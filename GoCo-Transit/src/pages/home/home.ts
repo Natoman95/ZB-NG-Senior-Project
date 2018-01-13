@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'home-component',
-  templateUrl: 'home.component.html'
+  selector: 'page-home',
+  templateUrl: 'home.html'
 })
-export class HomeComponent {
+export class HomePage {
 
   constructor(public navCtrl: NavController) {
 
