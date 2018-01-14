@@ -16,7 +16,7 @@ import { RequestsPage } from './../pages/requests/requests';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(HomePage)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
