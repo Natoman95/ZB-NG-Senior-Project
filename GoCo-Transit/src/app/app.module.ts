@@ -7,6 +7,9 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { RequestsPage } from './../pages/requests/requests';
+import { HighlandPage } from './../pages/highland/highland';
+import { OffersPage } from './../pages/offers/offers';
+import { TabsPage } from './../pages/tabs/tabs';
 
 import { FootNavComponent } from '../components/foot-nav/foot-nav';
 
@@ -15,17 +18,25 @@ import { FootNavComponent } from '../components/foot-nav/foot-nav';
     MyApp,
     HomePage,
     RequestsPage,
+    OffersPage,
+    HighlandPage,
+    TabsPage,
     FootNavComponent
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      tabsPlacement: 'top'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
     RequestsPage,
+    OffersPage,
+    HighlandPage,
+    TabsPage,
     FootNavComponent
   ],
   providers: [
