@@ -1,10 +1,13 @@
-<ion-tabs>
-  <ion-tab [root]="requests" tabTitle="Requests"></ion-tab>
-  <ion-tab [root]="offers" tabTitle="Offers"></ion-tab>
-  <ion-tab [root]="highland" tabTitle="Highland"></ion-tab>
-</ion-tabs>
+<ion-header>
+  <ion-navbar class="center-text">
+    <ion-title>
+      GoCo Transit
+    </ion-title>
+  </ion-navbar>
+</ion-header>
 
-<ion-footer>
-  <foot-nav>
-  </foot-nav>
-</ion-footer>
+<ion-tabs>
+  <ion-tab [root]="requests" tabTitle="Requests" tabIcon="person-add"></ion-tab>
+  <ion-tab [root]="offers" tabTitle="Offers" tabIcon="people"></ion-tab>
+  <ion-tab [root]="settings" tabTitle="Settings" tabIcon="settings"></ion-tab>
+</ion-tabs>
