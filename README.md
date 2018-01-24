@@ -2,7 +2,7 @@
 
 #### Useful Documentation
 * Material-UI Documentation https://material-ui-next.com
-* Existing Material-UI Icons https://material.io/icons/
+* Standard Material-UI Icons https://material.io/icons/
 
 #### Running and Developing the App
 * Install react globally (with the -g option) via the npm package manager https://www.npmjs.com/package/react/tutorial
