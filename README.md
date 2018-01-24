@@ -1,13 +1,13 @@
 # ZB-NG-Senior-Project
 
-**Useful Documentation**
+#### Useful Documentation
 Material-UI Documentation
 https://material-ui-next.com
 
 Existing Material-UI Icons
 https://material.io/icons/
 
-**Running and Developing the App**
+#### Running and Developing the App
 * Install react globally (with the -g option) via the npm package manager https://www.npmjs.com/package/react/tutorial
 * Install yarn globally in one of the ways listed https://yarnpkg.com/lang/en/docs/install/
 * Execute `yarn install` to download the packages necessary for the project to run
