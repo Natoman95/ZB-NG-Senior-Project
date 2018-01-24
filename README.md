@@ -13,4 +13,4 @@
 * Execute `yarn start` to run a production build of the project
 
 #### Naming Conventions
-* Branches: {issuenumber}-{summary_description}
+* Branches: `{issuenumber}-{summary_description}`
