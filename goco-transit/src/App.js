@@ -8,7 +8,34 @@ import GroupAddIcon from 'material-ui-icons/GroupAdd';
 import FavoriteIcon from 'material-ui-icons/Favorite';
 import SettingsIcon from 'material-ui-icons/Settings';
 import Typography from 'material-ui/Typography';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import createMuiTheme from 'material-ui/styles/createMuiTheme';
 
+// Universal color theme
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#00AEEF',
+      main: '#014983',
+      contrastText: '#fff',
+    },
+    secondary: {
+      light: '#DE571f',
+      main: '#B2BB1C',
+      dark: '#B53228',
+      contrastText: '#fff',
+    },
+  },
+  typography: {
+    fontFamily: 'Arial',
+  },
+  root: {
+    flexGrow: 1,
+    width: '100%',
+  },
+});
+
+// Contains the children the tabs navigate between
 function TabContainer(props) {
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
@@ -17,57 +44,41 @@ function TabContainer(props) {
   );
 }
 
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-};
-
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-  },
-});
-
 class Main extends React.Component {
   state = {
     value: 0,
   };
 
   handleChange = (event, value) => {
+    // Change tab pages
     this.setState({ value });
   };
 
   render() {
-    const { classes } = this.props;
-    const { value } = this.state;
-
     return (
-      <div className={classes.root}>
-        <AppBar position="static" color="default">
-          <Tabs
-            value={value}
-            onChange={this.handleChange}
-            scrollable
-            scrollButtons="on"
-            indicatorColor="primary"
-            textColor="primary"
-          >
-            <Tab label="Requests" icon={<GroupAddIcon />} />
-            <Tab label="Offers" icon={<GroupIcon />} />
-            <Tab label="Settings" icon={<SettingsIcon />} />
-          </Tabs>
-        </AppBar>
-        {value === 0 && <TabContainer>Requests</TabContainer>}
-        {value === 1 && <TabContainer>Offers</TabContainer>}
-        {value === 2 && <TabContainer>Settings</TabContainer>}
-      </div>
+      // Pass down the theme through the whole app
+      <MuiThemeProvider theme={theme}>
+        <div>
+          <AppBar position="static" color="primary">
+            <Tabs
+              fullWidth={true}
+              value={this.state.value}
+              onChange={this.handleChange}
+              indicatorColor={theme.palette.primary.light}
+            >
+              <Tab label="Requests" icon={<GroupAddIcon />} />
+              <Tab label="Offers" icon={<GroupIcon />} />
+              <Tab label="Settings" icon={<SettingsIcon />} />
+            </Tabs>
+          </AppBar>
+
+          {this.state.value === 0 && <TabContainer>Requests</TabContainer>}
+          {this.state.value === 1 && <TabContainer>Offers</TabContainer>}
+          {this.state.value === 2 && <TabContainer>Settings</TabContainer>}
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
 
-Main.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(Main);
+export default Main;
