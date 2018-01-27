@@ -3,6 +3,7 @@
 #### Useful Documentation
 * Material-UI Documentation https://material-ui-next.com
 * Standard Material-UI Icons https://material.io/icons/
+* Gordon Branding Standards http://www.gordon.edu/brandstandards
 
 #### Running and Developing the App
 * Install react globally (with the -g option) via the npm package manager https://www.npmjs.com/package/react/tutorial
