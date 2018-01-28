@@ -58,7 +58,7 @@ class Main extends React.Component {
         <div>
           {this.state.value === 1 &&
             <TabContainer>
-
+              <Offers />
             </TabContainer>}
         </div>
 
