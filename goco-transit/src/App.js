@@ -158,60 +158,7 @@ class Main extends React.Component {
           <div>
             {this.state.value === 1 &&
               <TabContainer>
-                <div>
-                  <List dense={this.state.dense}>
-                    <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
-                      <ListItemAvatar>
-                        <Avatar>
-                          <DoneIcon />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary="Scranton"
-                        secondary={this.state.secondary ? '2/3/18' : null}
-                      />
-                      <ListItemSecondaryAction>
-                        <IconButton disabled={true}>
-                          <Badge badgeContent={4} color="primary">
-                            <PersonIcon />
-                          </Badge>
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
 
-                    <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
-                      <ListItemAvatar>
-                        <Avatar>
-                          <DoneIcon />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary="Boston"
-                        secondary={this.state.secondary ? '4/6/18' : null}
-                      />
-                      <ListItemSecondaryAction>
-                        <IconButton disabled={true}>
-                          <Badge badgeContent={2} color="primary">
-                            <PersonIcon />
-                          </Badge>
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem>
-                  </List>
-
-                  <Grid container>
-                    <Grid item xs={12}>
-                      <Grid container direction="row" justify="flex-end" alignItems="center">
-                        <Grid item>
-                          <Button fab color="secondary" aria-label="add">
-                            <AddIcon />
-                          </Button>
-                        </Grid>
-                      </Grid>
-                    </Grid>
-                  </Grid>
-
-                </div>
               </TabContainer>}
           </div>
 
