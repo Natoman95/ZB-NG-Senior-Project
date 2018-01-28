@@ -15,3 +15,4 @@
 
 #### Naming Conventions
 * Branches: `{issuenumber}-{summary_description}`
+* Pull Requests (Should have names identical to the Issue they're linked to, but with the issue number at the front): `{linked issue number}-{linked issue description}`
