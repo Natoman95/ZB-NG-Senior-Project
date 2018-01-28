@@ -10,6 +10,7 @@ import SettingsIcon from 'material-ui-icons/Settings';
 import DoneIcon from 'material-ui-icons/Done';
 import DeleteIcon from 'material-ui-icons/Delete';
 import QuestionIcon from 'material-ui-icons/Help';
+import PersonIcon from 'material-ui-icons/Person';
 import Typography from 'material-ui/Typography';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createMuiTheme from 'material-ui/styles/createMuiTheme';
@@ -25,6 +26,8 @@ import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
+import Chip from 'material-ui/Chip';
+import Badge from 'material-ui/Badge';
 
 // Universal color theme
 const theme = createMuiTheme({
@@ -65,6 +68,8 @@ class Main extends React.Component {
     value: 0,
     dense: false,
     secondary: true,
+    noGutters: true,
+    divider: true,
   };
 
   handleChange = (event, value) => {
@@ -98,7 +103,7 @@ class Main extends React.Component {
               <TabContainer>
                 <div>
                   <List dense={this.state.dense}>
-                    <ListItem button>
+                    <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
                       <ListItemAvatar>
                         <Avatar>
                           <DoneIcon />
@@ -115,7 +120,7 @@ class Main extends React.Component {
                       </ListItemSecondaryAction>
                     </ListItem>
 
-                    <ListItem button>
+                    <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
                       <ListItemAvatar>
                         <Avatar>
                           <QuestionIcon />
@@ -153,7 +158,60 @@ class Main extends React.Component {
           <div>
             {this.state.value === 1 &&
               <TabContainer>
+                <div>
+                  <List dense={this.state.dense}>
+                    <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <DoneIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary="Scranton"
+                        secondary={this.state.secondary ? '2/3/18' : null}
+                      />
+                      <ListItemSecondaryAction>
+                        <IconButton disabled={true}>
+                          <Badge badgeContent={4} color="primary">
+                            <PersonIcon />
+                          </Badge>
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
 
+                    <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <DoneIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary="Boston"
+                        secondary={this.state.secondary ? '4/6/18' : null}
+                      />
+                      <ListItemSecondaryAction>
+                        <IconButton disabled={true}>
+                          <Badge badgeContent={2} color="primary">
+                            <PersonIcon />
+                          </Badge>
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  </List>
+
+                  <Grid container>
+                    <Grid item xs={12}>
+                      <Grid container direction="row" justify="flex-end" alignItems="center">
+                        <Grid item>
+                          <Button fab color="secondary" aria-label="add">
+                            <AddIcon />
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+
+                </div>
               </TabContainer>}
           </div>
 
