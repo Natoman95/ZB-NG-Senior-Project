@@ -5,7 +5,7 @@ import GroupIcon from 'material-ui-icons/Group';
 import GroupAddIcon from 'material-ui-icons/GroupAdd';
 import SettingsIcon from 'material-ui-icons/Settings';
 import Typography from 'material-ui/Typography';
-import Requests from './requests'
+import Offers from './offers'
 
 // Contains the children the tabs navigate between
 function TabContainer(props) {
@@ -48,7 +48,7 @@ class Main extends React.Component {
         <div>
           {this.state.value === 0 &&
             <TabContainer>
-              <Requests />
+
             </TabContainer>}
         </div>
 
@@ -56,7 +56,7 @@ class Main extends React.Component {
         <div>
           {this.state.value === 1 &&
             <TabContainer>
-
+              <Offers />
             </TabContainer>}
         </div>
 
