@@ -42,25 +42,27 @@ class Offers extends React.Component {
               secondary={this.state.secondary ? '2/3/18' : null}
             />
             <ListItemSecondaryAction>
-
+              <IconButton aria-label="Delete">
+                <DeleteIcon />
+              </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
 
           <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
             <ListItemAvatar>
-              <Avatar>
-                <DoneIcon />
-              </Avatar>
+              <IconButton disabled={true}>
+                <Badge badgeContent={2} color="primary">
+                  <PersonIcon />
+                </Badge>
+              </IconButton>
             </ListItemAvatar>
             <ListItemText
               primary="Boston"
               secondary={this.state.secondary ? '4/6/18' : null}
             />
             <ListItemSecondaryAction>
-              <IconButton disabled={true}>
-                <Badge badgeContent={2} color="primary">
-                  <PersonIcon />
-                </Badge>
+              <IconButton aria-label="Delete">
+                <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
