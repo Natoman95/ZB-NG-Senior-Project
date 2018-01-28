@@ -17,7 +17,7 @@ import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 
-class Requests extends React.Component {
+class Offers extends React.Component {
   state = {
     dense: false,
     secondary: true,
@@ -31,13 +31,15 @@ class Requests extends React.Component {
         <List dense={this.state.dense}>
           <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
             <ListItemAvatar>
-              <Avatar>
-                <DoneIcon />
-              </Avatar>
+              <IconButton disabled={true}>
+                <Badge badgeContent={4} color="primary">
+                  <PersonIcon />
+                </Badge>
+              </IconButton>
             </ListItemAvatar>
             <ListItemText
-              primary="Pittsburgh"
-              secondary={this.state.secondary ? '12/7-12/19' : null}
+              primary="Scranton"
+              secondary={this.state.secondary ? '2/3/18' : null}
             />
             <ListItemSecondaryAction>
               <IconButton aria-label="Delete">
@@ -48,13 +50,15 @@ class Requests extends React.Component {
 
           <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
             <ListItemAvatar>
-              <Avatar>
-                <QuestionIcon />
-              </Avatar>
+              <IconButton disabled={true}>
+                <Badge badgeContent={2} color="primary">
+                  <PersonIcon />
+                </Badge>
+              </IconButton>
             </ListItemAvatar>
             <ListItemText
-              primary="Wenham"
-              secondary={this.state.secondary ? '1/16-18/18' : null}
+              primary="Boston"
+              secondary={this.state.secondary ? '4/6/18' : null}
             />
             <ListItemSecondaryAction>
               <IconButton aria-label="Delete">
@@ -75,10 +79,9 @@ class Requests extends React.Component {
             </Grid>
           </Grid>
         </Grid>
-
       </div>
     );
   }
 }
 
-export default Requests;
+export default Offers;
