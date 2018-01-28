@@ -49,7 +49,7 @@ class Main extends React.Component {
         <div>
           {this.state.value === 0 &&
             <TabContainer>
-              <Requests />
+
             </TabContainer>}
         </div>
 
