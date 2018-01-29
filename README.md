@@ -17,7 +17,7 @@
 * Branches: `{issuenumber}-{summary_description}`
 * Pull Requests (Should have names identical to the Issue they're linked to, but with the issue number at the front): `{linked issue number}-{linked issue description}`
 
-### Issue Tracking
+#### Issue Tracking
 * Give the issue a name that briefly describes the bug or feature
 * Assign the issue to the appropriate person
 * Label the issue appropriately
