@@ -18,16 +18,18 @@
 * Pull Requests (Should have names identical to the Issue they're linked to, but with the issue number at the front): `{linked issue number}-{linked issue description}`
 
 #### Issue Tracking
-* Give the issue a name that briefly describes the bug or feature
-* Assign the issue to the appropriate person
-* Label the issue appropriately
-* Add the issue to the goco-transit project
-* Add the issue to a sprint if applicable
-* If the issue needs to be completed in the current sprint, add it to that column on the project board
-* Move the issue to "In Progress" once you have begun work on it
-* When you have finished work on the issue, create a pull request to merge the issue into master
-* Assign that pull request to the appropriate reviewer
-* Add the pull request to the goco-transit project
-* Add the issue to the current sprint
-* Wait for the pull request to be approved and merged
-* Close out the issue manually
+* Creating an issue
+  * Give the issue a name that briefly describes the bug or feature
+  * Assign the issue to the appropriate person
+  * Label the issue appropriately
+  * Add the issue to the goco-transit project
+  * Add the issue to a sprint if applicable
+  * If the issue needs to be completed in the current sprint, add it to that column on the project board
+  * Move the issue to "In Progress" once you have begun work on it
+* Completing an issue
+  * When you have finished work on the issue, create a pull request to merge the issue into master
+  * Assign that pull request to the appropriate reviewer
+  * Add the pull request to the goco-transit project
+  * Add the pull request to the current sprint
+  * Wait for the pull request to be approved and merged
+  * Close out the issue manually
