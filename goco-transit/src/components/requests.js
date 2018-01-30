@@ -17,6 +17,7 @@ import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 
+// Contains ride requests made by the user
 class Requests extends React.Component {
   state = {
     dense: false,
@@ -28,6 +29,7 @@ class Requests extends React.Component {
   render() {
     return (
       <div>
+        {/* List of requested rides */}
         <List dense={this.state.dense}>
           <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
             <ListItemAvatar>
@@ -64,6 +66,7 @@ class Requests extends React.Component {
           </ListItem>
         </List>
 
+        {/* Add a request button */}
         <Grid container>
           <Grid item xs={12}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
