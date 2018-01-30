@@ -5,6 +5,7 @@ import Button from 'material-ui/Button';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
 
+// Component for changing settings
 class Settings extends React.Component {
   state = {
     dense: false,
@@ -35,6 +36,8 @@ class Settings extends React.Component {
               </Grid>
             </Grid>
           </Grid>
+
+          {/* Button for editing contact information */}
           <Grid item xs={4}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
@@ -56,6 +59,7 @@ class Settings extends React.Component {
           Email: nathan.gray@gordon.edu
         </div>
 
+        {/* Decide which contact information will be shared with riders */}
         <h2>
           Contact Information to Share
         </h2>
@@ -87,6 +91,7 @@ class Settings extends React.Component {
           />
         </FormGroup>
 
+        {/* Shows which legal agreements have been completed */}
         <h2>
           Legal Agreements
         </h2>
@@ -133,10 +138,10 @@ class Settings extends React.Component {
         <div style={{ padding: '.75em', }}>
         </div>
 
+        {/* Button to logout */}
         <Button raised color="secondary" style={{ width: '100%', }}>
           Logout
         </Button>
-
       </div>
     );
   }

@@ -5,6 +5,9 @@ import GroupIcon from 'material-ui-icons/Group';
 import GroupAddIcon from 'material-ui-icons/GroupAdd';
 import SettingsIcon from 'material-ui-icons/Settings';
 import Typography from 'material-ui/Typography';
+import { Link, Route } from 'react-router-dom'
+
+// Components
 import Offers from './offers';
 import Requests from './requests';
 import Settings from './settings'
@@ -18,13 +21,13 @@ function TabContainer(props) {
   );
 }
 
+// Main app component
 class Main extends React.Component {
   state = {
     value: 0,
   };
 
   handleChange = (event, value) => {
-    // Change tab pages
     this.setState({ value });
   };
 
@@ -32,6 +35,7 @@ class Main extends React.Component {
     return (
       <div>
         <div>
+          {/* Tabs */}
           <AppBar position="static" color="primary">
             <Tabs
               fullWidth={true}
@@ -39,35 +43,20 @@ class Main extends React.Component {
               onChange={this.handleChange}
               indicatorColor="secondary"
             >
-              <Tab label="Requests" icon={<GroupAddIcon />} />
-              <Tab label="Offers" icon={<GroupIcon />} />
-              <Tab label="Settings" icon={<SettingsIcon />} />
+              <Tab label="Requests" icon={<GroupAddIcon />} component={Link} to="/requests" />
+              <Tab label="Offers" icon={<GroupIcon />} component={Link} to="/offers" />
+              <Tab label="Settings" icon={<SettingsIcon />} component={Link} to="/settings" />
             </Tabs>
           </AppBar>
         </div>
 
-        {/* Requests */}
+        {/* Tab Pages */}
         <div>
-          {this.state.value === 0 &&
-            <TabContainer>
-              <Requests />
-            </TabContainer>}
-        </div>
-
-        {/* Offers */}
-        <div>
-          {this.state.value === 1 &&
-            <TabContainer>
-              <Offers />
-            </TabContainer>}
-        </div>
-
-        {/* Settings */}
-        <div>
-          {this.state.value === 2 &&
-            <TabContainer>
-              <Settings />
-            </TabContainer>}
+          <TabContainer>
+            <Route exact path="/requests" component={Requests} />
+            <Route exact path="/offers" component={Offers} />
+            <Route exact path="/settings" component={Settings} />
+          </TabContainer>
         </div>
       </div>
     );

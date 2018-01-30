@@ -17,6 +17,7 @@ import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 
+// Contains rides offered to other users
 class Offers extends React.Component {
   state = {
     dense: false,
@@ -28,6 +29,7 @@ class Offers extends React.Component {
   render() {
     return (
       <div>
+        {/* List of offers - items display the number of users who have accepted the ride */}
         <List dense={this.state.dense}>
           <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
             <ListItemAvatar>
@@ -68,6 +70,7 @@ class Offers extends React.Component {
           </ListItem>
         </List>
 
+        {/* Add Offer Button */}
         <Grid container>
           <Grid item xs={12}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
