@@ -84,7 +84,6 @@ class Requests extends React.Component {
             </Grid>
           </Grid>
         </Grid>
-
       </div>
     );
   }
