@@ -53,6 +53,7 @@ class Main extends React.Component {
         {/* Tab Pages */}
         <div>
           <TabContainer>
+            <Route exact path="/" component={Requests} />
             <Route exact path="/requests" component={Requests} />
             <Route exact path="/offers" component={Offers} />
             <Route exact path="/settings" component={Settings} />
