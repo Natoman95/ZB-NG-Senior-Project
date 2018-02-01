@@ -22,6 +22,10 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import { Link } from 'react-router-dom'
+
+// Components
+import RequestSearch from './request-search'
 
 // Contains ride requests made by the user
 class Requests extends React.Component {
@@ -86,9 +90,11 @@ class Requests extends React.Component {
           <Grid item xs={12}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
-                <Button fab color="secondary" aria-label="add">
-                  <AddIcon />
-                </Button>
+                <Link to="/requests/search">
+                  <Button fab color="secondary" aria-label="add">
+                    <AddIcon />
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
           </Grid>
