@@ -122,7 +122,6 @@ class Requests extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-
       </div>
     );
   }
