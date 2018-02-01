@@ -33,4 +33,5 @@
   * Add the pull request to the goco-transit project
   * Add the pull request to the current sprint
   * Wait for the pull request to be approved and merged
+  * Delete the branch associated with the pull request
   * Close out the issue manually
