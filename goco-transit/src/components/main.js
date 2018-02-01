@@ -11,6 +11,7 @@ import { Link, Route } from 'react-router-dom'
 import Offers from './offers';
 import Requests from './requests';
 import Settings from './settings'
+import RequestSearch from './request-search'
 
 // Contains the children the tabs navigate between
 function TabContainer(props) {
@@ -54,6 +55,7 @@ class Main extends React.Component {
         <div>
           <TabContainer>
             <Route exact path="/requests" component={Requests} />
+            <Route exact path="/requests/search" component={RequestSearch} />
             <Route exact path="/offers" component={Offers} />
             <Route exact path="/settings" component={Settings} />
           </TabContainer>

@@ -16,6 +16,10 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
+import { Link } from 'react-router-dom'
+
+// Components
+import RequestSearch from './request-search'
 
 // Contains ride requests made by the user
 class Requests extends React.Component {
@@ -71,9 +75,11 @@ class Requests extends React.Component {
           <Grid item xs={12}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
-                <Button fab color="secondary" aria-label="add">
-                  <AddIcon />
-                </Button>
+                <Link to="/requests/search">
+                  <Button fab color="secondary" aria-label="add">
+                    <AddIcon />
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
           </Grid>
