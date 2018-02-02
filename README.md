@@ -8,6 +8,7 @@
 #### Running and Developing the App
 * Install react globally (with the -g option) via the npm package manager https://www.npmjs.com/package/react/tutorial
 * Install yarn globally in one of the ways listed https://yarnpkg.com/lang/en/docs/install/
+* Navigate to the `goco-transit` folder of the repository
 * Execute `yarn install` to download the packages necessary for the project to run
   * Whenever you install a new package via npm or otherwise, `yarn install` must be run to include those packages in the project dependencies
 * Execute `yarn dev` to run the project locally
@@ -32,4 +33,5 @@
   * Add the pull request to the goco-transit project
   * Add the pull request to the current sprint
   * Wait for the pull request to be approved and merged
+  * Delete the branch associated with the pull request
   * Close out the issue manually

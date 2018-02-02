@@ -24,7 +24,7 @@ server
       `<!DOCTYPE HTML>
 			<html lang="en">
 				<head>
-					<title>Material-UI Example</title>
+					<title>GoCo Transit</title>
 
 					<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 					<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -40,7 +40,7 @@ server
 
 					<script async src="` + assets.client.js + `"></script>
 				</head>
-				<body>
+				<body style="margin:0;">
 					<div id="root">` + html + `</div>
 				</body>
 			</html>`
