@@ -16,6 +16,12 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
 
 // Contains ride requests made by the user
 class Requests extends React.Component {
@@ -86,59 +92,50 @@ class Requests extends React.Component {
 }
 
 // Dialog box for confirming the deletion of a ride request
-class ConfirmationDialog extends React.Component {
+class AlertDialog extends React.Component {
   state = {
-    value: undefined,
+    open: false,
   };
 
-  componentWillMount() {
-    this.setState({ value: this.props.value });
-  }
-
-  componentWillUpdate(nextProps) {
-    if (nextProps.value !== this.props.value) {
-      // eslint-disable-next-line react/no-will-update-set-state
-      this.setState({ value: nextProps.value });
-    }
-  }
-
-  handleCancel = () => {
-    this.props.onClose(this.props.value);
+  handleClickOpen = () => {
+    this.setState({ open: true });
   };
 
-  handleOk = () => {
-    this.props.onClose(this.state.value);
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ value });
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   render() {
-    const { value, ...other } = this.props;
-
     return (
-      <Dialog
-        disableBackdropClick
-        disableEscapeKeyDown
-        maxWidth="xs"
-        onEntering={this.handleEntering}
-        aria-labelledby="confirmation-dialog-title"
-        {...other}
-      >
-        <DialogTitle id="confirmation-dialog-title">Phone Ringtone</DialogTitle>
-        <DialogContent />
-        <DialogActions>
-          <Button onClick={this.handleCancel} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={this.handleOk} color="primary">
-            Ok
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <div>
+        <Button onClick={this.handleClickOpen}>Open alert dialog</Button>
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Disagree
+            </Button>
+            <Button onClick={this.handleClose} color="primary" autoFocus>
+              Agree
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
     );
   }
 }
+
+export default AlertDialog;
 
 export default Requests;
