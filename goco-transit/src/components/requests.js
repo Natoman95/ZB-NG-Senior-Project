@@ -16,6 +16,12 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
 
 // Contains ride requests made by the user
 class Requests extends React.Component {
@@ -24,6 +30,15 @@ class Requests extends React.Component {
     secondary: true,
     noGutters: true,
     divider: true,
+    open: false,
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -42,7 +57,7 @@ class Requests extends React.Component {
               secondary={this.state.secondary ? '12/7-12/19' : null}
             />
             <ListItemSecondaryAction>
-              <IconButton aria-label="Delete">
+              <IconButton onClick={this.handleClickOpen} aria-label="Delete">
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
@@ -59,7 +74,7 @@ class Requests extends React.Component {
               secondary={this.state.secondary ? '1/16-18/18' : null}
             />
             <ListItemSecondaryAction>
-              <IconButton aria-label="Delete">
+              <IconButton onClick={this.handleClickOpen} aria-label="Delete">
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
@@ -78,6 +93,29 @@ class Requests extends React.Component {
             </Grid>
           </Grid>
         </Grid>
+
+        {/* Delete a request dialog box */}
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Delete this ride request?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              (Ride data will go here)
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose}>
+              Back
+            </Button>
+            <Button onClick={this.handleClose}>
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
 
       </div>
     );
