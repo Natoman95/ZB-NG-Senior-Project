@@ -30,6 +30,15 @@ class Requests extends React.Component {
     secondary: true,
     noGutters: true,
     divider: true,
+    open: false,
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -48,9 +57,8 @@ class Requests extends React.Component {
               secondary={this.state.secondary ? '12/7-12/19' : null}
             />
             <ListItemSecondaryAction>
-              <IconButton aria-label="Delete">
-                <DeleteIcon onClick="">
-                </DeleteIcon>
+              <IconButton onClick={this.handleClickOpen} aria-label="Delete">
+                <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
@@ -66,7 +74,7 @@ class Requests extends React.Component {
               secondary={this.state.secondary ? '1/16-18/18' : null}
             />
             <ListItemSecondaryAction>
-              <IconButton aria-label="Delete">
+              <IconButton onClick={this.handleClickOpen} aria-label="Delete">
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
@@ -85,6 +93,29 @@ class Requests extends React.Component {
             </Grid>
           </Grid>
         </Grid>
+
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              Let Google help apps determine location. This means sending anonymous location data to
+              Google, even when no apps are running.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Disagree
+            </Button>
+            <Button onClick={this.handleClose} color="primary" autoFocus>
+              Agree
+            </Button>
+          </DialogActions>
+        </Dialog>
 
       </div>
     );
@@ -135,7 +166,5 @@ class AlertDialog extends React.Component {
     );
   }
 }
-
-export default AlertDialog;
 
 export default Requests;
