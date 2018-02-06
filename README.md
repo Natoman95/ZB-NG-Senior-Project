@@ -1,6 +1,7 @@
 # ZB-NG-Senior-Project
 
 #### Useful Documentation
+* React JS Documentation https://reactjs.org/docs/hello-world.html
 * Material-UI Documentation https://material-ui-next.com
 * Standard Material-UI Icons https://material.io/icons/
 * Gordon Branding Standards http://www.gordon.edu/brandstandards
