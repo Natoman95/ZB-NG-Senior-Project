@@ -94,25 +94,25 @@ class Requests extends React.Component {
           </Grid>
         </Grid>
 
+        {/* Delete a request dialog box */}
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{"Delete this ride request?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Let Google help apps determine location. This means sending anonymous location data to
-              Google, even when no apps are running.
+              (Ride data will go here)
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Disagree
+            <Button onClick={this.handleClose}>
+              Back
             </Button>
-            <Button onClick={this.handleClose} color="primary" autoFocus>
-              Agree
+            <Button onClick={this.handleClose}>
+              Delete
             </Button>
           </DialogActions>
         </Dialog>
