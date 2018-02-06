@@ -43,7 +43,8 @@ class Requests extends React.Component {
             />
             <ListItemSecondaryAction>
               <IconButton aria-label="Delete">
-                <DeleteIcon />
+                <DeleteIcon onClick="">
+                </DeleteIcon>
               </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
@@ -80,6 +81,62 @@ class Requests extends React.Component {
         </Grid>
 
       </div>
+    );
+  }
+}
+
+// Dialog box for confirming the deletion of a ride request
+class ConfirmationDialog extends React.Component {
+  state = {
+    value: undefined,
+  };
+
+  componentWillMount() {
+    this.setState({ value: this.props.value });
+  }
+
+  componentWillUpdate(nextProps) {
+    if (nextProps.value !== this.props.value) {
+      // eslint-disable-next-line react/no-will-update-set-state
+      this.setState({ value: nextProps.value });
+    }
+  }
+
+  handleCancel = () => {
+    this.props.onClose(this.props.value);
+  };
+
+  handleOk = () => {
+    this.props.onClose(this.state.value);
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  render() {
+    const { value, ...other } = this.props;
+
+    return (
+      <Dialog
+        disableBackdropClick
+        disableEscapeKeyDown
+        maxWidth="xs"
+        onEntering={this.handleEntering}
+        aria-labelledby="confirmation-dialog-title"
+        {...other}
+      >
+        <DialogTitle id="confirmation-dialog-title">Phone Ringtone</DialogTitle>
+        <DialogContent />
+        <DialogActions>
+          <Button onClick={this.handleCancel} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={this.handleOk} color="primary">
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   }
 }
