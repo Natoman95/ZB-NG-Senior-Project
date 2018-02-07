@@ -169,7 +169,7 @@ class Offers extends React.Component {
                       <CalendarIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField type="date" style={{ paddingLeft: "1em" }} />
+                  <TextField required type="date" style={{ paddingLeft: "1em" }} />
                 </ListItem>
 
                 {/* Time */}
@@ -179,7 +179,7 @@ class Offers extends React.Component {
                       <ClockIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField type="time" style={{ paddingLeft: "1em" }} />
+                  <TextField required type="time" style={{ paddingLeft: "1em" }} />
                 </ListItem>
 
                 {/* Number of seats */}
@@ -189,7 +189,7 @@ class Offers extends React.Component {
                       <SeatIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField type="number" name="Seats available" min="1" style={{ paddingLeft: "1em" }} />
+                  <TextField required type="number" placeholder="Seats available" step="1" min="1" style={{ paddingLeft: "1em" }} />
                 </ListItem>
 
                 {/* Notes */}
@@ -199,7 +199,9 @@ class Offers extends React.Component {
                       <NoteIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField style={{ paddingLeft: "1em" }} label="Note to passengers" multiline={true} />
+                  <div style={{ paddingLeft: "1em" }} >
+                    <TextField label="Note to passengers" multiline={true} />
+                  </div>
                 </ListItem>
               </List>
 
