@@ -16,12 +16,19 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
+<<<<<<< HEAD
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+=======
+>>>>>>> abc30875111a852c8c6ca5d798bcc5f450e7aab5
+import { Link } from 'react-router-dom'
+
+// Components
+import RequestSearch from './request-search'
 
 // Contains ride requests made by the user
 class Requests extends React.Component {
@@ -86,13 +93,16 @@ class Requests extends React.Component {
           <Grid item xs={12}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
-                <Button fab color="secondary" aria-label="add">
-                  <AddIcon />
-                </Button>
+                <Link to="/requests/search">
+                  <Button fab color="secondary" aria-label="add">
+                    <AddIcon />
+                  </Button>
+                </Link>
               </Grid>
             </Grid>
           </Grid>
         </Grid>
+<<<<<<< HEAD
 
         {/* Delete a request dialog box */}
         <Dialog
@@ -116,7 +126,8 @@ class Requests extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-
+=======
+>>>>>>> abc30875111a852c8c6ca5d798bcc5f450e7aab5
       </div>
     );
   }
