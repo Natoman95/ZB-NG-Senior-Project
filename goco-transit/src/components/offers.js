@@ -16,6 +16,12 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
 
 // Contains rides offered to other users
 class Offers extends React.Component {
@@ -24,6 +30,15 @@ class Offers extends React.Component {
     secondary: true,
     noGutters: true,
     divider: true,
+    open: false,
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -44,7 +59,7 @@ class Offers extends React.Component {
               secondary={this.state.secondary ? '2/3/18' : null}
             />
             <ListItemSecondaryAction>
-              <IconButton aria-label="Delete">
+              <IconButton onClick={this.handleClickOpen} aria-label="Delete">
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
@@ -63,7 +78,7 @@ class Offers extends React.Component {
               secondary={this.state.secondary ? '4/6/18' : null}
             />
             <ListItemSecondaryAction>
-              <IconButton aria-label="Delete">
+              <IconButton onClick={this.handleClickOpen} aria-label="Delete">
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
@@ -82,6 +97,30 @@ class Offers extends React.Component {
             </Grid>
           </Grid>
         </Grid>
+
+        {/* Delete an offer dialog box */}
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Delete this ride offer?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              (Ride data will go here)
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose}>
+              Back
+            </Button>
+            <Button onClick={this.handleClose}>
+              Delete
+            </Button>
+          </DialogActions>
+        </Dialog>
+
       </div>
     );
   }
