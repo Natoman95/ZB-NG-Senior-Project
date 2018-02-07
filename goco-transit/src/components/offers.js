@@ -152,24 +152,24 @@ class Offers extends React.Component {
                 </ListItem>
 
                 {/* Date */}
-                {/* <ListItem disableGutters={true} divider={false}> */}
-                  {/* <ListItemAvatar> */}
-                    {/* <Avatar> */}
-                      {/* <CalendarIcon /> */}
-                    {/* </Avatar> */}
-                  {/* </ListItemAvatar> */}
-                  {/* <TextField type={Date} /> */}
-                {/* </ListItem> */}
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <CalendarIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <TextField type="date" />
+                </ListItem>
                 
                 {/* Time */}
-                {/* <ListItem disableGutters={true} divider={false}> */}
-                  {/* <ListItemAvatar> */}
-                    {/* <Avatar> */}
-                      {/* <ClockIcon /> */}
-                    {/* </Avatar> */}
-                  {/* </ListItemAvatar> */}
-                  {/* <TextField type={Time} /> */}
-                {/* </ListItem> */}
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <ClockIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <TextField type="time" />
+                </ListItem>
               
                 {/* Notes */}
                 <ListItem disableGutters={true} divider={false}>
