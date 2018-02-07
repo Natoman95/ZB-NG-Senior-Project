@@ -14,6 +14,8 @@ import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
+import LeftArrowIcon from 'material-ui-icons/chevronLeft';
+import RightArrowIcon from 'material-ui-icons/chevronRight';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 import Dialog, {
@@ -189,7 +191,12 @@ class Offers extends React.Component {
                       <SeatIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField required type="number" placeholder="Seats available" inputProps={{ min: "1", step: "1" }} style={{ paddingLeft: "1em" }} />
+                  <IconButton >
+                    <LeftArrowIcon />
+                  </IconButton>
+                  <IconButton >
+                    <RightArrowIcon />
+                  </IconButton>
                 </ListItem>
 
                 {/* Notes */}
