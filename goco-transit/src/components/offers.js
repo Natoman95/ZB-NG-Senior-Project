@@ -22,6 +22,10 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
+import PlaceIcon from 'material-ui-icons/place';
+import ClockIcon from 'material-ui-icons/watchLater';
+import CalendarIcon from 'material-ui-icons/dateRange';
+import TextField from 'material-ui/TextField';
 
 // Contains rides offered to other users
 class Offers extends React.Component {
@@ -148,24 +152,24 @@ class Offers extends React.Component {
                 </ListItem>
 
                 {/* Date */}
-                <ListItem disableGutters={true} divider={false}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <CalendarIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <TextField type={Date} />
-                </ListItem>
+                {/* <ListItem disableGutters={true} divider={false}> */}
+                  {/* <ListItemAvatar> */}
+                    {/* <Avatar> */}
+                      {/* <CalendarIcon /> */}
+                    {/* </Avatar> */}
+                  {/* </ListItemAvatar> */}
+                  {/* <TextField type={Date} /> */}
+                {/* </ListItem> */}
                 
                 {/* Time */}
-                <ListItem disableGutters={true} divider={false}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <ClockIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <TextField type={Time} />
-                </ListItem>
+                {/* <ListItem disableGutters={true} divider={false}> */}
+                  {/* <ListItemAvatar> */}
+                    {/* <Avatar> */}
+                      {/* <ClockIcon /> */}
+                    {/* </Avatar> */}
+                  {/* </ListItemAvatar> */}
+                  {/* <TextField type={Time} /> */}
+                {/* </ListItem> */}
               
                 {/* Notes */}
                 <ListItem disableGutters={true} divider={false}>
