@@ -17,6 +17,15 @@ import ZachPhoto from '../images/user_profile_zach.jpg'
 import NathanPhoto from '../images/user_profile_nathan.jpg'
 import Divider from 'material-ui/Divider';
 import Button from 'material-ui/Button';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from 'material-ui/Dialog';
+import PlaceIcon from 'material-ui-icons/place';
+import ClockIcon from 'material-ui-icons/watchLater';
+import CalendarIcon from 'material-ui-icons/dateRange';
 
 class RequestSearch extends React.Component {
   state = {
@@ -24,6 +33,15 @@ class RequestSearch extends React.Component {
     secondary: true,
     noGutters: true,
     divider: true,
+    open: false,
+  };
+
+  handleClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  handleClose = () => {
+    this.setState({ open: false });
   };
 
   render() {
@@ -98,7 +116,7 @@ class RequestSearch extends React.Component {
         </h3>
 
           <List dense={this.state.dense}>
-            <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
+            <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider} onClick={this.handleClickOpen}>
               <Avatar src={ZachPhoto} />
               <ListItemText
                 primary="Scranton"
@@ -113,7 +131,7 @@ class RequestSearch extends React.Component {
               </ListItemSecondaryAction>
             </ListItem>
 
-            <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
+            <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider} onClick={this.handleClickOpen}>
               <Avatar src={NathanPhoto} />
               <ListItemText
                 primary="Oxford"
@@ -129,6 +147,39 @@ class RequestSearch extends React.Component {
             </ListItem>
           </List>
         </div>
+
+        {/* Confirm adding ride request dialog box */}
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              <PlaceIcon /> (Location)
+              <br />
+              <br />
+              <CalendarIcon /> (Date)
+              <br />
+              <br />
+              <ClockIcon /> (Time)
+              <br />
+              <br />
+              Notes:
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose}>
+              Back
+            </Button>
+            <Button onClick={this.handleClose}>
+              Confirm
+            </Button>
+          </DialogActions>
+        </Dialog>
+
       </div>
     );
   }
