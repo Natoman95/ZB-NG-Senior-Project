@@ -34,15 +34,24 @@ class Offers extends React.Component {
     secondary: true,
     noGutters: true,
     divider: true,
-    open: false,
+    addOpen: false,
+    deleteOpen: false,
   };
 
-  handleClickOpen = () => {
-    this.setState({ open: true });
+  handleAddClickOpen = () => {
+    this.setState({ addOpen: true });
   };
 
-  handleClose = () => {
-    this.setState({ open: false });
+  handleAddClose = () => {
+    this.setState({ addOpen: false });
+  };
+
+  handleDeleteClickOpen = () => {
+    this.setState({ deleteOpen: true });
+  };
+
+  handleDeleteClose = () => {
+    this.setState({ deleteOpen: false });
   };
 
   render() {
@@ -63,7 +72,7 @@ class Offers extends React.Component {
               secondary={this.state.secondary ? '2/3/18' : null}
             />
             <ListItemSecondaryAction>
-              <IconButton onClick={this.handleClickOpen} aria-label="Delete">
+              <IconButton onClick={this.handleDeleteClickOpen} aria-label="Delete">
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
@@ -82,7 +91,7 @@ class Offers extends React.Component {
               secondary={this.state.secondary ? '4/6/18' : null}
             />
             <ListItemSecondaryAction>
-              <IconButton onClick={this.handleClickOpen} aria-label="Delete">
+              <IconButton onClick={this.handleDeleteClickOpen} aria-label="Delete">
                 <DeleteIcon />
               </IconButton>
             </ListItemSecondaryAction>
@@ -94,7 +103,7 @@ class Offers extends React.Component {
           <Grid item xs={12}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
-                <Button fab color="secondary" aria-label="add">
+                <Button fab color="secondary" aria-label="add" onClick={this.handleAddClickOpen}>
                   <AddIcon />
                 </Button>
               </Grid>
@@ -104,8 +113,8 @@ class Offers extends React.Component {
 
         {/* Delete an offer dialog box */}
         <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={this.state.deleteOpen}
+          onClose={this.handleDeleteClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
@@ -116,10 +125,10 @@ class Offers extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose}>
+            <Button onClick={this.handleDeleteClose}>
               Back
             </Button>
-            <Button onClick={this.handleClose}>
+            <Button onClick={this.handleDeleteClose}>
               Delete
             </Button>
           </DialogActions>
@@ -127,8 +136,8 @@ class Offers extends React.Component {
 
         {/* Add ride request dialog box */}
         <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
+          open={this.state.addOpen}
+          onClose={this.handleAddClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
@@ -180,10 +189,10 @@ class Offers extends React.Component {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={this.handleClose}>
+            <Button onClick={this.handleAddClose}>
               Back
             </Button>
-            <Button onClick={this.handleClose}>
+            <Button onClick={this.handleAddClose}>
               Confirm
             </Button>
           </DialogActions>
