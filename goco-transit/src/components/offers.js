@@ -26,6 +26,7 @@ import PlaceIcon from 'material-ui-icons/place';
 import ClockIcon from 'material-ui-icons/watchLater';
 import CalendarIcon from 'material-ui-icons/dateRange';
 import SeatIcon from 'material-ui-icons/eventSeat';
+import NoteIcon from 'material-ui-icons/assignment';
 import TextField from 'material-ui/TextField';
 
 // Contains rides offered to other users
@@ -193,7 +194,12 @@ class Offers extends React.Component {
 
                 {/* Notes */}
                 <ListItem disableGutters={true} divider={false}>
-                  <TextField label="Note to passengers" multiline={true} />
+                  <ListItemAvatar>
+                    <Avatar>
+                      <NoteIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <TextField style={{ paddingLeft: "1em" }} label="Note to passengers" multiline={true} />
                 </ListItem>
               </List>
 
