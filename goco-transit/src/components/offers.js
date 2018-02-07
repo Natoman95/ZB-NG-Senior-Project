@@ -25,6 +25,7 @@ import Dialog, {
 import PlaceIcon from 'material-ui-icons/place';
 import ClockIcon from 'material-ui-icons/watchLater';
 import CalendarIcon from 'material-ui-icons/dateRange';
+import SeatIcon from 'material-ui-icons/eventSeat';
 import TextField from 'material-ui/TextField';
 
 // Contains rides offered to other users
@@ -178,6 +179,16 @@ class Offers extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <TextField type="time" style={{ paddingLeft: "1em" }} />
+                </ListItem>
+
+                {/* Number of seats */}
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <SeatIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <TextField type="number" name="Seats available" min="1" style={{ paddingLeft: "1em" }} />
                 </ListItem>
 
                 {/* Notes */}
