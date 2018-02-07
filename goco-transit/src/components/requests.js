@@ -16,15 +16,12 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
-<<<<<<< HEAD
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
-=======
->>>>>>> abc30875111a852c8c6ca5d798bcc5f450e7aab5
 import { Link } from 'react-router-dom'
 
 // Components
@@ -102,7 +99,6 @@ class Requests extends React.Component {
             </Grid>
           </Grid>
         </Grid>
-<<<<<<< HEAD
 
         {/* Delete a request dialog box */}
         <Dialog
@@ -126,8 +122,6 @@ class Requests extends React.Component {
             </Button>
           </DialogActions>
         </Dialog>
-=======
->>>>>>> abc30875111a852c8c6ca5d798bcc5f450e7aab5
       </div>
     );
   }
