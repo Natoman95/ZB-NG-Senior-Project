@@ -158,7 +158,8 @@ class RequestSearch extends React.Component {
           <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              {/* List of requested rides */}
+              
+              {/* Ride info */}
               <List dense={this.state.dense}>
 
                 {/* Location */}
@@ -171,9 +172,9 @@ class RequestSearch extends React.Component {
                   <ListItemText
                     primary="(Location)"
                   />
+                </ListItem>
 
                 {/* Date */}
-                </ListItem>
                 <ListItem disableGutters={true} divider={false}>
                   <ListItemAvatar>
                     <Avatar>
@@ -183,9 +184,9 @@ class RequestSearch extends React.Component {
                   <ListItemText
                     primary="(Date)"
                   />
-                
-                {/* Time */}
                 </ListItem>
+
+                {/* Time */}
                 <ListItem disableGutters={true} divider={false}>
                   <ListItemAvatar>
                     <Avatar>

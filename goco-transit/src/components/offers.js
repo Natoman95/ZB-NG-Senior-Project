@@ -121,6 +121,70 @@ class Offers extends React.Component {
           </DialogActions>
         </Dialog>
 
+        {/* Add ride request dialog box */}
+        <Dialog
+          open={this.state.open}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Add Ride Request"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+
+              {/* Ride info input */}
+              <List dense={this.state.dense}>
+
+                {/* Location */}
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <PlaceIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary="(Location)"
+                  />
+                </ListItem>
+
+                {/* Date */}
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <CalendarIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <TextField type={Date} />
+                </ListItem>
+                
+                {/* Time */}
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <ClockIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <TextField type={Time} />
+                </ListItem>
+              
+                {/* Notes */}
+                <ListItem disableGutters={true} divider={false}>
+                  <TextField label="Note to potential passengers" multiline={true} />
+                </ListItem>
+              </List>
+              
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose}>
+              Back
+            </Button>
+            <Button onClick={this.handleClose}>
+              Confirm
+            </Button>
+          </DialogActions>
+        </Dialog>
+
       </div>
     );
   }
