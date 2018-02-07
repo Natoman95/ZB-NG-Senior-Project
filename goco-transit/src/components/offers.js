@@ -167,7 +167,7 @@ class Offers extends React.Component {
                       <CalendarIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField type="date" />
+                  <TextField type="date" style={{paddingLeft: "1em"}} />
                 </ListItem>
                 
                 {/* Time */}
@@ -177,12 +177,12 @@ class Offers extends React.Component {
                       <ClockIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField type="time" />
+                  <TextField type="time" style={{paddingLeft: "1em"}} />
                 </ListItem>
               
                 {/* Notes */}
                 <ListItem disableGutters={true} divider={false}>
-                  <TextField label="Note to potential passengers" multiline={true} />
+                  <TextField label="Note to passengers" multiline={true} />
                 </ListItem>
               </List>
               
