@@ -189,7 +189,7 @@ class Offers extends React.Component {
                       <SeatIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField required type="number" placeholder="Seats available" step="1" min="1" style={{ paddingLeft: "1em" }} />
+                  <TextField required type="number" placeholder="Seats available" inputProps={{ min: "1", step: "1" }} style={{ paddingLeft: "1em" }} />
                 </ListItem>
 
                 {/* Notes */}
