@@ -134,14 +134,14 @@ class Offers extends React.Component {
           </DialogActions>
         </Dialog>
 
-        {/* Add ride request dialog box */}
+        {/* Add ride offer dialog box */}
         <Dialog
           open={this.state.addOpen}
           onClose={this.handleAddClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">{"Add Ride Request"}</DialogTitle>
+          <DialogTitle id="alert-dialog-title">{"Add a ride offer"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
 
@@ -167,9 +167,9 @@ class Offers extends React.Component {
                       <CalendarIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField type="date" style={{paddingLeft: "1em"}} />
+                  <TextField type="date" style={{ paddingLeft: "1em" }} />
                 </ListItem>
-                
+
                 {/* Time */}
                 <ListItem disableGutters={true} divider={false}>
                   <ListItemAvatar>
@@ -177,15 +177,15 @@ class Offers extends React.Component {
                       <ClockIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField type="time" style={{paddingLeft: "1em"}} />
+                  <TextField type="time" style={{ paddingLeft: "1em" }} />
                 </ListItem>
-              
+
                 {/* Notes */}
                 <ListItem disableGutters={true} divider={false}>
                   <TextField label="Note to passengers" multiline={true} />
                 </ListItem>
               </List>
-              
+
             </DialogContentText>
           </DialogContent>
           <DialogActions>
