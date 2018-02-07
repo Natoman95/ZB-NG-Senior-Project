@@ -16,6 +16,7 @@ import Avatar from 'material-ui/Avatar';
 import ZachPhoto from '../images/user_profile_zach.jpg'
 import NathanPhoto from '../images/user_profile_nathan.jpg'
 import Divider from 'material-ui/Divider';
+import Button from 'material-ui/Button';
 
 class RequestSearch extends React.Component {
   state = {
@@ -43,7 +44,7 @@ class RequestSearch extends React.Component {
         />
 
         {/* Date range selection */}
-        <div style={{ marginTop: '3em' }}>
+        <div style={{ marginTop: '2em' }}>
           <Grid container>
             <Grid item xs={6}>
               <Grid container direction="row" justify="flex-start" alignItems="center">
@@ -81,6 +82,13 @@ class RequestSearch extends React.Component {
               </Grid>
             </Grid>
           </Grid>
+        </div>
+
+        {/* Search button */}
+        <div>
+          <Button raised color="secondary" style={{ width: '100%', marginTop: '2em' }}>
+            Search
+          </Button>
         </div>
 
         {/* Search Results */}
