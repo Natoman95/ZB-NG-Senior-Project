@@ -158,16 +158,50 @@ class RequestSearch extends React.Component {
           <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              <PlaceIcon /> (Location)
-              <br />
-              <br />
-              <CalendarIcon /> (Date)
-              <br />
-              <br />
-              <ClockIcon /> (Time)
-              <br />
-              <br />
-              Notes:
+              {/* List of requested rides */}
+              <List dense={this.state.dense}>
+
+                {/* Location */}
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <PlaceIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary="(Location)"
+                  />
+
+                {/* Date */}
+                </ListItem>
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <CalendarIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary="(Date)"
+                  />
+                
+                {/* Time */}
+                </ListItem>
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <ClockIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary="(Time)"
+                  />
+                </ListItem>
+              
+              {/* Notes */}
+              <ListItem disableGutters={true} divider={false}>
+                  <TextField label="Note to driver" multiline={true} />
+                </ListItem>
+              </List>
             </DialogContentText>
           </DialogContent>
           <DialogActions>
