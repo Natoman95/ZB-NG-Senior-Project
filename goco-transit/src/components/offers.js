@@ -65,12 +65,13 @@ class Offers extends React.Component {
 
   // Limits seat maximum to pre-defined constant
   handleSeatPlus = () => {
-    (this.state.seats == this.constants.seatMax) ? (this.setState({ seats: this.state.seats})) : this.setState({ seats: this.state.seats + 1 });
-  };
+    if (this.state.seats < 10) { this.setState({ seats: this.state.seats + 1 }) }
+  }
 
+  // Limits seat minimum to 1
   handleSeatMinus = () => {
-    (this.state.seats == 1) ? (this.setState({ seats: this.state.seats})) : this.setState({ seats: this.state.seats - 1 });
-  };
+    if (this.state.seats > 1) { this.setState({ seats: this.state.seats - 1 }) }
+  }
 
   render() {
     return (
