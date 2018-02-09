@@ -3,6 +3,7 @@
 #### Useful Documentation
 * React JS Documentation https://reactjs.org/docs/hello-world.html
 * Material-UI Documentation https://material-ui-next.com
+* NPM packages for anything not built into React or Material-UI https://www.npmjs.com
 * Standard Material-UI Icons https://material.io/icons/
 * Gordon Branding Standards http://www.gordon.edu/brandstandards
 
