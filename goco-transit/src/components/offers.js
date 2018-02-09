@@ -206,12 +206,12 @@ class Offers extends React.Component {
                       <SeatIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <IconButton >
-                    <LeftArrowIcon onClick={this.handleSeatMinus} />
+                  <IconButton onClick={this.handleSeatMinus} >
+                    <LeftArrowIcon />
                   </IconButton>
                     {this.state.seats}
-                  <IconButton >
-                    <RightArrowIcon onClick={this.handleSeatPlus} />
+                  <IconButton onClick={this.handleSeatPlus} >
+                    <RightArrowIcon />
                   </IconButton>
                 </ListItem>
 
