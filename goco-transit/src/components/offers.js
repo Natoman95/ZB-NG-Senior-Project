@@ -40,6 +40,7 @@ class Offers extends React.Component {
     divider: true,
     addOpen: false,
     deleteOpen: false,
+    seats: 1,
   };
 
   handleAddClickOpen = () => {
@@ -56,6 +57,14 @@ class Offers extends React.Component {
 
   handleDeleteClose = () => {
     this.setState({ deleteOpen: false });
+  };
+
+  handleSeatPlus = () => {
+    this.setState({ seats: seats + 1 });
+  };
+
+  handleSeatMinus = () => {
+    this.setState({ seats: seats - 1 });
   };
 
   render() {
@@ -192,10 +201,11 @@ class Offers extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <IconButton >
-                    <LeftArrowIcon />
+                    <LeftArrowIcon onClick={this.handleSeatMinus} />
                   </IconButton>
+                    {this.state.seats}
                   <IconButton >
-                    <RightArrowIcon />
+                    <RightArrowIcon onClick={this.handleSeatPlus} />
                   </IconButton>
                 </ListItem>
 
