@@ -43,6 +43,10 @@ class Offers extends React.Component {
     seats: 1,
   };
 
+  constants = {
+    seatMax: 10, // Maximum number of available seats allowed in a given offer
+  };
+
   handleAddClickOpen = () => {
     this.setState({ addOpen: true });
   };
@@ -59,12 +63,13 @@ class Offers extends React.Component {
     this.setState({ deleteOpen: false });
   };
 
+  // Limits seat maximum to pre-defined constant
   handleSeatPlus = () => {
-    this.setState({ seats: this.state.seats + 1 });
+    (this.state.seats == this.constants.seatMax) ? (this.setState({ seats: this.state.seats})) : this.setState({ seats: this.state.seats + 1 });
   };
 
   handleSeatMinus = () => {
-    this.setState({ seats: this.state.seats - 1 });
+    (this.state.seats == 1) ? (this.setState({ seats: this.state.seats})) : this.setState({ seats: this.state.seats - 1 });
   };
 
   render() {
