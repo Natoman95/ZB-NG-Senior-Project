@@ -4,6 +4,13 @@ import CreateIcon from 'material-ui-icons/Create';
 import Button from 'material-ui/Button';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
+import List, {
+  ListItem,
+  ListItemAvatar,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  ListItemText,
+} from 'material-ui/List';
 
 // Component for changing settings
 class Settings extends React.Component {
@@ -14,9 +21,6 @@ class Settings extends React.Component {
     divider: true,
     displayPhone: false,
     displayEmail: true,
-    privacyComplete: true,
-    waiverComplete: true,
-    termsComplete: true,
   };
 
   handleChange = name => event => {
@@ -91,51 +95,39 @@ class Settings extends React.Component {
           />
         </FormGroup>
 
-        {/* Shows which legal agreements have been completed */}
+        {/* Legal Agreements */}
         <h2>
           Legal Agreements
         </h2>
-
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.waiverComplete}
-                onChange={this.handleChange('waiverComplete')}
-                value="waiverComplete"
-              />
-            }
-            label="Liability Waiver"
-          />
-        </FormGroup>
-
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.privacyComplete}
-                onChange={this.handleChange('privacyComplete')}
-                value="privacyComplete"
-              />
-            }
-            label="Privacy Policy"
-          />
-        </FormGroup>
-
-        <FormGroup row>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={this.state.termsComplete}
-                onChange={this.handleChange('termsComplete')}
-                value="termsComplete"
-              />
-            }
-            label="Terms of Use"
-          />
-        </FormGroup>
-
+        
         <div style={{ padding: '.75em', }}>
+          <List dense={this.state.dense}>
+
+            <ListItem button disableGutters={this.state.noGutters} >
+              <ListItemText
+                primary="Liability Waiver"
+              />
+              <ListItemSecondaryAction>
+              </ListItemSecondaryAction>
+            </ListItem>
+
+            <ListItem button disableGutters={this.state.noGutters} >
+              <ListItemText
+                primary="Privacy Policy"
+              />
+              <ListItemSecondaryAction>
+              </ListItemSecondaryAction>
+            </ListItem>
+
+            <ListItem button disableGutters={this.state.noGutters} >
+              <ListItemText
+                primary="Terms of Use"
+              />
+              <ListItemSecondaryAction>
+              </ListItemSecondaryAction>
+            </ListItem>
+
+          </List>
         </div>
 
         {/* Button to logout */}
