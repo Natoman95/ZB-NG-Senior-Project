@@ -100,31 +100,25 @@ class Settings extends React.Component {
           Legal Agreements
         </h2>
         
-        <div style={{ padding: '.75em', }}>
+        <div style={{ padding: '.75em' }} >
           <List dense={this.state.dense}>
 
-            <ListItem button disableGutters={this.state.noGutters} >
-              <ListItemText
+            <ListItem button>
+              <ListItemText disableTypography
                 primary="Liability Waiver"
               />
-              <ListItemSecondaryAction>
-              </ListItemSecondaryAction>
             </ListItem>
 
-            <ListItem button disableGutters={this.state.noGutters} >
-              <ListItemText
+            <ListItem button>
+              <ListItemText disableTypography
                 primary="Privacy Policy"
               />
-              <ListItemSecondaryAction>
-              </ListItemSecondaryAction>
             </ListItem>
 
-            <ListItem button disableGutters={this.state.noGutters} >
-              <ListItemText
+            <ListItem button>
+              <ListItemText disableTypography
                 primary="Terms of Use"
               />
-              <ListItemSecondaryAction>
-              </ListItemSecondaryAction>
             </ListItem>
 
           </List>
