@@ -134,14 +134,6 @@ class Settings extends React.Component {
             label="Terms of Use"
           />
         </FormGroup>
-
-        <div style={{ padding: '.75em', }}>
-        </div>
-
-        {/* Button to logout */}
-        <Button raised color="secondary" style={{ width: '100%', }}>
-          Logout
-        </Button>
       </div>
     );
   }
