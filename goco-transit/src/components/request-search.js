@@ -26,6 +26,7 @@ import Dialog, {
 import PlaceIcon from 'material-ui-icons/place';
 import ClockIcon from 'material-ui-icons/watchLater';
 import CalendarIcon from 'material-ui-icons/dateRange';
+import NoteIcon from 'material-ui-icons/assignment';
 
 class RequestSearch extends React.Component {
   state = {
@@ -198,11 +199,19 @@ class RequestSearch extends React.Component {
                   />
                 </ListItem>
               
-              {/* Notes */}
-              <ListItem disableGutters={true} divider={false}>
-                  <TextField label="Note to driver" multiline={true} />
+                {/* Notes */}
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <NoteIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <div style={{ paddingLeft: "1em" }} >
+                    <TextField label="Note to driver" multiline={true} />
+                  </div>
                 </ListItem>
               </List>
+
             </DialogContentText>
           </DialogContent>
           <DialogActions>
