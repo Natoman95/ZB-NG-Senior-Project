@@ -36,7 +36,7 @@ class Settings extends React.Component {
               <Grid item>
                 <h2>
                   Contact Information
-              </h2>
+                </h2>
               </Grid>
             </Grid>
           </Grid>
@@ -100,29 +100,21 @@ class Settings extends React.Component {
           Legal Agreements
         </h2>
         
-        <div style={{ padding: '.75em' }} >
-          <List dense={this.state.dense}>
+        <List dense={this.state.dense}>
 
-            <ListItem button>
-              <ListItemText disableTypography
-                primary="Liability Waiver"
-              />
-            </ListItem>
+          <ListItem button>
+            <ListItemText disableTypography primary="Liability Waiver" />
+          </ListItem> 
 
-            <ListItem button>
-              <ListItemText disableTypography
-                primary="Privacy Policy"
-              />
-            </ListItem>
+          <ListItem button>
+            <ListItemText disableTypography primary="Privacy Policy" />
+          </ListItem>
 
-            <ListItem button>
-              <ListItemText disableTypography
-                primary="Terms of Use"
-              />
-            </ListItem>
+          <ListItem button>
+            <ListItemText disableTypography primary="Terms of Use" />
+          </ListItem>
 
-          </List>
-        </div>
+        </List>
 
         {/* Button to logout */}
         <Button raised color="secondary" style={{ width: '100%', }}>
