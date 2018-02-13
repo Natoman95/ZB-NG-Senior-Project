@@ -41,7 +41,7 @@ class Settings extends React.Component {
           <Grid item xs={4}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
-                <Button fab color="secondary" aria-label="add">
+                <Button variant="fab" color="secondary" aria-label="add">
                   <CreateIcon />
                 </Button>
               </Grid>
@@ -134,6 +134,14 @@ class Settings extends React.Component {
             label="Terms of Use"
           />
         </FormGroup>
+
+        <div style={{ padding: '.75em', }}>
+        </div>
+
+        {/* Button to logout */}
+        <Button variant="raised" color="secondary" style={{ width: '100%', }}>
+          Logout
+        </Button>
       </div>
     );
   }

@@ -91,7 +91,7 @@ class Requests extends React.Component {
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
                 <Link to="/requests/search">
-                  <Button fab color="secondary" aria-label="add">
+                  <Button variant="fab" color="secondary" aria-label="add">
                     <AddIcon />
                   </Button>
                 </Link>
