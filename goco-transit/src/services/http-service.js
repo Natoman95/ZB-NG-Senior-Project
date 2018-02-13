@@ -1,15 +1,12 @@
+import storage from './storage-service';
+
 /**
  * Handle HTTP requests to the API
  *
  * Copied from Gordon 360
- * 
- * @module http
  */
 
-import { createError } from './error';
-import storage from './storage';
-
-const base = process.env.GORDON_360_API_URL;
+const base = "https://360Api.gordon.edu/"
 
 /**
  * Make a headers object for use with the API
@@ -18,7 +15,7 @@ const base = process.env.GORDON_360_API_URL;
  */
 const makeHeaders = () => {
   try {
-    const token = storage.get('token');
+    const token = getItem('token');
     return new Headers({
       Authorization: `Bearer ${token}`,
     });
@@ -52,11 +49,11 @@ const parseResponse = res => {
   const json = res
     .json()
     // Handle error if response body is not valid JSON
-    .catch(err => Promise.reject(createError(err, res)));
+    .catch(err => Promise.reject(err));
 
   // Handle error when response body is valid but status code is not
   if (!res.ok) {
-    return json.then(data => Promise.reject(createError(data, res)));
+    return json.then(data => Promise.reject(err));
   }
   return json;
 };
@@ -101,4 +98,4 @@ const post = (url, body) => makeRequest(url, 'post', body);
  */
 const del = url => makeRequest(url, 'delete');
 
-export default { del, get, post, put, parseResponse };
+export { del, get, post, put, parseResponse };
