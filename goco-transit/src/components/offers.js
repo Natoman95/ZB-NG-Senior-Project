@@ -103,7 +103,7 @@ class Offers extends React.Component {
           <Grid item xs={12}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
-                <Button fab color="secondary" aria-label="add" onClick={this.handleAddClickOpen}>
+                <Button variant="fab" color="secondary" aria-label="add" onClick={this.handleAddClickOpen}>
                   <AddIcon />
                 </Button>
               </Grid>

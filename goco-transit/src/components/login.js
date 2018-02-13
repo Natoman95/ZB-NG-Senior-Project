@@ -33,7 +33,7 @@ class Login extends React.Component {
           <Toolbar>
             <Typography variant="title" color="inherit">
               GoCo Transit
-          </Typography>
+            </Typography>
           </Toolbar>
         </AppBar>
 

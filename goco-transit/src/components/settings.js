@@ -41,7 +41,7 @@ class Settings extends React.Component {
           <Grid item xs={4}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
-                <Button fab color="secondary" aria-label="add">
+                <Button variant="fab" color="secondary" aria-label="add">
                   <CreateIcon />
                 </Button>
               </Grid>
@@ -139,7 +139,7 @@ class Settings extends React.Component {
         </div>
 
         {/* Button to logout */}
-        <Button raised color="secondary" style={{ width: '100%', }}>
+        <Button variant="raised" color="secondary" style={{ width: '100%', }}>
           Logout
         </Button>
       </div>
