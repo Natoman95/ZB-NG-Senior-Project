@@ -27,7 +27,7 @@ const getItem = (key) => {
  */
 const setItem = (key, value) => {
   if (storageIsDefined()) {
-    window.localStorage.setItem(key, value);
+    window.localStorage.setItem(key, JSON.stringify(value));
   }
 }
 
