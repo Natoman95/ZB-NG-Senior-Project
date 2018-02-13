@@ -11,16 +11,18 @@ import { Redirect } from 'react-router'
 // Services
 import { authenticate } from '../services/auth-service';
 
-// Main app component
+// Login page component
 class Login extends React.Component {
   constructor() {
     super();
+    // We need the component's state so we can trigger a page refresh
     this.state = {
       triggerRedirect: false
     }
     this.handleClickLogin = this.handleClickLogin.bind(this);
   }
 
+  // Authenticate the user and trigger a page change
   handleClickLogin() {
     authenticate();
     this.setState({ fireRedirect: true });
@@ -29,6 +31,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
+        {/* Header bar with app title */}
         <AppBar position="static" color="primary">
           <Toolbar>
             <Typography variant="title" color="inherit">
@@ -37,13 +40,18 @@ class Login extends React.Component {
           </Toolbar>
         </AppBar>
 
+        {/* Login information is displayed on a card */}
         <div style={{ margin: "1.5em" }}>
           <Card>
+
+            {/* An image of Gordon 360 to nofity the user to use
+            their 360 credentials */}
             <CardMedia
               style={{ width: "100%", height: "12em" }}
               image={Gordon360Home}
             />
 
+            {/* Username */}
             <CardContent>
               <TextField
                 id="userName"
@@ -56,6 +64,7 @@ class Login extends React.Component {
               <div style={{ margin: "1em" }}>
               </div>
 
+              {/* Password */}
               <TextField
                 id="password"
                 label="Password"
@@ -65,10 +74,13 @@ class Login extends React.Component {
               />
             </CardContent>
 
+            {/* Login button */}
             <CardActions>
               <Button color="secondary" onClick={this.handleClickLogin}>
                 Login
               </Button>
+              {/* If the component state changed, then redirect to the first
+              of the tab components */}
               {this.state.triggerRedirect && (
                 <Redirect to={"/"} />
               )}
