@@ -47,7 +47,7 @@ const createRequest = (url, method, body) =>
  * @return {Promise.<Object|Array|String|Number>} Resolves with response body; rejects on non-2xx
  * response code
  */
-export const parseResponse = res => {
+const parseResponse = res => {
   // Attempt to parse body of response
   const json = res
     .json()
@@ -101,4 +101,4 @@ const post = (url, body) => makeRequest(url, 'post', body);
  */
 const del = url => makeRequest(url, 'delete');
 
-export default { del, get, post, put };
+export default { del, get, post, put, parseResponse };
