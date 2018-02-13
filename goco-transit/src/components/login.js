@@ -19,6 +19,7 @@ class Login extends React.Component {
     this.state = {
       triggerRedirect: false
     }
+    // The click handler needs "this"
     this.handleClickLogin = this.handleClickLogin.bind(this);
   }
 
