@@ -1,10 +1,11 @@
 import { getItem, setItem, removeItem } from "./storage-service";
+import { parseResponse } from "./http-service";
 
 /**
  * This class is responsible for all actions related to user authentication
  */
 
-const base = process.env.GORDON_360_API_URL;
+const base = "https://360Api.gordon.edu/"
 
 /**
  * Handle an authentication error
@@ -49,7 +50,7 @@ const getAuth = (username, password) => {
  * @return {Promise.<undefined>} Resolved when token is refreshed
  */
 const authenticate = (username, password) =>
-  getAuth(username, password).then(token => storage.store('token', token));
+  getAuth(username, password).then(token => setItem('token', token));
 
 /**
  * Check if current session is authenticated
@@ -57,13 +58,13 @@ const authenticate = (username, password) =>
  * @return {Promise.<boolean>} Whether session is authenticated or not
  */
 const isAuthenticated = () => {
-  try {
-    // Check that auth exists
-    const token = getItem('token');
+  const token = getItem('token');
 
-    // Check that auth contains a token
-    return token && token.length > 0;
-  } catch (err) {
+  // Check that auth contains a token
+  if (token !== null && token.length > 0) {
+    return true;
+  }
+  else {
     return false;
   }
 };

@@ -9,7 +9,7 @@ import Button from 'material-ui/Button';
 import { Redirect } from 'react-router'
 
 // Services
-import { authenticate } from '../services/auth-service';
+import { authenticate, isAuthenticated } from '../services/auth-service';
 
 // Login page component
 class Login extends React.Component {
@@ -17,79 +17,116 @@ class Login extends React.Component {
     super();
     // We need the component's state so we can trigger a page refresh
     this.state = {
-      triggerRedirect: false
+      userName: null,
+      password: null,
+      loginFailed: false,
+      triggerReRender: false,
     }
     // The click handler needs "this"
     this.handleClickLogin = this.handleClickLogin.bind(this);
   }
 
   // Authenticate the user and trigger a page change
-  handleClickLogin() {
-    authenticate();
-    this.setState({ fireRedirect: true });
+  async handleClickLogin(event) {
+    event.preventDefault();
+    try {
+      await authenticate(this.state.userName, this.state.password);
+      this.setState({ triggerReRender: true });
+    } catch (err) {
+      this.setState({ loginFailed: true });
+    }
   }
 
+  // Set state variables
+  handleFormChange(input) {
+    return event => {
+      this.setState({ [input]: event.target.value });
+      this.setState({ loginFailed: false });
+    };
+  }
+
+  // Depending on the user's authentication status, either the login component
+  // will be displayed or the user will be redirected to the first tab
   render() {
-    return (
-      <div>
-        {/* Header bar with app title */}
-        <AppBar position="static" color="primary">
-          <Toolbar>
-            <Typography variant="title" color="inherit">
-              GoCo Transit
-            </Typography>
-          </Toolbar>
-        </AppBar>
+    if (!isAuthenticated()) {
+      return (
+        <div>
+          {/* Header bar with app title */}
+          <AppBar position="static" color="primary">
+            <Toolbar>
+              <Typography variant="title" color="inherit">
+                GoCo Transit
+              </Typography>
+            </Toolbar>
+          </AppBar>
 
-        {/* Login information is displayed on a card */}
-        <div style={{ margin: "1.5em" }}>
-          <Card>
+          {/* Login information is displayed on a card */}
+          <div style={{ margin: "1.5em" }}>
+            <Card>
 
-            {/* An image of Gordon 360 to nofity the user to use
+              {/* An image of Gordon 360 to nofity the user to use
             their 360 credentials */}
-            <CardMedia
-              style={{ width: "100%", height: "12em" }}
-              image={Gordon360Home}
-            />
-
-            {/* Username */}
-            <CardContent>
-              <TextField
-                id="userName"
-                label="Username"
-                variant="username"
-                margin="none"
-                style={{ width: "100%" }}
+              <CardMedia
+                style={{ width: "100%", height: "12em" }}
+                image={Gordon360Home}
               />
 
-              <div style={{ margin: "1em" }}>
-              </div>
+              {/* Error message if login fails */}
+              {this.state.loginFailed &&
+                <Typography
+                  variant="body2"
+                  color="primary"
+                  style={{ paddingTop: "1em", paddingLeft: "1em", color: "#ff3300" }}
+                >
+                  Login Failed
+                </Typography>
+              }
 
-              {/* Password */}
-              <TextField
-                id="password"
-                label="Password"
-                variant="password"
-                margin="none"
-                style={{ width: "100%" }}
-              />
-            </CardContent>
+              {/* Username */}
+              <CardContent>
+                <TextField
+                  id="userName"
+                  label="Username"
+                  placeholder="firstname.lastname"
+                  variant="username"
+                  margin="none"
+                  value={this.state.userName}
+                  onChange={this.handleFormChange('userName')}
+                  style={{ width: "100%" }}
+                />
 
-            {/* Login button */}
-            <CardActions>
-              <Button color="secondary" onClick={this.handleClickLogin}>
-                Login
+                <div style={{ margin: "1em" }}>
+                </div>
+
+                {/* Password */}
+                <TextField
+                  id="password"
+                  label="Password"
+                  variant="password"
+                  type="password"
+                  margin="none"
+                  value={this.state.password}
+                  onChange={this.handleFormChange('password')}
+                  style={{ width: "100%" }}
+                />
+              </CardContent>
+
+              {/* Login button */}
+              <CardActions>
+                <Button color="secondary" onClick={this.handleClickLogin}>
+                  Login
               </Button>
-              {/* If the component state changed, then redirect to the first
-              of the tab components */}
-              {this.state.triggerRedirect && (
-                <Redirect to={"/"} />
-              )}
-            </CardActions>
-          </Card>
+              </CardActions>
+            </Card>
+          </div>
         </div>
-      </div>
-    );
+      )
+    }
+    else {
+      return (
+        <Redirect to={"/"} />
+      )
+    }
   }
 }
 

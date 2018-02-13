@@ -17,7 +17,7 @@ class App extends React.Component {
   // Depending on the user's authentication status, either the main component
   // or the login component will be displayed
   render() {
-    if (isAuthenticated() === true) {
+    if (isAuthenticated()) {
       return (
         <div>
           <Main />
