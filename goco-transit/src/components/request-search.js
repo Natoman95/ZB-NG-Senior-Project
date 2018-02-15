@@ -105,7 +105,7 @@ class RequestSearch extends React.Component {
 
         {/* Search button */}
         <div>
-          <Button raised color="secondary" style={{ width: '100%', marginTop: '2em' }}>
+          <Button variant="raised" color="secondary" style={{ width: '100%', marginTop: '2em' }}>
             Search
           </Button>
         </div>
@@ -159,7 +159,7 @@ class RequestSearch extends React.Component {
           <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              
+
               {/* Ride info */}
               <List dense={this.state.dense}>
 
@@ -198,7 +198,7 @@ class RequestSearch extends React.Component {
                     primary="(Time)"
                   />
                 </ListItem>
-              
+
                 {/* Notes */}
                 <ListItem disableGutters={true} divider={false}>
                   <ListItemAvatar>
