@@ -5,8 +5,8 @@ import { MemoryRouter as Router } from 'react-router-dom';
 import theme from './theme';
 
 // Components
-import Main from './components/main';
-import Login from './components/login';
+import MainPage from './pages/main-page';
+import LoginPage from './pages/login-page';
 
 // Services
 import { isAuthenticated } from './services/auth-service';
@@ -20,14 +20,14 @@ class App extends React.Component {
     if (isAuthenticated()) {
       return (
         <div>
-          <Main />
+          <MainPage />
         </div>
       );
     }
     else {
       return (
         <div>
-          <Login />
+          <LoginPage />
         </div>
       );
     }

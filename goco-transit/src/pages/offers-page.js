@@ -32,7 +32,7 @@ import NoteIcon from 'material-ui-icons/assignment';
 import TextField from 'material-ui/TextField';
 
 // Contains rides offered to other users
-class Offers extends React.Component {
+class OffersPage extends React.Component {
   state = {
     dense: false,
     secondary: true,
@@ -209,7 +209,7 @@ class Offers extends React.Component {
                   <IconButton onClick={this.handleSeatMinus} >
                     <LeftArrowIcon />
                   </IconButton>
-                    {this.state.seats}
+                  {this.state.seats}
                   <IconButton onClick={this.handleSeatPlus} >
                     <RightArrowIcon />
                   </IconButton>
@@ -245,4 +245,4 @@ class Offers extends React.Component {
   }
 }
 
-export default Offers;
+export default OffersPage;

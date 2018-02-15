@@ -12,7 +12,7 @@ import { Redirect } from 'react-router'
 import { authenticate, isAuthenticated } from '../services/auth-service';
 
 // Login page component
-class Login extends React.Component {
+class LoginPage extends React.Component {
   constructor() {
     super();
     // We need the component's state so we can trigger a page refresh
@@ -130,4 +130,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default LoginPage;

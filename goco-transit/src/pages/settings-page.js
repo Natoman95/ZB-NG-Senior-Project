@@ -10,7 +10,7 @@ import { Redirect } from 'react-router'
 import { signOut, isAuthenticated } from '../services/auth-service';
 
 // Component for changing settings
-class Settings extends React.Component {
+class SettingsPage extends React.Component {
   constructor() {
     super();
     // We need the component's state so we can trigger a page refresh
@@ -179,4 +179,4 @@ class Settings extends React.Component {
   }
 }
 
-export default Settings;
+export default SettingsPage;
