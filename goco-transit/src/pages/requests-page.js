@@ -22,25 +22,50 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 // Components
-import RequestSearchPage from './request-search-page'
+import RequestSearch from './request-search';
+
+// Models
+import RideModel from '../models/ride-model';
+
+// Services
+import { getUser } from '../services/auth-service';
 
 // Contains ride requests made by the user
-class RequestsPage extends React.Component {
-  state = {
-    dense: false,
-    secondary: true,
-    noGutters: true,
-    divider: true,
-    open: false,
-  };
+class Requests extends React.Component {
+  constructor() {
+    super();
 
+    this.state = {
+      dense: false,
+      secondary: true,
+      noGutters: true,
+      divider: true,
+      open: false,
+      requests: null,
+    };
+
+    // Dummy requests to display on the requests page
+    let ride1 = new RideModel("Wenham", "Pittsburgh", "12/7/2017", "12/19/2017", "Nathan");
+    ride1.passengers = ["Rachel", "Zach", "Chris", "Steve"];
+
+    let ride2 = new RideModel("Manchester", "Wenham", "1/16/2018", "1/18/2018", "Zach");
+    ride2.passengers = ["Jim", "Bob", "Leah"];
+
+    this.state.requests = [
+      ride1,
+      ride2
+    ];
+  }
+
+  // Open the delete dialog
   handleClickOpen = () => {
     this.setState({ open: true });
   };
 
+  // Close the delete dialog
   handleClose = () => {
     this.setState({ open: false });
   };
@@ -48,41 +73,35 @@ class RequestsPage extends React.Component {
   render() {
     return (
       <div>
-        {/* List of requested rides */}
+        {/* List of requested rides generated from an array */}
         <List dense={this.state.dense}>
-          <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
-            <ListItemAvatar>
-              <Avatar>
-                <DoneIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary="Pittsburgh"
-              secondary={this.state.secondary ? '12/7-12/19' : null}
-            />
-            <ListItemSecondaryAction>
-              <IconButton onClick={this.handleClickOpen} aria-label="Delete">
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-
-          <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
-            <ListItemAvatar>
-              <Avatar>
-                <QuestionIcon />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary="Wenham"
-              secondary={this.state.secondary ? '1/16-18/18' : null}
-            />
-            <ListItemSecondaryAction>
-              <IconButton onClick={this.handleClickOpen} aria-label="Delete">
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
+          {this.state.requests.map((request) => {
+            return (
+              <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
+                <ListItemAvatar>
+                  {/* Depending on whether the user has been accepted as a passenger
+                  A different avatar will be displayed */}
+                  <Avatar>
+                    {request.isUserAPassenger(getUser()) &&
+                      <DoneIcon />}
+                    {!request.isUserAPassenger(getUser()) &&
+                      <QuestionIcon />}
+                  </Avatar>
+                </ListItemAvatar>
+                {/* Route destination and date range */}
+                <ListItemText
+                  primary={request.destination}
+                  secondary={this.state.secondary ? (request.dateMin + '-' + request.dateMax) : null}
+                />
+                {/* Delete button */}
+                <ListItemSecondaryAction>
+                  <IconButton onClick={this.handleClickOpen} aria-label="Delete">
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            );
+          })}
         </List>
 
         {/* Add a request button */}

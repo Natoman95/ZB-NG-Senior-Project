@@ -8,6 +8,15 @@ import { parseResponse } from "./http-service";
 const base = "https://360Api.gordon.edu/"
 
 /**
+ * Get the current user
+ * @return {String} Current user
+ */
+const getUser = () => {
+  // Hardcoded for now
+  return "Zach";
+}
+
+/**
  * Handle an authentication error
  * @param {Error} err An authentication error
  * @throws {Error} An error that can be shown to users (`error.message`)
@@ -77,4 +86,4 @@ const signOut = () => {
   removeItem('token');
 };
 
-export { authenticate, signOut, isAuthenticated };
+export { authenticate, signOut, isAuthenticated, getUser };
