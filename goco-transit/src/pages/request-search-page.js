@@ -28,7 +28,7 @@ import ClockIcon from 'material-ui-icons/watchLater';
 import CalendarIcon from 'material-ui-icons/dateRange';
 import NoteIcon from 'material-ui-icons/assignment';
 
-class RequestSearch extends React.Component {
+class RequestSearchPage extends React.Component {
   state = {
     dense: false,
     secondary: true,
@@ -229,4 +229,4 @@ class RequestSearch extends React.Component {
   }
 }
 
-export default RequestSearch
+export default RequestSearchPage;
