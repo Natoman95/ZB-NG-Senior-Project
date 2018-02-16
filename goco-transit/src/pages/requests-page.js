@@ -25,7 +25,7 @@ import Dialog, {
 import { Link } from 'react-router-dom';
 
 // Components
-import RequestSearch from './request-search';
+import RequestSearchPage from './request-search-page';
 
 // Models
 import RideModel from '../models/ride-model';
@@ -34,7 +34,7 @@ import RideModel from '../models/ride-model';
 import { getUser } from '../services/auth-service';
 
 // Contains ride requests made by the user
-class Requests extends React.Component {
+class RequestsPage extends React.Component {
   constructor() {
     super();
 
