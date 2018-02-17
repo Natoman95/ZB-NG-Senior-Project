@@ -8,10 +8,10 @@ import Typography from 'material-ui/Typography';
 import { Link, Route } from 'react-router-dom'
 
 // Components
-import Offers from './offers';
-import Requests from './requests';
-import Settings from './settings'
-import RequestSearch from './request-search'
+import OffersPage from './offers-page';
+import RequestsPage from './requests-page';
+import SettingsPage from './settings-page'
+import RequestSearchPage from './request-search-page'
 
 // Contains the children the tabs navigate between
 function TabContainer(props) {
@@ -23,7 +23,7 @@ function TabContainer(props) {
 }
 
 // Main app component
-class Main extends React.Component {
+class MainPage extends React.Component {
   state = {
     value: 0,
   };
@@ -54,11 +54,11 @@ class Main extends React.Component {
         {/* Tab Pages */}
         <div>
           <TabContainer>
-            <Route exact path="/" component={Requests} />
-            <Route exact path="/requests" component={Requests} />
-            <Route exact path="/requests/search" component={RequestSearch} />
-            <Route exact path="/offers" component={Offers} />
-            <Route exact path="/settings" component={Settings} />
+            <Route exact path="/" component={RequestsPage} />
+            <Route exact path="/requests" component={RequestsPage} />
+            <Route exact path="/requests/search" component={RequestSearchPage} />
+            <Route exact path="/offers" component={OffersPage} />
+            <Route exact path="/settings" component={SettingsPage} />
           </TabContainer>
         </div>
       </div>
@@ -66,4 +66,4 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export default MainPage;

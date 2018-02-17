@@ -25,10 +25,10 @@ import Dialog, {
 import { Link } from 'react-router-dom'
 
 // Components
-import RequestSearch from './request-search'
+import RequestSearchPage from './request-search-page'
 
 // Contains ride requests made by the user
-class Requests extends React.Component {
+class RequestsPage extends React.Component {
   state = {
     dense: false,
     secondary: true,
@@ -91,7 +91,7 @@ class Requests extends React.Component {
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
                 <Link to="/requests/search">
-                  <Button fab color="secondary" aria-label="add">
+                  <Button variant="fab" color="secondary" aria-label="add">
                     <AddIcon />
                   </Button>
                 </Link>
@@ -127,4 +127,4 @@ class Requests extends React.Component {
   }
 }
 
-export default Requests;
+export default RequestsPage;

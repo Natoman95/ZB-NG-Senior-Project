@@ -14,6 +14,8 @@ import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
+import LeftArrowIcon from 'material-ui-icons/chevronLeft';
+import RightArrowIcon from 'material-ui-icons/chevronRight';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 import Dialog, {
@@ -25,10 +27,12 @@ import Dialog, {
 import PlaceIcon from 'material-ui-icons/place';
 import ClockIcon from 'material-ui-icons/watchLater';
 import CalendarIcon from 'material-ui-icons/dateRange';
+import SeatIcon from 'material-ui-icons/eventSeat';
+import NoteIcon from 'material-ui-icons/assignment';
 import TextField from 'material-ui/TextField';
 
 // Contains rides offered to other users
-class Offers extends React.Component {
+class OffersPage extends React.Component {
   state = {
     dense: false,
     secondary: true,
@@ -36,6 +40,11 @@ class Offers extends React.Component {
     divider: true,
     addOpen: false,
     deleteOpen: false,
+    seats: 1,
+  };
+
+  constants = {
+    seatMax: 10, // Maximum number of available seats allowed in a given offer
   };
 
   handleAddClickOpen = () => {
@@ -53,6 +62,16 @@ class Offers extends React.Component {
   handleDeleteClose = () => {
     this.setState({ deleteOpen: false });
   };
+
+  // Limits seat maximum to pre-defined constant
+  handleSeatPlus = () => {
+    if (this.state.seats < 10) { this.setState({ seats: this.state.seats + 1 }) }
+  }
+
+  // Limits seat minimum to 1
+  handleSeatMinus = () => {
+    if (this.state.seats > 1) { this.setState({ seats: this.state.seats - 1 }) }
+  }
 
   render() {
     return (
@@ -103,7 +122,7 @@ class Offers extends React.Component {
           <Grid item xs={12}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
-                <Button fab color="secondary" aria-label="add" onClick={this.handleAddClickOpen}>
+                <Button variant="fab" color="secondary" aria-label="add" onClick={this.handleAddClickOpen}>
                   <AddIcon />
                 </Button>
               </Grid>
@@ -167,7 +186,7 @@ class Offers extends React.Component {
                       <CalendarIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField type="date" style={{ paddingLeft: "1em" }} />
+                  <TextField required type="date" style={{ paddingLeft: "1em" }} />
                 </ListItem>
 
                 {/* Time */}
@@ -177,12 +196,35 @@ class Offers extends React.Component {
                       <ClockIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <TextField type="time" style={{ paddingLeft: "1em" }} />
+                  <TextField required type="time" style={{ paddingLeft: "1em" }} />
+                </ListItem>
+
+                {/* Number of seats */}
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <SeatIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <IconButton onClick={this.handleSeatMinus} >
+                    <LeftArrowIcon />
+                  </IconButton>
+                  {this.state.seats}
+                  <IconButton onClick={this.handleSeatPlus} >
+                    <RightArrowIcon />
+                  </IconButton>
                 </ListItem>
 
                 {/* Notes */}
                 <ListItem disableGutters={true} divider={false}>
-                  <TextField label="Note to passengers" multiline={true} />
+                  <ListItemAvatar>
+                    <Avatar>
+                      <NoteIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <div style={{ paddingLeft: "1em" }} >
+                    <TextField label="Note to passengers" multiline={true} />
+                  </div>
                 </ListItem>
               </List>
 
@@ -203,4 +245,4 @@ class Offers extends React.Component {
   }
 }
 
-export default Offers;
+export default OffersPage;

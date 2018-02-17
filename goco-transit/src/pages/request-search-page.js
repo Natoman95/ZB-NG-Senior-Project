@@ -26,8 +26,9 @@ import Dialog, {
 import PlaceIcon from 'material-ui-icons/place';
 import ClockIcon from 'material-ui-icons/watchLater';
 import CalendarIcon from 'material-ui-icons/dateRange';
+import NoteIcon from 'material-ui-icons/assignment';
 
-class RequestSearch extends React.Component {
+class RequestSearchPage extends React.Component {
   state = {
     dense: false,
     secondary: true,
@@ -104,7 +105,7 @@ class RequestSearch extends React.Component {
 
         {/* Search button */}
         <div>
-          <Button raised color="secondary" style={{ width: '100%', marginTop: '2em' }}>
+          <Button variant="raised" color="secondary" style={{ width: '100%', marginTop: '2em' }}>
             Search
           </Button>
         </div>
@@ -158,7 +159,7 @@ class RequestSearch extends React.Component {
           <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              
+
               {/* Ride info */}
               <List dense={this.state.dense}>
 
@@ -197,12 +198,20 @@ class RequestSearch extends React.Component {
                     primary="(Time)"
                   />
                 </ListItem>
-              
-              {/* Notes */}
-              <ListItem disableGutters={true} divider={false}>
-                  <TextField label="Note to driver" multiline={true} />
+
+                {/* Notes */}
+                <ListItem disableGutters={true} divider={false}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <NoteIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <div style={{ paddingLeft: "1em" }} >
+                    <TextField label="Note to driver" multiline={true} />
+                  </div>
                 </ListItem>
               </List>
+
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -220,4 +229,4 @@ class RequestSearch extends React.Component {
   }
 }
 
-export default RequestSearch
+export default RequestSearchPage;
