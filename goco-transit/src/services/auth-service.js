@@ -1,20 +1,12 @@
 import { getItem, setItem, removeItem } from "./storage-service";
 import { parseResponse } from "./http-service";
+import { UserModel } from "../models/user-model";
 
 /**
  * This class is responsible for all actions related to user authentication
  */
 
 const base = "https://360Api.gordon.edu/"
-
-/**
- * Get the current user
- * @return {String} Current user
- */
-const getUser = () => {
-  // Hardcoded for now
-  return "Zach";
-}
 
 /**
  * Handle an authentication error

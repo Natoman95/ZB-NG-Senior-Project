@@ -1,4 +1,3 @@
-
 /**
  * Contains data on rides which are viewed either as offers or
  * requests depending on the user

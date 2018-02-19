@@ -27,11 +27,8 @@ import { Link } from 'react-router-dom';
 // Components
 import RequestSearchPage from './request-search-page';
 
-// Models
-import RideModel from '../models/ride-model';
-
 // Services
-import { getUser } from '../services/auth-service';
+import { getUser } from '../services/user-service';
 
 // Contains ride requests made by the user
 class RequestsPage extends React.Component {
@@ -45,19 +42,11 @@ class RequestsPage extends React.Component {
       divider: true,
       open: false,
       requests: null,
+      user: null,
     };
 
-    // Dummy requests to display on the requests page
-    let ride1 = new RideModel("Wenham", "Pittsburgh", "12/7/2017", "12/19/2017", "Nathan");
-    ride1.passengers = ["Rachel", "Zach", "Chris", "Steve"];
-
-    let ride2 = new RideModel("Manchester", "Wenham", "1/16/2018", "1/18/2018", "Zach");
-    ride2.passengers = ["Jim", "Bob", "Leah"];
-
-    this.state.requests = [
-      ride1,
-      ride2
-    ];
+    this.state.user = getUser();
+    this.state.requests = this.state.user.requests;
   }
 
   // Open the delete dialog
@@ -82,9 +71,9 @@ class RequestsPage extends React.Component {
                   {/* Depending on whether the user has been accepted as a passenger
                   A different avatar will be displayed */}
                   <Avatar>
-                    {request.isUserAPassenger(getUser()) &&
+                    {request.isUserAPassenger(this.state.user) &&
                       <DoneIcon />}
-                    {!request.isUserAPassenger(getUser()) &&
+                    {!request.isUserAPassenger(this.state.user) &&
                       <QuestionIcon />}
                   </Avatar>
                 </ListItemAvatar>
