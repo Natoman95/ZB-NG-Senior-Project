@@ -28,14 +28,48 @@ import ClockIcon from 'material-ui-icons/watchLater';
 import CalendarIcon from 'material-ui-icons/dateRange';
 import NoteIcon from 'material-ui-icons/assignment';
 
+/** 
+ * This page is displayed when a user wants to find a ride somewhere.
+ * It allows the user to search for a ride by location and date range
+ */
 class RequestSearchPage extends React.Component {
-  state = {
-    dense: false,
-    secondary: true,
-    noGutters: true,
-    divider: true,
-    open: false,
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      dense: false,
+      secondary: true,
+      noGutters: true,
+      divider: true,
+      open: false,
+    };
+  }
+
+  /**
+   * Finds a future date offset from today in YYYY-MM-DD format
+   */
+  getFutureDate = (offset) => {
+    // Creates a date object based on the current day and offsets it by a constant
+    let date = new Date();
+    let nextDate = new Date(date);
+    nextDate.setDate(date.getDate() + offset);
+
+    let dd = nextDate.getDate();
+    let mm = nextDate.getMonth() + 1; //January is 0
+    let yyyy = nextDate.getFullYear();
+
+    // Handle single-digit days and months
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    let formattedDate = yyyy + '-' + mm + '-' + dd;
+
+    return formattedDate;
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -73,7 +107,7 @@ class RequestSearchPage extends React.Component {
                       id="startDate"
                       label="Earliest Travel Day"
                       type="date"
-                      defaultValue="2018-12-01"
+                      defaultValue={this.getFutureDate(0)}
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -84,14 +118,14 @@ class RequestSearchPage extends React.Component {
             </Grid>
 
             <Grid item xs={6}>
-              <Grid container direction="row" justify="flex-end" alignItems="center">
+              <Grid container direction="row" justify="flex-start" alignItems="center">
                 <Grid item>
                   <form noValidate>
                     <TextField
                       id="startDate"
                       label="Latest Travel Day"
                       type="date"
-                      defaultValue="2018-12-31"
+                      defaultValue={this.getFutureDate(1)}
                       InputLabelProps={{
                         shrink: true,
                       }}
