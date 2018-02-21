@@ -157,7 +157,7 @@ class RequestsPage extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleClose}>
-              Back
+              Cancel
             </Button>
             <Button onClick={this.handleClose}>
               Delete

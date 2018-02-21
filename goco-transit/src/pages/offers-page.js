@@ -143,7 +143,7 @@ class OffersPage extends React.Component {
           </DialogContent>
           <DialogActions>
             <Button onClick={this.handleDeleteClose}>
-              Back
+              Cancel
             </Button>
             <Button onClick={this.handleDeleteClose}>
               Delete
