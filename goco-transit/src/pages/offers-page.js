@@ -44,8 +44,8 @@ class OffersPage extends React.Component {
       secondary: true,
       noGutters: true,
       divider: true,
-      addOpen: false,
-      deleteOpen: false,
+      displayAddOfferDialog: false,
+      displayDeleteOfferDialog: false,
       seats: 1,
       offers: null
     };
@@ -58,19 +58,19 @@ class OffersPage extends React.Component {
   };
 
   handleAddClickOpen = () => {
-    this.setState({ addOpen: true });
+    this.setState({ displayAddOfferDialog: true });
   };
 
   handleAddClose = () => {
-    this.setState({ addOpen: false });
+    this.setState({ displayAddOfferDialog: false });
   };
 
   handleDeleteClickOpen = () => {
-    this.setState({ deleteOpen: true });
+    this.setState({ displayDeleteOfferDialog: true });
   };
 
   handleDeleteClose = () => {
-    this.setState({ deleteOpen: false });
+    this.setState({ displayDeleteOfferDialog: false });
   };
 
   // Limits seat maximum to pre-defined constant
@@ -130,7 +130,7 @@ class OffersPage extends React.Component {
 
         {/* Delete an offer dialog box */}
         <Dialog
-          open={this.state.deleteOpen}
+          open={this.state.displayDeleteOfferDialog}
           onClose={this.handleDeleteClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
@@ -153,7 +153,7 @@ class OffersPage extends React.Component {
 
         {/* Add ride offer dialog box */}
         <Dialog
-          open={this.state.addOpen}
+          open={this.state.displayAddOfferDialog}
           onClose={this.handleAddClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"

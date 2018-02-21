@@ -40,7 +40,7 @@ class RequestsPage extends React.Component {
       secondary: true,
       noGutters: true,
       divider: true,
-      open: false,
+      displayDeleteRequestDialog: false,
       user: null,
       rides: null,
       requests: null
@@ -53,12 +53,12 @@ class RequestsPage extends React.Component {
 
   // Open the delete dialog
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({ displayDeleteRequestDialog: true });
   };
 
   // Close the delete dialog
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ displayDeleteRequestDialog: false });
   };
 
   render() {
@@ -144,7 +144,7 @@ class RequestsPage extends React.Component {
 
         {/* Delete a request dialog box */}
         <Dialog
-          open={this.state.open}
+          open={this.state.displayDeleteRequestDialog}
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"

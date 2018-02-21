@@ -44,7 +44,7 @@ class RequestSearchPage extends React.Component {
       secondary: true,
       noGutters: true,
       divider: true,
-      open: false,
+      displayAddRequestDialog: false,
       origin: null,
       destination: null,
       startDate: null,
@@ -99,11 +99,11 @@ class RequestSearchPage extends React.Component {
   }
 
   handleClickOpen = () => {
-    this.setState({ open: true });
+    this.setState({ displayAddRequestDialog: true });
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({ displayAddRequestDialog: false });
   };
 
   render() {
@@ -237,7 +237,7 @@ class RequestSearchPage extends React.Component {
 
         {/* Confirm adding ride request dialog box */}
         <Dialog
-          open={this.state.open}
+          open={this.state.displayAddRequestDialog}
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
