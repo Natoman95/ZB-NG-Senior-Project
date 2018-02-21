@@ -28,14 +28,75 @@ import ClockIcon from 'material-ui-icons/watchLater';
 import CalendarIcon from 'material-ui-icons/dateRange';
 import NoteIcon from 'material-ui-icons/assignment';
 
+// Services
+import { findRides } from '../services/ride-service';
+
+/** 
+ * This page is displayed when a user wants to find a ride somewhere.
+ * It allows the user to search for a ride by location and date range
+ */
 class RequestSearchPage extends React.Component {
-  state = {
-    dense: false,
-    secondary: true,
-    noGutters: true,
-    divider: true,
-    open: false,
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      dense: false,
+      secondary: true,
+      noGutters: true,
+      divider: true,
+      open: false,
+      origin: null,
+      destination: null,
+      startDate: null,
+      endDate: null,
+      results: null
+    };
+  }
+
+  /**
+   * Finds a future date offset from today in YYYY-MM-DD format
+   */
+  getFutureDate = (offset) => {
+    // Creates a date object based on the current day and offsets it by a constant
+    let date = new Date();
+    let nextDate = new Date(date);
+    nextDate.setDate(date.getDate() + offset);
+
+    let dd = nextDate.getDate();
+    let mm = nextDate.getMonth() + 1; //January is 0
+    let yyyy = nextDate.getFullYear();
+
+    // Handle single-digit days and months
+    if (dd < 10) {
+      dd = '0' + dd;
+    }
+    if (mm < 10) {
+      mm = '0' + mm;
+    }
+
+    let formattedDate = yyyy + '-' + mm + '-' + dd;
+
+    return formattedDate;
+  }
+
+  /**
+   * When the search button is clicked, rides matching the user's parameters must be found
+   */
+  handleClickSearch = () => {
+    this.setState({
+      results: findRides(this.state.startDate, this.state.endDate,
+        this.state.origin, this.state.destination)
+    });
+  }
+
+  /**
+   * Change state variables based on changes to input forms
+   */
+  handleFormChange = (input) => {
+    return event => {
+      this.setState({ [input]: event.target.value });
+    };
+  }
 
   handleClickOpen = () => {
     this.setState({ open: true });
@@ -53,12 +114,27 @@ class RequestSearchPage extends React.Component {
           Find a Ride by Location
         </h3>
 
+        {/* Enter a start location */}
         <TextField
           style={{ margin: 0 }}
-          id="search"
-          label="Search"
+          id="origin"
+          label="Origin"
           type="search"
           margin="normal"
+          value={this.state.origin}
+          onChange={this.handleFormChange('origin')}
+          fullWidth={true}
+        />
+
+        {/* Enter a destination */}
+        <TextField
+          style={{ marginTop: '2em' }}
+          id="destination"
+          label="Destination"
+          type="search"
+          margin="normal"
+          value={this.state.destination}
+          onChange={this.handleFormChange('destination')}
           fullWidth={true}
         />
 
@@ -73,7 +149,10 @@ class RequestSearchPage extends React.Component {
                       id="startDate"
                       label="Earliest Travel Day"
                       type="date"
-                      defaultValue="2018-12-01"
+                      // Default time for the start date is today
+                      defaultValue={this.getFutureDate(0)}
+                      value={this.state.startDate}
+                      onChange={this.handleFormChange('startDate')}
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -84,14 +163,17 @@ class RequestSearchPage extends React.Component {
             </Grid>
 
             <Grid item xs={6}>
-              <Grid container direction="row" justify="flex-end" alignItems="center">
+              <Grid container direction="row" justify="flex-start" alignItems="center">
                 <Grid item>
                   <form noValidate>
                     <TextField
                       id="startDate"
                       label="Latest Travel Day"
                       type="date"
-                      defaultValue="2018-12-31"
+                      // Default time for the max date is tomorrow
+                      defaultValue={this.getFutureDate(1)}
+                      onChange={this.handleFormChange('endDate')}
+                      value={this.state.endDate}
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -105,49 +187,53 @@ class RequestSearchPage extends React.Component {
 
         {/* Search button */}
         <div>
-          <Button variant="raised" color="secondary" style={{ width: '100%', marginTop: '2em' }}>
+          <Button
+            variant="raised"
+            color="secondary"
+            style={{ width: '100%', marginTop: '2em' }}
+            onClick={this.handleClickSearch}
+          >
             Search
           </Button>
         </div>
 
-        {/* Search Results */}
-        <div style={{ marginTop: '3em' }}>
-          <h3>
-            Results
-        </h3>
+        {/* Search Results - visible only if user has hit the search button 
+         Generated from an array of results */}
+        {this.state.results !== null &&
+          <div style={{ marginTop: '3em' }}>
+            <h3>
+              Results
+            </h3>
 
-          <List dense={this.state.dense}>
-            <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider} onClick={this.handleClickOpen}>
-              <Avatar src={ZachPhoto} />
-              <ListItemText
-                primary="Scranton"
-                secondary={this.state.secondary ? '12/3/18' : null}
-              />
-              <ListItemSecondaryAction>
-                <IconButton disabled={true}>
-                  <Badge badgeContent={1} color="primary">
-                    <PersonIcon />
-                  </Badge>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-
-            <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider} onClick={this.handleClickOpen}>
-              <Avatar src={NathanPhoto} />
-              <ListItemText
-                primary="Oxford"
-                secondary={this.state.secondary ? '12/17/18' : null}
-              />
-              <ListItemSecondaryAction>
-                <IconButton disabled={true}>
-                  <Badge badgeContent={2} color="primary">
-                    <PersonIcon />
-                  </Badge>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          </List>
-        </div>
+            {this.state.results.map((result) => {
+              return (
+                <List dense={this.state.dense}>
+                  <ListItem
+                    button
+                    disableGutters={this.state.noGutters}
+                    divider={this.state.divider}
+                    onClick={this.handleClickOpen}>
+                    {/* Driver profile picture */}
+                    <Avatar src={result.driver.profilePhoto} />
+                    {/* Ride date */}
+                    <ListItemText
+                      primary={result.destination}
+                      secondary={this.state.secondary ? result.date : null}
+                    />
+                    {/* Number of passengers in the ride */}
+                    <ListItemSecondaryAction>
+                      <IconButton disabled={true}>
+                        <Badge badgeContent={result.passengers.length} color="primary">
+                          <PersonIcon />
+                        </Badge>
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </List>
+              );
+            })}
+          </div>
+        }
 
         {/* Confirm adding ride request dialog box */}
         <Dialog

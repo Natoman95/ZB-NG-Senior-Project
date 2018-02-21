@@ -31,17 +31,27 @@ import SeatIcon from 'material-ui-icons/eventSeat';
 import NoteIcon from 'material-ui-icons/assignment';
 import TextField from 'material-ui/TextField';
 
+// Services
+import { getUser } from '../services/user-service';
+
 // Contains rides offered to other users
 class OffersPage extends React.Component {
-  state = {
-    dense: false,
-    secondary: true,
-    noGutters: true,
-    divider: true,
-    addOpen: false,
-    deleteOpen: false,
-    seats: 1,
-  };
+  constructor() {
+    super();
+
+    this.state = {
+      dense: false,
+      secondary: true,
+      noGutters: true,
+      divider: true,
+      addOpen: false,
+      deleteOpen: false,
+      seats: 1,
+      offers: null
+    };
+
+    this.state.offers = getUser().offers;
+  }
 
   constants = {
     seatMax: 10, // Maximum number of available seats allowed in a given offer
@@ -76,45 +86,33 @@ class OffersPage extends React.Component {
   render() {
     return (
       <div>
-        {/* List of offers - items display the number of users who have accepted the ride */}
+        {/* List of offers - items display the number of users who have accepted the ride 
+         Generated from an array */}
         <List dense={this.state.dense}>
-          <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
-            <ListItemAvatar>
-              <IconButton disabled={true}>
-                <Badge badgeContent={4} color="primary">
-                  <PersonIcon />
-                </Badge>
-              </IconButton>
-            </ListItemAvatar>
-            <ListItemText
-              primary="Scranton"
-              secondary={this.state.secondary ? '2/3/18' : null}
-            />
-            <ListItemSecondaryAction>
-              <IconButton onClick={this.handleDeleteClickOpen} aria-label="Delete">
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
-
-          <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
-            <ListItemAvatar>
-              <IconButton disabled={true}>
-                <Badge badgeContent={2} color="primary">
-                  <PersonIcon />
-                </Badge>
-              </IconButton>
-            </ListItemAvatar>
-            <ListItemText
-              primary="Boston"
-              secondary={this.state.secondary ? '4/6/18' : null}
-            />
-            <ListItemSecondaryAction>
-              <IconButton onClick={this.handleDeleteClickOpen} aria-label="Delete">
-                <DeleteIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
-          </ListItem>
+          {this.state.offers.map((offer) => {
+            return (
+              <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
+                {/* Number of users on the offered ride */}
+                <ListItemAvatar>
+                  <IconButton disabled={true}>
+                    <Badge badgeContent={offer.passengers.length} color="primary">
+                      <PersonIcon />
+                    </Badge>
+                  </IconButton>
+                </ListItemAvatar>
+                {/* Date of the ride */}
+                <ListItemText
+                  primary={offer.destination}
+                  secondary={this.state.secondary ? offer.date : null}
+                />
+                <ListItemSecondaryAction>
+                  <IconButton onClick={this.handleDeleteClickOpen} aria-label="Delete">
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            );
+          })}
         </List>
 
         {/* Add Offer Button */}
