@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 
 // Components
 import RequestSearchPage from './request-search-page';
-import DeleteRequestDialog from '../components/delete-request-dialog';
+import DeleteRequestDialog, { handleClickOpen, handleClose } from '../components/delete-request-dialog';
 
 // Services
 import { getUser } from '../services/user-service';
@@ -79,9 +79,9 @@ class RequestsPage extends React.Component {
                   primary={ride.destination}
                   secondary={this.state.secondary ? ride.date : null}
                 />
-                {/* Delete button */}
+                {/* Delete ride button */}
                 <ListItemSecondaryAction>
-                  <IconButton onClick={this.handleClickOpen} aria-label="Delete">
+                  <IconButton onClick={() => this.refs.DeleteRequestDialog.handleClickOpen()} aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -111,9 +111,9 @@ class RequestsPage extends React.Component {
                   primary={request.destination}
                   secondary={this.state.secondary ? (request.dateMin + '-' + request.dateMax) : null}
                 />
-                {/* Delete button */}
+                {/* Delete request button */}
                 <ListItemSecondaryAction>
-                  <IconButton onClick={this.handleClickOpen} aria-label="Delete">
+                  <IconButton onClick={() => this.refs.DeleteRequestDialog.handleClickOpen()} aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -138,12 +138,7 @@ class RequestsPage extends React.Component {
         </Grid>
 
         {/* Delete a request dialog box */}
-        <DeleteRequestDialog
-          open={this.state.displayDeleteRequestDialog}
-          onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        />       
+        <DeleteRequestDialog ref="DeleteRequestDialog" />       
         
       </div>
     );
