@@ -1,20 +1,17 @@
+import React from 'react';
 import Dialog, {
     DialogActions,
     DialogContent,
     DialogContentText,
     DialogTitle,
   } from 'material-ui/Dialog';
+  import Button from 'material-ui/Button';
 
   {/* Delete a request dialog box */}
 
   const DeleteRequestDialog = () =>
   (
-    <Dialog
-      open={this.state.displayDeleteRequestDialog}
-      onClose={this.handleClose}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
-    >
+    <Dialog>
       <DialogTitle id="alert-dialog-title">{"Delete this ride request?"}</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-description">

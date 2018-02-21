@@ -138,7 +138,12 @@ class RequestsPage extends React.Component {
         </Grid>
 
         {/* Delete a request dialog box */}
-        
+        <DeleteRequestDialog
+          open={this.state.displayDeleteRequestDialog}
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        />       
         
       </div>
     );
