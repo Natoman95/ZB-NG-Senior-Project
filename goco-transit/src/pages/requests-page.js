@@ -20,7 +20,7 @@ import { Link } from 'react-router-dom';
 
 // Components
 import RequestSearchPage from './request-search-page';
-import DeleteRequestDialog, { handleClickOpen, handleClose } from '../components/delete-request-dialog';
+import DeleteRequestDialog from '../components/delete-request-dialog';
 
 // Services
 import { getUser } from '../services/user-service';
@@ -41,20 +41,11 @@ class RequestsPage extends React.Component {
       requests: null
     };
 
+    //this.state.displayDeleteRequestDialog = this.displayDeleteRequestDialog.state.displayDeleteRequestDialog;
     this.state.user = getUser();
     this.state.requests = this.state.user.requests;
     this.state.rides = this.state.user.rides;
   }
-
-  // Open the delete dialog
-  handleClickOpen = () => {
-    this.setState({ displayDeleteRequestDialog: true });
-  };
-
-  // Close the delete dialog
-  handleClose = () => {
-    this.setState({ displayDeleteRequestDialog: false });
-  };
 
   render() {
     return (
@@ -81,7 +72,7 @@ class RequestsPage extends React.Component {
                 />
                 {/* Delete ride button */}
                 <ListItemSecondaryAction>
-                  <IconButton onClick={() => this.refs.DeleteRequestDialog.handleClickOpen()} aria-label="Delete">
+                  <IconButton onClick={() => this.refs.deleteRequestDialogRef.handleClickOpen()} aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -113,7 +104,7 @@ class RequestsPage extends React.Component {
                 />
                 {/* Delete request button */}
                 <ListItemSecondaryAction>
-                  <IconButton onClick={() => this.refs.DeleteRequestDialog.handleClickOpen()} aria-label="Delete">
+                  <IconButton onClick={() => this.refs.deleteRequestDialogRef.handleClickOpen()} aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -138,7 +129,7 @@ class RequestsPage extends React.Component {
         </Grid>
 
         {/* Delete a request dialog box */}
-        <DeleteRequestDialog ref="DeleteRequestDialog" />       
+        <DeleteRequestDialog ref="deleteRequestDialogRef" />       
         
       </div>
     );

@@ -23,12 +23,12 @@ class DeleteRequestDialog extends React.Component {
   }
 
   // Open the delete request dialog
-  handleClickOpen() {
+  handleClickOpen = () => {
     this.setState({ displayDeleteRequestDialog: true });
   };
 
   // Close the delete request dialog
-  handleClose() {
+  handleClose = () => {
     this.setState({ displayDeleteRequestDialog: false });
   };
 
@@ -60,4 +60,3 @@ class DeleteRequestDialog extends React.Component {
 }
 
 export default DeleteRequestDialog;
-export { handleClickOpen, handleClose };
