@@ -16,16 +16,11 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog';
 import { Link } from 'react-router-dom';
 
 // Components
 import RequestSearchPage from './request-search-page';
+import DeleteRequestDialog from '../components/delete-request-dialog';
 
 // Services
 import { getUser } from '../services/user-service';
@@ -143,27 +138,8 @@ class RequestsPage extends React.Component {
         </Grid>
 
         {/* Delete a request dialog box */}
-        <Dialog
-          open={this.state.displayDeleteRequestDialog}
-          onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">{"Delete this ride request?"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              (Ride data will go here)
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose}>
-              Cancel
-            </Button>
-            <Button onClick={this.handleClose}>
-              Delete
-            </Button>
-          </DialogActions>
-        </Dialog>
+        
+        
       </div>
     );
   }
