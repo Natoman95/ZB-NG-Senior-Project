@@ -41,7 +41,6 @@ class RequestsPage extends React.Component {
       requests: null
     };
 
-    //this.state.displayDeleteRequestDialog = this.displayDeleteRequestDialog.state.displayDeleteRequestDialog;
     this.state.user = getUser();
     this.state.requests = this.state.user.requests;
     this.state.rides = this.state.user.rides;
@@ -72,7 +71,7 @@ class RequestsPage extends React.Component {
                 />
                 {/* Delete ride button */}
                 <ListItemSecondaryAction>
-                  <IconButton onClick={() => this.refs.deleteRequestDialogRef.handleClickOpen()} aria-label="Delete">
+                  <IconButton onClick={() => this.refs.dialogClass.handleClickOpen()} aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -104,7 +103,7 @@ class RequestsPage extends React.Component {
                 />
                 {/* Delete request button */}
                 <ListItemSecondaryAction>
-                  <IconButton onClick={() => this.refs.deleteRequestDialogRef.handleClickOpen()} aria-label="Delete">
+                  <IconButton onClick={() => this.refs.dialogClass.handleClickOpen()} aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -129,7 +128,7 @@ class RequestsPage extends React.Component {
         </Grid>
 
         {/* Delete a request dialog box */}
-        <DeleteRequestDialog ref="deleteRequestDialogRef" />       
+        <DeleteRequestDialog ref="dialogClass" />       
         
       </div>
     );
