@@ -152,6 +152,7 @@ class RequestSearchPage extends React.Component {
                       id="startDate"
                       label="Earliest Travel Day"
                       type="date"
+                      // Default time for the start date is today
                       defaultValue={this.getFutureDate(0)}
                       value={this.state.startDate}
                       onChange={this.handleFormChange('startDate')}
@@ -172,6 +173,7 @@ class RequestSearchPage extends React.Component {
                       id="startDate"
                       label="Latest Travel Day"
                       type="date"
+                      // Default time for the max date is tomorrow
                       defaultValue={this.getFutureDate(1)}
                       onChange={this.handleFormChange('endDate')}
                       value={this.state.endDate}
@@ -198,7 +200,8 @@ class RequestSearchPage extends React.Component {
           </Button>
         </div>
 
-        {/* Search Results - visible only if user has hit the search button */}
+        {/* Search Results - visible only if user has hit the search button 
+         Generated from an array of results */}
         {this.state.results !== null &&
           <div style={{ marginTop: '3em' }}>
             <h3>
@@ -213,11 +216,14 @@ class RequestSearchPage extends React.Component {
                     disableGutters={this.state.noGutters}
                     divider={this.state.divider}
                     onClick={this.handleClickOpen}>
+                    {/* Driver profile picture */}
                     <Avatar src={result.driver.profilePhoto} />
+                    {/* Ride date */}
                     <ListItemText
                       primary={result.destination}
                       secondary={this.state.secondary ? result.date : null}
                     />
+                    {/* Number of passengers in the ride */}
                     <ListItemSecondaryAction>
                       <IconButton disabled={true}>
                         <Badge badgeContent={result.passengers.length} color="primary">
