@@ -41,12 +41,14 @@ class RequestsPage extends React.Component {
       noGutters: true,
       divider: true,
       open: false,
-      requests: null,
       user: null,
+      rides: null,
+      requests: null
     };
 
     this.state.user = getUser();
     this.state.requests = this.state.user.requests;
+    this.state.rides = this.state.user.rides;
   }
 
   // Open the delete dialog
@@ -62,7 +64,42 @@ class RequestsPage extends React.Component {
   render() {
     return (
       <div>
-        {/* List of requested rides generated from an array */}
+        {/* List of rides generated from an array */}
+        <h3>
+          Rides
+        </h3>
+        <List dense={this.state.dense}>
+          {this.state.rides.map((ride) => {
+            return (
+              <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
+                <ListItemAvatar>
+                  {/* Depending on whether the user has been accepted as a passenger
+                  A different avatar will be displayed */}
+                  <Avatar>
+                    <DoneIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                {/* Route destination and date range */}
+                <ListItemText
+                  primary={ride.destination}
+                  secondary={this.state.secondary ? ride.date : null}
+                />
+                {/* Delete button */}
+                <ListItemSecondaryAction>
+                  <IconButton onClick={this.handleClickOpen} aria-label="Delete">
+                    <DeleteIcon />
+                  </IconButton>
+                </ListItemSecondaryAction>
+              </ListItem>
+            );
+          })}
+        </List>
+
+        {/* List of requests generated from an array */}
+        <h3 style={{ marginTop: '3em' }}>
+          Requests
+        </h3>
+
         <List dense={this.state.dense}>
           {this.state.requests.map((request) => {
             return (
@@ -71,10 +108,7 @@ class RequestsPage extends React.Component {
                   {/* Depending on whether the user has been accepted as a passenger
                   A different avatar will be displayed */}
                   <Avatar>
-                    {request.isUserAPassenger(this.state.user) &&
-                      <DoneIcon />}
-                    {!request.isUserAPassenger(this.state.user) &&
-                      <QuestionIcon />}
+                    <QuestionIcon />
                   </Avatar>
                 </ListItemAvatar>
                 {/* Route destination and date range */}

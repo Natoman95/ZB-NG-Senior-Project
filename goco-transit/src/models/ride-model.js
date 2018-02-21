@@ -1,25 +1,22 @@
 /**
- * Contains data on rides which are viewed either as offers or
- * requests depending on the user
+ * Contains data on rides which may be offers or rides
  */
 class RideModel {
-  constructor(source, destination, dateMin, dateMax, driver) {
+  constructor(source, destination, date, driver) {
     this.source = source;
     this.destination = destination;
-    this.dateMin = dateMin;
-    this.dateMax = dateMax;
+    this.date = date;
     this.driver = driver;
   }
 
   source;
   destination;
 
-  dateMin;
-  dateMax;
+  date; // Date
 
-  driver;
-  passengers = [];
-  pending = [];
+  driver; // User - the driver for the ride
+  passengers = []; // Users - any users who are part of the ride
+  pendingRequests = []; // Requests - request objects from users who wish to join the ride
 
   // Determine whether a user is in the list of passengers
   isUserAPassenger = (user) => {

@@ -28,6 +28,9 @@ import ClockIcon from 'material-ui-icons/watchLater';
 import CalendarIcon from 'material-ui-icons/dateRange';
 import NoteIcon from 'material-ui-icons/assignment';
 
+// Services
+import { findRides } from '../services/ride-service';
+
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
  * It allows the user to search for a ride by location and date range
@@ -42,6 +45,11 @@ class RequestSearchPage extends React.Component {
       noGutters: true,
       divider: true,
       open: false,
+      origin: null,
+      destination: null,
+      startDate: null,
+      endDate: null,
+      results: null
     };
   }
 
@@ -71,6 +79,28 @@ class RequestSearchPage extends React.Component {
     return formattedDate;
   }
 
+  /**
+   * When the search button is clicked, rides matching the user's parameters must be found
+   */
+  handleClickSearch = () => {
+    this.setState({
+      results: findRides(this.state.startDate, this.state.endDate,
+        this.state.origin, this.state.destination)
+    });
+    console.log(this.state.startDate, this.state.endDate,
+      this.state.origin, this.state.destination);
+  }
+
+  /**
+   * Change state variables based on changes to input forms
+   */
+  handleFormChange = (input) => {
+    return event => {
+      this.setState({ [input]: event.target.value });
+      this.setState({ loginFailed: false });
+    };
+  }
+
   handleClickOpen = () => {
     this.setState({ open: true });
   };
@@ -87,12 +117,27 @@ class RequestSearchPage extends React.Component {
           Find a Ride by Location
         </h3>
 
+        {/* Enter a start location */}
         <TextField
           style={{ margin: 0 }}
-          id="search"
-          label="Search"
+          id="origin"
+          label="Origin"
           type="search"
           margin="normal"
+          value={this.state.origin}
+          onChange={this.handleFormChange('origin')}
+          fullWidth={true}
+        />
+
+        {/* Enter a destination */}
+        <TextField
+          style={{ marginTop: '2em' }}
+          id="destination"
+          label="Destination"
+          type="search"
+          margin="normal"
+          value={this.state.destination}
+          onChange={this.handleFormChange('destination')}
           fullWidth={true}
         />
 
@@ -108,6 +153,8 @@ class RequestSearchPage extends React.Component {
                       label="Earliest Travel Day"
                       type="date"
                       defaultValue={this.getFutureDate(0)}
+                      value={this.state.startDate}
+                      onChange={this.handleFormChange('startDate')}
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -126,6 +173,8 @@ class RequestSearchPage extends React.Component {
                       label="Latest Travel Day"
                       type="date"
                       defaultValue={this.getFutureDate(1)}
+                      onChange={this.handleFormChange('endDate')}
+                      value={this.state.endDate}
                       InputLabelProps={{
                         shrink: true,
                       }}
@@ -139,49 +188,49 @@ class RequestSearchPage extends React.Component {
 
         {/* Search button */}
         <div>
-          <Button variant="raised" color="secondary" style={{ width: '100%', marginTop: '2em' }}>
+          <Button
+            variant="raised"
+            color="secondary"
+            style={{ width: '100%', marginTop: '2em' }}
+            onClick={this.handleClickSearch}
+          >
             Search
           </Button>
         </div>
 
-        {/* Search Results */}
-        <div style={{ marginTop: '3em' }}>
-          <h3>
-            Results
-        </h3>
+        {/* Search Results - visible only if user has hit the search button */}
+        {this.state.results !== null &&
+          <div style={{ marginTop: '3em' }}>
+            <h3>
+              Results
+            </h3>
 
-          <List dense={this.state.dense}>
-            <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider} onClick={this.handleClickOpen}>
-              <Avatar src={ZachPhoto} />
-              <ListItemText
-                primary="Scranton"
-                secondary={this.state.secondary ? '12/3/18' : null}
-              />
-              <ListItemSecondaryAction>
-                <IconButton disabled={true}>
-                  <Badge badgeContent={1} color="primary">
-                    <PersonIcon />
-                  </Badge>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-
-            <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider} onClick={this.handleClickOpen}>
-              <Avatar src={NathanPhoto} />
-              <ListItemText
-                primary="Oxford"
-                secondary={this.state.secondary ? '12/17/18' : null}
-              />
-              <ListItemSecondaryAction>
-                <IconButton disabled={true}>
-                  <Badge badgeContent={2} color="primary">
-                    <PersonIcon />
-                  </Badge>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
-          </List>
-        </div>
+            {this.state.results.map((result) => {
+              return (
+                <List dense={this.state.dense}>
+                  <ListItem
+                    button
+                    disableGutters={this.state.noGutters}
+                    divider={this.state.divider}
+                    onClick={this.handleClickOpen}>
+                    <Avatar src={result.driver.profilePhoto} />
+                    <ListItemText
+                      primary={result.destination}
+                      secondary={this.state.secondary ? result.date : null}
+                    />
+                    <ListItemSecondaryAction>
+                      <IconButton disabled={true}>
+                        <Badge badgeContent={result.passengers.length} color="primary">
+                          <PersonIcon />
+                        </Badge>
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                </List>
+              );
+            })}
+          </div>
+        }
 
         {/* Confirm adding ride request dialog box */}
         <Dialog

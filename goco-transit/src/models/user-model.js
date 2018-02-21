@@ -12,9 +12,11 @@ class UserModel {
   lastName;
   email;
   phoneNum;
+  profilePhoto;
 
-  requests = [];
-  offers = [];
+  requests = []; // Requests
+  rides = [] // Rides
+  offers = []; // Rides
 }
 
 export default UserModel;
