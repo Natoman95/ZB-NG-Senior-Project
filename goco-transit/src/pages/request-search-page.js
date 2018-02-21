@@ -87,8 +87,6 @@ class RequestSearchPage extends React.Component {
       results: findRides(this.state.startDate, this.state.endDate,
         this.state.origin, this.state.destination)
     });
-    console.log(this.state.startDate, this.state.endDate,
-      this.state.origin, this.state.destination);
   }
 
   /**
@@ -97,7 +95,6 @@ class RequestSearchPage extends React.Component {
   handleFormChange = (input) => {
     return event => {
       this.setState({ [input]: event.target.value });
-      this.setState({ loginFailed: false });
     };
   }
 
