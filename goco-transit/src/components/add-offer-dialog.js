@@ -44,12 +44,12 @@ class AddOfferDialog extends React.Component {
     SEAT_MAX: 9, // Maximum number of available seats allowed in a given offer
   };
 
-  // Open the delete offer dialog
+  // Open the add offer dialog
   handleClickOpen = () => {
     this.setState({ display: true });
   };
 
-  // Close the delete offer dialog
+  // Close the add offer dialog
   handleClose = () => {
     this.setState({ display: false });
   };
