@@ -41,7 +41,7 @@ class AddOfferDialog extends React.Component {
   }
 
   constants = {
-    SEAT_MAX: 10, // Maximum number of available seats allowed in a given offer
+    SEAT_MAX: 9, // Maximum number of available seats allowed in a given offer
   };
 
   // Open the delete offer dialog
@@ -56,7 +56,7 @@ class AddOfferDialog extends React.Component {
 
   // Limits seat maximum to pre-defined constant
   handleSeatPlus = () => {
-    if (this.state.seats < this.SEAT_MAX) { this.setState({ seats: this.state.seats + 1 }) }
+    if (this.state.seats < this.constants.SEAT_MAX) { this.setState({ seats: this.state.seats + 1 }) }
   }
 
   // Limits seat minimum to 1
