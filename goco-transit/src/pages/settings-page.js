@@ -10,6 +10,7 @@ import {Icons} from '../icon-library';
 
 // Services
 import { signOut, isAuthenticated } from '../services/auth-service';
+import { getProfile } from '../services/user-service';
 
 // Component for changing settings
 class SettingsPage extends React.Component {
@@ -30,6 +31,8 @@ class SettingsPage extends React.Component {
     }
     // The click handler needs "this"
     this.handleClickLogout = this.handleClickLogout.bind(this);
+
+    getProfile("nathan.gray");
   }
 
   // Authenticate the user and trigger a page change

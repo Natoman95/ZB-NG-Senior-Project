@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import { getItem } from './storage-service';
+=======
+// Services
+import { getItem } from "./storage-service";
+>>>>>>> experimenting with grabbing user data from 360
 
 /**
  * Handle HTTP requests to the API

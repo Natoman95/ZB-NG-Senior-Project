@@ -1,7 +1,12 @@
+import ZachPhoto from '../images/user_profile_zach.jpg';
+
+// Services
+import { get } from '../services/http-service';
+
+// Models
 import UserModel from "../models/user-model";
 import RideModel from "../models/ride-model";
 import RequestModel from "../models/request-model";
-import ZachPhoto from '../images/user_profile_zach.jpg'
 
 /**
  * This class is responsible for all actions related to users
@@ -51,4 +56,32 @@ const getUser = () => {
   return activeUser;
 }
 
-export { getUser };
+/**
+ * Get user profile info for a given user or the current user if `username` is not provided
+ * @param {String} [username] Username in firstname.lastname format
+ * @return {Promise.<StaffProfileInfo|StudentProfileInfo>} Profile info
+ */
+const getProfile = username => {
+  let profile;
+  if (username) {
+    profile = get(`profiles/${username}`);
+  } else {
+    profile = get('profiles');
+  }
+  return profile;
+};
+
+/**
+ * Get image for a given user or the current user if `username` is not provided
+ * @param {String} [username] Username in firstname.lastname format
+ * @return {Promise.<String>} Image as a Base64-encoded string
+ */
+const getImage = username => {
+  if (username) {
+    return get(`profiles/Image/${username}`);
+  }
+
+  return get('profiles/Image');
+};
+
+export { getUser, getProfile, getImage };
