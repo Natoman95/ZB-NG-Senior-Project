@@ -51,7 +51,7 @@ class OffersPage extends React.Component {
                 {/* Number of users on the offered ride */}
                 <ListItemAvatar>
                   <IconButton disabled={true}>
-                    <Badge badgeContent={offeredRide.passengers.length} color="primary">
+                    <Badge badgeContent={offeredRide.passengers.length + "/" + offeredRide.maxCapacity} color="primary">
                       <PersonIcon />
                     </Badge>
                   </IconButton>

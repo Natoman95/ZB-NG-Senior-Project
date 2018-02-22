@@ -15,7 +15,6 @@ import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
-import Badge from 'material-ui/Badge';
 import { Link } from 'react-router-dom';
 
 // Components
