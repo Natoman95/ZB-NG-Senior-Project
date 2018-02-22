@@ -64,7 +64,7 @@ const getUser = () => {
 const getProfile = username => {
   let profile;
   if (username) {
-    profile = get(`profiles/${username}`);
+    profile = get(`profiles/${username}/`);
   } else {
     profile = get('profiles');
   }

@@ -21,9 +21,12 @@ const base = "https://360Api.gordon.edu/"
 const makeHeaders = () => {
   try {
     const token = getItem('token');
-    return new Headers({
+    console.log(token);
+    let headers = new Headers({
       Authorization: `Bearer ${token}`,
     });
+    headers.append("Access-Control-Allow-Origin", "*");
+    return headers;
   } catch (err) {
     throw new Error('Token is not available');
   }
@@ -50,6 +53,7 @@ const createRequest = (url, method, body) =>
  * response code
  */
 const parseResponse = res => {
+  console.log(res);
   // Attempt to parse body of response
   const json = res
     .json()
