@@ -65,7 +65,7 @@ class LoginPage extends React.Component {
             <Card>
 
               {/* An image of Gordon 360 to nofity the user to use
-            their 360 credentials */}
+                 their 360 credentials */}
               <CardMedia
                 style={{ width: "100%", height: "12em" }}
                 image={Gordon360Home}
@@ -83,40 +83,42 @@ class LoginPage extends React.Component {
               }
 
               {/* Username */}
-              <CardContent>
-                <TextField
-                  id="userName"
-                  label="Username"
-                  placeholder="firstname.lastname"
-                  variant="username"
-                  margin="none"
-                  value={this.state.userName}
-                  onChange={this.handleFormChange('userName')}
-                  style={{ width: "100%" }}
-                />
+              <form onSubmit={this.handleClickLogin}>
+                <CardContent>
+                  <TextField
+                    id="userName"
+                    label="Username"
+                    placeholder="firstname.lastname"
+                    variant="username"
+                    margin="none"
+                    value={this.state.userName}
+                    onChange={this.handleFormChange('userName')}
+                    style={{ width: "100%" }}
+                  />
 
-                <div style={{ margin: "1em" }}>
-                </div>
+                  <div style={{ margin: "1em" }}>
+                  </div>
 
-                {/* Password */}
-                <TextField
-                  id="password"
-                  label="Password"
-                  variant="password"
-                  type="password"
-                  margin="none"
-                  value={this.state.password}
-                  onChange={this.handleFormChange('password')}
-                  style={{ width: "100%" }}
-                />
-              </CardContent>
+                  {/* Password */}
+                  <TextField
+                    id="password"
+                    label="Password"
+                    variant="password"
+                    type="password"
+                    margin="none"
+                    value={this.state.password}
+                    onChange={this.handleFormChange('password')}
+                    style={{ width: "100%" }}
+                  />
+                </CardContent>
 
-              {/* Login button */}
-              <CardActions>
-                <Button color="secondary" onClick={this.handleClickLogin}>
-                  Login
-              </Button>
-              </CardActions>
+                {/* Login button */}
+                <CardActions>
+                  <Button type="submit" color="secondary">
+                    Login
+                  </Button>
+                </CardActions>
+              </form>
             </Card>
           </div>
         </div>
