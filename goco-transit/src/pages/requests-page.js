@@ -36,7 +36,6 @@ class RequestsPage extends React.Component {
       secondary: true,
       noGutters: true,
       divider: true,
-      displayDeleteRequestDialog: false,
       user: null,
       rides: null,
       requests: null
@@ -128,7 +127,7 @@ class RequestsPage extends React.Component {
           </Grid>
         </Grid>
 
-        {/* Delete a request dialog box */}
+        {/* Dialog boxes */}
         <DeleteRequestDialog ref={(deleteRequestDialogInstance) => { this.deleteRequestDialogChild = deleteRequestDialogInstance; }} />
         <DeleteRideDialog ref={(deleteRideDialogInstance) => { this.deleteRideDialogChild = deleteRideDialogInstance; }} />
         
