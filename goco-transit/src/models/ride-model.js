@@ -16,6 +16,7 @@ class RideModel {
 
   driver; // User - the driver for the ride
   passengers = []; // Users - any users who are part of the ride
+  maxCapacity; // The number of seats available when the ride offer is created 
   pendingRequests = []; // Requests - request objects from users who wish to join the ride
 
   // Determine whether a user is in the list of passengers

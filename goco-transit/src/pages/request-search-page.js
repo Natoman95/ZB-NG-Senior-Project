@@ -32,7 +32,7 @@ import NoteIcon from 'material-ui-icons/assignment';
 import AddRequestDialog from '../components/add-request-dialog';
 
 // Services
-import { findRides } from '../services/ride-service';
+import { findOfferedRides } from '../services/ride-service';
 
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
@@ -87,7 +87,7 @@ class RequestSearchPage extends React.Component {
    */
   handleClickSearch = () => {
     this.setState({
-      results: findRides(this.state.startDate, this.state.endDate,
+      results: findOfferedRides(this.state.startDate, this.state.endDate,
         this.state.origin, this.state.destination)
     });
   }
@@ -213,14 +213,6 @@ class RequestSearchPage extends React.Component {
                       primary={result.destination}
                       secondary={this.state.secondary ? result.date : null}
                     />
-                    {/* Number of passengers in the ride */}
-                    <ListItemSecondaryAction>
-                      <IconButton disabled={true}>
-                        <Badge badgeContent={result.passengers.length} color="primary">
-                          <PersonIcon />
-                        </Badge>
-                      </IconButton>
-                    </ListItemSecondaryAction>
                   </ListItem>
                 </List>
               );
