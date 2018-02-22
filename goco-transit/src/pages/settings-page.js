@@ -56,9 +56,9 @@ class SettingsPage extends React.Component {
             <Grid item xs={8}>
               <Grid container direction="row" justify="flex-start" alignItems="center">
                 <Grid item>
-                  <h2>
+                  <h3>
                     Contact Information
-              </h2>
+                  </h3>
                 </Grid>
               </Grid>
             </Grid>
@@ -77,18 +77,18 @@ class SettingsPage extends React.Component {
 
           <div style={{ padding: '.75em', }}>
             Name: Nathan Gray
-        </div>
+          </div>
           <div style={{ padding: '.75em', }}>
             Phone: 999-888-7777
-        </div>
+          </div>
           <div style={{ padding: '.75em', }}>
             Email: nathan.gray@gordon.edu
-        </div>
+          </div>
 
           {/* Decide which contact information will be shared with riders */}
-          <h2>
+          <h3>
             Contact Information to Share
-        </h2>
+          </h3>
 
           <FormGroup row>
             <FormControlLabel
@@ -118,9 +118,9 @@ class SettingsPage extends React.Component {
           </FormGroup>
 
           {/* Shows which legal agreements have been completed */}
-          <h2>
+          <h3>
             Legal Agreements
-        </h2>
+          </h3>
 
           <FormGroup row>
             <FormControlLabel
