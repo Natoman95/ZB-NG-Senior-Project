@@ -30,20 +30,20 @@ const getUser = () => {
   let Jim = new UserModel("Jim", "Bob", "jim.bob@gordon.edu");
 
   // Dummy rides
-  let ride1 = new RideModel("Manchester", "Wenham", "4/16/2018", Jim);
+  let confirmedRide1 = new RideModel("Manchester", "Wenham", "4/16/2018", Jim);
 
-  activeUser.rides = [ride1];
+  activeUser.confirmedRides = [confirmedRide1];
 
-  // Dummy offers
-  let offer1 = new RideModel("Boston", "Wenham", "3/8/2018", activeUser);
-  offer1.passengers = [Rachel];
+  // Dummy ride offers
+  let offeredRide1 = new RideModel("Boston", "Wenham", "3/8/2018", activeUser);
+  offeredRide1.passengers = [Rachel];
 
-  let offer2 = new RideModel("Wenham", "Danvers", "2/14/2018", activeUser);
-  offer1.passengers = [Rachel, Jim];
+  let offeredRide2 = new RideModel("Wenham", "Danvers", "2/14/2018", activeUser);
+  offeredRide1.passengers = [Rachel, Jim];
 
-  activeUser.offers = [
-    offer1,
-    offer2
+  activeUser.offeredRides = [
+    offeredRide1,
+    offeredRide2
   ];
 
   return activeUser;

@@ -33,36 +33,36 @@ class OffersPage extends React.Component {
       secondary: true,
       noGutters: true,
       divider: true,
-      offers: null
+      offeredRides: null
     };
 
-    this.state.offers = getUser().offers;
+    this.state.offeredRides = getUser().offeredRides;
   }
 
   render() {
     return (
       <div>
-        {/* List of offers - items display the number of users who have accepted the ride 
+        {/* List of ride offers - items display the number of users who have accepted the ride 
          Generated from an array */}
         <List dense={this.state.dense}>
-          {this.state.offers.map((offer) => {
+          {this.state.offeredRides.map((offeredRide) => {
             return (
               <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
                 {/* Number of users on the offered ride */}
                 <ListItemAvatar>
                   <IconButton disabled={true}>
-                    <Badge badgeContent={offer.passengers.length} color="primary">
+                    <Badge badgeContent={offeredRide.passengers.length} color="primary">
                       <PersonIcon />
                     </Badge>
                   </IconButton>
                 </ListItemAvatar>
                 {/* Date of the ride */}
                 <ListItemText
-                  primary={offer.destination}
-                  secondary={this.state.secondary ? offer.date : null}
+                  primary={offeredRide.destination}
+                  secondary={this.state.secondary ? offeredRide.date : null}
                 />
                 <ListItemSecondaryAction>
-                  {/* Delete offer button */}
+                  {/* Delete ride offer button */}
                   <IconButton onClick={() => { this.deleteOfferDialogChild.handleClickOpen(); }} aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>

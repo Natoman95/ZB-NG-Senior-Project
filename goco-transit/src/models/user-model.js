@@ -15,8 +15,8 @@ class UserModel {
   profilePhoto;
 
   requests = []; // Requests
-  rides = [] // Rides
-  offers = []; // Rides
+  confirmedRides = []; // Rides
+  offeredRides = []; // Rides
 }
 
 export default UserModel;

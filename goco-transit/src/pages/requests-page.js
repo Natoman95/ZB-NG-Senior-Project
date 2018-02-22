@@ -37,24 +37,24 @@ class RequestsPage extends React.Component {
       noGutters: true,
       divider: true,
       user: null,
-      rides: null,
+      confirmedRides: null,
       requests: null
     };
 
     this.state.user = getUser();
     this.state.requests = this.state.user.requests;
-    this.state.rides = this.state.user.rides;
+    this.state.confirmedRides = this.state.user.confirmedRides;
   }
 
   render() {
     return (
       <div>
-        {/* List of rides generated from an array */}
+        {/* List of confirmed rides generated from an array */}
         <h3>
           Rides
         </h3>
         <List dense={this.state.dense}>
-          {this.state.rides.map((ride) => {
+          {this.state.confirmedRides.map((confirmedRide) => {
             return (
               <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
                 <ListItemAvatar>
@@ -66,10 +66,10 @@ class RequestsPage extends React.Component {
                 </ListItemAvatar>
                 {/* Route destination and date range */}
                 <ListItemText
-                  primary={ride.destination}
-                  secondary={this.state.secondary ? ride.date : null}
+                  primary={confirmedRide.destination}
+                  secondary={this.state.secondary ? confirmedRide.date : null}
                 />
-                {/* Delete ride button */}
+                {/* Delete confirmed ride button */}
                 <ListItemSecondaryAction>
                   <IconButton onClick={() => { this.deleteRideDialogChild.handleClickOpen(); }} aria-label="Delete">
                     <DeleteIcon />
