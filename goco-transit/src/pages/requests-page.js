@@ -13,7 +13,7 @@ import List, {
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
-import AddIcon from 'material-ui-icons/Add';
+import SearchIcon from 'material-ui-icons/Search';
 import Grid from 'material-ui/Grid';
 import { Link } from 'react-router-dom';
 
@@ -118,7 +118,7 @@ class RequestsPage extends React.Component {
               <Grid item>
                 <Link to="/requests/search">
                   <Button variant="fab" color="secondary" aria-label="add">
-                    <AddIcon />
+                    <SearchIcon />
                   </Button>
                 </Link>
               </Grid>

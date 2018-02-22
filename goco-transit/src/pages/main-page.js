@@ -44,8 +44,8 @@ class MainPage extends React.Component {
               onChange={this.handleChange}
               indicatorColor="secondary"
             >
-              <Tab label="Requests" icon={<GroupAddIcon />} component={Link} to="/requests" />
-              <Tab label="Offers" icon={<GroupIcon />} component={Link} to="/offers" />
+              <Tab label="Passenger" icon={<GroupAddIcon />} component={Link} to="/requests" />
+              <Tab label="Driver" icon={<GroupIcon />} component={Link} to="/offers" />
               <Tab label="Settings" icon={<SettingsIcon />} component={Link} to="/settings" />
             </Tabs>
           </AppBar>
