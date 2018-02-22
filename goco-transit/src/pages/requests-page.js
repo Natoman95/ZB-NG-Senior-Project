@@ -21,6 +21,7 @@ import { Link } from 'react-router-dom';
 // Components
 import RequestSearchPage from './request-search-page';
 import DeleteRequestDialog from '../components/delete-request-dialog';
+import DeleteRideDialog from '../components/delete-ride-dialog';
 
 // Services
 import { getUser } from '../services/user-service';
@@ -71,7 +72,7 @@ class RequestsPage extends React.Component {
                 />
                 {/* Delete ride button */}
                 <ListItemSecondaryAction>
-                  <IconButton onClick={() => this.refs.dialogClass.handleClickOpen()} aria-label="Delete">
+                  <IconButton onClick={() => { this.deleteRideDialogChild.handleClickOpen(); }} aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -103,7 +104,7 @@ class RequestsPage extends React.Component {
                 />
                 {/* Delete request button */}
                 <ListItemSecondaryAction>
-                  <IconButton onClick={() => this.refs.dialogClass.handleClickOpen()} aria-label="Delete">
+                  <IconButton onClick={() => { this.deleteRequestDialogChild.handleClickOpen(); }} aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -128,7 +129,8 @@ class RequestsPage extends React.Component {
         </Grid>
 
         {/* Delete a request dialog box */}
-        <DeleteRequestDialog ref="dialogClass" />       
+        <DeleteRequestDialog ref={(deleteRequestDialogInstance) => { this.deleteRequestDialogChild = deleteRequestDialogInstance; }} />
+        <DeleteRideDialog ref={(deleteRideDialogInstance) => { this.deleteRideDialogChild = deleteRideDialogInstance; }} />
         
       </div>
     );

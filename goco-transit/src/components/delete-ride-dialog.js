@@ -7,9 +7,9 @@ import Dialog, {
   } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
 
-{/* Delete a request dialog box */}
+{/* Delete a ride dialog box */}
 
-class DeleteRequestDialog extends React.Component {
+class DeleteRideDialog extends React.Component {
   constructor() {
     super();
 
@@ -22,12 +22,12 @@ class DeleteRequestDialog extends React.Component {
     };
   }
 
-  // Open the delete request dialog
+  // Open the delete ride dialog
   handleClickOpen = () => {
     this.setState({ display: true });
   };
 
-  // Close the delete request dialog
+  // Close the delete ride dialog
   handleClose = () => {
     this.setState({ display: false });
   };
@@ -40,7 +40,7 @@ class DeleteRequestDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Delete this ride request?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Remove yourself from this ride?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             (Ride data will go here)
@@ -59,4 +59,4 @@ class DeleteRequestDialog extends React.Component {
   }
 }
 
-export default DeleteRequestDialog;
+export default DeleteRideDialog;
