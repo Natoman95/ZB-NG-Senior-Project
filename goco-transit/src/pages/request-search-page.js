@@ -28,6 +28,9 @@ import ClockIcon from 'material-ui-icons/watchLater';
 import CalendarIcon from 'material-ui-icons/dateRange';
 import NoteIcon from 'material-ui-icons/assignment';
 
+// Components
+import AddRequestDialog from '../components/add-request-dialog';
+
 // Services
 import { findRides } from '../services/ride-service';
 
@@ -44,7 +47,7 @@ class RequestSearchPage extends React.Component {
       secondary: true,
       noGutters: true,
       divider: true,
-      open: false,
+      displayAddRequestDialog: false,
       origin: null,
       destination: null,
       startDate: null,
@@ -89,22 +92,12 @@ class RequestSearchPage extends React.Component {
     });
   }
 
-  /**
-   * Change state variables based on changes to input forms
-   */
+  // Change state variables based on changes to input forms
   handleFormChange = (input) => {
     return event => {
       this.setState({ [input]: event.target.value });
     };
   }
-
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  handleClose = () => {
-    this.setState({ open: false });
-  };
 
   render() {
     return (
@@ -212,7 +205,7 @@ class RequestSearchPage extends React.Component {
                     button
                     disableGutters={this.state.noGutters}
                     divider={this.state.divider}
-                    onClick={this.handleClickOpen}>
+                    onClick={() => { this.addRequestDialogChild.handleClickOpen(); }}>
                     {/* Driver profile picture */}
                     <Avatar src={result.driver.profilePhoto} />
                     {/* Ride date */}
@@ -235,80 +228,8 @@ class RequestSearchPage extends React.Component {
           </div>
         }
 
-        {/* Confirm adding ride request dialog box */}
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-
-              {/* Ride info */}
-              <List dense={this.state.dense}>
-
-                {/* Location */}
-                <ListItem disableGutters={true} divider={false}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <PlaceIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="(Location)"
-                  />
-                </ListItem>
-
-                {/* Date */}
-                <ListItem disableGutters={true} divider={false}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <CalendarIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="(Date)"
-                  />
-                </ListItem>
-
-                {/* Time */}
-                <ListItem disableGutters={true} divider={false}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <ClockIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="(Time)"
-                  />
-                </ListItem>
-
-                {/* Notes */}
-                <ListItem disableGutters={true} divider={false}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <NoteIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <div style={{ paddingLeft: "1em" }} >
-                    <TextField label="Note to driver" multiline={true} />
-                  </div>
-                </ListItem>
-              </List>
-
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose}>
-              Back
-            </Button>
-            <Button onClick={this.handleClose}>
-              Confirm
-            </Button>
-          </DialogActions>
-        </Dialog>
+        {/* Dialog box */}
+        <AddRequestDialog ref={(addRequestDialogInstance) => { this.addRequestDialogChild = addRequestDialogInstance; }} />
 
       </div>
     );

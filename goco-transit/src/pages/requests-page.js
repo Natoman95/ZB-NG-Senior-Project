@@ -16,16 +16,12 @@ import Button from 'material-ui/Button';
 import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog';
 import { Link } from 'react-router-dom';
 
 // Components
 import RequestSearchPage from './request-search-page';
+import DeleteRequestDialog from '../components/delete-request-dialog';
+import DeleteRideDialog from '../components/delete-ride-dialog';
 
 // Services
 import { getUser } from '../services/user-service';
@@ -40,7 +36,6 @@ class RequestsPage extends React.Component {
       secondary: true,
       noGutters: true,
       divider: true,
-      open: false,
       user: null,
       rides: null,
       requests: null
@@ -50,16 +45,6 @@ class RequestsPage extends React.Component {
     this.state.requests = this.state.user.requests;
     this.state.rides = this.state.user.rides;
   }
-
-  // Open the delete dialog
-  handleClickOpen = () => {
-    this.setState({ open: true });
-  };
-
-  // Close the delete dialog
-  handleClose = () => {
-    this.setState({ open: false });
-  };
 
   render() {
     return (
@@ -84,9 +69,9 @@ class RequestsPage extends React.Component {
                   primary={ride.destination}
                   secondary={this.state.secondary ? ride.date : null}
                 />
-                {/* Delete button */}
+                {/* Delete ride button */}
                 <ListItemSecondaryAction>
-                  <IconButton onClick={this.handleClickOpen} aria-label="Delete">
+                  <IconButton onClick={() => { this.deleteRideDialogChild.handleClickOpen(); }} aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -116,9 +101,9 @@ class RequestsPage extends React.Component {
                   primary={request.destination}
                   secondary={this.state.secondary ? (request.dateMin + '-' + request.dateMax) : null}
                 />
-                {/* Delete button */}
+                {/* Delete request button */}
                 <ListItemSecondaryAction>
-                  <IconButton onClick={this.handleClickOpen} aria-label="Delete">
+                  <IconButton onClick={() => { this.deleteRequestDialogChild.handleClickOpen(); }} aria-label="Delete">
                     <DeleteIcon />
                   </IconButton>
                 </ListItemSecondaryAction>
@@ -142,28 +127,10 @@ class RequestsPage extends React.Component {
           </Grid>
         </Grid>
 
-        {/* Delete a request dialog box */}
-        <Dialog
-          open={this.state.open}
-          onClose={this.handleClose}
-          aria-labelledby="alert-dialog-title"
-          aria-describedby="alert-dialog-description"
-        >
-          <DialogTitle id="alert-dialog-title">{"Delete this ride request?"}</DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-description">
-              (Ride data will go here)
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose}>
-              Back
-            </Button>
-            <Button onClick={this.handleClose}>
-              Delete
-            </Button>
-          </DialogActions>
-        </Dialog>
+        {/* Dialog boxes */}
+        <DeleteRequestDialog ref={(deleteRequestDialogInstance) => { this.deleteRequestDialogChild = deleteRequestDialogInstance; }} />
+        <DeleteRideDialog ref={(deleteRideDialogInstance) => { this.deleteRideDialogChild = deleteRideDialogInstance; }} />
+        
       </div>
     );
   }
