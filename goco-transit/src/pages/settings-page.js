@@ -6,7 +6,7 @@ import Checkbox from 'material-ui/Checkbox';
 import { Redirect } from 'react-router'
 
 // Components
-import {Icons} from './icon-library';
+import {Icons} from '../components/icon-library';
 
 // Services
 import { signOut, isAuthenticated } from '../services/auth-service';

@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 import RequestSearchPage from './request-search-page';
 import DeleteRequestDialog from '../components/delete-request-dialog';
 import DeleteRideDialog from '../components/delete-ride-dialog';
-import {Icons} from './icon-library';
+import {Icons} from '../components/icon-library';
 
 // Services
 import { getUser } from '../services/user-service';
