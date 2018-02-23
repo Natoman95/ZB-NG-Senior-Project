@@ -135,8 +135,8 @@ class RequestSearchPage extends React.Component {
                   <form noValidate>
                     <TextField
                       id="startDate"
-                      label="Earliest Possible Departure"
-                      type="datetime-local"
+                      label="Earliest Travel Day"
+                      type="date"
                       // Default time for the start date is today
                       defaultValue={this.getFutureDate(0)}
                       value={this.state.startDate}
@@ -156,8 +156,8 @@ class RequestSearchPage extends React.Component {
                   <form noValidate>
                     <TextField
                       id="startDate"
-                      label="Latest Possible Departure"
-                      type="datetime"
+                      label="Latest Travel Day"
+                      type="date"
                       // Default time for the max date is tomorrow
                       defaultValue={this.getFutureDate(1)}
                       onChange={this.handleFormChange('endDate')}
