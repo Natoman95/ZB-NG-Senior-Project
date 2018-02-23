@@ -15,6 +15,16 @@ import List, {
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
+<<<<<<< HEAD
+=======
+import LeftArrowIcon from 'material-ui-icons/chevronLeft';
+import RightArrowIcon from 'material-ui-icons/chevronRight';
+import PlaceIcon from 'material-ui-icons/place';
+import ClockIcon from 'material-ui-icons/watchLater';
+import CalendarIcon from 'material-ui-icons/event';
+import SeatIcon from 'material-ui-icons/eventSeat';
+import NoteIcon from 'material-ui-icons/assignment';
+>>>>>>> Updated icons
 import TextField from 'material-ui/TextField';
 
 // Components

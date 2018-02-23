@@ -24,7 +24,7 @@ import Dialog, {
 
 // Components
 import AddRequestDialog from '../components/add-request-dialog';
-import {Icons} from '../icon-library';
+import { Icons } from '../icon-library';
 
 // Services
 import { findOfferedRides } from '../services/ride-service';
