@@ -67,7 +67,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons)}
+                    {React.createElement(Icons.calendarIcon)}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
