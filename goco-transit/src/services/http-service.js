@@ -22,11 +22,9 @@ const makeHeaders = () => {
   try {
     const token = getItem('token');
     console.log(token);
-    let headers = new Headers({
+    return new Headers({
       Authorization: `Bearer ${token}`,
     });
-    headers.append("Access-Control-Allow-Origin", "*");
-    return headers;
   } catch (err) {
     throw new Error('Token is not available');
   }
