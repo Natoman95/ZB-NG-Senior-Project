@@ -14,10 +14,6 @@ import List, {
 } from 'material-ui/List';
 import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
-// import PlaceIcon from 'material-ui-icons/place';
-// import ClockIcon from 'material-ui-icons/watchLater';
-// import CalendarIcon from 'material-ui-icons/dateRange';
-// import NoteIcon from 'material-ui-icons/assignment';
 import TextField from 'material-ui/TextField';
 
 // Components
@@ -63,15 +59,27 @@ class AddRequestDialog extends React.Component {
             {/* Ride info */}
             <List dense={this.state.dense}>
 
-              {/* Location */}
+              {/* Origin */}
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.calendarIcon)}
+                    {React.createElement(Icons.originIcon)}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary="(Location)"
+                  primary="(Origin)"
+                />
+              </ListItem>
+              
+              {/* Destination */}
+              <ListItem disableGutters={true} divider={false}>
+                <ListItemAvatar>
+                  <Avatar>
+                    {React.createElement(Icons.destinationIcon)}
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary="(Destination)"
                 />
               </ListItem>
 
@@ -79,7 +87,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {Icons.CalendarIcon}
+                    {React.createElement(Icons.dateIcon)}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -91,7 +99,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {Icons.CalendarIcon}
+                    {React.createElement(Icons.timeIcon)}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -103,7 +111,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {Icons.NoteIcon}
+                    {React.createElement(Icons.noteIcon)}
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >
