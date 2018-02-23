@@ -14,11 +14,14 @@ import List, {
 } from 'material-ui/List';
 import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
-import PlaceIcon from 'material-ui-icons/place';
-import ClockIcon from 'material-ui-icons/watchLater';
-import CalendarIcon from 'material-ui-icons/dateRange';
-import NoteIcon from 'material-ui-icons/assignment';
+// import PlaceIcon from 'material-ui-icons/place';
+// import ClockIcon from 'material-ui-icons/watchLater';
+// import CalendarIcon from 'material-ui-icons/dateRange';
+// import NoteIcon from 'material-ui-icons/assignment';
 import TextField from 'material-ui/TextField';
+
+// Components
+import {Icons} from './icon-library';
 
 {/* Add a request dialog box */}
 
@@ -64,7 +67,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    <PlaceIcon />
+                    {React.createElement(Icons)}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -76,7 +79,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    <CalendarIcon />
+                    {Icons.CalendarIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -88,7 +91,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    <ClockIcon />
+                    {Icons.CalendarIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -100,7 +103,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    <NoteIcon />
+                    {Icons.NoteIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >
