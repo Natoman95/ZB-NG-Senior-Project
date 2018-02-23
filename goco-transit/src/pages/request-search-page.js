@@ -108,72 +108,67 @@ class RequestSearchPage extends React.Component {
         </h3>
 
         {/* Enter a start location */}
-        <TextField
-          style={{ margin: 0 }}
-          id="origin"
-          label="Origin"
-          type="search"
-          margin="normal"
-          value={this.state.origin}
-          onChange={this.handleFormChange('origin')}
-          fullWidth={true}
-        />
-
-        {/* Enter a destination */}
-        <TextField
-          style={{ marginTop: '2em' }}
-          id="destination"
-          label="Destination"
-          type="search"
-          margin="normal"
-          value={this.state.destination}
-          onChange={this.handleFormChange('destination')}
-          fullWidth={true}
-        />
+        <div style={{ marginTop: '2em' }}>
+          <Grid container spacing={40}>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                style = {{width: 228.42}} // Same width as departure fields
+                id="origin"
+                label="Origin"
+                type="search"
+                margin="normal"
+                value={this.state.origin}
+                onChange={this.handleFormChange('origin')}
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                style = {{width: 228.42}} // Same width as departure fields
+                id="destination"
+                label="Destination"
+                type="search"
+                margin="normal"
+                value={this.state.destination}
+                onChange={this.handleFormChange('destination')}
+              />
+            </Grid>
+          </Grid>
+        </div>
 
         {/* Date range selection */}
         <div style={{ marginTop: '2em' }}>
-          <Grid container>
-            <Grid item xs={6}>
-              <Grid container direction="row" justify="flex-start" alignItems="center">
-                <Grid item>
-                  <form noValidate>
-                    <TextField
-                      id="startDate"
-                      label="Earliest Possible Departure"
-                      type="datetime-local"
-                      // Default time for the start date is today
-                      defaultValue={this.getFutureDate(0)}
-                      value={this.state.startDate}
-                      onChange={this.handleFormChange('startDate')}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </form>
-                </Grid>
-              </Grid>
+          <Grid container spacing={40}>
+            <Grid item xs={12} sm={6}>
+              <form noValidate>
+                <TextField
+                  id="startDate"
+                  label="Earliest Possible Departure"
+                  type="datetime-local"
+                  // Default time for the start date is today
+                  defaultValue={this.getFutureDate(0)}
+                  value={this.state.startDate}
+                  onChange={this.handleFormChange('startDate')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </form>
             </Grid>
-
-            <Grid item xs={6}>
-              <Grid container direction="row" justify="flex-start" alignItems="center">
-                <Grid item>
-                  <form noValidate>
-                    <TextField
-                      id="startDate"
-                      label="Latest Possible Departure"
-                      type="datetime-local"
-                      // Default time for the max date is tomorrow
-                      defaultValue={this.getFutureDate(1)}
-                      onChange={this.handleFormChange('endDate')}
-                      value={this.state.endDate}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </form>
-                </Grid>
-              </Grid>
+            <Grid item xs={12} sm={6}>
+              <form noValidate>
+                <TextField
+                  id="startDate"
+                  label="Latest Possible Departure"
+                  type="datetime-local"
+                  // Default time for the max date is tomorrow
+                  defaultValue={this.getFutureDate(1)}
+                  onChange={this.handleFormChange('endDate')}
+                  value={this.state.endDate}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </form>
             </Grid>
           </Grid>
         </div>
