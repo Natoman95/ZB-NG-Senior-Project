@@ -16,7 +16,7 @@ import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
 import PlaceIcon from 'material-ui-icons/place';
 import ClockIcon from 'material-ui-icons/watchLater';
-import CalendarIcon from 'material-ui-icons/dateRange';
+import CalendarIcon from 'material-ui-icons/event';
 import NoteIcon from 'material-ui-icons/assignment';
 import TextField from 'material-ui/TextField';
 

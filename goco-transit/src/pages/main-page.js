@@ -1,11 +1,11 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import GroupIcon from 'material-ui-icons/Group';
-import GroupAddIcon from 'material-ui-icons/GroupAdd';
+import CarIcon from 'material-ui-icons/driveETA';
+import SeatIcon from 'material-ui-icons/eventSeat';
 import SettingsIcon from 'material-ui-icons/Settings';
 import Typography from 'material-ui/Typography';
-import { Link, Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom';
 
 // Components
 import OffersPage from './offers-page';
@@ -44,8 +44,8 @@ class MainPage extends React.Component {
               onChange={this.handleChange}
               indicatorColor="secondary"
             >
-              <Tab label="Passenger" icon={<GroupAddIcon />} component={Link} to="/requests" />
-              <Tab label="Driver" icon={<GroupIcon />} component={Link} to="/offers" />
+              <Tab label="Passenger" icon={<SeatIcon />} component={Link} to="/requests" />
+              <Tab label="Driver" icon={<CarIcon />} component={Link} to="/offers" />
               <Tab label="Settings" icon={<SettingsIcon />} component={Link} to="/settings" />
             </Tabs>
           </AppBar>
