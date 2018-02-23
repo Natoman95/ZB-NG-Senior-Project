@@ -7,9 +7,9 @@ import { Link, Route } from 'react-router-dom'
 // Components
 import OffersPage from './offers-page';
 import RequestsPage from './requests-page';
-import SettingsPage from './settings-page'
-import RequestSearchPage from './request-search-page'
-import {Icons} from '../components/icon-library';
+import SettingsPage from './settings-page';
+import RequestSearchPage from './request-search-page';
+import {Icons} from '../icon-library';
 
 // Contains the children the tabs navigate between
 function TabContainer(props) {
