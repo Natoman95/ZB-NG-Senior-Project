@@ -1,17 +1,15 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import GroupIcon from 'material-ui-icons/Group';
-import GroupAddIcon from 'material-ui-icons/GroupAdd';
-import SettingsIcon from 'material-ui-icons/Settings';
 import Typography from 'material-ui/Typography';
 import { Link, Route } from 'react-router-dom'
 
 // Components
 import OffersPage from './offers-page';
 import RequestsPage from './requests-page';
-import SettingsPage from './settings-page'
-import RequestSearchPage from './request-search-page'
+import SettingsPage from './settings-page';
+import RequestSearchPage from './request-search-page';
+import {Icons} from '../icon-library';
 
 // Contains the children the tabs navigate between
 function TabContainer(props) {
@@ -44,9 +42,9 @@ class MainPage extends React.Component {
               onChange={this.handleChange}
               indicatorColor="secondary"
             >
-              <Tab label="Requests" icon={<GroupAddIcon />} component={Link} to="/requests" />
-              <Tab label="Offers" icon={<GroupIcon />} component={Link} to="/offers" />
-              <Tab label="Settings" icon={<SettingsIcon />} component={Link} to="/settings" />
+              <Tab label="Passenger" icon={Icons.seatIcon} component={Link} to="/requests" />
+              <Tab label="Driver" icon={Icons.driverIcon} component={Link} to="/offers" />
+              <Tab label="Settings" icon={Icons.settingsIcon} component={Link} to="/settings" />
             </Tabs>
           </AppBar>
         </div>

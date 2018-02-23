@@ -15,14 +15,10 @@ import List, {
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
-import LeftArrowIcon from 'material-ui-icons/chevronLeft';
-import RightArrowIcon from 'material-ui-icons/chevronRight';
-import PlaceIcon from 'material-ui-icons/place';
-import ClockIcon from 'material-ui-icons/watchLater';
-import CalendarIcon from 'material-ui-icons/dateRange';
-import SeatIcon from 'material-ui-icons/eventSeat';
-import NoteIcon from 'material-ui-icons/assignment';
 import TextField from 'material-ui/TextField';
+
+// Components
+import {Icons} from '../icon-library';
 
 {/* Add an offer dialog box */}
 
@@ -79,15 +75,27 @@ class AddOfferDialog extends React.Component {
             {/* Ride info input */}
             <List dense={this.state.dense}>
 
-              {/* Location */}
+              {/* Origin */}
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    <PlaceIcon />
+                    {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary="(Location)"
+                  primary="(Origin)"
+                />
+              </ListItem>
+
+              {/* Destination */}
+              <ListItem disableGutters={true} divider={false}>
+                <ListItemAvatar>
+                  <Avatar>
+                    {Icons.destinationIcon}
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary="(Destination)"
                 />
               </ListItem>
 
@@ -95,7 +103,7 @@ class AddOfferDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    <CalendarIcon />
+                    {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <TextField required type="date" style={{ paddingLeft: "1em" }} />
@@ -105,7 +113,7 @@ class AddOfferDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    <ClockIcon />
+                    {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <TextField required type="time" style={{ paddingLeft: "1em" }} />
@@ -115,15 +123,15 @@ class AddOfferDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    <SeatIcon />
+                    {Icons.seatIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <IconButton onClick={this.handleSeatMinus} >
-                  <LeftArrowIcon />
+                  {Icons.leftArrowIcon} 
                 </IconButton>
                 {this.state.seats}
                 <IconButton onClick={this.handleSeatPlus} >
-                  <RightArrowIcon />
+                  {Icons.rightArrowIcon}
                 </IconButton>
               </ListItem>
 
@@ -131,7 +139,7 @@ class AddOfferDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    <NoteIcon />
+                    {Icons.noteIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >

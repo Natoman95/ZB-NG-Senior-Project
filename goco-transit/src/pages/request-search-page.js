@@ -10,8 +10,6 @@ import List, {
 } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import Badge from 'material-ui/Badge';
-import DeleteIcon from 'material-ui-icons/Delete';
-import PersonIcon from 'material-ui-icons/Person';
 import Avatar from 'material-ui/Avatar';
 import ZachPhoto from '../images/user_profile_zach.jpg'
 import NathanPhoto from '../images/user_profile_nathan.jpg'
@@ -23,13 +21,10 @@ import Dialog, {
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
-import PlaceIcon from 'material-ui-icons/place';
-import ClockIcon from 'material-ui-icons/watchLater';
-import CalendarIcon from 'material-ui-icons/dateRange';
-import NoteIcon from 'material-ui-icons/assignment';
 
 // Components
 import AddRequestDialog from '../components/add-request-dialog';
+import {Icons} from '../icon-library';
 
 // Services
 import { findOfferedRides } from '../services/ride-service';
