@@ -48,7 +48,7 @@ class OffersPage extends React.Component {
                 <ListItemAvatar>
                   <IconButton disabled={true}>
                     <Badge badgeContent={offeredRide.passengers.length + "/" + offeredRide.maxCapacity} color="primary">
-                      {React.createElement(Icons.personIcon)}
+                      {Icons.personIcon}
                     </Badge>
                   </IconButton>
                 </ListItemAvatar>
@@ -60,7 +60,7 @@ class OffersPage extends React.Component {
                 <ListItemSecondaryAction>
                   {/* Delete ride offer button */}
                   <IconButton onClick={() => { this.deleteOfferDialogChild.handleClickOpen(); }} aria-label="Delete">
-                    {React.createElement(Icons.deleteIcon)}
+                    {Icons.deleteIcon}
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
@@ -74,7 +74,7 @@ class OffersPage extends React.Component {
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
                 <Button variant="fab" color="secondary" aria-label="add" onClick={() => { this.addOfferDialogChild.handleClickOpen(); }}>
-                  {React.createElement(Icons.addIcon)}
+                  {Icons.addIcon}
                 </Button>
               </Grid>
             </Grid>

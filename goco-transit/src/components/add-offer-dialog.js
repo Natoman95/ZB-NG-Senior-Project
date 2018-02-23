@@ -79,7 +79,7 @@ class AddOfferDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.originIcon)}
+                    {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -91,7 +91,7 @@ class AddOfferDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.destinationIcon)}
+                    {Icons.destinationIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -103,7 +103,7 @@ class AddOfferDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.dateIcon)}
+                    {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <TextField required type="date" style={{ paddingLeft: "1em" }} />
@@ -113,7 +113,7 @@ class AddOfferDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.timeIcon)}
+                    {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <TextField required type="time" style={{ paddingLeft: "1em" }} />
@@ -123,15 +123,15 @@ class AddOfferDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.seatIcon)}
+                    {Icons.seatIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <IconButton onClick={this.handleSeatMinus} >
-                  {React.createElement(Icons.leftArrowIcon)} 
+                  {Icons.leftArrowIcon} 
                 </IconButton>
                 {this.state.seats}
                 <IconButton onClick={this.handleSeatPlus} >
-                  {React.createElement(Icons.rightArrowIcon)}
+                  {Icons.rightArrowIcon}
                 </IconButton>
               </ListItem>
 
@@ -139,7 +139,7 @@ class AddOfferDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.noteIcon)}
+                    {Icons.noteIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >

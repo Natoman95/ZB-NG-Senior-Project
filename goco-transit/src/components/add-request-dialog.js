@@ -63,7 +63,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.originIcon)}
+                    {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -75,7 +75,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.destinationIcon)}
+                    {Icons.destinationIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -87,7 +87,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.dateIcon)}
+                    {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -99,7 +99,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.timeIcon)}
+                    {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
@@ -111,7 +111,7 @@ class AddRequestDialog extends React.Component {
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
                   <Avatar>
-                    {React.createElement(Icons.noteIcon)}
+                    {Icons.noteIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >

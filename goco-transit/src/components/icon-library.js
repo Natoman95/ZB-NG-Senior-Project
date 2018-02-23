@@ -1,3 +1,5 @@
+import React from 'react';
+
 import OriginIcon from 'material-ui-icons/myLocation';
 import DestinationIcon from 'material-ui-icons/place';
 import TimeIcon from 'material-ui-icons/watchLater';
@@ -17,22 +19,22 @@ import DeleteIcon from 'material-ui-icons/Delete';
 
 // Icon dictionary
 var icons = {
-  originIcon: OriginIcon,
-  destinationIcon: DestinationIcon,
-  timeIcon: TimeIcon,
-  dateIcon: DateIcon,
-  noteIcon: NoteIcon,
-  personIcon: PersonIcon,
-  driverIcon: DriverIcon,
-  seatIcon: SeatIcon,
-  confirmedRideIcon: ConfirmedRideIcon,
-  pendingRideIcon: PendingRideIcon,
-  leftArrowIcon: LeftArrowIcon,
-  rightArrowIcon: RightArrowIcon,
-  settingsIcon: SettingsIcon,
-  addIcon: AddIcon,
-  editIcon: EditIcon,
-  deleteIcon: DeleteIcon
+  originIcon: React.createElement(OriginIcon),
+  destinationIcon: React.createElement(DestinationIcon),
+  timeIcon: React.createElement(TimeIcon),
+  dateIcon: React.createElement(DateIcon),
+  noteIcon: React.createElement(NoteIcon),
+  personIcon: React.createElement(PersonIcon),
+  driverIcon: React.createElement(DriverIcon),
+  seatIcon: React.createElement(SeatIcon),
+  confirmedRideIcon: React.createElement(ConfirmedRideIcon),
+  pendingRideIcon: React.createElement(PendingRideIcon),
+  leftArrowIcon: React.createElement(LeftArrowIcon),
+  rightArrowIcon: React.createElement(RightArrowIcon),
+  settingsIcon: React.createElement(SettingsIcon),
+  addIcon: React.createElement(AddIcon),
+  editIcon: React.createElement(EditIcon),
+  deleteIcon: React.createElement(DeleteIcon)
 };
 
 export { icons as Icons };

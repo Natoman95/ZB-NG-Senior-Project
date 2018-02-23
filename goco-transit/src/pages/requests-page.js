@@ -56,7 +56,7 @@ class RequestsPage extends React.Component {
                   {/* Depending on whether the user has been accepted as a passenger
                   A different avatar will be displayed */}
                   <Avatar>
-                    {React.createElement(Icons.confirmedRideIcon)}
+                    {Icons.confirmedRideIcon}
                   </Avatar>
                 </ListItemAvatar>
                 {/* Route destination and date range */}
@@ -67,7 +67,7 @@ class RequestsPage extends React.Component {
                 {/* Delete confirmed ride button */}
                 <ListItemSecondaryAction>
                   <IconButton onClick={() => { this.deleteRideDialogChild.handleClickOpen(); }} aria-label="Delete">
-                    {React.createElement(Icons.deleteIcon)}
+                    {Icons.deleteIcon}
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
@@ -88,7 +88,7 @@ class RequestsPage extends React.Component {
                   {/* Depending on whether the user has been accepted as a passenger
                   A different avatar will be displayed */}
                   <Avatar>
-                    {React.createElement(Icons.pendingRideIcon)}
+                    {Icons.pendingRideIcon}
                   </Avatar>
                 </ListItemAvatar>
                 {/* Route destination and date range */}
@@ -99,7 +99,7 @@ class RequestsPage extends React.Component {
                 {/* Delete request button */}
                 <ListItemSecondaryAction>
                   <IconButton onClick={() => { this.deleteRequestDialogChild.handleClickOpen(); }} aria-label="Delete">
-                    {React.createElement(Icons.deleteIcon)}
+                    {Icons.deleteIcon}
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
@@ -114,7 +114,7 @@ class RequestsPage extends React.Component {
               <Grid item>
                 <Link to="/requests/search">
                   <Button variant="fab" color="secondary" aria-label="add">
-                    {React.createElement(Icons.addIcon)}
+                    {Icons.addIcon}
                   </Button>
                 </Link>
               </Grid>

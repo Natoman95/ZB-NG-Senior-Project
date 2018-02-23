@@ -65,7 +65,7 @@ class SettingsPage extends React.Component {
               <Grid container direction="row" justify="flex-end" alignItems="center">
                 <Grid item>
                   <Button variant="fab" color="secondary" aria-label="add">
-                    {React.createElement(Icons.editIcon)}
+                    {Icons.editIcon}
                   </Button>
                 </Grid>
               </Grid>
