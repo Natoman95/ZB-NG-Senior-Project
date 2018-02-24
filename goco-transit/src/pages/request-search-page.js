@@ -51,6 +51,25 @@ class RequestSearchPage extends React.Component {
     };
   }
 
+  // Returns the current date and time in datetime-local format ("YYYY-MM-DDTHH:MM")
+  getDateTime = () => {
+    var now = new Date();
+    return this.pad(now.getFullYear(), 4)
+           + "-" + this.pad((now.getMonth() + 1), 2)
+           + "-" + this.pad(now.getDate(), 2)
+           + "T" + this.pad(now.getHours(), 2)
+           + ":" + this.pad(now.getMinutes(), 2)
+  };
+
+  // Pads a number with leading zeroes and returns it as a String
+  pad = (number, length) => {
+    var str = '' + number;
+    while (str.length < length) {
+        str = '0' + str;
+    }
+    return str;
+  }
+  
   /**
    * Finds a future date offset from today in YYYY-MM-DD format
    */
@@ -140,7 +159,8 @@ class RequestSearchPage extends React.Component {
                   label="Earliest Possible Departure"
                   type="datetime-local"
                   // Default time for the start date is today
-                  defaultValue={this.getFutureDate(0)}
+                  defaultValue={this.getDateTime()}
+                  min={this.getDateTime()}
                   value={this.state.startDate}
                   onChange={this.handleFormChange('startDate')}
                   InputLabelProps={{
@@ -156,7 +176,8 @@ class RequestSearchPage extends React.Component {
                   label="Latest Possible Departure"
                   type="datetime-local"
                   // Default time for the max date is tomorrow
-                  defaultValue={this.getFutureDate(1)}
+                  defaultValue={this.getDateTime()}
+                  min={this.getDateTime()}
                   onChange={this.handleFormChange('endDate')}
                   value={this.state.endDate}
                   InputLabelProps={{
