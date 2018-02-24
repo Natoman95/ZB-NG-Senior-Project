@@ -9,7 +9,7 @@ import OffersPage from './offers-page';
 import RequestsPage from './requests-page';
 import SettingsPage from './settings-page';
 import RequestSearchPage from './request-search-page';
-import {Icons} from '../icon-library';
+import { Icons } from '../icon-library';
 
 // Contains the children the tabs navigate between
 function TabContainer(props) {
@@ -35,7 +35,7 @@ class MainPage extends React.Component {
       <div>
         <div>
           {/* Tabs */}
-          <AppBar position="static" color="primary">
+          <AppBar position="static" color="primary" style={{ position: 'fixed' }}>
             <Tabs
               fullWidth={true}
               value={this.state.value}
@@ -50,7 +50,7 @@ class MainPage extends React.Component {
         </div>
 
         {/* Tab Pages */}
-        <div>
+        <div style={{ paddingTop: '4.25em' }}>
           <TabContainer>
             <Route exact path="/" component={RequestsPage} />
             <Route exact path="/requests" component={RequestsPage} />

@@ -26,17 +26,17 @@ const findOfferedRides = (startDate, endDate, origin, destination) => {
   let Jim = new UserModel("Jim", "Bob", "jim.bob@gordon.edu");
 
   // Dummy rides - will be found in a database somewhere
-  let confirmedRide1 = new RideModel("Wenham", "Oxford", "12/7/2017", Nathan);
-  confirmedRide1.passengers = [Rachel];
-  confirmedRide1.maxCapacity = 3;
+  let ride1 = new RideModel("Wenham", "Oxford", "12/7/2017", Nathan);
+  ride1.passengers = [Rachel];
+  ride1.maxCapacity = 3;
 
-  let confirmedRide2 = new RideModel("Manchester", "Wenham", "1/16/2018", Zach);
-  confirmedRide2.passengers = [Jim];
-  confirmedRide2.maxCapacity = 4;
+  let ride2 = new RideModel("Manchester", "Wenham", "1/16/2018", Zach);
+  ride2.passengers = [Jim];
+  ride2.maxCapacity = 4;
 
-  let confirmedRides = [confirmedRide1, confirmedRide2];
+  let rides = [ride1, ride2];
 
-  return confirmedRides;
+  return rides;
 }
 
 export { findOfferedRides };
