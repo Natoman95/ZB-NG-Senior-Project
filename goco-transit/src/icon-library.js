@@ -12,11 +12,19 @@ import ConfirmedRideIcon from 'material-ui-icons/done';
 import PendingRideIcon from 'material-ui-icons/help';
 import LeftArrowIcon from 'material-ui-icons/chevronLeft';
 import RightArrowIcon from 'material-ui-icons/chevronRight';
+<<<<<<< HEAD
 import SettingsIcon from 'material-ui-icons/Settings';
 import AddIcon from 'material-ui-icons/Add';
 import EditIcon from 'material-ui-icons/Edit';
 import DeleteIcon from 'material-ui-icons/Delete';
 import SearchIcon from 'material-ui-icons/Search';
+=======
+import SettingsIcon from 'material-ui-icons/settings';
+import AddIcon from 'material-ui-icons/add';
+import EditIcon from 'material-ui-icons/edit';
+import DeleteIcon from 'material-ui-icons/delete';
+import SearchIcon from 'material-ui-icons/search';
+>>>>>>> 3c686fd8ec10c59482d96ee227dcd70bb9b8fe94
 
 // Icon dictionary
 var icons = {
