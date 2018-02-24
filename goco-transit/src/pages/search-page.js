@@ -51,14 +51,15 @@ class RequestSearchPage extends React.Component {
     };
   }
 
-  // Returns the current date and time in datetime-local format ("YYYY-MM-DDTHH:MM")
-  getDateTime = () => {
+  // Returns the date and time plus a given number of milliseconds in datetime-local format ("YYYY-MM-DDTHH:MM")
+  getDateTime = (ms) => {
     var now = new Date();
-    return this.pad(now.getFullYear(), 4)
-           + "-" + this.pad((now.getMonth() + 1), 2)
-           + "-" + this.pad(now.getDate(), 2)
-           + "T" + this.pad(now.getHours(), 2)
-           + ":" + this.pad(now.getMinutes(), 2)
+    var adjustedDate = new Date(now.getTime() + ms);
+    return this.pad(adjustedDate.getFullYear(), 4)
+           + "-" + this.pad((adjustedDate.getMonth() + 1), 2)
+           + "-" + this.pad(adjustedDate.getDate(), 2)
+           + "T" + this.pad(adjustedDate.getHours(), 2)
+           + ":" + this.pad(adjustedDate.getMinutes(), 2)
   };
 
   // Pads a number with leading zeroes and returns it as a String
@@ -159,8 +160,8 @@ class RequestSearchPage extends React.Component {
                   label="Earliest Possible Departure"
                   type="datetime-local"
                   // Default time for the start date is today
-                  defaultValue={this.getDateTime()}
-                  min={this.getDateTime()}
+                  defaultValue={this.getDateTime(0)}
+                  min={this.getDateTime(0)}
                   value={this.state.startDate}
                   onChange={this.handleFormChange('startDate')}
                   InputLabelProps={{
@@ -176,8 +177,8 @@ class RequestSearchPage extends React.Component {
                   label="Latest Possible Departure"
                   type="datetime-local"
                   // Default time for the max date is tomorrow
-                  defaultValue={this.getDateTime()}
-                  min={this.getDateTime()}
+                  defaultValue={this.getDateTime(86400000)}
+                  min={this.getDateTime(86400000)}
                   onChange={this.handleFormChange('endDate')}
                   value={this.state.endDate}
                   InputLabelProps={{
