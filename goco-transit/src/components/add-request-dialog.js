@@ -14,19 +14,12 @@ import List, {
 } from 'material-ui/List';
 import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
-<<<<<<< HEAD
-=======
-import PlaceIcon from 'material-ui-icons/place';
-import ClockIcon from 'material-ui-icons/watchLater';
-import CalendarIcon from 'material-ui-icons/event';
-import NoteIcon from 'material-ui-icons/assignment';
->>>>>>> Updated icons
 import TextField from 'material-ui/TextField';
 
 // Components
-import {Icons} from '../icon-library';
+import { Icons } from '../icon-library';
 
-{/* Add a request dialog box */}
+{/* Add a request dialog box */ }
 
 class AddRequestDialog extends React.Component {
   constructor() {
@@ -77,7 +70,7 @@ class AddRequestDialog extends React.Component {
                   primary="(Origin)"
                 />
               </ListItem>
-              
+
               {/* Destination */}
               <ListItem disableGutters={true} divider={false}>
                 <ListItemAvatar>
