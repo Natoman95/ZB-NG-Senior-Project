@@ -114,7 +114,7 @@ class RequestsPage extends React.Component {
               <Grid item>
                 <Link to="/requests/search">
                   <Button variant="fab" color="secondary" aria-label="add">
-                    {Icons.addIcon}
+                    {Icons.searchIcon}
                   </Button>
                 </Link>
               </Grid>

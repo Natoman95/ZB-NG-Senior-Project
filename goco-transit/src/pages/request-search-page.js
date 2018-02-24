@@ -102,11 +102,11 @@ class RequestSearchPage extends React.Component {
           Find a Ride by Location
         </h3>
 
-        {/* Enter a start location */}
+        {/* Location entry */}
         <div style={{ marginTop: '2em' }}>
           <Grid container spacing={40}>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <TextField // Origin (start)
                 style = {{width: 228.42}} // Same width as departure fields
                 id="origin"
                 label="Origin"
@@ -117,7 +117,7 @@ class RequestSearchPage extends React.Component {
               />
             </Grid>
             <Grid item xs={12} sm={6}>
-              <TextField
+              <TextField // Destination (end)
                 style = {{width: 228.42}} // Same width as departure fields
                 id="destination"
                 label="Destination"
