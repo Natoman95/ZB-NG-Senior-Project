@@ -1,8 +1,4 @@
 import React from 'react';
-import DoneIcon from 'material-ui-icons/Done';
-import DeleteIcon from 'material-ui-icons/Delete';
-import QuestionIcon from 'material-ui-icons/Help';
-import PersonIcon from 'material-ui-icons/Person';
 import List, {
   ListItem,
   ListItemAvatar,
@@ -12,13 +8,13 @@ import List, {
 } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
-import AddIcon from 'material-ui-icons/Add';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 
 // Components
 import AddOfferDialog from '../components/add-offer-dialog';
 import DeleteOfferDialog from '../components/delete-offer-dialog';
+import {Icons} from '../icon-library';
 
 // Services
 import { getUser } from '../services/user-service';
@@ -52,7 +48,7 @@ class OffersPage extends React.Component {
                 <ListItemAvatar>
                   <IconButton disabled={true}>
                     <Badge badgeContent={offeredRide.passengers.length + "/" + offeredRide.maxCapacity} color="primary">
-                      <PersonIcon />
+                      {Icons.personIcon}
                     </Badge>
                   </IconButton>
                 </ListItemAvatar>
@@ -64,7 +60,7 @@ class OffersPage extends React.Component {
                 <ListItemSecondaryAction>
                   {/* Delete ride offer button */}
                   <IconButton onClick={() => { this.deleteOfferDialogChild.handleClickOpen(); }} aria-label="Delete">
-                    <DeleteIcon />
+                    {Icons.deleteIcon}
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
@@ -78,7 +74,7 @@ class OffersPage extends React.Component {
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
                 <Button variant="fab" color="secondary" aria-label="add" onClick={() => { this.addOfferDialogChild.handleClickOpen(); }}>
-                  <AddIcon />
+                  {Icons.addIcon}
                 </Button>
               </Grid>
             </Grid>

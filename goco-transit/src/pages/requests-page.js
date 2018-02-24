@@ -1,8 +1,4 @@
 import React from 'react';
-import DoneIcon from 'material-ui-icons/Done';
-import DeleteIcon from 'material-ui-icons/Delete';
-import QuestionIcon from 'material-ui-icons/Help';
-import PersonIcon from 'material-ui-icons/Person';
 import List, {
   ListItem,
   ListItemAvatar,
@@ -13,7 +9,6 @@ import List, {
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
-import SearchIcon from 'material-ui-icons/Search';
 import Grid from 'material-ui/Grid';
 import { Link } from 'react-router-dom';
 
@@ -21,6 +16,7 @@ import { Link } from 'react-router-dom';
 import RequestSearchPage from './request-search-page';
 import DeleteRequestDialog from '../components/delete-request-dialog';
 import DeleteRideDialog from '../components/delete-ride-dialog';
+import {Icons} from '../icon-library';
 
 // Services
 import { getUser } from '../services/user-service';
@@ -60,7 +56,7 @@ class RequestsPage extends React.Component {
                   {/* Depending on whether the user has been accepted as a passenger
                   A different avatar will be displayed */}
                   <Avatar>
-                    <DoneIcon />
+                    {Icons.confirmedRideIcon}
                   </Avatar>
                 </ListItemAvatar>
                 {/* Route destination and date range */}
@@ -71,7 +67,7 @@ class RequestsPage extends React.Component {
                 {/* Delete confirmed ride button */}
                 <ListItemSecondaryAction>
                   <IconButton onClick={() => { this.deleteRideDialogChild.handleClickOpen(); }} aria-label="Delete">
-                    <DeleteIcon />
+                    {Icons.deleteIcon}
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
@@ -92,7 +88,7 @@ class RequestsPage extends React.Component {
                   {/* Depending on whether the user has been accepted as a passenger
                   A different avatar will be displayed */}
                   <Avatar>
-                    <QuestionIcon />
+                    {Icons.pendingRideIcon}
                   </Avatar>
                 </ListItemAvatar>
                 {/* Route destination and date range */}
@@ -103,7 +99,7 @@ class RequestsPage extends React.Component {
                 {/* Delete request button */}
                 <ListItemSecondaryAction>
                   <IconButton onClick={() => { this.deleteRequestDialogChild.handleClickOpen(); }} aria-label="Delete">
-                    <DeleteIcon />
+                    {Icons.deleteIcon}
                   </IconButton>
                 </ListItemSecondaryAction>
               </ListItem>
@@ -118,7 +114,11 @@ class RequestsPage extends React.Component {
               <Grid item>
                 <Link to="/requests/search">
                   <Button variant="fab" color="secondary" aria-label="add">
+<<<<<<< HEAD
                     <SearchIcon />
+=======
+                    {Icons.addIcon}
+>>>>>>> refs/remotes/origin/master
                   </Button>
                 </Link>
               </Grid>
