@@ -50,7 +50,7 @@ class MainPage extends React.Component {
         </div>
 
         {/* Tab Pages */}
-        <div style={{ paddingTop: '4em' }}>
+        <div style={{ paddingTop: '4.25em' }}>
           <TabContainer>
             <Route exact path="/" component={RequestsPage} />
             <Route exact path="/requests" component={RequestsPage} />
