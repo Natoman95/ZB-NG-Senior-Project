@@ -42,15 +42,9 @@ class MainPage extends React.Component {
               onChange={this.handleChange}
               indicatorColor="secondary"
             >
-<<<<<<< HEAD
-              <Tab label="Passenger" icon={<SeatIcon />} component={Link} to="/requests" />
-              <Tab label="Driver" icon={<CarIcon />} component={Link} to="/offers" />
-              <Tab label="Settings" icon={<SettingsIcon />} component={Link} to="/settings" />
-=======
               <Tab label="Passenger" icon={Icons.seatIcon} component={Link} to="/requests" />
               <Tab label="Driver" icon={Icons.driverIcon} component={Link} to="/offers" />
               <Tab label="Settings" icon={Icons.settingsIcon} component={Link} to="/settings" />
->>>>>>> refs/remotes/origin/master
             </Tabs>
           </AppBar>
         </div>

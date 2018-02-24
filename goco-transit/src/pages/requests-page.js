@@ -114,11 +114,7 @@ class RequestsPage extends React.Component {
               <Grid item>
                 <Link to="/requests/search">
                   <Button variant="fab" color="secondary" aria-label="add">
-<<<<<<< HEAD
-                    <SearchIcon />
-=======
                     {Icons.addIcon}
->>>>>>> refs/remotes/origin/master
                   </Button>
                 </Link>
               </Grid>
