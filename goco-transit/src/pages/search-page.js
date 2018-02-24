@@ -51,15 +51,14 @@ class RequestSearchPage extends React.Component {
     };
   }
 
-  // Returns the date and time plus a given number of milliseconds in datetime-local format ("YYYY-MM-DDTHH:MM")
+  // Returns the date and time plus a given number of milliseconds (ms) in datetime-local format ("YYYY-MM-DDTHH:MM")
   getDateTime = (ms) => {
-    var now = new Date();
-    var adjustedDate = new Date(now.getTime() + ms);
-    return this.pad(adjustedDate.getFullYear(), 4)
-           + "-" + this.pad((adjustedDate.getMonth() + 1), 2)
-           + "-" + this.pad(adjustedDate.getDate(), 2)
-           + "T" + this.pad(adjustedDate.getHours(), 2)
-           + ":" + this.pad(adjustedDate.getMinutes(), 2)
+    var dateTime = new Date((new Date()).getTime() + ms);
+    return this.pad(dateTime.getFullYear(), 4)
+           + "-" + this.pad((dateTime.getMonth() + 1), 2)
+           + "-" + this.pad(dateTime.getDate(), 2)
+           + "T" + this.pad(dateTime.getHours(), 2)
+           + ":" + this.pad(dateTime.getMinutes(), 2)
   };
 
   // Pads a number with leading zeroes and returns it as a String
