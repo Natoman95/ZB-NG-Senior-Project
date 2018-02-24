@@ -5,10 +5,10 @@ import Typography from 'material-ui/Typography';
 import { Link, Route } from 'react-router-dom'
 
 // Components
-import OffersPage from './offers-page';
-import RequestsPage from './requests-page';
+import DriverPage from './driver-page';
+import PassengerPage from './passenger-page';
 import SettingsPage from './settings-page';
-import RequestSearchPage from './request-search-page';
+import SearchPage from './search-page';
 import { Icons } from '../icon-library';
 
 // Contains the children the tabs navigate between
@@ -42,8 +42,8 @@ class MainPage extends React.Component {
               onChange={this.handleChange}
               indicatorColor="secondary"
             >
-              <Tab label="Passenger" icon={Icons.seatIcon} component={Link} to="/requests" />
-              <Tab label="Driver" icon={Icons.driverIcon} component={Link} to="/offers" />
+              <Tab label="Passenger" icon={Icons.seatIcon} component={Link} to="/passenger" />
+              <Tab label="Driver" icon={Icons.driverIcon} component={Link} to="/driver" />
               <Tab label="Settings" icon={Icons.settingsIcon} component={Link} to="/settings" />
             </Tabs>
           </AppBar>
@@ -52,10 +52,10 @@ class MainPage extends React.Component {
         {/* Tab Pages */}
         <div style={{ paddingTop: '4.25em' }}>
           <TabContainer>
-            <Route exact path="/" component={RequestsPage} />
-            <Route exact path="/requests" component={RequestsPage} />
-            <Route exact path="/requests/search" component={RequestSearchPage} />
-            <Route exact path="/offers" component={OffersPage} />
+            <Route exact path="/" component={PassengerPage} />
+            <Route exact path="/passenger" component={PassengerPage} />
+            <Route exact path="/passenger/search" component={SearchPage} />
+            <Route exact path="/driver" component={DriverPage} />
             <Route exact path="/settings" component={SettingsPage} />
           </TabContainer>
         </div>
