@@ -24,7 +24,7 @@ import Dialog, {
 
 // Components
 import AddRequestDialog from '../components/add-request-dialog';
-import {Icons} from '../icon-library';
+import { Icons } from '../icon-library';
 
 // Services
 import { findOfferedRides } from '../services/ride-service';
@@ -55,45 +55,19 @@ class RequestSearchPage extends React.Component {
   getDateTime = (ms) => {
     var dateTime = new Date((new Date()).getTime() + ms);
     return this.pad(dateTime.getFullYear(), 4)
-           + "-" + this.pad((dateTime.getMonth() + 1), 2)
-           + "-" + this.pad(dateTime.getDate(), 2)
-           + "T" + this.pad(dateTime.getHours(), 2)
-           + ":" + this.pad(dateTime.getMinutes(), 2)
+      + "-" + this.pad((dateTime.getMonth() + 1), 2)
+      + "-" + this.pad(dateTime.getDate(), 2)
+      + "T" + this.pad(dateTime.getHours(), 2)
+      + ":" + this.pad(dateTime.getMinutes(), 2)
   };
 
   // Pads a number with leading zeroes and returns it as a String
   pad = (number, length) => {
     var str = '' + number;
     while (str.length < length) {
-        str = '0' + str;
+      str = '0' + str;
     }
     return str;
-  }
-  
-  /**
-   * Finds a future date offset from today in YYYY-MM-DD format
-   */
-  getFutureDate = (offset) => {
-    // Creates a date object based on the current day and offsets it by a constant
-    let date = new Date();
-    let nextDate = new Date(date);
-    nextDate.setDate(date.getDate() + offset);
-
-    let dd = nextDate.getDate();
-    let mm = nextDate.getMonth() + 1; //January is 0
-    let yyyy = nextDate.getFullYear();
-
-    // Handle single-digit days and months
-    if (dd < 10) {
-      dd = '0' + dd;
-    }
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
-
-    let formattedDate = yyyy + '-' + mm + '-' + dd;
-
-    return formattedDate;
   }
 
   /**
@@ -126,7 +100,7 @@ class RequestSearchPage extends React.Component {
           <Grid container spacing={40}>
             <Grid item xs={12} sm={6}>
               <TextField // Origin (start)
-                style = {{width: 228.42}} // Same width as departure fields
+                style={{ width: 228.42 }} // Same width as departure fields
                 id="origin"
                 label="Origin"
                 type="search"
@@ -137,7 +111,7 @@ class RequestSearchPage extends React.Component {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField // Destination (end)
-                style = {{width: 228.42}} // Same width as departure fields
+                style={{ width: 228.42 }} // Same width as departure fields
                 id="destination"
                 label="Destination"
                 type="search"
