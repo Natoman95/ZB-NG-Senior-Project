@@ -15,12 +15,19 @@ import List, {
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import Avatar from 'material-ui/Avatar';
+import LeftArrowIcon from 'material-ui-icons/chevronLeft';
+import RightArrowIcon from 'material-ui-icons/chevronRight';
+import PlaceIcon from 'material-ui-icons/place';
+import ClockIcon from 'material-ui-icons/watchLater';
+import CalendarIcon from 'material-ui-icons/event';
+import SeatIcon from 'material-ui-icons/eventSeat';
+import NoteIcon from 'material-ui-icons/assignment';
 import TextField from 'material-ui/TextField';
 
 // Components
-import {Icons} from '../icon-library';
+import { Icons } from '../icon-library';
 
-{/* Add an offer dialog box */}
+{/* Add an offer dialog box */ }
 
 class AddOfferDialog extends React.Component {
   constructor() {
@@ -76,7 +83,7 @@ class AddOfferDialog extends React.Component {
             <List dense={this.state.dense}>
 
               {/* Origin */}
-              <ListItem disableGutters={true} divider={false}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.originIcon}
@@ -88,7 +95,7 @@ class AddOfferDialog extends React.Component {
               </ListItem>
 
               {/* Destination */}
-              <ListItem disableGutters={true} divider={false}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.destinationIcon}
@@ -100,34 +107,34 @@ class AddOfferDialog extends React.Component {
               </ListItem>
 
               {/* Date */}
-              <ListItem disableGutters={true} divider={false}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <TextField required type="date" style={{ paddingLeft: "1em" }} />
+                <TextField required type="date" />
               </ListItem>
 
               {/* Time */}
-              <ListItem disableGutters={true} divider={false}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <TextField required type="time" style={{ paddingLeft: "1em" }} />
+                <TextField required type="time" />
               </ListItem>
 
               {/* Number of seats */}
-              <ListItem disableGutters={true} divider={false}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.seatIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <IconButton onClick={this.handleSeatMinus} >
-                  {Icons.leftArrowIcon} 
+                  {Icons.leftArrowIcon}
                 </IconButton>
                 {this.state.seats}
                 <IconButton onClick={this.handleSeatPlus} >
@@ -136,14 +143,14 @@ class AddOfferDialog extends React.Component {
               </ListItem>
 
               {/* Notes */}
-              <ListItem disableGutters={true} divider={false}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.noteIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >
-                  <TextField label="Note to passengers" multiline={true} />
+                  <TextField label="Note to passengers" multiline={true} style={{ paddingLeft: "1em" }} />
                 </div>
               </ListItem>
             </List>

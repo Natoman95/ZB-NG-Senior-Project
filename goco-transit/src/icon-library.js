@@ -5,17 +5,18 @@ import DestinationIcon from 'material-ui-icons/place';
 import TimeIcon from 'material-ui-icons/watchLater';
 import DateIcon from 'material-ui-icons/dateRange';
 import NoteIcon from 'material-ui-icons/assignment';
-import PersonIcon from 'material-ui-icons/Person';
+import PersonIcon from 'material-ui-icons/person';
 import DriverIcon from 'material-ui-icons/driveETA';
 import SeatIcon from 'material-ui-icons/eventSeat';
-import ConfirmedRideIcon from 'material-ui-icons/Done';
-import PendingRideIcon from 'material-ui-icons/Help';
+import ConfirmedRideIcon from 'material-ui-icons/done';
+import PendingRideIcon from 'material-ui-icons/help';
 import LeftArrowIcon from 'material-ui-icons/chevronLeft';
 import RightArrowIcon from 'material-ui-icons/chevronRight';
 import SettingsIcon from 'material-ui-icons/Settings';
 import AddIcon from 'material-ui-icons/Add';
 import EditIcon from 'material-ui-icons/Edit';
 import DeleteIcon from 'material-ui-icons/Delete';
+import SearchIcon from 'material-ui-icons/Search';
 
 // Icon dictionary
 var icons = {
@@ -34,7 +35,8 @@ var icons = {
   settingsIcon: React.createElement(SettingsIcon),
   addIcon: React.createElement(AddIcon),
   editIcon: React.createElement(EditIcon),
-  deleteIcon: React.createElement(DeleteIcon)
+  deleteIcon: React.createElement(DeleteIcon),
+  searchIcon: React.createElement(SearchIcon)
 };
 
 export { icons as Icons };

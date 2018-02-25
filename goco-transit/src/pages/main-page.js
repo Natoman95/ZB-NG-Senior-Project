@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
-import { Link, Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom';
 
 // Components
 import DriverPage from './driver-page';

@@ -16,7 +16,7 @@ import { Link } from 'react-router-dom';
 import SearchPage from './search-page';
 import DeleteRequestDialog from '../components/delete-request-dialog';
 import DeleteRideDialog from '../components/delete-ride-dialog';
-import {Icons} from '../icon-library';
+import { Icons } from '../icon-library';
 
 // Services
 import { getUser } from '../services/user-service';
@@ -114,7 +114,7 @@ class RequestsPage extends React.Component {
               <Grid item>
                 <Link to="/passenger/search">
                   <Button variant="fab" color="secondary" aria-label="add">
-                    {Icons.addIcon}
+                    {Icons.searchIcon}
                   </Button>
                 </Link>
               </Grid>
@@ -125,7 +125,7 @@ class RequestsPage extends React.Component {
         {/* Dialog boxes */}
         <DeleteRequestDialog ref={(deleteRequestDialogInstance) => { this.deleteRequestDialogChild = deleteRequestDialogInstance; }} />
         <DeleteRideDialog ref={(deleteRideDialogInstance) => { this.deleteRideDialogChild = deleteRideDialogInstance; }} />
-        
+
       </div>
     );
   }

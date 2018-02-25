@@ -24,7 +24,7 @@ import Dialog, {
 
 // Components
 import AddRequestDialog from '../components/add-request-dialog';
-import {Icons} from '../icon-library';
+import { Icons } from '../icon-library';
 
 // Services
 import { findOfferedRides } from '../services/ride-service';
@@ -51,30 +51,23 @@ class RequestSearchPage extends React.Component {
     };
   }
 
-  /**
-   * Finds a future date offset from today in YYYY-MM-DD format
-   */
-  getFutureDate = (offset) => {
-    // Creates a date object based on the current day and offsets it by a constant
-    let date = new Date();
-    let nextDate = new Date(date);
-    nextDate.setDate(date.getDate() + offset);
+  // Returns the date and time plus a given number of milliseconds (ms) in datetime-local format ("YYYY-MM-DDTHH:MM")
+  getDateTime = (ms) => {
+    var dateTime = new Date((new Date()).getTime() + ms);
+    return this.pad(dateTime.getFullYear(), 4)
+      + "-" + this.pad((dateTime.getMonth() + 1), 2)
+      + "-" + this.pad(dateTime.getDate(), 2)
+      + "T" + this.pad(dateTime.getHours(), 2)
+      + ":" + this.pad(dateTime.getMinutes(), 2)
+  };
 
-    let dd = nextDate.getDate();
-    let mm = nextDate.getMonth() + 1; //January is 0
-    let yyyy = nextDate.getFullYear();
-
-    // Handle single-digit days and months
-    if (dd < 10) {
-      dd = '0' + dd;
+  // Pads a number with leading zeroes and returns it as a String
+  pad = (number, length) => {
+    var str = '' + number;
+    while (str.length < length) {
+      str = '0' + str;
     }
-    if (mm < 10) {
-      mm = '0' + mm;
-    }
-
-    let formattedDate = yyyy + '-' + mm + '-' + dd;
-
-    return formattedDate;
+    return str;
   }
 
   /**
@@ -102,73 +95,63 @@ class RequestSearchPage extends React.Component {
           Find a Ride by Location
         </h3>
 
-        {/* Enter a start location */}
-        <TextField
-          style={{ margin: 0 }}
-          id="origin"
-          label="Origin"
-          type="search"
-          margin="normal"
-          value={this.state.origin}
-          onChange={this.handleFormChange('origin')}
-          fullWidth={true}
-        />
-
-        {/* Enter a destination */}
-        <TextField
-          style={{ marginTop: '2em' }}
-          id="destination"
-          label="Destination"
-          type="search"
-          margin="normal"
-          value={this.state.destination}
-          onChange={this.handleFormChange('destination')}
-          fullWidth={true}
-        />
-
-        {/* Date range selection */}
+        {/* Grid for entry fields */}
         <div style={{ marginTop: '2em' }}>
-          <Grid container>
-            <Grid item xs={6}>
-              <Grid container direction="row" justify="flex-start" alignItems="center">
-                <Grid item>
-                  <form noValidate>
-                    <TextField
-                      id="startDate"
-                      label="Earliest Travel Day"
-                      type="date"
-                      // Default time for the start date is today
-                      defaultValue={this.getFutureDate(0)}
-                      value={this.state.startDate}
-                      onChange={this.handleFormChange('startDate')}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </form>
-                </Grid>
-              </Grid>
+          <Grid container spacing={40}>
+            {/* Origin */}
+            <Grid item>
+              <TextField
+                style={{ width: 226.23 }} // Same width as departure fields
+                id="origin"
+                label="Origin"
+                type="search"
+                value={this.state.origin}
+                onChange={this.handleFormChange('origin')}
+              />
             </Grid>
-
-            <Grid item xs={6}>
-              <Grid container direction="row" justify="flex-start" alignItems="center">
-                <Grid item>
-                  <form noValidate>
-                    <TextField
-                      id="startDate"
-                      label="Latest Travel Day"
-                      type="date"
-                      // Default time for the max date is tomorrow
-                      defaultValue={this.getFutureDate(1)}
-                      onChange={this.handleFormChange('endDate')}
-                      value={this.state.endDate}
-                      InputLabelProps={{
-                        shrink: true,
-                      }}
-                    />
-                  </form>
-                </Grid>
-              </Grid>
+            {/* Destination */}
+            <Grid item>
+              <TextField // Destination (end)
+                style={{ width: 226.23 }} // Same width as departure fields
+                id="destination"
+                label="Destination"
+                type="search"
+                value={this.state.destination}
+                onChange={this.handleFormChange('destination')}
+              />
+            </Grid>
+            {/* Start date */}
+            <Grid item>
+              <form noValidate>
+                <TextField
+                  id="startDate"
+                  label="Earliest Possible Departure"
+                  type="datetime-local"
+                  defaultValue={this.getDateTime(0)} // Default time for the start date is today
+                  value={this.state.startDate}
+                  onChange={this.handleFormChange('startDate')}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </form>
+            </Grid>
+            {/* End date */}
+            <Grid item>
+              <form noValidate>
+                <TextField
+                  id="startDate"
+                  label="Latest Possible Departure"
+                  type="datetime-local"
+                  defaultValue={this.getDateTime(86400000)} // Default time for the end date is tomorrow
+                  min={this.getDateTime(86400000)}
+                  onChange={this.handleFormChange('endDate')}
+                  value={this.state.endDate}
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                />
+              </form>
             </Grid>
           </Grid>
         </div>
