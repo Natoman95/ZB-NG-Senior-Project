@@ -5,6 +5,9 @@
 * Material-UI Documentation https://material-ui-next.com
 * NPM packages for anything not built into React or Material-UI https://www.npmjs.com
 * Standard Material-UI Icons https://material.io/icons/
+* Custom Material-UI Icons https://materialdesignicons.com/
+  * Using these Icons is a bit more involved, but by downloading any icon as an SVG, you gain access to a special code that can be used to generate the Icon properly
+  * https://material-ui-next.com/style/icons/ documents how to use one of these codes
 * Gordon Branding Standards http://www.gordon.edu/brandstandards
 
 #### Running and Developing the App
