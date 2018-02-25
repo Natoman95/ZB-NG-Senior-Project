@@ -95,46 +95,39 @@ class RequestSearchPage extends React.Component {
           Find a Ride by Location
         </h3>
 
-        {/* Location entry */}
+        {/* Grid for entry fields */}
         <div style={{ marginTop: '2em' }}>
           <Grid container spacing={40}>
-            <Grid item xs={12} sm={6}>
-              <TextField // Origin (start)
-                style={{ width: 228.42 }} // Same width as departure fields
+            {/* Origin */}
+            <Grid item>
+              <TextField
+                style={{ width: 226.23 }} // Same width as departure fields
                 id="origin"
                 label="Origin"
                 type="search"
-                margin="normal"
                 value={this.state.origin}
                 onChange={this.handleFormChange('origin')}
               />
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* Destination */}
+            <Grid item>
               <TextField // Destination (end)
-                style={{ width: 228.42 }} // Same width as departure fields
+                style={{ width: 226.23 }} // Same width as departure fields
                 id="destination"
                 label="Destination"
                 type="search"
-                margin="normal"
                 value={this.state.destination}
                 onChange={this.handleFormChange('destination')}
               />
             </Grid>
-          </Grid>
-        </div>
-
-        {/* Date range selection */}
-        <div style={{ marginTop: '2em' }}>
-          <Grid container spacing={40}>
-            <Grid item xs={12} sm={6}>
+            {/* Start date */}
+            <Grid item>
               <form noValidate>
                 <TextField
                   id="startDate"
                   label="Earliest Possible Departure"
                   type="datetime-local"
-                  // Default time for the start date is today
-                  defaultValue={this.getDateTime(0)}
-                  min={this.getDateTime(0)}
+                  defaultValue={this.getDateTime(0)} // Default time for the start date is today
                   value={this.state.startDate}
                   onChange={this.handleFormChange('startDate')}
                   InputLabelProps={{
@@ -143,14 +136,14 @@ class RequestSearchPage extends React.Component {
                 />
               </form>
             </Grid>
-            <Grid item xs={12} sm={6}>
+            {/* End date */}
+            <Grid item>
               <form noValidate>
                 <TextField
                   id="startDate"
                   label="Latest Possible Departure"
                   type="datetime-local"
-                  // Default time for the max date is tomorrow
-                  defaultValue={this.getDateTime(86400000)}
+                  defaultValue={this.getDateTime(86400000)} // Default time for the end date is tomorrow
                   min={this.getDateTime(86400000)}
                   onChange={this.handleFormChange('endDate')}
                   value={this.state.endDate}
