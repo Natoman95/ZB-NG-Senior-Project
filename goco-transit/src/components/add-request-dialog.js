@@ -60,7 +60,7 @@ class AddRequestDialog extends React.Component {
             <List dense={this.state.dense}>
 
               {/* Origin */}
-              <ListItem disableGutters={true} divider={false}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.originIcon}
@@ -72,7 +72,7 @@ class AddRequestDialog extends React.Component {
               </ListItem>
 
               {/* Destination */}
-              <ListItem disableGutters={true} divider={false}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.destinationIcon}
@@ -84,7 +84,7 @@ class AddRequestDialog extends React.Component {
               </ListItem>
 
               {/* Date */}
-              <ListItem disableGutters={true} divider={false}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.dateIcon}
@@ -96,7 +96,7 @@ class AddRequestDialog extends React.Component {
               </ListItem>
 
               {/* Time */}
-              <ListItem disableGutters={true} divider={false}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.timeIcon}
@@ -108,7 +108,7 @@ class AddRequestDialog extends React.Component {
               </ListItem>
 
               {/* Notes */}
-              <ListItem disableGutters={true} divider={false}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.noteIcon}
