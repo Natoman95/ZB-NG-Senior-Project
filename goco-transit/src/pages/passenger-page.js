@@ -2,7 +2,6 @@ import React from 'react';
 import List, {
   ListItem,
   ListItemAvatar,
-  ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
 } from 'material-ui/List';
@@ -13,7 +12,6 @@ import Grid from 'material-ui/Grid';
 import { Link } from 'react-router-dom';
 
 // Components
-import SearchPage from './search-page';
 import DeleteRequestDialog from '../components/delete-request-dialog';
 import DeleteRideDialog from '../components/delete-ride-dialog';
 import { Icons } from '../icon-library';

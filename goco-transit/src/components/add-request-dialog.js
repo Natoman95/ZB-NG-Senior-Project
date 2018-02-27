@@ -8,8 +8,6 @@ import Dialog, {
 import List, {
   ListItem,
   ListItemAvatar,
-  ListItemIcon,
-  ListItemSecondaryAction,
   ListItemText,
 } from 'material-ui/List';
 import Button from 'material-ui/Button';
@@ -19,8 +17,7 @@ import TextField from 'material-ui/TextField';
 // Components
 import { Icons } from '../icon-library';
 
-{/* Add a request dialog box */ }
-
+/* Add a request dialog box */
 class AddRequestDialog extends React.Component {
   constructor() {
     super();

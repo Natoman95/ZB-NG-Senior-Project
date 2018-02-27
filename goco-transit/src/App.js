@@ -1,8 +1,5 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { MemoryRouter as Router } from 'react-router-dom';
-import theme from './theme';
 
 // Components
 import MainPage from './pages/main-page';

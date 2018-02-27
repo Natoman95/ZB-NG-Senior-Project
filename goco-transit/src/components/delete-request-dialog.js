@@ -7,8 +7,7 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
 
-{/* Delete a request dialog box */}
-
+/* Delete a request dialog box */
 class DeleteRequestDialog extends React.Component {
   constructor() {
     super();

@@ -2,7 +2,6 @@ import React from 'react';
 import List, {
   ListItem,
   ListItemAvatar,
-  ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
 } from 'material-ui/List';
@@ -14,7 +13,7 @@ import Badge from 'material-ui/Badge';
 // Components
 import AddOfferDialog from '../components/add-offer-dialog';
 import DeleteOfferDialog from '../components/delete-offer-dialog';
-import {Icons} from '../icon-library';
+import { Icons } from '../icon-library';
 
 // Services
 import { getUser } from '../services/user-service';

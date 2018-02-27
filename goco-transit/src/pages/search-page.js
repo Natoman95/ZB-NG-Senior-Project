@@ -3,28 +3,12 @@ import TextField from 'material-ui/TextField';
 import Grid from 'material-ui/Grid';
 import List, {
   ListItem,
-  ListItemAvatar,
-  ListItemIcon,
-  ListItemSecondaryAction,
   ListItemText,
-} from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
-import Badge from 'material-ui/Badge';
-import Avatar from 'material-ui/Avatar';
-import ZachPhoto from '../images/user_profile_zach.jpg'
-import NathanPhoto from '../images/user_profile_nathan.jpg'
-import Divider from 'material-ui/Divider';
+} from 'material-ui/List'; import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/Button';
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from 'material-ui/Dialog';
 
 // Components
 import AddRequestDialog from '../components/add-request-dialog';
-import { Icons } from '../icon-library';
 
 // Services
 import { findOfferedRides } from '../services/ride-service';

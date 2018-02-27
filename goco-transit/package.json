@@ -1,23 +1,20 @@
 {
-  "scripts": {
-    "start": "razzle build && cross-env NODE_ENV=production node build/server.js",
-    "dev": "razzle start"
-  },
+  "name": "goco-transit",
+  "version": "0.0.0",
+  "private": true,
   "dependencies": {
-    "compression": "1.x",
-    "express": "4.x",
-    "html-minifier": "3.x",
-    "material-ui": "^1.0.0-beta.32",
-    "material-ui-icons": "^1.0.0-beta.17",
-    "react-dom": "15.x",
-    "react-tap-event-plugin": "2.x",
-    "styled-components": "v2.0.0-17"
-  },
-  "devDependencies": {
-    "cross-env": "4.x",
-    "razzle": "0.5.x",
-    "react": "^15.6.2",
+    "material-ui": "^1.0.0-beta.35",
+    "material-ui-icons": "^1.0.0-beta.35",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
     "react-router": "^4.2.0",
-    "react-router-dom": "^4.2.2"
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1"
+  },
+  "scripts": {
+    "dev": "PORT=8080 BROWSER=none react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
