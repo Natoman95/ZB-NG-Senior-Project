@@ -1,9 +1,4 @@
-<<<<<<< HEAD
 import { getItem } from './storage-service';
-=======
-// Services
-import { getItem } from "./storage-service";
->>>>>>> experimenting with grabbing user data from 360
 
 /**
  * Handle HTTP requests to the API
@@ -11,7 +6,7 @@ import { getItem } from "./storage-service";
  * Copied from Gordon 360
  */
 
-const base = "https://360Api.gordon.edu/"
+const base = "/"
 
 /**
  * Make a headers object for use with the API

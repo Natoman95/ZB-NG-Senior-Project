@@ -5,7 +5,7 @@ import { parseResponse } from "./http-service";
  * This class is responsible for all actions related to user authentication
  */
 
-const base = "https://360Api.gordon.edu/"
+const base = "/"
 
 /**
  * Handle an authentication error
