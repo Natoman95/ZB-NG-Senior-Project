@@ -1,17 +1,15 @@
 import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import GroupIcon from 'material-ui-icons/Group';
-import GroupAddIcon from 'material-ui-icons/GroupAdd';
-import SettingsIcon from 'material-ui-icons/Settings';
 import Typography from 'material-ui/Typography';
-import { Link, Route } from 'react-router-dom'
+import { Link, Route } from 'react-router-dom';
 
 // Components
-import OffersPage from './offers-page';
-import RequestsPage from './requests-page';
-import SettingsPage from './settings-page'
-import RequestSearchPage from './request-search-page'
+import DriverPage from './driver-page';
+import PassengerPage from './passenger-page';
+import SettingsPage from './settings-page';
+import SearchPage from './search-page';
+import { Icons } from '../icon-library';
 
 // Contains the children the tabs navigate between
 function TabContainer(props) {
@@ -37,27 +35,27 @@ class MainPage extends React.Component {
       <div>
         <div>
           {/* Tabs */}
-          <AppBar position="static" color="primary">
+          <AppBar position="static" color="primary" style={{ position: 'fixed' }}>
             <Tabs
               fullWidth={true}
               value={this.state.value}
               onChange={this.handleChange}
               indicatorColor="secondary"
             >
-              <Tab label="Requests" icon={<GroupAddIcon />} component={Link} to="/requests" />
-              <Tab label="Offers" icon={<GroupIcon />} component={Link} to="/offers" />
-              <Tab label="Settings" icon={<SettingsIcon />} component={Link} to="/settings" />
+              <Tab label="Passenger" icon={Icons.seatIcon} component={Link} to="/passenger" />
+              <Tab label="Driver" icon={Icons.driverIcon} component={Link} to="/driver" />
+              <Tab label="Settings" icon={Icons.settingsIcon} component={Link} to="/settings" />
             </Tabs>
           </AppBar>
         </div>
 
         {/* Tab Pages */}
-        <div>
+        <div style={{ paddingTop: '4.25em' }}>
           <TabContainer>
-            <Route exact path="/" component={RequestsPage} />
-            <Route exact path="/requests" component={RequestsPage} />
-            <Route exact path="/requests/search" component={RequestSearchPage} />
-            <Route exact path="/offers" component={OffersPage} />
+            <Route exact path="/" component={PassengerPage} />
+            <Route exact path="/passenger" component={PassengerPage} />
+            <Route exact path="/passenger/search" component={SearchPage} />
+            <Route exact path="/driver" component={DriverPage} />
             <Route exact path="/settings" component={SettingsPage} />
           </TabContainer>
         </div>

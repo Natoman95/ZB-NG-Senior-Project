@@ -2,19 +2,23 @@
 
 #### Useful Documentation
 * React JS Documentation https://reactjs.org/docs/hello-world.html
+* Create React App Documentation https://github.com/facebook/create-react-app
+  * Our app is built on top of Create React App, whic takes care a lot of React JS headache
+  * This documentation gives pointers for configuring the app and adding basic features that we'll need
 * Material-UI Documentation https://material-ui-next.com
 * NPM packages for anything not built into React or Material-UI https://www.npmjs.com
 * Standard Material-UI Icons https://material.io/icons/
+* Custom Material-UI Icons https://materialdesignicons.com/
+  * Using these Icons is a bit more involved, but by downloading any icon as an SVG, you gain access to a special code that can be used to generate the Icon properly
+  * https://material-ui-next.com/style/icons/ documents how to use one of these codes
 * Gordon Branding Standards http://www.gordon.edu/brandstandards
 
 #### Running and Developing the App
 * Install react globally (with the -g option) via the npm package manager https://www.npmjs.com/package/react/tutorial
 * Install yarn globally in one of the ways listed https://yarnpkg.com/lang/en/docs/install/
 * Navigate to the `goco-transit` folder of the repository
-* Execute `yarn install` to download the packages necessary for the project to run
-  * Whenever you install a new package via npm or otherwise, `yarn install` must be run to include those packages in the project dependencies
-* Execute `yarn dev` to run the project locally
-* Execute `yarn start` to run a production build of the project
+* Execute `yarn dev` to run the project
+* Execute `yarn build` to create a production build of the project
 
 #### Naming Conventions
 * Branches: `{issuenumber}-{summary-description}`

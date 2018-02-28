@@ -1,10 +1,12 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
-import CreateIcon from 'material-ui-icons/Create';
 import Button from 'material-ui/Button';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
 import { Redirect } from 'react-router'
+
+// Components
+import {Icons} from '../icon-library';
 
 // Services
 import { signOut, isAuthenticated } from '../services/auth-service';
@@ -63,7 +65,7 @@ class SettingsPage extends React.Component {
               <Grid container direction="row" justify="flex-end" alignItems="center">
                 <Grid item>
                   <Button variant="fab" color="secondary" aria-label="add">
-                    <CreateIcon />
+                    {Icons.editIcon}
                   </Button>
                 </Grid>
               </Grid>
