@@ -7,8 +7,7 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import Button from 'material-ui/Button';
 
-{/* Delete an offer dialog box */}
-
+/* Delete an offer dialog box */
 class DeleteOfferDialog extends React.Component {
   constructor() {
     super();

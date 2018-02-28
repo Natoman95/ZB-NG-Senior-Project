@@ -1,6 +1,5 @@
 import { getItem, setItem, removeItem } from "./storage-service";
 import { parseResponse } from "./http-service";
-import { UserModel } from "../models/user-model";
 
 /**
  * This class is responsible for all actions related to user authentication
@@ -78,4 +77,4 @@ const signOut = () => {
   removeItem('token');
 };
 
-export { authenticate, signOut, isAuthenticated, getUser };
+export { authenticate, signOut, isAuthenticated };
