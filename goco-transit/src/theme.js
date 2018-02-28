@@ -1,4 +1,3 @@
-import React from 'react'
 import createMuiTheme from 'material-ui/styles/createMuiTheme';
 
 // Theme for the whole app

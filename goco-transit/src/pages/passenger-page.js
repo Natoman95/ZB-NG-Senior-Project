@@ -2,7 +2,6 @@ import React from 'react';
 import List, {
   ListItem,
   ListItemAvatar,
-  ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
 } from 'material-ui/List';
@@ -13,10 +12,9 @@ import Grid from 'material-ui/Grid';
 import { Link } from 'react-router-dom';
 
 // Components
-import RequestSearchPage from './request-search-page';
 import DeleteRequestDialog from '../components/delete-request-dialog';
 import DeleteRideDialog from '../components/delete-ride-dialog';
-import {Icons} from '../icon-library';
+import { Icons } from '../icon-library';
 
 // Services
 import { getUser } from '../services/user-service';
@@ -112,9 +110,9 @@ class RequestsPage extends React.Component {
           <Grid item xs={12}>
             <Grid container direction="row" justify="flex-end" alignItems="center">
               <Grid item>
-                <Link to="/requests/search">
+                <Link to="/passenger/search">
                   <Button variant="fab" color="secondary" aria-label="add">
-                    {Icons.addIcon}
+                    {Icons.searchIcon}
                   </Button>
                 </Link>
               </Grid>
@@ -125,7 +123,7 @@ class RequestsPage extends React.Component {
         {/* Dialog boxes */}
         <DeleteRequestDialog ref={(deleteRequestDialogInstance) => { this.deleteRequestDialogChild = deleteRequestDialogInstance; }} />
         <DeleteRideDialog ref={(deleteRideDialogInstance) => { this.deleteRideDialogChild = deleteRideDialogInstance; }} />
-        
+
       </div>
     );
   }

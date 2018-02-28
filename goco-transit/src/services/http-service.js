@@ -1,4 +1,4 @@
-import storage from './storage-service';
+import { getItem } from './storage-service';
 
 /**
  * Handle HTTP requests to the API
@@ -49,11 +49,11 @@ const parseResponse = res => {
   const json = res
     .json()
     // Handle error if response body is not valid JSON
-    .catch(err => Promise.reject(err));
+    .catch(error => Promise.reject(error));
 
   // Handle error when response body is valid but status code is not
   if (!res.ok) {
-    return json.then(data => Promise.reject(err));
+    return json.then(data => Promise.reject());
   }
   return json;
 };
