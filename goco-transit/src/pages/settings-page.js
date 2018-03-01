@@ -6,7 +6,7 @@ import Checkbox from 'material-ui/Checkbox';
 import { Redirect } from 'react-router'
 
 // Components
-import {Icons} from '../icon-library';
+import { Icons } from '../icon-library';
 
 // Services
 import { signOut, isAuthenticated } from '../services/auth-service';
@@ -32,7 +32,7 @@ class SettingsPage extends React.Component {
     // The click handler needs "this"
     this.handleClickLogout = this.handleClickLogout.bind(this);
 
-    getProfile("nathan.gray");
+    getProfile("zach.brown");
   }
 
   // Authenticate the user and trigger a page change

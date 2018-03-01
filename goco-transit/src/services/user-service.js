@@ -78,7 +78,7 @@ const getProfile = username => {
  */
 const getImage = username => {
   if (username) {
-    return get(`profiles/Image/${username}`);
+    return get(`profiles/Image/${username}/`);
   }
 
   return get('profiles/Image');

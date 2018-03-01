@@ -6,8 +6,6 @@ import { getItem } from './storage-service';
  * Copied from Gordon 360
  */
 
-const base = "/"
-
 /**
  * Make a headers object for use with the API
  * @description Provides the correct authorization for API requests.
@@ -16,7 +14,6 @@ const base = "/"
 const makeHeaders = () => {
   try {
     const token = getItem('token');
-    console.log(token);
     return new Headers({
       Authorization: `Bearer ${token}`,
     });
@@ -33,7 +30,7 @@ const makeHeaders = () => {
  * @return {Request} A request object
  */
 const createRequest = (url, method, body) =>
-  new Request(`${base}api/${url}`, {
+  new Request(`/api/${url}`, {
     method,
     body,
     headers: makeHeaders(),
@@ -46,12 +43,11 @@ const createRequest = (url, method, body) =>
  * response code
  */
 const parseResponse = res => {
-  console.log(res);
   // Attempt to parse body of response
   const json = res
     .json()
     // Handle error if response body is not valid JSON
-    .catch(error => Promise.reject(error));
+    .catch(error => Promise.reject());
 
   // Handle error when response body is valid but status code is not
   if (!res.ok) {

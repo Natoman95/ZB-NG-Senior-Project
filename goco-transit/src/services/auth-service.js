@@ -5,8 +5,6 @@ import { parseResponse } from "./http-service";
  * This class is responsible for all actions related to user authentication
  */
 
-const base = "/"
-
 /**
  * Handle an authentication error
  * @param {Error} err An authentication error
@@ -34,7 +32,7 @@ const getAuth = (username, password) => {
     password,
     grant_type: 'password',
   });
-  const request = new Request(`${base}token`, { method: 'post', headers, body });
+  const request = new Request(`/token`, { method: 'post', headers, body });
 
   return fetch(request)
     .then(parseResponse)
