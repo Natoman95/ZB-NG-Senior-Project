@@ -6,10 +6,11 @@ import Checkbox from 'material-ui/Checkbox';
 import { Redirect } from 'react-router'
 
 // Components
-import {Icons} from '../icon-library';
+import { Icons } from '../icon-library';
 
 // Services
 import { signOut, isAuthenticated } from '../services/auth-service';
+import { getUser } from '../services/user-service';
 
 // Component for changing settings
 class SettingsPage extends React.Component {
@@ -27,10 +28,33 @@ class SettingsPage extends React.Component {
       waiverComplete: true,
       termsComplete: true,
       triggerReRender: false,
+      user: null,
+      firstName: null,
+      lastName: null,
+      phoneNum: null,
+      email: null,
     }
     // The click handler needs "this"
     this.handleClickLogout = this.handleClickLogout.bind(this);
   }
+
+  componentWillMount() {
+    this.loadUserData();
+  }
+
+  /**
+   * Load user data - grabbing from 360
+   */
+  async loadUserData() {
+    let data = await getUser();
+    this.setState({
+      user: data,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phoneNum: data.phoneNum,
+      email: data.email,
+    });
+  };
 
   // Authenticate the user and trigger a page change
   handleClickLogout() {
@@ -53,9 +77,9 @@ class SettingsPage extends React.Component {
             <Grid item xs={8}>
               <Grid container direction="row" justify="flex-start" alignItems="center">
                 <Grid item>
-                  <h2>
+                  <h3>
                     Contact Information
-              </h2>
+                  </h3>
                 </Grid>
               </Grid>
             </Grid>
@@ -73,19 +97,19 @@ class SettingsPage extends React.Component {
           </Grid>
 
           <div style={{ padding: '.75em', }}>
-            Name: Nathan Gray
-        </div>
+            Name: {this.state.firstName} {this.state.lastName}
+          </div>
           <div style={{ padding: '.75em', }}>
-            Phone: 999-888-7777
-        </div>
+            Phone: {this.state.phoneNum}
+          </div>
           <div style={{ padding: '.75em', }}>
-            Email: nathan.gray@gordon.edu
-        </div>
+            Email: {this.state.email}
+          </div>
 
           {/* Decide which contact information will be shared with riders */}
-          <h2>
+          <h3>
             Contact Information to Share
-        </h2>
+          </h3>
 
           <FormGroup row>
             <FormControlLabel
@@ -115,9 +139,9 @@ class SettingsPage extends React.Component {
           </FormGroup>
 
           {/* Shows which legal agreements have been completed */}
-          <h2>
+          <h3>
             Legal Agreements
-        </h2>
+          </h3>
 
           <FormGroup row>
             <FormControlLabel

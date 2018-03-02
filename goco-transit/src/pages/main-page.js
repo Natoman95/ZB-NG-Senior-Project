@@ -11,6 +11,9 @@ import SettingsPage from './settings-page';
 import SearchPage from './search-page';
 import { Icons } from '../icon-library';
 
+// Services
+import { getUser } from '../services/user-service';
+
 // Contains the children the tabs navigate between
 function TabContainer(props) {
   return (
@@ -22,8 +25,21 @@ function TabContainer(props) {
 
 // Main app component
 class MainPage extends React.Component {
-  state = {
-    value: 0,
+  constructor() {
+    super();
+
+    this.state = {
+      value: 0,
+    };
+
+    this.loadUserData();
+  }
+
+  /**
+   * Load user data on login - grabbing from 360
+   */
+  async loadUserData() {
+    await getUser();
   };
 
   handleChange = (event, value) => {

@@ -6,8 +6,6 @@ import { getItem } from './storage-service';
  * Copied from Gordon 360
  */
 
-const base = "https://360Api.gordon.edu/"
-
 /**
  * Make a headers object for use with the API
  * @description Provides the correct authorization for API requests.
@@ -32,7 +30,7 @@ const makeHeaders = () => {
  * @return {Request} A request object
  */
 const createRequest = (url, method, body) =>
-  new Request(`${base}api/${url}`, {
+  new Request(`/api/${url}`, {
     method,
     body,
     headers: makeHeaders(),
@@ -49,7 +47,7 @@ const parseResponse = res => {
   const json = res
     .json()
     // Handle error if response body is not valid JSON
-    .catch(error => Promise.reject(error));
+    .catch(error => Promise.reject());
 
   // Handle error when response body is valid but status code is not
   if (!res.ok) {
