@@ -8,6 +8,9 @@ import UserModel from "../models/user-model";
 import RideModel from "../models/ride-model";
 import RequestModel from "../models/request-model";
 
+// Services
+import { getItem } from "../services/storage-service";
+
 /**
  * This class is responsible for all actions related to users
  */
@@ -16,9 +19,18 @@ import RequestModel from "../models/request-model";
  * Get the current user
  * @return {UserModel} Current user
  */
-const getUser = () => {
-  // Hardcoded for now - will retrieve from 360
-  let activeUser = new UserModel("Zach", "Brown", "zach.brown@gordon.edu");
+const getUser = async () => {
+  let userName = getItem('userName');
+
+  // Fetching data from 360
+  let user360Profile = await getUser360Profile(userName);
+  let user360Image = await getUser360Image(userName);
+
+  // Populating user with 360 data
+  let activeUser = new UserModel(user360Profile.FirstName, user360Profile.LastName, user360Profile.Email);
+  activeUser.phoneNum = user360Profile.MobilePhone;
+
+  // Dummy photo
   activeUser.profilePhoto = ZachPhoto;
 
   // Dummy requests
@@ -58,13 +70,13 @@ const getUser = () => {
 
 /**
  * Get user profile info for a given user or the current user if `username` is not provided
- * @param {String} [username] Username in firstname.lastname format
- * @return {Promise.<StaffProfileInfo|StudentProfileInfo>} Profile info
+ * @param {String} [userName] Username in firstname.lastname format
+ * @return {Promise} Profile info
  */
-const getProfile = username => {
+const getUser360Profile = userName => {
   let profile;
-  if (username) {
-    profile = get(`profiles/${username}/`);
+  if (userName) {
+    profile = get(`profiles/${userName}/`);
   } else {
     profile = get('profiles');
   }
@@ -73,15 +85,15 @@ const getProfile = username => {
 
 /**
  * Get image for a given user or the current user if `username` is not provided
- * @param {String} [username] Username in firstname.lastname format
+ * @param {String} [userName] Username in firstname.lastname format
  * @return {Promise.<String>} Image as a Base64-encoded string
  */
-const getImage = username => {
-  if (username) {
-    return get(`profiles/Image/${username}/`);
+const getUser360Image = userName => {
+  if (userName) {
+    return get(`profiles/Image/${userName}/`);
   }
 
   return get('profiles/Image');
 };
 
-export { getUser, getProfile, getImage };
+export { getUser };

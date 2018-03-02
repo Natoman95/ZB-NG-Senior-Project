@@ -10,7 +10,7 @@ import { Icons } from '../icon-library';
 
 // Services
 import { signOut, isAuthenticated } from '../services/auth-service';
-import { getProfile } from '../services/user-service';
+import { getUser } from '../services/user-service';
 
 // Component for changing settings
 class SettingsPage extends React.Component {
@@ -28,12 +28,33 @@ class SettingsPage extends React.Component {
       waiverComplete: true,
       termsComplete: true,
       triggerReRender: false,
+      user: null,
+      firstName: null,
+      lastName: null,
+      phoneNum: null,
+      email: null,
     }
     // The click handler needs "this"
     this.handleClickLogout = this.handleClickLogout.bind(this);
-
-    getProfile("zach.brown");
   }
+
+  componentWillMount() {
+    this.loadUserData();
+  }
+
+  /**
+   * Load user data - grabbing from 360
+   */
+  async loadUserData() {
+    let data = await getUser();
+    this.setState({
+      user: data,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phoneNum: data.phoneNum,
+      email: data.email,
+    });
+  };
 
   // Authenticate the user and trigger a page change
   handleClickLogout() {
@@ -76,13 +97,13 @@ class SettingsPage extends React.Component {
           </Grid>
 
           <div style={{ padding: '.75em', }}>
-            Name: Nathan Gray
+            Name: {this.state.firstName} {this.state.lastName}
           </div>
           <div style={{ padding: '.75em', }}>
-            Phone: 999-888-7777
+            Phone: {this.state.phoneNum}
           </div>
           <div style={{ padding: '.75em', }}>
-            Email: nathan.gray@gordon.edu
+            Email: {this.state.email}
           </div>
 
           {/* Decide which contact information will be shared with riders */}
