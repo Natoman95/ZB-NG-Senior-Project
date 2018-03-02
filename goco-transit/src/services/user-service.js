@@ -1,5 +1,3 @@
-import ZachPhoto from '../images/user_profile_zach.jpg';
-
 // Services
 import { get } from '../services/http-service';
 
@@ -29,9 +27,7 @@ const getUser = async () => {
   // Populating user with 360 data
   let activeUser = new UserModel(user360Profile.FirstName, user360Profile.LastName, user360Profile.Email);
   activeUser.phoneNum = user360Profile.MobilePhone;
-
-  // Dummy photo
-  activeUser.profilePhoto = ZachPhoto;
+  activeUser.profilePhoto = user360Image;
 
   // Dummy requests
   let request1 = new RequestModel("Wenham", "Pittsburgh", "12/7/2017", "12/8/2017", activeUser);
