@@ -107,7 +107,7 @@ class RequestsPage extends React.Component {
                   {/* Route destination and date range */}
                   <ListItemText
                     primary={request.destination}
-                    secondary={this.state.secondary ? (request.dateMin + '-' + request.dateMax) : null}
+                    secondary={this.state.secondary ? (request.dateMin + ' - ' + request.dateMax) : null}
                   />
                   {/* Delete request button */}
                   <ListItemSecondaryAction>
