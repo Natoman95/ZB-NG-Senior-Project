@@ -6,11 +6,13 @@ class UserModel {
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
+    this.userName = (email.split("@"))[0];
   }
 
   firstName;
   lastName;
   email;
+  userName;
   phoneNum;
   profilePhoto;
 

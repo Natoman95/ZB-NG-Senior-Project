@@ -5,8 +5,6 @@ import { parseResponse } from "./http-service";
  * This class is responsible for all actions related to user authentication
  */
 
-const base = "https://360Api.gordon.edu/"
-
 /**
  * Handle an authentication error
  * @param {Error} err An authentication error
@@ -23,18 +21,18 @@ const handleError = err => {
 
 /**
  * Get token for user from backend
- * @param {String} username Username in firstname.lastname format
+ * @param {String} userName Username in firstname.lastname format
  * @param {String} password User's password
  * @return {String} Token for use on API requests
  */
-const getAuth = (username, password) => {
+const getAuth = (userName, password) => {
   const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
   const body = new URLSearchParams({
-    username,
+    userName,
     password,
     grant_type: 'password',
   });
-  const request = new Request(`${base}token`, { method: 'post', headers, body });
+  const request = new Request(`/token`, { method: 'post', headers, body });
 
   return fetch(request)
     .then(parseResponse)
@@ -45,12 +43,14 @@ const getAuth = (username, password) => {
 /**
  * Authenticate a user, saving the returned token for later use and caching the user's credentials
  * for refreshing the token when it expires.
- * @param {String} username Username in firstname.lastname format
+ * @param {String} userName Username in firstname.lastname format
  * @param {String} password User's password
  * @return {Promise.<undefined>} Resolved when token is refreshed
  */
-const authenticate = (username, password) =>
-  getAuth(username, password).then(token => setItem('token', token));
+const authenticate = (userName, password) => {
+  setItem('userName', userName);
+  getAuth(userName, password).then(token => setItem('token', token));
+};
 
 /**
  * Check if current session is authenticated
