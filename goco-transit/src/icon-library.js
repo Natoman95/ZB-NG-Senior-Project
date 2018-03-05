@@ -8,8 +8,7 @@ import NoteIcon from 'material-ui-icons/Assignment';
 import PersonIcon from 'material-ui-icons/Person';
 import DriverIcon from 'material-ui-icons/DriveEta';
 import SeatIcon from 'material-ui-icons/EventSeat';
-import ConfirmedRideIcon from 'material-ui-icons/Done';
-import PendingRideIcon from 'material-ui-icons/Help';
+import ConfirmIcon from 'material-ui-icons/Done';
 import LeftArrowIcon from 'material-ui-icons/ChevronLeft';
 import RightArrowIcon from 'material-ui-icons/ChevronRight';
 import SettingsIcon from 'material-ui-icons/Settings';
@@ -29,8 +28,7 @@ var icons = {
   personIcon: React.createElement(PersonIcon),
   driverIcon: React.createElement(DriverIcon),
   seatIcon: React.createElement(SeatIcon),
-  confirmedRideIcon: React.createElement(ConfirmedRideIcon),
-  pendingRideIcon: React.createElement(PendingRideIcon),
+  confirmIcon: React.createElement(ConfirmIcon),
   leftArrowIcon: React.createElement(LeftArrowIcon),
   rightArrowIcon: React.createElement(RightArrowIcon),
   settingsIcon: React.createElement(SettingsIcon),

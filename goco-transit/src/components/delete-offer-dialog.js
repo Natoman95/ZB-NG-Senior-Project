@@ -62,7 +62,7 @@ class DeleteOfferDialog extends React.Component {
             </Grid>
             <Grid item>
               <IconButton onClick={this.handleClose} >
-                {Icons.confirmedRideIcon}
+                {Icons.confirmIcon}
               </IconButton>
             </Grid>
           </Grid>

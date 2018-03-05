@@ -1,11 +1,9 @@
 import React from 'react';
 import List, {
   ListItem,
-  ListItemAvatar,
   ListItemSecondaryAction,
   ListItemText,
 } from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
@@ -65,13 +63,6 @@ class RequestsPage extends React.Component {
             {this.state.confirmedRides.map((confirmedRide) => {
               return (
                 <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
-                  <ListItemAvatar>
-                    {/* Depending on whether the user has been accepted as a passenger
-                     A different avatar will be displayed */}
-                    <Avatar>
-                      {Icons.confirmedRideIcon}
-                    </Avatar>
-                  </ListItemAvatar>
                   {/* Route destination and date range */}
                   <ListItemText
                     primary={confirmedRide.destination}
@@ -97,13 +88,6 @@ class RequestsPage extends React.Component {
             {this.state.requests.map((request) => {
               return (
                 <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
-                  <ListItemAvatar>
-                    {/* Depending on whether the user has been accepted as a passenger
-                     A different avatar will be displayed */}
-                    <Avatar>
-                      {Icons.pendingRideIcon}
-                    </Avatar>
-                  </ListItemAvatar>
                   {/* Route destination and date range */}
                   <ListItemText
                     primary={request.destination}
