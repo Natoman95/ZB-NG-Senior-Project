@@ -29,11 +29,14 @@ class OfferDetailsDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
+      ride: null
     };
   }
 
   // Open the add offer dialog
-  handleClickOpen = () => {
+  handleClickOpen = (offeredRide) => {
+    this.setState({ ride: offeredRide });
+    console.log("RIDE: " + this.state.ride)
     this.setState({ display: true });
   };
 
@@ -65,7 +68,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Origin)" />
+                <ListItemText primary="" />
               </ListItem>
 
               {/* Destination */}

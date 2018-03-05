@@ -55,10 +55,11 @@ class OffersPage extends React.Component {
          Generated from an array */}
           <List dense={this.state.dense}>
             {this.state.offeredRides.map((offeredRide) => {
+              console.log("TEST: " + offeredRide.origin);
               return (
                 <ListItem
                   button
-                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(); }}
+                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(offeredRide); }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
