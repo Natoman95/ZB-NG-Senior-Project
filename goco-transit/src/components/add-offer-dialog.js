@@ -70,7 +70,7 @@ class AddOfferDialog extends React.Component {
           <DialogContentText id="alert-dialog-description">
 
             {/* Ride info input */}
-            <List dense={this.state.dense}>
+            <List dense={this.state.dense} style={{ padding: '0px' }} >
 
               {/* Origin */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>

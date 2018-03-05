@@ -54,7 +54,7 @@ class AddRequestDialog extends React.Component {
           <DialogContentText id="alert-dialog-description">
 
             {/* Ride info */}
-            <List dense={this.state.dense}>
+            <List dense={this.state.dense} style={{ padding: '0px' }} >
 
               {/* Origin */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>

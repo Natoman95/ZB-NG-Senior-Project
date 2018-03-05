@@ -2,7 +2,6 @@ import React from 'react';
 import List, {
   ListItem,
   ListItemAvatar,
-  ListItemSecondaryAction,
   ListItemText,
 } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
@@ -13,7 +12,6 @@ import Badge from 'material-ui/Badge';
 // Components
 import OfferDetailsDialog from '../components/offer-details-dialog';
 import AddOfferDialog from '../components/add-offer-dialog';
-import DeleteOfferDialog from '../components/delete-offer-dialog';
 import { Icons } from '../icon-library';
 
 // Services
@@ -77,12 +75,6 @@ class OffersPage extends React.Component {
                     primary={offeredRide.destination}
                     secondary={this.state.secondary ? offeredRide.date : null}
                   />
-                  <ListItemSecondaryAction>
-                    {/* Delete ride offer button */}
-                    <IconButton onClick={() => { this.deleteOfferDialogChild.handleClickOpen(); }} aria-label="Delete">
-                      {Icons.deleteIcon}
-                    </IconButton>
-                  </ListItemSecondaryAction>
                 </ListItem>
               );
             })}
@@ -101,12 +93,12 @@ class OffersPage extends React.Component {
             </Grid>
           </Grid>
 
-          {/* Dialog boxes */}
-          <OfferDetailsDialog ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance; }} />
-          <AddOfferDialog ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance; }} />
-          <DeleteOfferDialog ref={(deleteOfferDialogInstance) => { this.deleteOfferDialogChild = deleteOfferDialogInstance; }} />
-
         </div>}
+
+        {/* Dialog boxes */}
+        <OfferDetailsDialog ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance; }} />
+        <AddOfferDialog ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance; }} />
+      
       </div>
     );
   }

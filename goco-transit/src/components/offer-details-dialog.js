@@ -1,6 +1,5 @@
 import React from 'react';
 import Dialog, {
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
@@ -13,9 +12,11 @@ import List, {
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
+import Badge from 'material-ui/Badge';
 
 // Components
 import { Icons } from '../icon-library';
+import DeleteOfferDialog from '../components/delete-offer-dialog';
 
 /* Add an offer dialog box */
 class OfferDetailsDialog extends React.Component {
@@ -54,7 +55,7 @@ class OfferDetailsDialog extends React.Component {
           <DialogContentText id="alert-dialog-description">
 
             {/* Ride offer details */}
-            <List dense={this.state.dense}>
+            <List dense={this.state.dense} style={{ padding: '0px' }} >
 
               {/* Origin */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
@@ -119,11 +120,16 @@ class OfferDetailsDialog extends React.Component {
 
           </DialogContentText>
 
+          <hr/>
+
           {/* Action buttons */}
-          <Grid container justify="center">
+          <Grid container spacing={40} justify="center">
             <Grid item>
-              <IconButton onClick={this.handleClose}>
-                {Icons.deleteIcon}
+              <IconButton>
+                <Badge color="primary">
+                  {/* ^TODO (Fix import): badgeContent={offeredRide.passengers.length + "/" + offeredRide.maxCapacity} */}
+                  {Icons.personIcon}
+                </Badge>
               </IconButton>
             </Grid>
             <Grid item>
@@ -131,11 +137,22 @@ class OfferDetailsDialog extends React.Component {
                 {Icons.exitIcon}
               </IconButton>
             </Grid>
+            <Grid item>
+              <IconButton onClick={() => { this.deleteOfferDialogChild.handleClickOpen(); }} >
+                {Icons.deleteIcon}
+              </IconButton>
+            </Grid>
           </Grid>
 
         </DialogContent>
+
+        {/* Dialog boxes */}
+        <DeleteOfferDialog ref={(deleteOfferDialogInstance) => { this.deleteOfferDialogChild = deleteOfferDialogInstance; }} />
+
       </Dialog>
+      
     );
+  
   }
 }
 
