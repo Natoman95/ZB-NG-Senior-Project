@@ -5,7 +5,6 @@ import DestinationIcon from 'material-ui-icons/Place';
 import TimeIcon from 'material-ui-icons/WatchLater';
 import DateIcon from 'material-ui-icons/DateRange';
 import NoteIcon from 'material-ui-icons/Assignment';
-import PersonIcon from 'material-ui-icons/Person';
 import DriverIcon from 'material-ui-icons/DriveEta';
 import SeatIcon from 'material-ui-icons/EventSeat';
 import ConfirmIcon from 'material-ui-icons/Done';
@@ -25,7 +24,6 @@ var icons = {
   timeIcon: React.createElement(TimeIcon),
   dateIcon: React.createElement(DateIcon),
   noteIcon: React.createElement(NoteIcon),
-  personIcon: React.createElement(PersonIcon),
   driverIcon: React.createElement(DriverIcon),
   seatIcon: React.createElement(SeatIcon),
   confirmIcon: React.createElement(ConfirmIcon),

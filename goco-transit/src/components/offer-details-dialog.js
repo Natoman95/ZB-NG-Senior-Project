@@ -118,8 +118,7 @@ class OfferDetailsDialog extends React.Component {
             <Grid item>
               <IconButton>
                 <Badge color="primary">
-                  {/* ^TODO (Fix import): badgeContent={offeredRide.passengers.length + "/" + offeredRide.maxCapacity} */}
-                  {Icons.personIcon}
+                  {Icons.seatIcon}
                 </Badge>
               </IconButton>
             </Grid>
