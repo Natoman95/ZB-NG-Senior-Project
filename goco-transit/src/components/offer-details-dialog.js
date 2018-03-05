@@ -10,10 +10,8 @@ import List, {
   ListItemAvatar,
   ListItemText,
 } from 'material-ui/List';
-import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
-import TextField from 'material-ui/TextField';
 
 // Components
 import { Icons } from '../icon-library';
@@ -29,13 +27,8 @@ class OfferDetailsDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
-      seats: 1,
     };
   }
-
-  constants = {
-    SEAT_MAX: 9, // Maximum number of available seats allowed in a given offer
-  };
 
   // Open the add offer dialog
   handleClickOpen = () => {
@@ -47,16 +40,6 @@ class OfferDetailsDialog extends React.Component {
     this.setState({ display: false });
   };
 
-  // Limits seat maximum to pre-defined constant
-  handleSeatPlus = () => {
-    if (this.state.seats < this.constants.SEAT_MAX) { this.setState({ seats: this.state.seats + 1 }) }
-  }
-
-  // Limits seat minimum to 1
-  handleSeatMinus = () => {
-    if (this.state.seats > 1) { this.setState({ seats: this.state.seats - 1 }) }
-  }
-
   render() {
     return (
       <Dialog
@@ -65,11 +48,11 @@ class OfferDetailsDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Add a ride offer:"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Ride Offer Details"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
 
-            {/* Ride info input */}
+            {/* Ride offer details */}
             <List dense={this.state.dense}>
 
               {/* Origin */}
@@ -79,9 +62,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary="(Origin)"
-                />
+                <ListItemText primary="(Origin)" />
               </ListItem>
 
               {/* Destination */}
@@ -91,9 +72,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.destinationIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary="(Destination)"
-                />
+                <ListItemText primary="(Destination)" />
               </ListItem>
 
               {/* Date */}
@@ -103,7 +82,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <TextField required type="date" />
+                <ListItemText primary="(Date)" />
               </ListItem>
 
               {/* Time */}
@@ -113,7 +92,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <TextField required type="time" />
+                <ListItemText primary="(Time)" />
               </ListItem>
 
               {/* Number of seats */}
@@ -123,13 +102,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.seatIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <IconButton onClick={this.handleSeatMinus} >
-                  {Icons.leftArrowIcon}
-                </IconButton>
-                {this.state.seats}
-                <IconButton onClick={this.handleSeatPlus} >
-                  {Icons.rightArrowIcon}
-                </IconButton>
+                <ListItemText primary="(Destination)" />
               </ListItem>
 
               {/* Notes */}
@@ -139,21 +112,19 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.noteIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <div style={{ paddingLeft: "1em" }} >
-                  <TextField label="Note to passengers" multiline={true} style={{ paddingLeft: "1em" }} />
-                </div>
+                <ListItemText primary="(Note to passengers)" />
               </ListItem>
             </List>
 
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.handleClose}>
-            Back
-          </Button>
-          <Button onClick={this.handleClose}>
-            Confirm
-          </Button>
+          <IconButton onClick={this.handleClose}>
+            {Icons.deleteIcon}
+          </IconButton>
+          <IconButton onClick={this.handleClose}>
+            {Icons.exitIcon}
+          </IconButton>
         </DialogActions>
       </Dialog>
     );

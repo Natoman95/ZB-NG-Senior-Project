@@ -17,6 +17,7 @@ import AddIcon from 'material-ui-icons/Add';
 import EditIcon from 'material-ui-icons/Edit';
 import DeleteIcon from 'material-ui-icons/Delete';
 import SearchIcon from 'material-ui-icons/Search';
+import ExitIcon from 'material-ui-icons/Close';
 
 // Icon dictionary
 var icons = {
@@ -36,7 +37,8 @@ var icons = {
   addIcon: React.createElement(AddIcon),
   editIcon: React.createElement(EditIcon),
   deleteIcon: React.createElement(DeleteIcon),
-  searchIcon: React.createElement(SearchIcon)
+  searchIcon: React.createElement(SearchIcon),
+  exitIcon: React.createElement(ExitIcon)
 };
 
 export { icons as Icons };
