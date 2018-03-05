@@ -47,6 +47,7 @@ class OfferDetailsDialog extends React.Component {
       <Dialog
         open={this.state.display}
         onClose={this.handleClose}
+        disableBackdropClick={true}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -95,16 +96,6 @@ class OfferDetailsDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary="(Time)" />
-              </ListItem>
-
-              {/* Number of seats */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.seatIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary="(Destination)" />
               </ListItem>
 
               {/* Notes */}
