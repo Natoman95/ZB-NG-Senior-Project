@@ -12,6 +12,7 @@ import List, {
 } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
+import Grid from 'material-ui/Grid';
 
 // Components
 import { Icons } from '../icon-library';
@@ -117,15 +118,22 @@ class OfferDetailsDialog extends React.Component {
             </List>
 
           </DialogContentText>
+
+          {/* Action buttons */}
+          <Grid container justify="center">
+            <Grid item>
+              <IconButton onClick={this.handleClose}>
+                {Icons.deleteIcon}
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <IconButton onClick={this.handleClose}>
+                {Icons.exitIcon}
+              </IconButton>
+            </Grid>
+          </Grid>
+
         </DialogContent>
-        <DialogActions>
-          <IconButton onClick={this.handleClose}>
-            {Icons.deleteIcon}
-          </IconButton>
-          <IconButton onClick={this.handleClose}>
-            {Icons.exitIcon}
-          </IconButton>
-        </DialogActions>
       </Dialog>
     );
   }
