@@ -11,6 +11,7 @@ import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 
 // Components
+import OfferDetailsDialog from '../components/offer-details-dialog';
 import AddOfferDialog from '../components/add-offer-dialog';
 import DeleteOfferDialog from '../components/delete-offer-dialog';
 import { Icons } from '../icon-library';
@@ -57,7 +58,12 @@ class OffersPage extends React.Component {
           <List dense={this.state.dense}>
             {this.state.offeredRides.map((offeredRide) => {
               return (
-                <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
+                <ListItem
+                  button
+                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(); }}
+                  disableGutters={this.state.noGutters}
+                  divider={this.state.divider}
+                >
                   {/* Number of users on the offered ride */}
                   <ListItemAvatar>
                     <IconButton disabled={true}>
@@ -96,6 +102,7 @@ class OffersPage extends React.Component {
           </Grid>
 
           {/* Dialog boxes */}
+          <OfferDetailsDialog ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance; }} />
           <AddOfferDialog ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance; }} />
           <DeleteOfferDialog ref={(deleteOfferDialogInstance) => { this.deleteOfferDialogChild = deleteOfferDialogInstance; }} />
 
