@@ -1,11 +1,14 @@
 import React from 'react';
 import Dialog, {
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
 } from 'material-ui/Dialog';
-import Button from 'material-ui/Button';
+import Grid from 'material-ui/Grid';
+import IconButton from 'material-ui/IconButton';
+
+// Components
+import { Icons } from '../icon-library';
 
 /* Delete an offer dialog box */
 class DeleteOfferDialog extends React.Component {
@@ -36,23 +39,35 @@ class DeleteOfferDialog extends React.Component {
       <Dialog
         open={this.state.display}
         onClose={this.handleClose}
+        disableBackdropClick={true}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{"Delete this ride offer?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            (Ride data will go here)
+            <div style={{ paddingBottom: '8px' }}>
+              Your passengers will be notified.
+            </div>
           </DialogContentText>
+
+          <hr/>
+
+          {/* Action buttons */}
+          <Grid container spacing={40} justify="center">
+            <Grid item>
+              <IconButton onClick={this.handleClose}>
+                {Icons.exitIcon}
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <IconButton onClick={this.handleClose} >
+                {Icons.confirmIcon}
+              </IconButton>
+            </Grid>
+          </Grid>
+
         </DialogContent>
-        <DialogActions>
-          <Button onClick={this.handleClose}>
-            Cancel
-          </Button>
-          <Button onClick={this.handleClose}>
-            Delete
-          </Button>
-        </DialogActions>
       </Dialog>
     );
   }

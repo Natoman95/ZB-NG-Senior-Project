@@ -46,6 +46,7 @@ class AddRequestDialog extends React.Component {
       <Dialog
         open={this.state.display}
         onClose={this.handleClose}
+        disableBackdropClick={true}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -54,7 +55,7 @@ class AddRequestDialog extends React.Component {
           <DialogContentText id="alert-dialog-description">
 
             {/* Ride info */}
-            <List dense={this.state.dense}>
+            <List dense={this.state.dense} style={{ padding: '0px' }} >
 
               {/* Origin */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
