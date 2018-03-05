@@ -2,15 +2,15 @@
  * Contains data on rides which may be offers or rides
  */
 class RequestModel {
-  constructor(source, destination, dateMin, dateMax, user) {
-    this.source = source;
+  constructor(origin, destination, dateMin, dateMax, user) {
+    this.origin = origin;
     this.destination = destination;
     this.dateMin = dateMin;
     this.dateMax = dateMax;
     this.user = user;
   }
 
-  source;
+  origin;
   destination;
 
   date;

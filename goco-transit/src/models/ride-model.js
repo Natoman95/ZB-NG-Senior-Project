@@ -2,14 +2,14 @@
  * Contains data on rides which may be offers or rides
  */
 class RideModel {
-  constructor(source, destination, date, driver) {
-    this.source = source;
+  constructor(origin, destination, date, driver) {
+    this.origin = origin;
     this.destination = destination;
     this.date = date;
     this.driver = driver;
   }
 
-  source;
+  origin;
   destination;
 
   date; // Date
