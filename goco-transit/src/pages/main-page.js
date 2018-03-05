@@ -57,6 +57,7 @@ class MainPage extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
               indicatorColor="secondary"
+              centered
             >
               <Tab label="Passenger" icon={Icons.seatIcon} component={Link} to="/passenger" />
               <Tab label="Driver" icon={Icons.driverIcon} component={Link} to="/driver" />

@@ -59,7 +59,7 @@ class RequestsPage extends React.Component {
         <div>
           {/* List of confirmed rides generated from an array */}
           <h3>
-            Rides
+            Confirmed
         </h3>
           <List dense={this.state.dense}>
             {this.state.confirmedRides.map((confirmedRide) => {
@@ -90,7 +90,7 @@ class RequestsPage extends React.Component {
 
           {/* List of requests generated from an array */}
           <h3 style={{ marginTop: '3em' }}>
-            Requests
+            Requested
           </h3>
 
           <List dense={this.state.dense}>
@@ -107,7 +107,7 @@ class RequestsPage extends React.Component {
                   {/* Route destination and date range */}
                   <ListItemText
                     primary={request.destination}
-                    secondary={this.state.secondary ? (request.dateMin + '-' + request.dateMax) : null}
+                    secondary={this.state.secondary ? (request.dateMin + ' - ' + request.dateMax) : null}
                   />
                   {/* Delete request button */}
                   <ListItemSecondaryAction>

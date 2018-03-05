@@ -103,7 +103,9 @@ class AddOfferDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <TextField required type="date" />
+                <div style={{ paddingLeft: "1em" }} >
+                  <TextField required type="date" />
+                </div>
               </ListItem>
 
               {/* Time */}
@@ -113,7 +115,9 @@ class AddOfferDialog extends React.Component {
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <TextField required type="time" />
+                <div style={{ paddingLeft: "1em" }} >
+                  <TextField required type="time" />
+                </div>
               </ListItem>
 
               {/* Number of seats */}
@@ -140,7 +144,7 @@ class AddOfferDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >
-                  <TextField label="Note to passengers" multiline={true} style={{ paddingLeft: "1em" }} />
+                  <TextField label="Note to passengers" multiline={true} />
                 </div>
               </ListItem>
             </List>
