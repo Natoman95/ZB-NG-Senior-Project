@@ -54,12 +54,13 @@ class OffersPage extends React.Component {
           {/* List of ride offers - items display the number of users who have accepted the ride 
          Generated from an array */}
           <List dense={this.state.dense}>
-            {this.state.offeredRides.map((offeredRide) => {
+            {this.state.offeredRides.map((offeredRide, index) => {
               console.log("TEST: " + offeredRide.origin);
               return (
                 <ListItem
+                  key={index}
                   button
-                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(offeredRide); }}
+                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(this.state.offeredRides[this.key]); }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
