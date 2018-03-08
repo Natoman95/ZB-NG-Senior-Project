@@ -5,6 +5,8 @@
 * Create React App Documentation https://github.com/facebook/create-react-app
   * Our app is built on top of Create React App, whic takes care a lot of React JS headache
   * This documentation gives pointers for configuring the app and adding basic features that we'll need
+* Create React App Typescript Documentation https://github.com/wmonk/create-react-app-typescript
+  * This allows us to use Typescript when it helps us
 * Material-UI Documentation https://material-ui-next.com
 * NPM packages for anything not built into React or Material-UI https://www.npmjs.com
 * Standard Material-UI Icons https://material.io/icons/
@@ -12,6 +14,9 @@
   * Using these Icons is a bit more involved, but by downloading any icon as an SVG, you gain access to a special code that can be used to generate the Icon properly
   * https://material-ui-next.com/style/icons/ documents how to use one of these codes
 * Gordon Branding Standards http://www.gordon.edu/brandstandards
+
+#### Dependencies
+* 
 
 #### Running and Developing the App
 * Install react globally (with the -g option) via the npm package manager https://www.npmjs.com/package/react/tutorial
