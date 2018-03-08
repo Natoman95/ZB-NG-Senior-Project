@@ -11,6 +11,11 @@ const theme = createMuiTheme({
       main: '#00AEEF',
       contrastText: '#fff',
     },
+    tertiaryLight: "#B2BB1C",
+    tertiaryDark: "#31342B",
+    caution: "#FDB913",
+    warning: "#DE571f",
+    danger: "#B53228",
   },
   typography: {
     fontFamily: 'Arial',
@@ -20,5 +25,6 @@ const theme = createMuiTheme({
     width: '100%',
   },
 });
+
 
 export default theme
