@@ -29,10 +29,12 @@ const findOfferedRides = (startDate, endDate, origin, destination) => {
   let ride1 = new RideModel("Wenham", "Oxford", "12/7/2017", Nathan);
   ride1.passengers = [Rachel];
   ride1.maxCapacity = 3;
+  ride1.id = "000003";
 
   let ride2 = new RideModel("Manchester", "Wenham", "1/16/2018", Zach);
   ride2.passengers = [Jim];
   ride2.maxCapacity = 4;
+  ride2.id = "000004";
 
   let rides = [ride1, ride2];
 

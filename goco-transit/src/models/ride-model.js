@@ -11,6 +11,7 @@ class RideModel {
 
   origin;
   destination;
+  id;
 
   date; // Date
 

@@ -38,19 +38,6 @@ class RequestsPage extends React.Component {
     this.loadUserData();
   }
 
-  /**
-   * Load user data - grabbing from 360
-   */
-  async loadUserData() {
-    let data = await getUser();
-    this.setState({
-      user: data,
-      requests: data.requests,
-      confirmedRides: data.confirmedRides,
-      loading: false,
-    });
-  };
-
   render() {
     if (!this.state.loading) {
       return (
@@ -129,6 +116,20 @@ class RequestsPage extends React.Component {
       return (<div></div>);
     }
   }
+
+  /**
+   * Load user data - grabbing from 360
+   */
+  async loadUserData() {
+    let data = await getUser();
+    this.setState({
+      user: data,
+      requests: data.requests,
+      confirmedRides: data.confirmedRides,
+      loading: false,
+    });
+  };
+
 }
 
 export default RequestsPage;

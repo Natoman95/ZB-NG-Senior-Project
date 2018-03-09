@@ -35,13 +35,6 @@ class MainPage extends React.Component {
     this.loadUserData();
   }
 
-  /**
-   * Load user data on login - grabbing from 360
-   */
-  async loadUserData() {
-    await getUser();
-  };
-
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -79,6 +72,14 @@ class MainPage extends React.Component {
       </div>
     );
   }
+
+  /**
+   * Load user data on login - grabbing from 360
+   */
+  async loadUserData() {
+    await getUser();
+  };
+
 }
 
 export default MainPage;

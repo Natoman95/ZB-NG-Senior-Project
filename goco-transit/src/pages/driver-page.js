@@ -36,17 +36,6 @@ class OffersPage extends React.Component {
     this.loadUserData();
   }
 
-  /**
-   * Load user data - grabbing from 360
-   */
-  async loadUserData() {
-    let data = await getUser();
-    this.setState({
-      user: data,
-      offeredRides: data.offeredRides,
-    });
-  };
-
   render() {
     return (
       <div>
@@ -54,13 +43,13 @@ class OffersPage extends React.Component {
           {/* List of ride offers - items display the number of users who have accepted the ride 
          Generated from an array */}
           <List dense={this.state.dense}>
-            {this.state.offeredRides.map((offeredRide, index) => {
-              console.log("TEST: " + offeredRide.origin);
+            {this.state.offeredRides.map((offeredRide) => {
+              console.log("ID: " + offeredRide.id);
               return (
                 <ListItem
-                  key={index}
+                  key={offeredRide.id}
                   button
-                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(this.state.offeredRides[this.key]); }}
+                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(); }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
@@ -104,6 +93,18 @@ class OffersPage extends React.Component {
       </div>
     );
   }
+
+  /**
+   * Load user data - grabbing from 360
+   */
+  async loadUserData() {
+    let data = await getUser();
+    this.setState({
+      user: data,
+      offeredRides: data.offeredRides,
+    });
+  };
+  
 }
 
 export default OffersPage;

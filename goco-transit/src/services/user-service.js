@@ -51,10 +51,12 @@ const getUser = async () => {
   let offeredRide1 = new RideModel("Boston", "Wenham", "3/8/2018", activeUser);
   offeredRide1.passengers = [Rachel];
   offeredRide1.maxCapacity = 4;
+  offeredRide1.id = "000001";
 
   let offeredRide2 = new RideModel("Wenham", "Danvers", "2/14/2018", activeUser);
   offeredRide2.passengers = [Rachel, Jim];
   offeredRide2.maxCapacity = 6;
+  offeredRide2.id = "000002";
 
   activeUser.offeredRides = [
     offeredRide1,
