@@ -44,7 +44,6 @@ class OffersPage extends React.Component {
          Generated from an array */}
           <List dense={this.state.dense}>
             {this.state.offeredRides.map((offeredRide) => {
-              console.log("ID: " + offeredRide.id);
               return (
                 <ListItem
                   key={offeredRide.id}
@@ -104,7 +103,7 @@ class OffersPage extends React.Component {
       offeredRides: data.offeredRides,
     });
   };
-  
+
 }
 
 export default OffersPage;
