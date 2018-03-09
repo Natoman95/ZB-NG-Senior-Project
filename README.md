@@ -16,7 +16,19 @@
 * Gordon Branding Standards http://www.gordon.edu/brandstandards
 
 #### Dependencies
-* 
+* @types -- Typescript dependencies so that various react types can be used as types
+* babel-loader -- Deals with loading javascript files. Normally hidden within Create React App, but had to be manually installed so the configuration could be patched to use both Typescript and Javascript
+* babel-preset-react-app -- The presets for Babel used by Create React App which was also needed to modify the project configuration
+* cross-env -- Allows app commands like `start` and `build` to be run with unix variables on both Windows and Mac
+* material-ui -- Pre-made user interface components like buttons, tabs, etc.
+* material-ui-icons -- Standard material icons that work seemlessly with Material UI
+* react -- The basic React libraries for constructing a React app
+* react-app-rewired -- Allows for modification of the configuration file normally hidden by Create React App
+* react-dom -- DOM for React
+* react-router -- Allows for navigation between React components
+* react-router-dom -- DOM for React Router
+* react-scripts-ts -- Commands for running, building, testing a React App built on Typescript
+* typescript -- More strictly typed Javascript
 
 #### Running and Developing the App
 * Install react globally (with the -g option) via the npm package manager https://www.npmjs.com/package/react/tutorial
