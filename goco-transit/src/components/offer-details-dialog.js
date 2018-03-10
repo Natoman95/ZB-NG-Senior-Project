@@ -16,7 +16,7 @@ import Badge from 'material-ui/Badge';
 
 // Components
 import { Icons } from '../icon-library';
-import DeleteOfferDialog from '../components/delete-offer-dialog';
+import ConfirmationDialog from '../components/confirmation-dialog';
 
 /* Add an offer dialog box */
 class OfferDetailsDialog extends React.Component {
@@ -128,7 +128,9 @@ class OfferDetailsDialog extends React.Component {
               </IconButton>
             </Grid>
             <Grid item>
-              <IconButton onClick={() => { this.deleteOfferDialogChild.handleClickOpen(); }} >
+              <IconButton onClick={() => { this.confirmationDialogChild.handleClickOpen(
+                "Delete this ride offer?", "Your passengers will be notified."); }}
+              >
                 {Icons.deleteIcon}
               </IconButton>
             </Grid>
@@ -137,7 +139,7 @@ class OfferDetailsDialog extends React.Component {
         </DialogContent>
 
         {/* Dialog boxes */}
-        <DeleteOfferDialog ref={(deleteOfferDialogInstance) => { this.deleteOfferDialogChild = deleteOfferDialogInstance; }} />
+        <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance; }} />
 
       </Dialog>
       
