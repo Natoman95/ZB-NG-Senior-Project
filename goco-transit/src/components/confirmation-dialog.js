@@ -10,8 +10,8 @@ import IconButton from 'material-ui/IconButton';
 // Components
 import { Icons } from '../icon-library';
 
-/* Delete an offer dialog box */
-class DeleteOfferDialog extends React.Component {
+/* Confirmation dialog box */
+class ConfirmationDialog extends React.Component {
   constructor() {
     super();
 
@@ -20,16 +20,20 @@ class DeleteOfferDialog extends React.Component {
       secondary: true,
       noGutters: true,
       divider: true,
+      title: null,
+      subtitle: null,
       display: false,
     };
   }
 
-  // Open the delete offer dialog
-  handleClickOpen = () => {
+  // Open the confirmation dialog and pass in text parameters
+  handleClickOpen = (t, st) => {
+    this.setState({ title: t });
+    this.setState({ subtitle: st });
     this.setState({ display: true });
   };
 
-  // Close the delete offer dialog
+  // Close the confirmation dialog
   handleClose = () => {
     this.setState({ display: false });
   };
@@ -43,11 +47,11 @@ class DeleteOfferDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Delete this ride offer?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{this.state.title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <div style={{ paddingBottom: '8px' }}>
-              Your passengers will be notified.
+              {this.state.subtitle}
             </div>
           </DialogContentText>
 
@@ -73,4 +77,4 @@ class DeleteOfferDialog extends React.Component {
   }
 }
 
-export default DeleteOfferDialog;
+export default ConfirmationDialog;
