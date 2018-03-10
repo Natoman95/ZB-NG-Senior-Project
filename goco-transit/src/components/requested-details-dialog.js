@@ -78,24 +78,24 @@ class RequestedDetailsDialog extends React.Component {
                 <ListItemText primary="(Destination)" />
               </ListItem>
 
-              {/* Date */}
+              {/* Start of availability range */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
-                    {Icons.dateIcon}
+                    TBD
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Date)" />
+                <ListItemText primary="(Start)" />
               </ListItem>
 
-              {/* Time */}
+              {/* End of availability range */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
-                    {Icons.timeIcon}
+                    TBD
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Time)" />
+                <ListItemText primary="(End)" />
               </ListItem>
 
               {/* Notes */}
@@ -105,7 +105,7 @@ class RequestedDetailsDialog extends React.Component {
                     {Icons.noteIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Note to passengers)" />
+                <ListItemText primary="(Note to driver)" />
               </ListItem>
             </List>
 
