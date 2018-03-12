@@ -19,7 +19,7 @@ import { Icons } from '../icon-library';
 import ConfirmationDialog from '../components/confirmation-dialog';
 
 /* Add an offer dialog box */
-class OfferDetailsDialog extends React.Component {
+class RequestedDetailsDialog extends React.Component {
   constructor() {
     super();
 
@@ -51,11 +51,11 @@ class OfferDetailsDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Ride Offer Details"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Ride Request Details"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
 
-            {/* Ride offer details */}
+            {/* Requested ride details */}
             <List dense={this.state.dense} style={{ padding: '0px' }} >
 
               {/* Origin */}
@@ -78,24 +78,24 @@ class OfferDetailsDialog extends React.Component {
                 <ListItemText primary="(Destination)" />
               </ListItem>
 
-              {/* Date */}
+              {/* Start of availability range */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
-                    {Icons.dateIcon}
+                    TBD
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Date)" />
+                <ListItemText primary="(Start)" />
               </ListItem>
 
-              {/* Time */}
+              {/* End of availability range */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
-                    {Icons.timeIcon}
+                    TBD
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Time)" />
+                <ListItemText primary="(End)" />
               </ListItem>
 
               {/* Notes */}
@@ -105,7 +105,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.noteIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Note to passengers)" />
+                <ListItemText primary="(Note to driver)" />
               </ListItem>
             </List>
 
@@ -129,7 +129,7 @@ class OfferDetailsDialog extends React.Component {
             </Grid>
             <Grid item>
               <IconButton onClick={() => { this.confirmationDialogChild.handleClickOpen(
-                "Delete this ride offer?", "Your passengers will be notified."); }}
+                "Delete this ride request?", "You will be removed from the waiting list."); }}
               >
                 {Icons.deleteIcon}
               </IconButton>
@@ -148,4 +148,4 @@ class OfferDetailsDialog extends React.Component {
   }
 }
 
-export default OfferDetailsDialog;
+export default RequestedDetailsDialog;
