@@ -1,4 +1,4 @@
-import { getItem, setItem, removeItem } from "./storage-service";
+import { getItem, setItem, clearStorage } from "./storage-service";
 import { parseResponse } from "./http-service";
 
 /**
@@ -74,7 +74,7 @@ const isAuthenticated = () => {
  * @description Removes token from storage.
  */
 const signOut = () => {
-  removeItem('token');
+  clearStorage();
 };
 
 export { authenticate, signOut, isAuthenticated };
