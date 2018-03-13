@@ -33,6 +33,7 @@ class SettingsPage extends React.Component {
       lastName: null,
       phoneNum: null,
       email: null,
+      loading: true,
     }
     // The click handlers needs "this"
     this.handleClickLogout = this.handleClickLogout.bind(this);
@@ -55,7 +56,8 @@ class SettingsPage extends React.Component {
       lastName: data.lastName,
       phoneNum: data.phoneNum,
       email: data.email,
-      userName: data.userName
+      userName: data.userName,
+      loading: false,
     });
   };
 
@@ -79,99 +81,94 @@ class SettingsPage extends React.Component {
   // But if the logout button is clicked, redirect to the login page
   render() {
     if (isAuthenticated()) {
-      return (
-        <div>
-          <Grid container>
-            <Grid item xs={8}>
-              <Grid container direction="row" justify="flex-start" alignItems="center">
-                <Grid item>
-                  <h3>
-                    Contact Information
-                  </h3>
+      if (!this.state.loading) {
+        return (
+          <div>
+            <Grid container>
+              <Grid item xs={8}>
+                <Grid container direction="row" justify="flex-start" alignItems="center">
+                  <Grid item>
+                    <h3>
+                      Contact Information
+                    </h3>
+                  </Grid>
+                </Grid>
+              </Grid>
+
+              {/* Button for editing contact information */}
+              <Grid item xs={4}>
+                <Grid container direction="row" justify="flex-end" alignItems="center">
+                  <Grid item>
+                    <Button variant="fab" color="secondary" aria-label="add" onClick={this.handleClickEdit}>
+                      {Icons.editIcon}
+                    </Button>
+                  </Grid>
                 </Grid>
               </Grid>
             </Grid>
 
-            {/* Button for editing contact information */}
-            <Grid item xs={4}>
-              <Grid container direction="row" justify="flex-end" alignItems="center">
-                <Grid item>
-                  <Button variant="fab" color="secondary" aria-label="add" onClick={this.handleClickEdit}>
-                    {Icons.editIcon}
-                  </Button>
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
+            {/* Shows which legal agreements have been completed */}
+            <h3>
+              Legal Agreements
+            </h3>
 
-          <div style={{ padding: '.75em', }}>
-            Name: {this.state.firstName} {this.state.lastName}
-          </div>
-          <div style={{ padding: '.75em', }}>
-            Phone: {this.state.phoneNum}
-          </div>
-          <div style={{ padding: '.75em', }}>
-            Email: {this.state.email}
-          </div>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    color="primary"
+                    checked={this.state.waiverComplete}
+                    value="waiverComplete"
+                  />
+                }
+                label="Liability Waiver"
+              />
+            </FormGroup>
 
-          {/* Shows which legal agreements have been completed */}
-          <h3>
-            Legal Agreements
-          </h3>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    color="primary"
+                    checked={this.state.privacyComplete}
+                    value="privacyComplete"
+                  />
+                }
+                label="Privacy Policy"
+              />
+            </FormGroup>
 
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  checked={this.state.waiverComplete}
-                  value="waiverComplete"
-                />
-              }
-              label="Liability Waiver"
-            />
-          </FormGroup>
+            <FormGroup row>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    color="primary"
+                    checked={this.state.termsComplete}
+                    value="termsComplete"
+                  />
+                }
+                label="Terms of Use"
+              />
+            </FormGroup>
 
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  checked={this.state.privacyComplete}
-                  value="privacyComplete"
-                />
-              }
-              label="Privacy Policy"
-            />
-          </FormGroup>
+            <div style={{ padding: '.75em', }}>
+            </div>
 
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  checked={this.state.termsComplete}
-                  value="termsComplete"
-                />
-              }
-              label="Terms of Use"
-            />
-          </FormGroup>
-
-          <div style={{ padding: '.75em', }}>
-          </div>
-
-          {/* Button to logout */}
-          <Button
-            variant="raised"
-            color="secondary"
-            style={{ width: '100%', }}
-            onClick={this.handleClickLogout}
-          >
-            Logout
+            {/* Button to logout */}
+            <Button
+              variant="raised"
+              color="secondary"
+              style={{ width: '100%', }}
+              onClick={this.handleClickLogout}
+            >
+              Logout
         </Button>
-        </div>
-      )
+          </div>
+        )
+      }
+      else {
+        return (<div></div>);
+      }
     }
     else {
       return (
