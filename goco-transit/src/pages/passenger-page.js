@@ -6,6 +6,7 @@ import List, {
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import { Link } from 'react-router-dom';
+import Loader from '../components/loader';
 
 // Components
 import RequestedDetailsDialog from '../components/requested-details-dialog';
@@ -40,18 +41,29 @@ class PassengerPage extends React.Component {
    * Load user data - grabbing from 360
    */
   async loadUserData() {
-    let data = await getUser();
-    this.setState({
-      user: data,
-      requests: data.requests,
-      confirmedRides: data.confirmedRides,
-      loading: false,
-    });
+    this.setState({ loading: true });
+    try {
+      let data = await getUser();
+      this.setState({
+        user: data,
+        requests: data.requests,
+        confirmedRides: data.confirmedRides,
+        loading: false,
+      });
+    }
+    catch (err) {
+      throw err;
+    }
   };
 
   render() {
-    if (!this.state.loading) {
-      return (
+    let content;
+    if (this.state.loading) {
+      content = (<Loader />);
+    }
+
+    else {
+      content = (
         <div>
           {/* List of confirmed rides generated from an array */}
           <h3>
@@ -122,9 +134,8 @@ class PassengerPage extends React.Component {
         </div>
       );
     }
-    else {
-      return (<div></div>);
-    }
+
+    return (<div>{content}</div>)
   }
 }
 

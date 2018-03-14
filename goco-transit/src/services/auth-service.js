@@ -25,7 +25,7 @@ const handleError = err => {
  * @param {String} password User's password
  * @return {String} Token for use on API requests
  */
-const getAuth = async (userName, password) => {
+const getAuth = (userName, password) => {
   const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
   const body = new URLSearchParams({
     userName,
