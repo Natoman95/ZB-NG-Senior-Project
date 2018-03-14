@@ -36,6 +36,7 @@ const getAuth = (userName, password) => {
 
   return fetch(request)
     .then(parseResponse)
+    .then(data => data.access_token)
     .catch(handleError);
 };
 
@@ -60,7 +61,7 @@ const isAuthenticated = () => {
   const token = getItem('token');
 
   // Check that auth contains a token
-  if (token !== null && token.access_token.length > 0) {
+  if (token !== null && token.length > 0) {
     return true;
   }
   else {
