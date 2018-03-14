@@ -1,5 +1,8 @@
 import React from 'react';
 import { withStyles } from 'material-ui/styles';
+import { BrowserRouter as Router } from 'react-router-dom';
+import theme from './theme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 // Components
 import MainPage from './pages/main-page';
@@ -24,20 +27,21 @@ class App extends React.Component {
   // Depending on the user's authentication status, either the main component
   // or the login component will be displayed
   render() {
+    let content = (<div></div>);
     if (isAuthenticated()) {
-      return (
-        <div>
-          <MainPage onLogout={this.onAuthChange} />
-        </div>
-      );
+      content = (<MainPage onLogout={this.onAuthChange} />);
     }
     else {
-      return (
-        <div>
-          <LoginPage onLogin={this.onAuthChange} />
-        </div>
-      );
+      content = (<LoginPage onLogin={this.onAuthChange} />);
     }
+
+    return (
+      <MuiThemeProvider theme={theme}>
+        <Router>
+          {content}
+        </Router>
+      </MuiThemeProvider>
+    );
   }
 }
 

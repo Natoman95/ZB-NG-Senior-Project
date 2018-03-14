@@ -48,7 +48,6 @@ class SettingsPage extends React.Component {
    */
   async loadUserData() {
     let data = await getUser();
-    console.log(data);
     this.setState({
       user: data,
       firstName: data.firstName,
