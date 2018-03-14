@@ -25,7 +25,7 @@ const handleError = err => {
  * @param {String} password User's password
  * @return {String} Token for use on API requests
  */
-const getAuth = (userName, password) => {
+const getAuth = async (userName, password) => {
   const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
   const body = new URLSearchParams({
     userName,
@@ -47,9 +47,9 @@ const getAuth = (userName, password) => {
  * @param {String} password User's password
  * @return {Promise.<undefined>} Resolved when token is refreshed
  */
-const authenticate = (userName, password) => {
+const authenticate = async (userName, password) => {
   setItem('userName', userName);
-  getAuth(userName, password).then(token => setItem('token', token));
+  await getAuth(userName, password).then(token => setItem('token', token));
 };
 
 /**
