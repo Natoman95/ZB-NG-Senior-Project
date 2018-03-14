@@ -107,6 +107,16 @@ class SettingsPage extends React.Component {
               </Grid>
             </Grid>
 
+            <div style={{ padding: '.75em', }}>
+              Name: {this.state.firstName} {this.state.lastName}
+            </div>
+            <div style={{ padding: '.75em', }}>
+              Phone: {this.state.phoneNum}
+            </div>
+            <div style={{ padding: '.75em', }}>
+              Email: {this.state.email}
+            </div>
+
             {/* Shows which legal agreements have been completed */}
             <h3>
               Legal Agreements
@@ -167,16 +177,7 @@ class SettingsPage extends React.Component {
         )
       }
       else {
-        return (<div>
-          <Button
-            variant="raised"
-            color="secondary"
-            style={{ width: '100%', }}
-            onClick={this.handleClickLogout}
-          >
-            Logout
-          </Button>
-        </div>);
+        return (<div></div>);
       }
     }
     else {

@@ -60,7 +60,7 @@ const isAuthenticated = () => {
   const token = getItem('token');
 
   // Check that auth contains a token
-  if (token !== null && token.length > 0) {
+  if (token !== null && token.access_token.length > 0) {
     return true;
   }
   else {

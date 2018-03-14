@@ -14,7 +14,8 @@ import { createError } from './error-service';
  */
 const makeHeaders = () => {
   try {
-    const token = getItem('token');
+    const tokenObject = getItem('token');
+    const token = tokenObject.access_token;
     return new Headers({
       Authorization: `Bearer ${token}`,
     });
