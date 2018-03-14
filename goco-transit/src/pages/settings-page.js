@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import { Icons } from '../icon-library';
+import Loader from '../components/loader';
 
 // Services
 import { signOut } from '../services/auth-service';
@@ -32,7 +33,7 @@ class SettingsPage extends React.Component {
       lastName: null,
       phoneNum: null,
       email: null,
-      loading: true,
+      loading: false,
     }
     // The click handlers needs "this"
     this.handleClickLogout = this.handleClickLogout.bind(this);
@@ -47,16 +48,22 @@ class SettingsPage extends React.Component {
    * Load user data - grabbing from 360
    */
   async loadUserData() {
-    let data = await getUser();
-    this.setState({
-      user: data,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      phoneNum: data.phoneNum,
-      email: data.email,
-      userName: data.userName,
-      loading: false,
-    });
+    this.setState({ loading: true });
+    try {
+      let data = await getUser();
+      this.setState({
+        user: data,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phoneNum: data.phoneNum,
+        email: data.email,
+        userName: data.userName,
+        loading: false,
+      });
+    }
+    catch (err) {
+      throw err;
+    }
   };
 
   // Authenticate the user and trigger a page change
@@ -79,8 +86,12 @@ class SettingsPage extends React.Component {
   // If the user is logged in, then display the settings
   // But if the logout button is clicked, redirect to the login page
   render() {
-    if (!this.state.loading) {
-      return (
+    let content;
+    if (this.state.loading) {
+      content = (<Loader />);
+    }
+    else {
+      content = (
         <div>
           <Grid container>
             <Grid item xs={8}>
@@ -172,11 +183,10 @@ class SettingsPage extends React.Component {
             Logout
             </Button>
         </div>
-      )
+      );
     }
-    else {
-      return (<div></div>);
-    }
+
+    return (<div>{content}</div>);
   }
 }
 
