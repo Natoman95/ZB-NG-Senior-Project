@@ -6,12 +6,12 @@ import List, {
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import { Link } from 'react-router-dom';
-import Loader from '../components/loader';
 
 // Components
 import RequestedDetailsDialog from '../components/requested-details-dialog';
 import ConfirmedDetailsDialog from '../components/confirmed-details-dialog';
 import { Icons } from '../icon-library';
+import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
@@ -61,7 +61,6 @@ class PassengerPage extends React.Component {
     if (this.state.loading) {
       content = (<Loader />);
     }
-
     else {
       content = (
         <div>
