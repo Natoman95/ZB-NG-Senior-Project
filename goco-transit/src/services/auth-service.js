@@ -36,7 +36,6 @@ const getAuth = (userName, password) => {
 
   return fetch(request)
     .then(parseResponse)
-    .then(data => data.access_token)
     .catch(handleError);
 };
 

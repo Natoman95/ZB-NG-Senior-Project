@@ -6,7 +6,9 @@ import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router';
+import { CircularProgress } from 'material-ui/Progress';
+import Grid from 'material-ui/Grid';
 
 // Services
 import { authenticate, isAuthenticated } from '../services/auth-service';
@@ -20,7 +22,8 @@ class LoginPage extends React.Component {
       userName: null,
       password: null,
       loginFailed: false,
-      triggerReRender: false,
+      errorMessage: null,
+      loading: false,
     }
     // The click handler needs "this"
     this.handleClickLogin = this.handleClickLogin.bind(this);
@@ -29,11 +32,12 @@ class LoginPage extends React.Component {
   // Authenticate the user and trigger a page change
   async handleClickLogin(event) {
     event.preventDefault();
+    this.setState({ loading: true });
     try {
       await authenticate(this.state.userName, this.state.password);
-      this.setState({ triggerReRender: true });
+      this.setState({ loading: false });
     } catch (err) {
-      this.setState({ loginFailed: true });
+      this.setState({ errorMessage: err.message, loading: false, loginFailed: true });
     }
   }
 
@@ -78,7 +82,7 @@ class LoginPage extends React.Component {
                   color="primary"
                   style={{ paddingTop: "1em", paddingLeft: "1em", color: "#ff3300" }}
                 >
-                  Login Failed
+                  {this.state.errorMessage}
                 </Typography>
               }
 
@@ -114,9 +118,23 @@ class LoginPage extends React.Component {
 
                 {/* Login button */}
                 <CardActions>
-                  <Button type="submit" color="secondary">
-                    Login
-                  </Button>
+                  <Grid container style={{ paddingBottom: "1em" }}>
+                    <Grid item xs={12}>
+                      <Grid container direction="row" justify="center" alignItems="center">
+                        <Grid item>
+                          <Button
+                            variant="raised"
+                            type="submit"
+                            color="secondary"
+                            disabled={this.state.loading}
+                          >
+                            {!this.state.loading && 'Log in'}
+                            {this.state.loading && <CircularProgress size={24} />}
+                          </Button>
+                        </Grid>
+                      </Grid>
+                    </Grid>
+                  </Grid>
                 </CardActions>
               </form>
             </Card>

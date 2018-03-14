@@ -16,7 +16,7 @@ import { Icons } from '../icon-library';
 import { getUser } from '../services/user-service';
 
 // Contains ride requests made by the user
-class RequestsPage extends React.Component {
+class PassengerPage extends React.Component {
   constructor() {
     super();
 
@@ -56,7 +56,7 @@ class RequestsPage extends React.Component {
           {/* List of confirmed rides generated from an array */}
           <h3>
             Confirmed
-        </h3>
+          </h3>
           <List dense={this.state.dense}>
             {this.state.confirmedRides.map((confirmedRide) => {
               return (
@@ -128,4 +128,4 @@ class RequestsPage extends React.Component {
   }
 }
 
-export default RequestsPage;
+export default PassengerPage;

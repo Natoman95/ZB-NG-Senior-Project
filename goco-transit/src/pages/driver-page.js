@@ -18,7 +18,7 @@ import { Icons } from '../icon-library';
 import { getUser } from '../services/user-service';
 
 // Contains rides offered to other users
-class OffersPage extends React.Component {
+class DriverPage extends React.Component {
   constructor() {
     super();
 
@@ -98,10 +98,10 @@ class OffersPage extends React.Component {
         {/* Dialog boxes */}
         <OfferDetailsDialog ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance; }} />
         <AddOfferDialog ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance; }} />
-      
+
       </div>
     );
   }
 }
 
-export default OffersPage;
+export default DriverPage;

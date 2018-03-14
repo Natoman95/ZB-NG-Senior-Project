@@ -162,12 +162,21 @@ class SettingsPage extends React.Component {
               onClick={this.handleClickLogout}
             >
               Logout
-        </Button>
+            </Button>
           </div>
         )
       }
       else {
-        return (<div></div>);
+        return (<div>
+          <Button
+            variant="raised"
+            color="secondary"
+            style={{ width: '100%', }}
+            onClick={this.handleClickLogout}
+          >
+            Logout
+          </Button>
+        </div>);
       }
     }
     else {
