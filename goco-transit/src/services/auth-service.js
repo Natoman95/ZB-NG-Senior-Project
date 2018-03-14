@@ -71,7 +71,7 @@ const isAuthenticated = () => {
 
 /**
  * Sign a user out
- * @description Removes token from storage.
+ * @description Removes local data, including auth token from storage.
  */
 const signOut = () => {
   clearStorage();

@@ -10,6 +10,16 @@ import { isAuthenticated } from './services/auth-service';
 
 // Main page for the application
 class App extends React.Component {
+  constructor() {
+    super();
+
+    this.onAuthChange = this.onAuthChange.bind(this);
+  }
+
+  onAuthChange() {
+    // Force this component to re-render
+    this.forceUpdate();
+  }
 
   // Depending on the user's authentication status, either the main component
   // or the login component will be displayed
@@ -17,14 +27,14 @@ class App extends React.Component {
     if (isAuthenticated()) {
       return (
         <div>
-          <MainPage />
+          <MainPage onLogout={this.onAuthChange} />
         </div>
       );
     }
     else {
       return (
         <div>
-          <LoginPage />
+          <LoginPage onLogin={this.onAuthChange} />
         </div>
       );
     }
