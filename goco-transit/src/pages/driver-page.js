@@ -43,15 +43,16 @@ class OffersPage extends React.Component {
           {/* List of ride offers - items display the number of users who have accepted the ride 
          Generated from an array */}
           <List dense={this.state.dense}>
-            {this.state.offeredRides.map((offeredRide) => {
+            {this.state.offeredRides.map((offeredRide) => {              
               return (
                 <ListItem
-                  key={offeredRide.id}
                   button
-                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(); }}
+                  // key={offeredRide.id}
+                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(offeredRide.id); }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
+                {console.log(this.state.offeredRides)}
                   {/* Number of users on the offered ride */}
                   <ListItemAvatar>
                     <IconButton disabled={true}>

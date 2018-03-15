@@ -34,8 +34,9 @@ class OfferDetailsDialog extends React.Component {
   }
 
   // Open the add offer dialog
-  handleClickOpen = (offeredRide) => {
-    this.setState({ ride: offeredRide });
+  handleClickOpen = (key) => {
+    this.setState({ ride: key });
+    console.log(key);
     this.setState({ display: true });
   };
 
