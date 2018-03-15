@@ -19,7 +19,7 @@ import { Icons } from '../icon-library';
 import ConfirmationDialog from '../components/confirmation-dialog';
 
 /* Add an offer dialog box */
-class OfferDetailsDialog extends React.Component {
+class ConfirmedDetailsDialog extends React.Component {
   constructor() {
     super();
 
@@ -29,13 +29,11 @@ class OfferDetailsDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
-      ride: null
     };
   }
 
   // Open the add offer dialog
-  handleClickOpen = (offeredRide) => {
-    this.setState({ ride: offeredRide });
+  handleClickOpen = () => {
     this.setState({ display: true });
   };
 
@@ -53,11 +51,11 @@ class OfferDetailsDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Ride Offer Details"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Ride Details"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
 
-            {/* Ride offer details */}
+            {/* Confirmed ride details */}
             <List dense={this.state.dense} style={{ padding: '0px' }} >
 
               {/* Origin */}
@@ -67,7 +65,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="" />
+                <ListItemText primary="(Origin)" />
               </ListItem>
 
               {/* Destination */}
@@ -131,7 +129,7 @@ class OfferDetailsDialog extends React.Component {
             </Grid>
             <Grid item>
               <IconButton onClick={() => { this.confirmationDialogChild.handleClickOpen(
-                "Delete this ride offer?", "Your passengers will be notified."); }}
+                "Delete this ride?", "Your driver will be notified."); }}
               >
                 {Icons.deleteIcon}
               </IconButton>
@@ -150,4 +148,4 @@ class OfferDetailsDialog extends React.Component {
   }
 }
 
-export default OfferDetailsDialog;
+export default ConfirmedDetailsDialog;

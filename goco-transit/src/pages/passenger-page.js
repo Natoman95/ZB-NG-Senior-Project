@@ -1,17 +1,15 @@
 import React from 'react';
 import List, {
   ListItem,
-  ListItemSecondaryAction,
   ListItemText,
 } from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import { Link } from 'react-router-dom';
 
 // Components
-import DeleteRequestDialog from '../components/delete-request-dialog';
-import DeleteRideDialog from '../components/delete-ride-dialog';
+import RequestedDetailsDialog from '../components/requested-details-dialog';
+import ConfirmedDetailsDialog from '../components/confirmed-details-dialog';
 import { Icons } from '../icon-library';
 
 // Services
@@ -49,18 +47,17 @@ class RequestsPage extends React.Component {
           <List dense={this.state.dense}>
             {this.state.confirmedRides.map((confirmedRide) => {
               return (
-                <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
+                <ListItem
+                  button
+                  onClick={() => { this.confirmedDetailsDialogChild.handleClickOpen(); }}
+                  disableGutters={this.state.noGutters}
+                  divider={this.state.divider}
+                >
                   {/* Route destination and date range */}
                   <ListItemText
                     primary={confirmedRide.destination}
                     secondary={this.state.secondary ? confirmedRide.date : null}
                   />
-                  {/* Delete confirmed ride button */}
-                  <ListItemSecondaryAction>
-                    <IconButton onClick={() => { this.deleteRideDialogChild.handleClickOpen(); }} aria-label="Delete">
-                      {Icons.deleteIcon}
-                    </IconButton>
-                  </ListItemSecondaryAction>
                 </ListItem>
               );
             })}
@@ -74,18 +71,17 @@ class RequestsPage extends React.Component {
           <List dense={this.state.dense}>
             {this.state.requests.map((request) => {
               return (
-                <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
+                <ListItem
+                  button
+                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(); }}
+                  disableGutters={this.state.noGutters}
+                  divider={this.state.divider}
+                >
                   {/* Route destination and date range */}
                   <ListItemText
                     primary={request.destination}
                     secondary={this.state.secondary ? (request.dateMin + ' - ' + request.dateMax) : null}
                   />
-                  {/* Delete request button */}
-                  <ListItemSecondaryAction>
-                    <IconButton onClick={() => { this.deleteRequestDialogChild.handleClickOpen(); }} aria-label="Delete">
-                      {Icons.deleteIcon}
-                    </IconButton>
-                  </ListItemSecondaryAction>
                 </ListItem>
               );
             })}
@@ -107,8 +103,9 @@ class RequestsPage extends React.Component {
           </Grid>
 
           {/* Dialog boxes */}
-          <DeleteRequestDialog ref={(deleteRequestDialogInstance) => { this.deleteRequestDialogChild = deleteRequestDialogInstance; }} />
-          <DeleteRideDialog ref={(deleteRideDialogInstance) => { this.deleteRideDialogChild = deleteRideDialogInstance; }} />
+          <RequestedDetailsDialog ref={(requestedDetailsDialogInstance) => { this.requestedDetailsDialogChild = requestedDetailsDialogInstance; }} />
+          <ConfirmedDetailsDialog ref={(confirmedDetailsDialogInstance) => { this.confirmedDetailsDialogChild = confirmedDetailsDialogInstance; }} />
+
         </div>
       );
     }

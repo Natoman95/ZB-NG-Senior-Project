@@ -34,18 +34,40 @@ class SettingsPage extends React.Component {
       phoneNum: null,
       email: null,
     }
-    // The click handler needs "this"
+    // The click handlers needs "this"
     this.handleClickLogout = this.handleClickLogout.bind(this);
+    this.handleClickEdit = this.handleClickEdit.bind(this);
   }
 
   componentWillMount() {
     this.loadUserData();
   }
 
+  /**
+   * Load user data - grabbing from 360
+   */
+  async loadUserData() {
+    let data = await getUser();
+    console.log(data);
+    this.setState({
+      user: data,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phoneNum: data.phoneNum,
+      email: data.email,
+      userName: data.userName
+    });
+  };
+
   // Authenticate the user and trigger a page change
   handleClickLogout() {
     signOut();
     this.setState({ triggerReRender: true });
+  }
+
+  // Redirect to 360 to edit user info
+  handleClickEdit() {
+    window.location = "https://360.gordon.edu/#/profile/" + this.state.userName;
   }
 
   // Bind dialog data to the state
@@ -74,7 +96,7 @@ class SettingsPage extends React.Component {
             <Grid item xs={4}>
               <Grid container direction="row" justify="flex-end" alignItems="center">
                 <Grid item>
-                  <Button variant="fab" color="secondary" aria-label="add">
+                  <Button variant="fab" color="secondary" aria-label="add" onClick={this.handleClickEdit}>
                     {Icons.editIcon}
                   </Button>
                 </Grid>
@@ -92,38 +114,6 @@ class SettingsPage extends React.Component {
             Email: {this.state.email}
           </div>
 
-          {/* Decide which contact information will be shared with riders */}
-          <h3>
-            Contact Information to Share
-          </h3>
-
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.displayPhone}
-                  onChange={this.handleChange('displayPhone')}
-                  value="displayPhone"
-                  color="secondary"
-                />
-              }
-              label="Phone Number"
-            />
-          </FormGroup>
-
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.displayEmail}
-                  onChange={this.handleChange('displayEmail')}
-                  value="displayEmail"
-                />
-              }
-              label="Email Address"
-            />
-          </FormGroup>
-
           {/* Shows which legal agreements have been completed */}
           <h3>
             Legal Agreements
@@ -133,8 +123,8 @@ class SettingsPage extends React.Component {
             <FormControlLabel
               control={
                 <Checkbox
+                  color="primary"
                   checked={this.state.waiverComplete}
-                  onChange={this.handleChange('waiverComplete')}
                   value="waiverComplete"
                 />
               }
@@ -146,8 +136,8 @@ class SettingsPage extends React.Component {
             <FormControlLabel
               control={
                 <Checkbox
+                  color="primary"
                   checked={this.state.privacyComplete}
-                  onChange={this.handleChange('privacyComplete')}
                   value="privacyComplete"
                 />
               }
@@ -159,8 +149,8 @@ class SettingsPage extends React.Component {
             <FormControlLabel
               control={
                 <Checkbox
+                  color="primary"
                   checked={this.state.termsComplete}
-                  onChange={this.handleChange('termsComplete')}
                   value="termsComplete"
                 />
               }

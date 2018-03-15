@@ -1,3 +1,5 @@
+let CircularJSON = require('circular-json');
+
 /**
  * Handle local storage of data
  */
@@ -7,21 +9,30 @@
  */
 const getItem = (key) => {
   let item = window.localStorage.getItem(key);
+  let parsedItem = null;
+  try {
+    parsedItem = CircularJSON.parse(item);
+  }
+  // If parsing fails, it's not JSON and we can return the item as is
+  catch (e) {
+    parsedItem = item;
+  }
 
-  return item;
+  return parsedItem;
 }
 
 /**
  * Put an item into local storage
  */
 const setItem = (key, value) => {
-  let jsonValue = JSON.stringify(value);
+  let jsonValue = CircularJSON.stringify(value);
   // JSON.stringify adds extra quotes to the beginning and end of strings
   // We need to remove these quotes so we don't have: ""example""
   let clippedJsonValue = jsonValue;
   if ((typeof jsonValue) === "string") {
     clippedJsonValue = jsonValue.replace(/(^"+|"+$)/mg, '');
   }
+  // store item
   window.localStorage.setItem(key, clippedJsonValue);
 }
 
@@ -32,4 +43,24 @@ const removeItem = (key) => {
   window.localStorage.removeItem(key);
 }
 
-export { getItem, setItem, removeItem };
+/**
+ * Check to see if data needs to be updated
+ */
+const isCachedDataExpired = (key) => {
+  let data = getItem(key);
+  if (data !== undefined && data !== null) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+/**
+ * Clear anything stored in local storage by the app
+ */
+const clearStorage = () => {
+  window.localStorage.clear();
+}
+
+export { getItem, setItem, removeItem, isCachedDataExpired, clearStorage };

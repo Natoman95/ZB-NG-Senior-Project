@@ -13,6 +13,16 @@
   * https://material-ui-next.com/style/icons/ documents how to use one of these codes
 * Gordon Branding Standards http://www.gordon.edu/brandstandards
 
+#### Dependencies
+* cross-env -- Allows app commands like `start` and `build` to be run with unix variables on both Windows and Mac
+* material-ui -- Pre-made user interface components like buttons, tabs, etc.
+* material-ui-icons -- Standard material icons that work seemlessly with Material UI
+* react -- The basic React libraries for constructing a React app
+* react-dom -- DOM for React
+* react-router -- Allows for navigation between React components
+* react-router-dom -- DOM for React Router
+* react-scripts -- Commands for running, building, testing a React App
+
 #### Running and Developing the App
 * Install react globally (with the -g option) via the npm package manager https://www.npmjs.com/package/react/tutorial
 * Install yarn globally in one of the ways listed https://yarnpkg.com/lang/en/docs/install/
