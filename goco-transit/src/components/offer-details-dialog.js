@@ -29,14 +29,17 @@ class OfferDetailsDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
-      ride: null
+      origin: null,
+      destination: null,
+      date: null
     };
   }
 
   // Open the add offer dialog
-  handleClickOpen = (key) => {
-    this.setState({ ride: key });
-    console.log(key);
+  handleClickOpen = (originIn, destinationIn, dateIn) => {
+    this.setState({ origin: originIn });
+    this.setState({ destination: destinationIn });
+    this.setState({ date: dateIn });
     this.setState({ display: true });
   };
 
@@ -68,7 +71,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="" />
+                <ListItemText primary={this.state.origin} />
               </ListItem>
 
               {/* Destination */}
@@ -78,7 +81,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.destinationIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Destination)" />
+                <ListItemText primary={this.state.destination} />
               </ListItem>
 
               {/* Date */}
@@ -88,7 +91,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Date)" />
+                <ListItemText primary={this.state.date} />
               </ListItem>
 
               {/* Time */}
@@ -149,6 +152,7 @@ class OfferDetailsDialog extends React.Component {
     );
   
   }
+
 }
 
 export default OfferDetailsDialog;

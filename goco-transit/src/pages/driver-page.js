@@ -47,12 +47,14 @@ class OffersPage extends React.Component {
               return (
                 <ListItem
                   button
-                  // key={offeredRide.id}
-                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(offeredRide.id); }}
+                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(
+                    offeredRide.origin,
+                    offeredRide.destination,
+                    offeredRide.date
+                  ); }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
-                {console.log(this.state.offeredRides)}
                   {/* Number of users on the offered ride */}
                   <ListItemAvatar>
                     <IconButton disabled={true}>
