@@ -36,7 +36,7 @@ class ConfirmedDetailsDialog extends React.Component {
 
   // Open the add offer dialog
   handleClickOpen = (confirmedRide) => {
-    this.setState({ ride: confirmedRide })
+    this.setState({ ride: confirmedRide });
     this.setState({ display: true });
   };
 

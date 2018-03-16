@@ -69,18 +69,18 @@ class RequestsPage extends React.Component {
           </h3>
 
           <List dense={this.state.dense}>
-            {this.state.requests.map((request) => {
+            {this.state.requests.map((requestedRide) => {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(); }}
+                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(requestedRide); }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
                   {/* Route destination and date range */}
                   <ListItemText
-                    primary={request.destination}
-                    secondary={this.state.secondary ? (request.dateMin + ' - ' + request.dateMax) : null}
+                    primary={requestedRide.destination}
+                    secondary={this.state.secondary ? (requestedRide.earliestDeparture + ' - ' + requestedRide.latestDeparture) : null}
                   />
                 </ListItem>
               );
