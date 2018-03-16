@@ -11,6 +11,7 @@ import SeatIcon from 'material-ui-icons/EventSeat';
 import ConfirmIcon from 'material-ui-icons/Done';
 import LeftArrowIcon from 'material-ui-icons/ChevronLeft';
 import RightArrowIcon from 'material-ui-icons/ChevronRight';
+import ReturnArrowIcon from 'material-ui-icons/SubdirectoryArrowRight';
 import SettingsIcon from 'material-ui-icons/Settings';
 import AddIcon from 'material-ui-icons/Add';
 import EditIcon from 'material-ui-icons/Edit';
@@ -31,6 +32,7 @@ var icons = {
   confirmIcon: React.createElement(ConfirmIcon),
   leftArrowIcon: React.createElement(LeftArrowIcon),
   rightArrowIcon: React.createElement(RightArrowIcon),
+  returnArrowIcon: React.createElement(ReturnArrowIcon),
   settingsIcon: React.createElement(SettingsIcon),
   addIcon: React.createElement(AddIcon),
   editIcon: React.createElement(EditIcon),

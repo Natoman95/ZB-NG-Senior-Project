@@ -84,7 +84,7 @@ class RequestedDetailsDialog extends React.Component {
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
-                    TBD
+                    {Icons.timelapseIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={this.state.request.earliestDeparture} />
@@ -94,7 +94,7 @@ class RequestedDetailsDialog extends React.Component {
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
-                    TBD
+                    {Icons.returnArrowIcon}
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText primary={this.state.request.latestDeparture} />
