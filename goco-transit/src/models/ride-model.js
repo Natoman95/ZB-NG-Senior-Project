@@ -9,11 +9,14 @@ class RideModel {
     this.driver = driver;
   }
 
-  origin;
-  destination;
-  id;
+  id; // Primary key
 
-  date; // Date
+  // Data inputted into add offer dialog 
+  origin; // Starting location
+  destination; // Ending location
+  date; // Date of ride
+  time; // Time of ride
+  driverNote; // Note to passengers
 
   driver; // User - the driver for the ride
   passengers = []; // Users - any users who are part of the ride
