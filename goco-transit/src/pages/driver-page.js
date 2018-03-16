@@ -47,13 +47,7 @@ class OffersPage extends React.Component {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(
-                    offeredRide.origin,
-                    offeredRide.destination,
-                    offeredRide.date,
-                    offeredRide.time,
-                    offeredRide.driverNote
-                  ); }}
+                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(offeredRide); }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >

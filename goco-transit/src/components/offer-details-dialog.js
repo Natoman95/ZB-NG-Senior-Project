@@ -38,12 +38,12 @@ class OfferDetailsDialog extends React.Component {
   }
 
   // Open the add offer dialog
-  handleClickOpen = (originIn, destinationIn, dateIn, timeIn, driverNoteIn) => {
-    this.setState({ origin: originIn });
-    this.setState({ destination: destinationIn });
-    this.setState({ date: dateIn });
-    this.setState({ time: timeIn });
-    this.setState({ driverNote: driverNoteIn });
+  handleClickOpen = (offeredRide) => {
+    this.setState({ origin: offeredRide.origin });
+    this.setState({ destination: offeredRide.destination });
+    this.setState({ date: offeredRide.date });
+    this.setState({ time: offeredRide.time });
+    this.setState({ driverNote: offeredRide.driverNote });
     this.setState({ display: true });
   };
 
@@ -105,7 +105,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={this.state.date} />
+                <ListItemText primary={this.state.time} />
               </ListItem>
 
               {/* Notes */}

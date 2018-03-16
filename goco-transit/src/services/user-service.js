@@ -45,7 +45,7 @@ const getUser = async () => {
     let Jim = new UserModel("Jim", "Bob", "jim.bob@gordon.edu");
 
     // Dummy rides
-    let confirmedRide1 = new RideModel(Jim, "Manchester", "Wenham", "2018-04-16", "07:30", 2, "");
+    let confirmedRide1 = new RideModel(Jim, "Manchester", "Wenham", "2018-04-16", "07:30", 2, "The singularity is near.");
 
     activeUser.confirmedRides = [confirmedRide1];
 
