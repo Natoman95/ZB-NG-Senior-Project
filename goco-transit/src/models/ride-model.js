@@ -19,7 +19,7 @@ class RideModel {
   destination; // Ending location
   date; // Date of ride
   time; // Time of ride
-  driverNote; // Note to passengers
+  driverNote; // Note to passengers (optional)
 
   driver; // User - the driver for the ride
   passengers = []; // Users - any users who are part of the ride

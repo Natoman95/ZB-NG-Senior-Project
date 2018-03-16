@@ -10,10 +10,11 @@ import List, {
   ListItemAvatar,
   ListItemText,
 } from 'material-ui/List';
+
 import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
-import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
 
 // Components
 import { Icons } from '../icon-library';
