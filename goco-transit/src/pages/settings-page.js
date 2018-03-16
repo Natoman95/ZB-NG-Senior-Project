@@ -43,22 +43,6 @@ class SettingsPage extends React.Component {
     this.loadUserData();
   }
 
-  /**
-   * Load user data - grabbing from 360
-   */
-  async loadUserData() {
-    let data = await getUser();
-    console.log(data);
-    this.setState({
-      user: data,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      phoneNum: data.phoneNum,
-      email: data.email,
-      userName: data.userName
-    });
-  };
-
   // Authenticate the user and trigger a page change
   handleClickLogout() {
     signOut();

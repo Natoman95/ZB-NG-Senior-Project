@@ -17,6 +17,7 @@ import Badge from 'material-ui/Badge';
 // Components
 import { Icons } from '../icon-library';
 import ConfirmationDialog from '../components/confirmation-dialog';
+import RideModel from '../models/ride-model';
 
 /* Add an offer dialog box */
 class OfferDetailsDialog extends React.Component {
@@ -29,21 +30,13 @@ class OfferDetailsDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
-      origin: null,
-      destination: null,
-      date: null,
-      time: null,
-      driverNote: null
+      ride: new RideModel() // Prevents null pointer exception
     };
   }
 
   // Open the add offer dialog
   handleClickOpen = (offeredRide) => {
-    this.setState({ origin: offeredRide.origin });
-    this.setState({ destination: offeredRide.destination });
-    this.setState({ date: offeredRide.date });
-    this.setState({ time: offeredRide.time });
-    this.setState({ driverNote: offeredRide.driverNote });
+    this.setState({ ride: offeredRide })
     this.setState({ display: true });
   };
 
@@ -51,7 +44,7 @@ class OfferDetailsDialog extends React.Component {
   handleClose = () => {
     this.setState({ display: false });
   };
-
+  
   render() {
     return (
       <Dialog
@@ -75,7 +68,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={this.state.origin} />
+                <ListItemText primary={this.state.ride.origin} />
               </ListItem>
 
               {/* Destination */}
@@ -85,7 +78,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.destinationIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={this.state.destination} />
+                <ListItemText primary={this.state.ride.destination} />
               </ListItem>
 
               {/* Date */}
@@ -95,7 +88,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={this.state.date} />
+                <ListItemText primary={this.state.ride.date} />
               </ListItem>
 
               {/* Time */}
@@ -105,7 +98,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={this.state.time} />
+                <ListItemText primary={this.state.ride.time} />
               </ListItem>
 
               {/* Notes */}
@@ -115,7 +108,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.noteIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={this.state.driverNote} />
+                <ListItemText primary={this.state.ride.driverNote} />
               </ListItem>
             </List>
 
@@ -127,7 +120,7 @@ class OfferDetailsDialog extends React.Component {
           <Grid container spacing={40} justify="center">
             <Grid item>
               <IconButton>
-                <Badge color="primary">
+                <Badge badgeContent={this.state.ride.passengers.length + "/" + this.state.ride.maxCapacity} color="primary">
                   {Icons.seatIcon}
                 </Badge>
               </IconButton>
