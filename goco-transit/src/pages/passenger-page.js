@@ -49,7 +49,7 @@ class RequestsPage extends React.Component {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.confirmedDetailsDialogChild.handleClickOpen(); }}
+                  onClick={() => { this.confirmedDetailsDialogChild.handleClickOpen(confirmedRide); }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
