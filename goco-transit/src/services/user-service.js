@@ -45,18 +45,18 @@ const getUser = async () => {
     let Jim = new UserModel("Jim", "Bob", "jim.bob@gordon.edu");
 
     // Dummy rides
-    let confirmedRide1 = new RideModel("Manchester", "Wenham", "4/16/2018", Jim);
+    let confirmedRide1 = new RideModel(Jim, "Manchester", "Wenham", "2018-04-16", "07:30", 2, "");
 
     activeUser.confirmedRides = [confirmedRide1];
 
   // Dummy ride offers
-  let offeredRide1 = new RideModel("Boston", "Wenham", "3/8/2018", activeUser);
+  let offeredRide1 = new RideModel(activeUser, "Boston", "Wenham", "2018-03-08", "18:15", 1, "Take me to church.");
   offeredRide1.passengers = [Rachel];
   offeredRide1.maxCapacity = 4;
   offeredRide1.id = "000001";
 
-  let offeredRide2 = new RideModel("Wenham", "Danvers", "2/14/2018", activeUser);
-  offeredRide2.passengers = [Rachel, Jim];
+  let offeredRide2 = new RideModel(activeUser, "Wenham", "Danvers", "2018-02-18", "22:00", 3, "Cars 2 was the best.");
+  offeredRide2.passengers = [Rachel, Jim];  
   offeredRide2.maxCapacity = 6;
   offeredRide2.id = "000002";
 
