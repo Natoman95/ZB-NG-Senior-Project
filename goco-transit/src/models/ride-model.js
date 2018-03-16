@@ -2,11 +2,14 @@
  * Contains data on rides which may be offers or rides
  */
 class RideModel {
-  constructor(origin, destination, date, driver) {
+  constructor(driver, origin, destination, date, time, maxCapacity, driverNote) {
+    this.driver = driver;
     this.origin = origin;
     this.destination = destination;
     this.date = date;
-    this.driver = driver;
+    this.time = time;
+    this.maxCapacity = maxCapacity;
+    this.driverNote = driverNote;
   }
 
   id; // Primary key

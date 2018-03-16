@@ -31,15 +31,19 @@ class OfferDetailsDialog extends React.Component {
       display: false,
       origin: null,
       destination: null,
-      date: null
+      date: null,
+      time: null,
+      driverNote: null
     };
   }
 
   // Open the add offer dialog
-  handleClickOpen = (originIn, destinationIn, dateIn) => {
+  handleClickOpen = (originIn, destinationIn, dateIn, timeIn, driverNoteIn) => {
     this.setState({ origin: originIn });
     this.setState({ destination: destinationIn });
     this.setState({ date: dateIn });
+    this.setState({ time: timeIn });
+    this.setState({ driverNote: driverNoteIn });
     this.setState({ display: true });
   };
 
@@ -101,7 +105,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Time)" />
+                <ListItemText primary={this.state.date} />
               </ListItem>
 
               {/* Notes */}
@@ -111,7 +115,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.noteIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Note to passengers)" />
+                <ListItemText primary={this.state.driverNote} />
               </ListItem>
             </List>
 
