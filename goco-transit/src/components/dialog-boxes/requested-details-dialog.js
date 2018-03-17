@@ -83,22 +83,23 @@ class RequestedDetailsDialog extends React.Component {
               </ListItem>
 
               {/* Start of availability range */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingBottom: 0}} >
+                <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Earliest </div>
+                <ListItemText primary={this.state.request.earliestDeparture} />
+              </ListItem>
+
+              {/* Availability icon */}
+              <ListItem disableGutters={this.state.noGutters} divider={false} style={{padding: 0}}>
                 <ListItemAvatar>
                   <Avatar>
                     {Icons.timelapseIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={this.state.request.earliestDeparture} />
               </ListItem>
 
               {/* End of availability range */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.returnArrowIcon}
-                  </Avatar>
-                </ListItemAvatar>
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingTop: 0}}>
+                <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Latest </div>
                 <ListItemText primary={this.state.request.latestDeparture} />
               </ListItem>
 
