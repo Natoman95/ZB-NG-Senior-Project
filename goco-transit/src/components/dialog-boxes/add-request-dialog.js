@@ -1,6 +1,5 @@
 import React from 'react';
 import Dialog, {
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
@@ -10,9 +9,10 @@ import List, {
   ListItemAvatar,
   ListItemText,
 } from 'material-ui/List';
-import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
 import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
+import Grid from 'material-ui/Grid';
 
 // Components
 import { Icons } from '../../icon-library';
@@ -124,15 +124,25 @@ class AddRequestDialog extends React.Component {
             </List>
 
           </DialogContentText>
+        
+        <hr/>
+
+        {/* Action buttons */}
+        <Grid container spacing={40} justify="center">
+          <Grid item>
+            <IconButton onClick={this.handleClose}>
+              {Icons.exitIcon}
+            </IconButton>
+          </Grid>
+          <Grid item>
+            <IconButton onClick={this.handleClose}>
+              {Icons.confirmIcon}
+            </IconButton>
+          </Grid>
+        </Grid>
+
         </DialogContent>
-        <DialogActions>
-          <Button onClick={this.handleClose}>
-            Back
-          </Button>
-          <Button onClick={this.handleClose}>
-            Confirm
-          </Button>
-        </DialogActions>
+
       </Dialog>
     );
   }
