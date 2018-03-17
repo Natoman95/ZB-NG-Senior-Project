@@ -1,6 +1,3 @@
-// Services
-import { get } from '../services/http-service';
-
 // Models
 import UserModel from "../models/user-model";
 import RideModel from "../models/ride-model";
@@ -8,6 +5,7 @@ import RequestModel from "../models/request-model";
 
 // Services
 import { getItem, setItem, isCachedDataExpired } from "../services/storage-service";
+import { get } from '../services/http-service';
 
 /**
  * This class is responsible for all actions related to users

@@ -1,5 +1,8 @@
+// Models
 import UserModel from "../models/user-model";
 import RideModel from "../models/ride-model";
+
+// Media
 import ZachPhoto from '../images/user_profile_zach.jpg'
 import NathanPhoto from '../images/user_profile_nathan.jpg'
 
@@ -31,7 +34,7 @@ const findOfferedRides = (startDate, endDate, origin, destination) => {
   ride1.maxCapacity = 3;
   ride1.id = "000003";
 
-  let ride2 = new RideModel(Zach, "Manchester", "Wenham", "08:45", 4, "The way I see it, if you're gonna build a time machine into a car, why not do it with some style?");
+  let ride2 = new RideModel(Zach, "Manchester", "Wenham", "2017-11-03", "08:45", 4, "The way I see it, if you're gonna build a time machine into a car, why not do it with some style?");
   ride2.passengers = [Jim];
   ride2.maxCapacity = 4;
   ride2.id = "000004";

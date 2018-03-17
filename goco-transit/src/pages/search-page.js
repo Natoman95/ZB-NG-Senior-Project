@@ -160,20 +160,20 @@ class RequestSearchPage extends React.Component {
               Results
             </h3>
 
-            {this.state.results.map((result) => {
+            {this.state.results.map((searchResult) => {
               return (
                 <List dense={this.state.dense}>
                   <ListItem
                     button
                     disableGutters={this.state.noGutters}
                     divider={this.state.divider}
-                    onClick={() => { this.addRequestDialogChild.handleClickOpen(); }}>
+                    onClick={() => { this.addRequestDialogChild.handleClickOpen(searchResult); }}>
                     {/* Driver profile picture */}
-                    <Avatar src={result.driver.profilePhoto} />
+                    <Avatar src={searchResult.driver.profilePhoto} />
                     {/* Ride date */}
                     <ListItemText
-                      primary={result.destination}
-                      secondary={this.state.secondary ? result.date : null}
+                      primary={searchResult.destination}
+                      secondary={this.state.secondary ? searchResult.date : null}
                     />
                   </ListItem>
                 </List>

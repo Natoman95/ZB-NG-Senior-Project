@@ -17,6 +17,9 @@ import TextField from 'material-ui/TextField';
 // Components
 import { Icons } from '../../icon-library';
 
+// Models
+import RideModel from '../../models/ride-model';
+
 /* Add a request dialog box */
 class AddRequestDialog extends React.Component {
   constructor() {
@@ -28,11 +31,13 @@ class AddRequestDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
+      ride: new RideModel() // Prevents null pointer exception
     };
   }
 
   // Open the add request dialog
-  handleClickOpen = () => {
+  handleClickOpen = (searchResult) => {
+    this.setState({ ride: searchResult });
     this.setState({ display: true });
   };
 
@@ -65,7 +70,7 @@ class AddRequestDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary="(Origin)"
+                  primary={this.state.ride.origin}
                 />
               </ListItem>
 
@@ -77,7 +82,7 @@ class AddRequestDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary="(Destination)"
+                  primary={this.state.ride.destination}
                 />
               </ListItem>
 
@@ -89,7 +94,7 @@ class AddRequestDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary="(Date)"
+                  primary={this.state.ride.date}
                 />
               </ListItem>
 
@@ -101,7 +106,7 @@ class AddRequestDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary="(Time)"
+                  primary={this.state.ride.time}
                 />
               </ListItem>
 
