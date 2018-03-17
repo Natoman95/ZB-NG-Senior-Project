@@ -127,7 +127,7 @@ class LoginPage extends React.Component {
                           color="secondary"
                           disabled={this.state.loading}
                         >
-                          {!this.state.loading && 'Log in'}
+                          {!this.state.loading && 'SIGN IN'}
                           {this.state.loading && <CircularProgress size={24} />}
                         </Button>
                       </Grid>
