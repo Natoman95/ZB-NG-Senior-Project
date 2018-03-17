@@ -19,7 +19,7 @@ import { Icons } from '../../icon-library';
 import ConfirmationDialog from './confirmation-dialog';
 
 // Models
-import RideModel from '../models/ride-model';
+import RideModel from '../../models/ride-model';
 
 /* Add an offer dialog box */
 class OfferDetailsDialog extends React.Component {

@@ -18,7 +18,7 @@ import { Icons } from '../../icon-library';
 import ConfirmationDialog from './confirmation-dialog';
 
 // Models
-import RequestModel from '../models/request-model';
+import RequestModel from '../../models/request-model';
 
 /* Add an offer dialog box */
 class RequestedDetailsDialog extends React.Component {
