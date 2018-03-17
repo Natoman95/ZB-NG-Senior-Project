@@ -23,13 +23,14 @@ const getUser = async () => {
 
   // Fetching data from 360 if it hasn't been cached
   if (isCachedDataExpired(userName)) {
-    let user360Profile = await getUser360Profile(userName);
-    let user360Image = await getUser360Image(userName);
+    let user360data = await Promise.all([getUser360Profile(userName), getUser360Image(userName)])
+    let profile = user360data[0]
+    let image = user360data[1];
 
     // Populating user with 360 data
-    activeUser = new UserModel(user360Profile.FirstName, user360Profile.LastName, user360Profile.Email);
-    activeUser.phoneNum = user360Profile.MobilePhone;
-    activeUser.profilePhoto = user360Image;
+    activeUser = new UserModel(profile.FirstName, profile.LastName, profile.Email);
+    activeUser.phoneNum = profile.MobilePhone;
+    activeUser.profilePhoto = image;
 
     // Dummy requests
     let request1 = new RequestModel(activeUser, "Wenham", "Pittsburgh", "2017-12-07T08:30", "2017-12-07T20:30", "Take me to church.");
@@ -82,13 +83,10 @@ const getUser = async () => {
  * @return {Promise} Profile info
  */
 const getUser360Profile = userName => {
-  let profile;
   if (userName) {
-    profile = get(`profiles/${userName}/`);
-  } else {
-    profile = get('profiles');
+    return get(`profiles/${userName}/`);
   }
-  return profile;
+  return get('profiles');
 };
 
 /**

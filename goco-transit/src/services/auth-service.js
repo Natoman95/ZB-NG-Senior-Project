@@ -47,9 +47,9 @@ const getAuth = (userName, password) => {
  * @param {String} password User's password
  * @return {Promise.<undefined>} Resolved when token is refreshed
  */
-const authenticate = (userName, password) => {
+const authenticate = async (userName, password) => {
   setItem('userName', userName);
-  getAuth(userName, password).then(token => setItem('token', token));
+  await getAuth(userName, password).then(token => setItem('token', token));
 };
 
 /**
@@ -71,7 +71,7 @@ const isAuthenticated = () => {
 
 /**
  * Sign a user out
- * @description Removes token from storage.
+ * @description Removes local data, including auth token from storage.
  */
 const signOut = () => {
   clearStorage();

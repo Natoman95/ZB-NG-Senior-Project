@@ -13,12 +13,13 @@ import Badge from 'material-ui/Badge';
 import OfferDetailsDialog from '../components/offer-details-dialog';
 import AddOfferDialog from '../components/add-offer-dialog';
 import { Icons } from '../icon-library';
+import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
 
 // Contains rides offered to other users
-class OffersPage extends React.Component {
+class DriverPage extends React.Component {
   constructor() {
     super();
 
@@ -28,7 +29,8 @@ class OffersPage extends React.Component {
       noGutters: true,
       divider: true,
       user: null,
-      offeredRides: null
+      offeredRides: null,
+      loading: false,
     };
   }
 
@@ -37,13 +39,17 @@ class OffersPage extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.state.user !== null && <div>
+    let content;
+    if (this.state.loading) {
+      content = (<Loader />);
+    }
+    else {
+      content = (
+        <div>
           {/* List of ride offers - items display the number of users who have accepted the ride 
          Generated from an array */}
           <List dense={this.state.dense}>
-            {this.state.offeredRides.map((offeredRide) => {              
+            {this.state.offeredRides.map((offeredRide) => {
               return (
                 <ListItem
                   button
@@ -82,27 +88,35 @@ class OffersPage extends React.Component {
             </Grid>
           </Grid>
 
-        </div>}
+          {/* Dialog boxes */}
+          <OfferDetailsDialog ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance; }} />
+          <AddOfferDialog ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance; }} />
 
-        {/* Dialog boxes */}
-        <OfferDetailsDialog ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance; }} />
-        <AddOfferDialog ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance; }} />
-      
-      </div>
-    );
+        </div>
+      );
+    }
+
+    return (<div>{content}</div>);
   }
 
   /**
    * Load user data - grabbing from 360
    */
   async loadUserData() {
-    let data = await getUser();
-    this.setState({
-      user: data,
-      offeredRides: data.offeredRides,
-    });
+    this.setState({ loading: true });
+    try {
+      let data = await getUser();
+      this.setState({
+        user: data,
+        offeredRides: data.offeredRides,
+        loading: false
+      });
+    }
+    catch (err) {
+      throw err;
+    }
   };
 
 }
 
-export default OffersPage;
+export default DriverPage;
