@@ -15,7 +15,7 @@ import Avatar from 'material-ui/Avatar';
 import TextField from 'material-ui/TextField';
 
 // Components
-import { Icons } from '../icon-library';
+import { Icons } from '../../icon-library';
 
 /* Add a request dialog box */
 class AddRequestDialog extends React.Component {
