@@ -10,8 +10,8 @@ import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 
 // Components
-import OfferDetailsDialog from '../components/offer-details-dialog';
-import AddOfferDialog from '../components/add-offer-dialog';
+import OfferDetailsDialog from '../components/dialog-boxes/offer-details-dialog';
+import AddOfferDialog from '../components/dialog-boxes/add-offer-dialog';
 import { Icons } from '../icon-library';
 import Loader from '../components/loader';
 

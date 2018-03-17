@@ -15,8 +15,8 @@ import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 
 // Components
-import { Icons } from '../icon-library';
-import ConfirmationDialog from '../components/confirmation-dialog';
+import { Icons } from '../../icon-library';
+import ConfirmationDialog from './confirmation-dialog';
 
 /* Add an offer dialog box */
 class ConfirmedDetailsDialog extends React.Component {

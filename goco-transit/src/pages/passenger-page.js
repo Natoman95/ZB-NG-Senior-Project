@@ -8,8 +8,8 @@ import Grid from 'material-ui/Grid';
 import { Link } from 'react-router-dom';
 
 // Components
-import RequestedDetailsDialog from '../components/requested-details-dialog';
-import ConfirmedDetailsDialog from '../components/confirmed-details-dialog';
+import RequestedDetailsDialog from '../components/dialog-boxes/requested-details-dialog';
+import ConfirmedDetailsDialog from '../components/dialog-boxes/confirmed-details-dialog';
 import { Icons } from '../icon-library';
 import Loader from '../components/loader';
 

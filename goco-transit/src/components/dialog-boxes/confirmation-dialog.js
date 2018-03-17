@@ -8,7 +8,7 @@ import Grid from 'material-ui/Grid';
 import IconButton from 'material-ui/IconButton';
 
 // Components
-import { Icons } from '../icon-library';
+import { Icons } from '../../icon-library';
 
 /* Confirmation dialog box */
 class ConfirmationDialog extends React.Component {
