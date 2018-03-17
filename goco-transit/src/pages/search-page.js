@@ -8,7 +8,7 @@ import List, {
 import Button from 'material-ui/Button';
 
 // Components
-import AddRequestDialog from '../components/add-request-dialog';
+import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
 
 // Services
 import { findOfferedRides } from '../services/ride-service';
