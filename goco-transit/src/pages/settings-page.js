@@ -3,19 +3,20 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
-import { Redirect } from 'react-router'
+import PropTypes from 'prop-types';
 
 // Components
 import { Icons } from '../icon-library';
+import Loader from '../components/loader';
 
 // Services
-import { signOut, isAuthenticated } from '../services/auth-service';
+import { signOut } from '../services/auth-service';
 import { getUser } from '../services/user-service';
 
 // Component for changing settings
 class SettingsPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     // We need the component's state so we can trigger a page refresh
     this.state = {
       dense: false,
@@ -27,12 +28,12 @@ class SettingsPage extends React.Component {
       privacyComplete: true,
       waiverComplete: true,
       termsComplete: true,
-      triggerReRender: false,
       user: null,
       firstName: null,
       lastName: null,
       phoneNum: null,
       email: null,
+      loading: false,
     }
     // The click handlers needs "this"
     this.handleClickLogout = this.handleClickLogout.bind(this);
@@ -47,22 +48,29 @@ class SettingsPage extends React.Component {
    * Load user data - grabbing from 360
    */
   async loadUserData() {
-    let data = await getUser();
-    console.log(data);
-    this.setState({
-      user: data,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      phoneNum: data.phoneNum,
-      email: data.email,
-      userName: data.userName
-    });
+    this.setState({ loading: true });
+    try {
+      let data = await getUser();
+      this.setState({
+        user: data,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phoneNum: data.phoneNum,
+        email: data.email,
+        userName: data.userName,
+        loading: false,
+      });
+    }
+    catch (err) {
+      throw err;
+    }
   };
 
   // Authenticate the user and trigger a page change
   handleClickLogout() {
     signOut();
-    this.setState({ triggerReRender: true });
+    // Pass the message up to the main page
+    this.props.onLogout();
   }
 
   // Redirect to 360 to edit user info
@@ -78,8 +86,12 @@ class SettingsPage extends React.Component {
   // If the user is logged in, then display the settings
   // But if the logout button is clicked, redirect to the login page
   render() {
-    if (isAuthenticated()) {
-      return (
+    let content;
+    if (this.state.loading) {
+      content = (<Loader />);
+    }
+    else {
+      content = (
         <div>
           <Grid container>
             <Grid item xs={8}>
@@ -87,7 +99,7 @@ class SettingsPage extends React.Component {
                 <Grid item>
                   <h3>
                     Contact Information
-                  </h3>
+                    </h3>
                 </Grid>
               </Grid>
             </Grid>
@@ -169,16 +181,17 @@ class SettingsPage extends React.Component {
             onClick={this.handleClickLogout}
           >
             Logout
-        </Button>
+            </Button>
         </div>
-      )
+      );
     }
-    else {
-      return (
-        <Redirect to={"/"} />
-      )
-    }
+
+    return (<div>{content}</div>);
   }
 }
+
+SettingsPage.propTypes = {
+  onLogout: PropTypes.func.isRequired,
+};
 
 export default SettingsPage;

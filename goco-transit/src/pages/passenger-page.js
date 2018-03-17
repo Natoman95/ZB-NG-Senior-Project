@@ -11,12 +11,13 @@ import { Link } from 'react-router-dom';
 import RequestedDetailsDialog from '../components/requested-details-dialog';
 import ConfirmedDetailsDialog from '../components/confirmed-details-dialog';
 import { Icons } from '../icon-library';
+import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
 
 // Contains ride requests made by the user
-class RequestsPage extends React.Component {
+class PassengerPage extends React.Component {
   constructor() {
     super();
 
@@ -40,23 +41,33 @@ class RequestsPage extends React.Component {
    * Load user data - grabbing from 360
    */
   async loadUserData() {
-    let data = await getUser();
-    this.setState({
-      user: data,
-      requests: data.requests,
-      confirmedRides: data.confirmedRides,
-      loading: false,
-    });
+    this.setState({ loading: true });
+    try {
+      let data = await getUser();
+      this.setState({
+        user: data,
+        requests: data.requests,
+        confirmedRides: data.confirmedRides,
+        loading: false,
+      });
+    }
+    catch (err) {
+      throw err;
+    }
   };
 
   render() {
-    if (!this.state.loading) {
-      return (
+    let content;
+    if (this.state.loading) {
+      content = (<Loader />);
+    }
+    else {
+      content = (
         <div>
           {/* List of confirmed rides generated from an array */}
           <h3>
             Confirmed
-        </h3>
+          </h3>
           <List dense={this.state.dense}>
             {this.state.confirmedRides.map((confirmedRide) => {
               return (
@@ -122,10 +133,9 @@ class RequestsPage extends React.Component {
         </div>
       );
     }
-    else {
-      return (<div></div>);
-    }
+
+    return (<div>{content}</div>)
   }
 }
 
-export default RequestsPage;
+export default PassengerPage;

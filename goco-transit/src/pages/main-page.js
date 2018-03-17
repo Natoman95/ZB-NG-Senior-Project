@@ -3,6 +3,7 @@ import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 import { Link, Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // Components
 import DriverPage from './driver-page';
@@ -25,8 +26,8 @@ function TabContainer(props) {
 
 // Main app component
 class MainPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       value: 0,
@@ -73,12 +74,20 @@ class MainPage extends React.Component {
             <Route exact path="/passenger" component={PassengerPage} />
             <Route exact path="/passenger/search" component={SearchPage} />
             <Route exact path="/driver" component={DriverPage} />
-            <Route exact path="/settings" component={SettingsPage} />
+            {/* This route is different because we need to get the logout property from it
+             and pass that message to the app component */}
+            <Route
+              exact path="/settings"
+              render={() => <SettingsPage onLogout={this.props.onLogout}></SettingsPage>} />
           </TabContainer>
         </div>
       </div>
     );
   }
 }
+
+MainPage.propTypes = {
+  onLogout: PropTypes.func.isRequired,
+};
 
 export default MainPage;
