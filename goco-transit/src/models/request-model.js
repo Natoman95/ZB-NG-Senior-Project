@@ -2,18 +2,22 @@
  * Contains data on rides which may be offers or rides
  */
 class RequestModel {
-  constructor(source, destination, dateMin, dateMax, user) {
-    this.source = source;
-    this.destination = destination;
-    this.dateMin = dateMin;
-    this.dateMax = dateMax;
+  constructor(user, origin, destination, earliestDeparture, latestDeparture, passengerNote) {
     this.user = user;
+    this.origin = origin;
+    this.destination = destination;
+    this.earliestDeparture = earliestDeparture;
+    this.latestDeparture = latestDeparture;
+    this.passengerNote = passengerNote;
   }
 
-  source;
-  destination;
+  id; // Primary key
 
-  date;
+  // Data inputted into request search
+  origin;
+  destination;
+  earliestDeparture;
+  latestDeparture;
 
   user; // User - the one who wants a ride
   pendingRide; // Ride - if the request is linked to a desired ride

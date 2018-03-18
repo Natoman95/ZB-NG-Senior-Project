@@ -38,24 +38,6 @@ class DriverPage extends React.Component {
     this.loadUserData();
   }
 
-  /**
-   * Load user data - grabbing from 360
-   */
-  async loadUserData() {
-    this.setState({ loading: true });
-    try {
-      let data = await getUser();
-      this.setState({
-        user: data,
-        offeredRides: data.offeredRides,
-        loading: false
-      });
-    }
-    catch (err) {
-      throw err;
-    }
-  };
-
   render() {
     let content;
     if (this.state.loading) {
@@ -71,7 +53,7 @@ class DriverPage extends React.Component {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(); }}
+                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(offeredRide); }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
@@ -116,6 +98,25 @@ class DriverPage extends React.Component {
 
     return (<div>{content}</div>);
   }
+
+  /**
+   * Load user data - grabbing from 360
+   */
+  async loadUserData() {
+    this.setState({ loading: true });
+    try {
+      let data = await getUser();
+      this.setState({
+        user: data,
+        offeredRides: data.offeredRides,
+        loading: false
+      });
+    }
+    catch (err) {
+      throw err;
+    }
+  };
+
 }
 
 export default DriverPage;

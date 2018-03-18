@@ -2,17 +2,24 @@
  * Contains data on rides which may be offers or rides
  */
 class RideModel {
-  constructor(source, destination, date, driver) {
-    this.source = source;
+  constructor(driver, origin, destination, date, time, maxCapacity, driverNote) {
+    this.driver = driver;
+    this.origin = origin;
     this.destination = destination;
     this.date = date;
-    this.driver = driver;
+    this.time = time;
+    this.maxCapacity = maxCapacity;
+    this.driverNote = driverNote;
   }
 
-  source;
-  destination;
+  id; // Primary key
 
-  date; // Date
+  // Data inputted into add offer dialog 
+  origin; // Starting location
+  destination; // Ending location
+  date; // Date of ride
+  time; // Time of ride
+  driverNote; // Note to passengers (optional)
 
   driver; // User - the driver for the ride
   passengers = []; // Users - any users who are part of the ride

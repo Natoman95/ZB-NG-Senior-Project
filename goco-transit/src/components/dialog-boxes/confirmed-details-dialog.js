@@ -18,6 +18,9 @@ import Badge from 'material-ui/Badge';
 import { Icons } from '../../icon-library';
 import ConfirmationDialog from './confirmation-dialog';
 
+// Models
+import RideModel from '../../models/ride-model';
+
 /* Add an offer dialog box */
 class ConfirmedDetailsDialog extends React.Component {
   constructor() {
@@ -29,11 +32,13 @@ class ConfirmedDetailsDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
+      ride: new RideModel() // Prevents null pointer exception
     };
   }
 
   // Open the add offer dialog
-  handleClickOpen = () => {
+  handleClickOpen = (confirmedRide) => {
+    this.setState({ ride: confirmedRide });
     this.setState({ display: true });
   };
 
@@ -65,7 +70,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Origin)" />
+                <ListItemText primary={this.state.ride.origin} />
               </ListItem>
 
               {/* Destination */}
@@ -75,7 +80,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     {Icons.destinationIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Destination)" />
+                <ListItemText primary={this.state.ride.destination} />
               </ListItem>
 
               {/* Date */}
@@ -85,7 +90,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Date)" />
+                <ListItemText primary={this.state.ride.date} />
               </ListItem>
 
               {/* Time */}
@@ -95,7 +100,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Time)" />
+                <ListItemText primary={this.state.ride.time} />
               </ListItem>
 
               {/* Notes */}
@@ -105,7 +110,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     {Icons.noteIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary="(Note to passengers)" />
+                <ListItemText primary={this.state.ride.driverNote} />
               </ListItem>
             </List>
 
@@ -117,7 +122,7 @@ class ConfirmedDetailsDialog extends React.Component {
           <Grid container spacing={40} justify="center">
             <Grid item>
               <IconButton>
-                <Badge color="primary">
+                <Badge badgeContent={this.state.ride.passengers.length + "/" + this.state.ride.maxCapacity} color="primary">
                   {Icons.seatIcon}
                 </Badge>
               </IconButton>
@@ -128,8 +133,10 @@ class ConfirmedDetailsDialog extends React.Component {
               </IconButton>
             </Grid>
             <Grid item>
-              <IconButton onClick={() => { this.confirmationDialogChild.handleClickOpen(
-                "Delete this ride?", "Your driver will be notified."); }}
+              <IconButton onClick={() => {
+                this.confirmationDialogChild.handleClickOpen(
+                  "Delete this ride?", "Your driver will be notified.");
+              }}
               >
                 {Icons.deleteIcon}
               </IconButton>
@@ -142,9 +149,9 @@ class ConfirmedDetailsDialog extends React.Component {
         <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance; }} />
 
       </Dialog>
-      
+
     );
-  
+
   }
 }
 

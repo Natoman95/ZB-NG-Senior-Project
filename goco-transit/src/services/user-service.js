@@ -1,6 +1,3 @@
-// Services
-import { get } from '../services/http-service';
-
 // Models
 import UserModel from "../models/user-model";
 import RideModel from "../models/ride-model";
@@ -8,6 +5,7 @@ import RequestModel from "../models/request-model";
 
 // Services
 import { getItem, setItem, isCachedDataExpired } from "../services/storage-service";
+import { get } from '../services/http-service';
 
 /**
  * This class is responsible for all actions related to users
@@ -33,8 +31,8 @@ const getUser = async () => {
     activeUser.profilePhoto = image;
 
     // Dummy requests
-    let request1 = new RequestModel("Wenham", "Pittsburgh", "12/7/2017", "12/8/2017", activeUser);
-    let request2 = new RequestModel("Manchester", "Wenham", "1/16/2018", "1/18/2018", activeUser);
+    let request1 = new RequestModel(activeUser, "Wenham", "Pittsburgh", "2017-12-07T08:30", "2017-12-07T20:30", "Take me to church.");
+    let request2 = new RequestModel(activeUser, "Manchester", "Wenham", "2018-01-16T13:45", "2018-01-18T10:15", "I call shotgun.");
 
     activeUser.requests = [
       request1,
@@ -46,18 +44,20 @@ const getUser = async () => {
     let Jim = new UserModel("Jim", "Bob", "jim.bob@gordon.edu");
 
     // Dummy rides
-    let confirmedRide1 = new RideModel("Manchester", "Wenham", "4/16/2018", Jim);
+    let confirmedRide1 = new RideModel(Jim, "Manchester", "Wenham", "2018-04-16", "07:30", 2, "Let's ride.");
 
     activeUser.confirmedRides = [confirmedRide1];
 
-    // Dummy ride offers
-    let offeredRide1 = new RideModel("Boston", "Wenham", "3/8/2018", activeUser);
-    offeredRide1.passengers = [Rachel];
-    offeredRide1.maxCapacity = 4;
+  // Dummy ride offers
+  let offeredRide1 = new RideModel(activeUser, "Boston", "Wenham", "2018-03-08", "18:15", 1); // No note
+  offeredRide1.passengers = [Rachel];
+  offeredRide1.maxCapacity = 4;
+  offeredRide1.id = "000001";
 
-    let offeredRide2 = new RideModel("Wenham", "Danvers", "2/14/2018", activeUser);
-    offeredRide2.passengers = [Rachel, Jim];
-    offeredRide2.maxCapacity = 6;
+  let offeredRide2 = new RideModel(activeUser, "Wenham", "Danvers", "2018-02-18", "22:00", 3, "Cars 2 was the best.");
+  offeredRide2.passengers = [Rachel, Jim];  
+  offeredRide2.maxCapacity = 6;
+  offeredRide2.id = "000002";
 
     activeUser.offeredRides = [
       offeredRide1,

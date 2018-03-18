@@ -44,28 +44,6 @@ class SettingsPage extends React.Component {
     this.loadUserData();
   }
 
-  /**
-   * Load user data - grabbing from 360
-   */
-  async loadUserData() {
-    this.setState({ loading: true });
-    try {
-      let data = await getUser();
-      this.setState({
-        user: data,
-        firstName: data.firstName,
-        lastName: data.lastName,
-        phoneNum: data.phoneNum,
-        email: data.email,
-        userName: data.userName,
-        loading: false,
-      });
-    }
-    catch (err) {
-      throw err;
-    }
-  };
-
   // Authenticate the user and trigger a page change
   handleClickLogout() {
     signOut();
@@ -188,6 +166,29 @@ class SettingsPage extends React.Component {
 
     return (<div>{content}</div>);
   }
+
+  /**
+   * Load user data - grabbing from 360
+   */
+  async loadUserData() {
+    this.setState({ loading: true });
+    try {
+      let data = await getUser();
+      this.setState({
+        user: data,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phoneNum: data.phoneNum,
+        email: data.email,
+        userName: data.userName,
+        loading: false,
+      });
+    }
+    catch (err) {
+      throw err;
+    }
+  };
+
 }
 
 SettingsPage.propTypes = {
