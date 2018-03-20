@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 // Components
@@ -39,6 +39,23 @@ class MainPage extends React.Component {
   handleChange = (event, value) => {
     this.setState({ value });
   };
+
+  componentWillMount() {
+    // Will change the tab when browser forward and back buttons are used
+    // to switch between components rather than the user clicking on the tabs
+    this.props.history.listen(() => {
+      let path = this.props.history.location.pathname;
+      if (path === '/' || path.includes('/passenger')) {
+        this.setState({ value: 0 });
+      }
+      else if (path.includes('/driver')) {
+        this.setState({ value: 1 });
+      }
+      else if (path.includes('/settings')) {
+        this.setState({ value: 2 });
+      }
+    });
+  }
 
   render() {
     return (
@@ -91,4 +108,4 @@ MainPage.propTypes = {
   onLogout: PropTypes.func.isRequired,
 };
 
-export default MainPage;
+export default withRouter(MainPage);
