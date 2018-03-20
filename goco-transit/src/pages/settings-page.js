@@ -4,6 +4,7 @@ import Button from 'material-ui/Button';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 // Components
 import { Icons } from '../icon-library';
@@ -151,15 +152,18 @@ class SettingsPage extends React.Component {
           <div style={{ padding: '.75em', }}>
           </div>
 
-          {/* Button to logout */}
-          <Button
-            variant="raised"
-            color="secondary"
-            style={{ width: '100%', }}
-            onClick={this.handleClickLogout}
-          >
-            Logout
+          {/* Button to logout
+           the link keeps the url from remaining at the "settings" page after logout */}
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <Button
+              variant="raised"
+              color="secondary"
+              style={{ width: '100%', }}
+              onClick={this.handleClickLogout}
+            >
+              Logout
             </Button>
+          </Link>
         </div>
       );
     }
