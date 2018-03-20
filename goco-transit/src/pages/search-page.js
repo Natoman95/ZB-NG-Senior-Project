@@ -6,6 +6,7 @@ import List, {
   ListItemText,
 } from 'material-ui/List'; import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/Button';
+import PropTypes from 'prop-types';
 
 // Components
 import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
@@ -17,9 +18,9 @@ import { findOfferedRides } from '../services/ride-service';
  * This page is displayed when a user wants to find a ride somewhere.
  * It allows the user to search for a ride by location and date range
  */
-class RequestSearchPage extends React.Component {
-  constructor() {
-    super();
+class SearchPage extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
       dense: false,
@@ -33,6 +34,11 @@ class RequestSearchPage extends React.Component {
       endDate: null,
       results: null
     };
+  }
+
+  componentWillMount() {
+    // Once the component mounts, make sure the tab matches the component
+    this.props.matchTab();
   }
 
   // Returns the date and time plus a given number of milliseconds (ms) in datetime-local format ("YYYY-MM-DDTHH:MM")
@@ -190,4 +196,8 @@ class RequestSearchPage extends React.Component {
   }
 }
 
-export default RequestSearchPage;
+SearchPage.propTypes = {
+  matchTab: PropTypes.func.isRequired,
+};
+
+export default SearchPage;

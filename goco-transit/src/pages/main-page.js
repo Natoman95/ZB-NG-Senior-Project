@@ -2,7 +2,7 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 // Components
@@ -36,10 +36,6 @@ class MainPage extends React.Component {
     this.loadUserData();
   }
 
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
   render() {
     return (
       <div>
@@ -49,7 +45,6 @@ class MainPage extends React.Component {
             <Tabs
               fullWidth={true}
               value={this.state.value}
-              onChange={this.handleChange}
               indicatorColor="secondary"
               centered
             >
@@ -63,15 +58,32 @@ class MainPage extends React.Component {
         {/* Tab Pages */}
         <div style={{ paddingTop: '4.25em' }}>
           <TabContainer>
-            <Route exact path="/" component={PassengerPage} />
-            <Route exact path="/passenger" component={PassengerPage} />
-            <Route exact path="/passenger/search" component={SearchPage} />
-            <Route exact path="/driver" component={DriverPage} />
-            {/* This route is different because we need to get the logout property from it
-             and pass that message to the app component */}
+            <Route
+              exact path="/"
+              render={() => <PassengerPage
+                matchTab={() => this.setState({ value: 0 })}>
+              </PassengerPage>} />
+            <Route
+              exact path="/passenger"
+              render={() => <PassengerPage
+                matchTab={() => this.setState({ value: 0 })}>
+              </PassengerPage>} />
+            <Route
+              exact path="/passenger/search"
+              render={() => <SearchPage
+                matchTab={() => this.setState({ value: 0 })}>
+              </SearchPage>} />
+            <Route
+              exact path="/driver"
+              render={() => <DriverPage
+                matchTab={() => this.setState({ value: 1 })}>
+              </DriverPage>} />
             <Route
               exact path="/settings"
-              render={() => <SettingsPage onLogout={this.props.onLogout}></SettingsPage>} />
+              render={() => <SettingsPage
+                onLogout={this.props.onLogout}
+                matchTab={() => this.setState({ value: 2 })}>
+              </SettingsPage>} />
           </TabContainer>
         </div>
       </div>
@@ -91,4 +103,4 @@ MainPage.propTypes = {
   onLogout: PropTypes.func.isRequired,
 };
 
-export default MainPage;
+export default withRouter(MainPage);
