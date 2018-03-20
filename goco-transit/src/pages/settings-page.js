@@ -42,6 +42,8 @@ class SettingsPage extends React.Component {
   }
 
   componentWillMount() {
+    // Once the component mounts, make sure the tab matches the component
+    this.props.matchTab();
     this.loadUserData();
   }
 
@@ -197,6 +199,7 @@ class SettingsPage extends React.Component {
 
 SettingsPage.propTypes = {
   onLogout: PropTypes.func.isRequired,
+  matchTab: PropTypes.func.isRequired,
 };
 
 export default SettingsPage;

@@ -8,6 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
+import PropTypes from 'prop-types';
 
 // Components
 import OfferDetailsDialog from '../components/dialog-boxes/offer-details-dialog';
@@ -20,8 +21,8 @@ import { getUser } from '../services/user-service';
 
 // Contains rides offered to other users
 class DriverPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       dense: false,
@@ -35,6 +36,8 @@ class DriverPage extends React.Component {
   }
 
   componentWillMount() {
+    // Once the component mounts, make sure the tab matches the component
+    this.props.matchTab();
     this.loadUserData();
   }
 
@@ -118,5 +121,9 @@ class DriverPage extends React.Component {
   };
 
 }
+
+DriverPage.propTypes = {
+  matchTab: PropTypes.func.isRequired,
+};
 
 export default DriverPage;

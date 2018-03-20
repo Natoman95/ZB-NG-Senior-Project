@@ -6,6 +6,7 @@ import List, {
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // Components
 import RequestedDetailsDialog from '../components/dialog-boxes/requested-details-dialog';
@@ -18,8 +19,8 @@ import { getUser } from '../services/user-service';
 
 // Contains ride requests made by the user
 class PassengerPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       dense: false,
@@ -34,6 +35,8 @@ class PassengerPage extends React.Component {
   }
 
   componentWillMount() {
+    // Once the component mounts, make sure the tab matches the component
+    this.props.matchTab();
     this.loadUserData();
   }
 
@@ -138,5 +141,9 @@ class PassengerPage extends React.Component {
   };
 
 }
+
+PassengerPage.propTypes = {
+  matchTab: PropTypes.func.isRequired,
+};
 
 export default PassengerPage;
