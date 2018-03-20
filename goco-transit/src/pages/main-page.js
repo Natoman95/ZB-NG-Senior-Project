@@ -33,30 +33,7 @@ class MainPage extends React.Component {
       value: 0,
     };
 
-    this.matchTabToRoute = this.matchTabToRoute.bind(this);
-
     this.loadUserData();
-  }
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
-
-  /**
-   * Whenever the route is changed or set without using the tab buttons
-   * this method can be used to match the tab to the current route
-   */
-  matchTabToRoute() {
-    let path = this.props.history.location.pathname;
-    if (path === '/' || path.includes('/passenger')) {
-      this.setState({ value: 0 });
-    }
-    else if (path.includes('/driver')) {
-      this.setState({ value: 1 });
-    }
-    else if (path.includes('/settings')) {
-      this.setState({ value: 2 });
-    }
   }
 
   render() {
@@ -68,7 +45,6 @@ class MainPage extends React.Component {
             <Tabs
               fullWidth={true}
               value={this.state.value}
-              onChange={this.handleChange}
               indicatorColor="secondary"
               centered
             >
@@ -85,28 +61,28 @@ class MainPage extends React.Component {
             <Route
               exact path="/"
               render={() => <PassengerPage
-                matchTab={this.matchTabToRoute}>
+                matchTab={() => this.setState({ value: 0 })}>
               </PassengerPage>} />
             <Route
               exact path="/passenger"
               render={() => <PassengerPage
-                matchTab={this.matchTabToRoute}>
+                matchTab={() => this.setState({ value: 0 })}>
               </PassengerPage>} />
             <Route
               exact path="/passenger/search"
               render={() => <SearchPage
-                matchTab={this.matchTabToRoute}>
+                matchTab={() => this.setState({ value: 0 })}>
               </SearchPage>} />
             <Route
               exact path="/driver"
               render={() => <DriverPage
-                matchTab={this.matchTabToRoute}>
+                matchTab={() => this.setState({ value: 1 })}>
               </DriverPage>} />
             <Route
               exact path="/settings"
               render={() => <SettingsPage
                 onLogout={this.props.onLogout}
-                matchTab={this.matchTabToRoute}>
+                matchTab={() => this.setState({ value: 2 })}>
               </SettingsPage>} />
           </TabContainer>
         </div>
