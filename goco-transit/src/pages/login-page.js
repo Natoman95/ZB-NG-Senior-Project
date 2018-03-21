@@ -1,6 +1,5 @@
 import React from 'react';
-import Card, { CardActions, CardContent, CardMedia } from 'material-ui/Card';
-import Gordon360Home from '../images/gordon_360_home.png';
+import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
@@ -9,6 +8,8 @@ import Button from 'material-ui/Button';
 import { CircularProgress } from 'material-ui/Progress';
 import Grid from 'material-ui/Grid';
 import PropTypes from 'prop-types';
+import GordonLogo from '../images/gordon_logo.svg';
+import theme from '../theme';
 
 // Services
 import { authenticate } from '../services/auth-service';
@@ -66,28 +67,27 @@ class LoginPage extends React.Component {
         {/* Login information is displayed on a card */}
         <div style={{ margin: "1.5em" }}>
           <Card>
-
-            {/* An image of Gordon 360 to nofity the user to use
-                 their 360 credentials */}
-            <CardMedia
-              style={{ width: "100%", height: "12em" }}
-              image={Gordon360Home}
-            />
-
-            {/* Error message if login fails */}
-            {this.state.loginFailed &&
-              <Typography
-                variant="body2"
-                color="primary"
-                style={{ paddingTop: "1em", paddingLeft: "1em", color: "#ff3300" }}
-              >
-                {this.state.errorMessage}
-              </Typography>
-            }
-
             {/* Username */}
             <form onSubmit={this.handleClickLogin}>
               <CardContent>
+                <Grid container>
+                  {/* Gordon Logo */}
+                  <Grid item xs={12}>
+                    <Grid container direction="row" justify="center" alignItems="center"
+                      style={{ backgroundColor: theme.palette.primary.main }} >
+                      <Grid item style={{ padding: "2em" }}>
+                        <img style={{ width: '100%' }} src={GordonLogo} alt='Gordon Logo' />
+                      </Grid>
+                    </Grid>
+                    {/* Reminder that login happens through 360 */}
+                    <Grid container direction="row" justify="center" alignItems="center">
+                      <Grid item style={{ paddingTop: "1.5em" }}>
+                        <Typography variant="subheading">Log in through Gordon 360</Typography>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+
                 <TextField
                   id="userName"
                   label="Username"
@@ -96,7 +96,7 @@ class LoginPage extends React.Component {
                   margin="none"
                   value={this.state.userName}
                   onChange={this.handleFormChange('userName')}
-                  style={{ width: "100%" }}
+                  style={{ width: "100%", paddingTop: '1em' }}
                 />
 
                 <div style={{ margin: "1em" }}>
@@ -113,6 +113,17 @@ class LoginPage extends React.Component {
                   onChange={this.handleFormChange('password')}
                   style={{ width: "100%" }}
                 />
+
+                {/* Error message if login fails */}
+                {this.state.loginFailed &&
+                  <Typography
+                    variant="body2"
+                    color="primary"
+                    style={{ paddingTop: "1em", paddingLeft: "1em", color: "#ff3300" }}
+                  >
+                    {this.state.errorMessage}
+                  </Typography>
+                }
               </CardContent>
 
               {/* Login button */}
