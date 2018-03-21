@@ -92,7 +92,7 @@ class SearchPage extends React.Component {
             <Grid item>
               <TextField
                 fullWidth
-                id="origin"
+                id="originField"
                 label="Origin"
                 type="search"
                 value={this.state.origin}
@@ -103,7 +103,7 @@ class SearchPage extends React.Component {
             <Grid item>
               <TextField // Destination (end)
                 fullWidth
-                id="destination"
+                id="destinationField"
                 label="Destination"
                 type="search"
                 value={this.state.destination}
@@ -114,7 +114,7 @@ class SearchPage extends React.Component {
             <Grid item>
               <TextField
                 fullWidth
-                id="startDate"
+                id="startDateField"
                 label="Earliest Possible Departure"
                 type="datetime-local"
                 defaultValue={this.getDateTime(0)} // Default time for the start date is today
@@ -129,7 +129,7 @@ class SearchPage extends React.Component {
             <Grid item>
               <TextField
                 fullWidth
-                id="startDate"
+                id="endDateField"
                 label="Latest Possible Departure"
                 type="datetime-local"
                 defaultValue={this.getDateTime(86400000)} // Default time for the end date is tomorrow
