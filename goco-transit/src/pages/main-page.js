@@ -2,7 +2,8 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // Components
 import DriverPage from './driver-page';
@@ -25,8 +26,8 @@ function TabContainer(props) {
 
 // Main app component
 class MainPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       value: 0,
@@ -34,17 +35,6 @@ class MainPage extends React.Component {
 
     this.loadUserData();
   }
-
-  /**
-   * Load user data on login - grabbing from 360
-   */
-  async loadUserData() {
-    await getUser();
-  };
-
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
 
   render() {
     return (
@@ -55,7 +45,6 @@ class MainPage extends React.Component {
             <Tabs
               fullWidth={true}
               value={this.state.value}
-              onChange={this.handleChange}
               indicatorColor="secondary"
               centered
             >
@@ -69,16 +58,49 @@ class MainPage extends React.Component {
         {/* Tab Pages */}
         <div style={{ paddingTop: '4.25em' }}>
           <TabContainer>
-            <Route exact path="/" component={PassengerPage} />
-            <Route exact path="/passenger" component={PassengerPage} />
-            <Route exact path="/passenger/search" component={SearchPage} />
-            <Route exact path="/driver" component={DriverPage} />
-            <Route exact path="/settings" component={SettingsPage} />
+            <Route
+              exact path="/"
+              render={() => <PassengerPage
+                matchTab={() => this.setState({ value: 0 })}>
+              </PassengerPage>} />
+            <Route
+              exact path="/passenger"
+              render={() => <PassengerPage
+                matchTab={() => this.setState({ value: 0 })}>
+              </PassengerPage>} />
+            <Route
+              exact path="/passenger/search"
+              render={() => <SearchPage
+                matchTab={() => this.setState({ value: 0 })}>
+              </SearchPage>} />
+            <Route
+              exact path="/driver"
+              render={() => <DriverPage
+                matchTab={() => this.setState({ value: 1 })}>
+              </DriverPage>} />
+            <Route
+              exact path="/settings"
+              render={() => <SettingsPage
+                onLogout={this.props.onLogout}
+                matchTab={() => this.setState({ value: 2 })}>
+              </SettingsPage>} />
           </TabContainer>
         </div>
       </div>
     );
   }
+
+  /**
+   * Load user data on login - grabbing from 360
+   */
+  async loadUserData() {
+    await getUser();
+  };
+
 }
 
-export default MainPage;
+MainPage.propTypes = {
+  onLogout: PropTypes.func.isRequired,
+};
+
+export default withRouter(MainPage);

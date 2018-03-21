@@ -1,6 +1,5 @@
 import React from 'react';
 import Dialog, {
-  DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
@@ -10,15 +9,20 @@ import List, {
   ListItemAvatar,
   ListItemText,
 } from 'material-ui/List';
-import Button from 'material-ui/Button';
 import Avatar from 'material-ui/Avatar';
-import TextField from 'material-ui/TextField';
+import IconButton from 'material-ui/IconButton';
+import Grid from 'material-ui/Grid';
+import Badge from 'material-ui/Badge';
 
 // Components
-import { Icons } from '../icon-library';
+import { Icons } from '../../icon-library';
+import ConfirmationDialog from './confirmation-dialog';
 
-/* Add a request dialog box */
-class AddRequestDialog extends React.Component {
+// Models
+import RideModel from '../../models/ride-model';
+
+/* Add an offer dialog box */
+class ConfirmedDetailsDialog extends React.Component {
   constructor() {
     super();
 
@@ -28,15 +32,17 @@ class AddRequestDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
+      ride: new RideModel() // Prevents null pointer exception
     };
   }
 
-  // Open the add request dialog
-  handleClickOpen = () => {
+  // Open the add offer dialog
+  handleClickOpen = (confirmedRide) => {
+    this.setState({ ride: confirmedRide });
     this.setState({ display: true });
   };
 
-  // Close the add request dialog
+  // Close the add offer dialog
   handleClose = () => {
     this.setState({ display: false });
   };
@@ -50,11 +56,11 @@ class AddRequestDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Ride Details"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
 
-            {/* Ride info */}
+            {/* Confirmed ride details */}
             <List dense={this.state.dense} style={{ padding: '0px' }} >
 
               {/* Origin */}
@@ -64,9 +70,7 @@ class AddRequestDialog extends React.Component {
                     {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary="(Origin)"
-                />
+                <ListItemText primary={this.state.ride.origin} />
               </ListItem>
 
               {/* Destination */}
@@ -76,9 +80,7 @@ class AddRequestDialog extends React.Component {
                     {Icons.destinationIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary="(Destination)"
-                />
+                <ListItemText primary={this.state.ride.destination} />
               </ListItem>
 
               {/* Date */}
@@ -88,9 +90,7 @@ class AddRequestDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary="(Date)"
-                />
+                <ListItemText primary={this.state.ride.date} />
               </ListItem>
 
               {/* Time */}
@@ -100,9 +100,7 @@ class AddRequestDialog extends React.Component {
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary="(Time)"
-                />
+                <ListItemText primary={this.state.ride.time} />
               </ListItem>
 
               {/* Notes */}
@@ -112,25 +110,49 @@ class AddRequestDialog extends React.Component {
                     {Icons.noteIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <div style={{ paddingLeft: "1em" }} >
-                  <TextField label="Note to driver" multiline={true} />
-                </div>
+                <ListItemText primary={this.state.ride.driverNote} />
               </ListItem>
             </List>
 
           </DialogContentText>
+
+          <hr/>
+
+          {/* Action buttons */}
+          <Grid container spacing={40} justify="center">
+            <Grid item>
+              <IconButton>
+                <Badge badgeContent={this.state.ride.passengers.length + "/" + this.state.ride.maxCapacity} color="primary">
+                  {Icons.seatIcon}
+                </Badge>
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <IconButton onClick={this.handleClose}>
+                {Icons.exitIcon}
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <IconButton onClick={() => {
+                this.confirmationDialogChild.handleClickOpen(
+                  "Delete this ride?", "Your driver will be notified.");
+              }}
+              >
+                {Icons.deleteIcon}
+              </IconButton>
+            </Grid>
+          </Grid>
+
         </DialogContent>
-        <DialogActions>
-          <Button onClick={this.handleClose}>
-            Back
-          </Button>
-          <Button onClick={this.handleClose}>
-            Confirm
-          </Button>
-        </DialogActions>
+
+        {/* Dialog boxes */}
+        <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance; }} />
+
       </Dialog>
+
     );
+
   }
 }
 
-export default AddRequestDialog;
+export default ConfirmedDetailsDialog;

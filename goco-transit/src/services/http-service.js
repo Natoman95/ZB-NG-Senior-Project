@@ -1,4 +1,5 @@
 import { getItem } from './storage-service';
+import { createError } from './error-service';
 
 /**
  * Handle HTTP requests to the API
@@ -47,11 +48,11 @@ const parseResponse = res => {
   const json = res
     .json()
     // Handle error if response body is not valid JSON
-    .catch(error => Promise.reject());
+    .catch(err => Promise.reject(createError(err, res)));
 
   // Handle error when response body is valid but status code is not
   if (!res.ok) {
-    return json.then(data => Promise.reject());
+    return json.then(data => Promise.reject(createError(data, res)));
   }
   return json;
 };

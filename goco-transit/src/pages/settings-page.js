@@ -3,19 +3,21 @@ import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import { FormGroup, FormControlLabel } from 'material-ui/Form';
 import Checkbox from 'material-ui/Checkbox';
-import { Redirect } from 'react-router'
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 // Components
 import { Icons } from '../icon-library';
+import Loader from '../components/loader';
 
 // Services
-import { signOut, isAuthenticated } from '../services/auth-service';
+import { signOut } from '../services/auth-service';
 import { getUser } from '../services/user-service';
 
 // Component for changing settings
 class SettingsPage extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     // We need the component's state so we can trigger a page refresh
     this.state = {
       dense: false,
@@ -27,39 +29,34 @@ class SettingsPage extends React.Component {
       privacyComplete: true,
       waiverComplete: true,
       termsComplete: true,
-      triggerReRender: false,
       user: null,
       firstName: null,
       lastName: null,
       phoneNum: null,
       email: null,
+      loading: false,
     }
-    // The click handler needs "this"
+    // The click handlers needs "this"
     this.handleClickLogout = this.handleClickLogout.bind(this);
+    this.handleClickEdit = this.handleClickEdit.bind(this);
   }
 
   componentWillMount() {
+    // Once the component mounts, make sure the tab matches the component
+    this.props.matchTab();
     this.loadUserData();
   }
-
-  /**
-   * Load user data - grabbing from 360
-   */
-  async loadUserData() {
-    let data = await getUser();
-    this.setState({
-      user: data,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      phoneNum: data.phoneNum,
-      email: data.email,
-    });
-  };
 
   // Authenticate the user and trigger a page change
   handleClickLogout() {
     signOut();
-    this.setState({ triggerReRender: true });
+    // Pass the message up to the main page
+    this.props.onLogout();
+  }
+
+  // Redirect to 360 to edit user info
+  handleClickEdit() {
+    window.open("https://360.gordon.edu/#/profile/" + this.state.userName, '_blank');
   }
 
   // Bind dialog data to the state
@@ -70,8 +67,12 @@ class SettingsPage extends React.Component {
   // If the user is logged in, then display the settings
   // But if the logout button is clicked, redirect to the login page
   render() {
-    if (isAuthenticated()) {
-      return (
+    let content;
+    if (this.state.loading) {
+      content = (<Loader />);
+    }
+    else {
+      content = (
         <div>
           <Grid container>
             <Grid item xs={8}>
@@ -79,7 +80,7 @@ class SettingsPage extends React.Component {
                 <Grid item>
                   <h3>
                     Contact Information
-                  </h3>
+                    </h3>
                 </Grid>
               </Grid>
             </Grid>
@@ -88,7 +89,7 @@ class SettingsPage extends React.Component {
             <Grid item xs={4}>
               <Grid container direction="row" justify="flex-end" alignItems="center">
                 <Grid item>
-                  <Button variant="fab" color="secondary" aria-label="add">
+                  <Button variant="fab" color="secondary" aria-label="add" onClick={this.handleClickEdit}>
                     {Icons.editIcon}
                   </Button>
                 </Grid>
@@ -106,38 +107,6 @@ class SettingsPage extends React.Component {
             Email: {this.state.email}
           </div>
 
-          {/* Decide which contact information will be shared with riders */}
-          <h3>
-            Contact Information to Share
-          </h3>
-
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.displayPhone}
-                  onChange={this.handleChange('displayPhone')}
-                  value="displayPhone"
-                  color="secondary"
-                />
-              }
-              label="Phone Number"
-            />
-          </FormGroup>
-
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={this.state.displayEmail}
-                  onChange={this.handleChange('displayEmail')}
-                  value="displayEmail"
-                />
-              }
-              label="Email Address"
-            />
-          </FormGroup>
-
           {/* Shows which legal agreements have been completed */}
           <h3>
             Legal Agreements
@@ -147,8 +116,8 @@ class SettingsPage extends React.Component {
             <FormControlLabel
               control={
                 <Checkbox
+                  color="primary"
                   checked={this.state.waiverComplete}
-                  onChange={this.handleChange('waiverComplete')}
                   value="waiverComplete"
                 />
               }
@@ -160,8 +129,8 @@ class SettingsPage extends React.Component {
             <FormControlLabel
               control={
                 <Checkbox
+                  color="primary"
                   checked={this.state.privacyComplete}
-                  onChange={this.handleChange('privacyComplete')}
                   value="privacyComplete"
                 />
               }
@@ -173,8 +142,8 @@ class SettingsPage extends React.Component {
             <FormControlLabel
               control={
                 <Checkbox
+                  color="primary"
                   checked={this.state.termsComplete}
-                  onChange={this.handleChange('termsComplete')}
                   value="termsComplete"
                 />
               }
@@ -185,24 +154,52 @@ class SettingsPage extends React.Component {
           <div style={{ padding: '.75em', }}>
           </div>
 
-          {/* Button to logout */}
-          <Button
-            variant="raised"
-            color="secondary"
-            style={{ width: '100%', }}
-            onClick={this.handleClickLogout}
-          >
-            Logout
-        </Button>
+          {/* Button to logout
+           the link keeps the url from remaining at the "settings" page after logout */}
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <Button
+              variant="raised"
+              color="secondary"
+              style={{ width: '100%', }}
+              onClick={this.handleClickLogout}
+            >
+              Logout
+            </Button>
+          </Link>
         </div>
-      )
+      );
     }
-    else {
-      return (
-        <Redirect to={"/"} />
-      )
-    }
+
+    return (<div>{content}</div>);
   }
+
+  /**
+   * Load user data - grabbing from 360
+   */
+  async loadUserData() {
+    this.setState({ loading: true });
+    try {
+      let data = await getUser();
+      this.setState({
+        user: data,
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phoneNum: data.phoneNum,
+        email: data.email,
+        userName: data.userName,
+        loading: false,
+      });
+    }
+    catch (err) {
+      throw err;
+    }
+  };
+
 }
+
+SettingsPage.propTypes = {
+  onLogout: PropTypes.func.isRequired,
+  matchTab: PropTypes.func.isRequired,
+};
 
 export default SettingsPage;

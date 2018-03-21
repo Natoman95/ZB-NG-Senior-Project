@@ -1,4 +1,4 @@
-import { getItem, setItem, removeItem } from "./storage-service";
+import { getItem, setItem, clearStorage } from "./storage-service";
 import { parseResponse } from "./http-service";
 
 /**
@@ -47,9 +47,9 @@ const getAuth = (userName, password) => {
  * @param {String} password User's password
  * @return {Promise.<undefined>} Resolved when token is refreshed
  */
-const authenticate = (userName, password) => {
+const authenticate = async (userName, password) => {
   setItem('userName', userName);
-  getAuth(userName, password).then(token => setItem('token', token));
+  await getAuth(userName, password).then(token => setItem('token', token));
 };
 
 /**
@@ -71,10 +71,10 @@ const isAuthenticated = () => {
 
 /**
  * Sign a user out
- * @description Removes token from storage.
+ * @description Removes local data, including auth token from storage.
  */
 const signOut = () => {
-  removeItem('token');
+  clearStorage();
 };
 
 export { authenticate, signOut, isAuthenticated };
