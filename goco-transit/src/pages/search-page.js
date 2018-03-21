@@ -91,7 +91,7 @@ class SearchPage extends React.Component {
             {/* Origin */}
             <Grid item>
               <TextField
-                style={{ width: 226.23 }} // Same width as departure fields
+                fullWidth
                 id="origin"
                 label="Origin"
                 type="search"
@@ -102,7 +102,7 @@ class SearchPage extends React.Component {
             {/* Destination */}
             <Grid item>
               <TextField // Destination (end)
-                style={{ width: 226.23 }} // Same width as departure fields
+                fullWidth
                 id="destination"
                 label="Destination"
                 type="search"
@@ -112,36 +112,34 @@ class SearchPage extends React.Component {
             </Grid>
             {/* Start date */}
             <Grid item>
-              <form noValidate>
-                <TextField
-                  id="startDate"
-                  label="Earliest Possible Departure"
-                  type="datetime-local"
-                  defaultValue={this.getDateTime(0)} // Default time for the start date is today
-                  value={this.state.startDate}
-                  onChange={this.handleFormChange('startDate')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </form>
+              <TextField
+                fullWidth
+                id="startDate"
+                label="Earliest Possible Departure"
+                type="datetime-local"
+                defaultValue={this.getDateTime(0)} // Default time for the start date is today
+                value={this.state.startDate}
+                onChange={this.handleFormChange('startDate')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
             </Grid>
             {/* End date */}
             <Grid item>
-              <form noValidate>
-                <TextField
-                  id="startDate"
-                  label="Latest Possible Departure"
-                  type="datetime-local"
-                  defaultValue={this.getDateTime(86400000)} // Default time for the end date is tomorrow
-                  min={this.getDateTime(86400000)}
-                  onChange={this.handleFormChange('endDate')}
-                  value={this.state.endDate}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </form>
+              <TextField
+                fullWidth
+                id="startDate"
+                label="Latest Possible Departure"
+                type="datetime-local"
+                defaultValue={this.getDateTime(86400000)} // Default time for the end date is tomorrow
+                min={this.getDateTime(86400000)}
+                onChange={this.handleFormChange('endDate')}
+                value={this.state.endDate}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
             </Grid>
           </Grid>
         </div>
