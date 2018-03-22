@@ -89,7 +89,7 @@ class SearchPage extends React.Component {
         <div style={{ marginTop: '2em' }}>
           <Grid container spacing={40}>
             {/* Origin */}
-            <Grid item>
+            <Grid item xl={3} md={6} sm={12}>
               <TextField
                 fullWidth
                 id="originField"
@@ -100,7 +100,7 @@ class SearchPage extends React.Component {
               />
             </Grid>
             {/* Destination */}
-            <Grid item>
+            <Grid item xl={3} md={6} sm={12}>
               <TextField // Destination (end)
                 fullWidth
                 id="destinationField"
@@ -111,7 +111,7 @@ class SearchPage extends React.Component {
               />
             </Grid>
             {/* Start date */}
-            <Grid item>
+            <Grid item xl={3} md={6} sm={12}>
               <TextField
                 fullWidth
                 id="startDateField"
@@ -126,7 +126,7 @@ class SearchPage extends React.Component {
               />
             </Grid>
             {/* End date */}
-            <Grid item>
+            <Grid item xl={3} md={6} sm={12}>
               <TextField
                 fullWidth
                 id="endDateField"
