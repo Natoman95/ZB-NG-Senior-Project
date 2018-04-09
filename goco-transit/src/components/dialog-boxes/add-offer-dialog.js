@@ -53,10 +53,23 @@ class AddOfferDialog extends React.Component {
   // Close the add offer dialog
   handleClose = (confirmSelected) => {
     if (confirmSelected) {
-      addRideOffer(, origin, destination, );
+      addRideOffer(
+                   this.state.originValue,
+                   this.state.destinationValue,
+                   this.state.dateValue,
+                   this.state.timeValue,
+                   this.state.maxCapacityValue,
+                   this.state.driverNoteValue);
     }
     this.setState({ display: false });
   };
+
+  // Set state variables
+  handleFormChange(input) {
+    return event => {
+      this.setState({ [input]: event.target.value });
+    };
+  }
 
   // Limits seat maximum to pre-defined constant
   handleSeatPlus = () => {
@@ -116,7 +129,14 @@ class AddOfferDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >
-                  <TextField value={this.state.dateValue} required type="date" />
+                  <TextField
+                    required
+                    id="dateInput"
+                    type="date"
+                    //* TODO: Abstract getDateTime from search-page.js *// defaultValue={this.getDateTime(0)} // Default to now
+                    value={this.state.dateValue}
+                    onChange={this.handleFormChange("dateValue")}
+                  />
                 </div>
               </ListItem>
 
@@ -128,7 +148,14 @@ class AddOfferDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >
-                  <TextField value={this.state.timeValue} required type="time" />
+                  <TextField
+                    required
+                    id="timeInput"
+                    type="time"
+                    //* TODO: Abstract getDateTime from search-page.js *// defaultValue={this.getDateTime(0)} // Default to now
+                    value={this.state.timeValue}
+                    onChange={this.handleFormChange("timeValue")}
+                  />
                 </div>
               </ListItem>
 
@@ -142,7 +169,7 @@ class AddOfferDialog extends React.Component {
                 <IconButton onClick={this.handleSeatMinus} >
                   {Icons.leftArrowIcon}
                 </IconButton>
-                {this.state.seats}
+                {this.state.maxCapacityValue}
                 <IconButton onClick={this.handleSeatPlus} >
                   {Icons.rightArrowIcon}
                 </IconButton>
@@ -156,7 +183,15 @@ class AddOfferDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >
-                  <TextField value={this.state.driverNoteValue} label="Note to passengers" multiline={true} />
+                  <TextField
+                    required
+                    id="driverNoteInput"
+                    label="Note to passengers"
+                    multiline={true}
+                    //* TODO: Abstract getDateTime from search-page.js *// defaultValue={this.getDateTime(0)} // Default to now
+                    value={this.state.driverNoteValue}
+                    onChange={this.handleFormChange("driverNoteValue")}
+                  />
                 </div>
               </ListItem>
             </List>

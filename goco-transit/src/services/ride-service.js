@@ -47,7 +47,14 @@ const findOfferedRides = (startDate, endDate, origin, destination) => {
   return rides;
 }
 
-const addRideOffer = (driver, origin, destination, date, time, maxCapacity, driverNote) => {
+const addRideOffer = (origin, destination, date, time, maxCapacity, driverNote) => {
+  console.log("origin: " + origin);
+  console.log("dest: " + destination);
+  console.log("date: " + date);
+  console.log("time: " + time);
+  console.log("maxCap: " + maxCapacity);
+  console.log("dNote: " + driverNote);
+  let rideToAdd = new RideModel(origin, destination, date, time, maxCapacity, driverNote); //TODO: driver
   return post();
 };
 
