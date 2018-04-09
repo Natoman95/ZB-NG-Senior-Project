@@ -6,8 +6,7 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import List, {
   ListItem,
-  ListItemAvatar,
-  ListItemText,
+  ListItemAvatar
 } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import TextField from 'material-ui/TextField';
@@ -31,6 +30,7 @@ class AddOfferDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
+
       // Dialog box values
       originValue: null,
       destinationValue: null,
@@ -104,9 +104,15 @@ class AddOfferDialog extends React.Component {
                     {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary="(Origin)"
-                />
+                <div style={{ paddingLeft: "1em" }} >
+                  <TextField
+                      required
+                      id="originInput"
+                      label="Starting location"
+                      value={this.state.originValue}
+                      onChange={this.handleFormChange("originValue")}
+                    />
+                  </div>
               </ListItem>
 
               {/* Destination */}
@@ -116,9 +122,15 @@ class AddOfferDialog extends React.Component {
                     {Icons.destinationIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText
-                  primary="(Destination)"
-                />
+                <div style={{ paddingLeft: "1em" }} >
+                  <TextField
+                      required
+                      id="destinationInput"
+                      label="Ending location"
+                      value={this.state.destinationValue}
+                      onChange={this.handleFormChange("destinationValue")}
+                    />
+                  </div>
               </ListItem>
 
               {/* Date */}
@@ -188,7 +200,6 @@ class AddOfferDialog extends React.Component {
                     id="driverNoteInput"
                     label="Note to passengers"
                     multiline={true}
-                    //* TODO: Abstract getDateTime from search-page.js *// defaultValue={this.getDateTime(0)} // Default to now
                     value={this.state.driverNoteValue}
                     onChange={this.handleFormChange("driverNoteValue")}
                   />
