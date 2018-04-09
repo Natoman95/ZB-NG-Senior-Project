@@ -2,6 +2,10 @@
 import UserModel from "../models/user-model";
 import RideModel from "../models/ride-model";
 
+// Services
+import { post } from './http-service';
+import { getUser } from '../services/user-service';
+
 // Media
 import ZachPhoto from '../images/user_profile_zach.jpg'
 import NathanPhoto from '../images/user_profile_nathan.jpg'
@@ -44,4 +48,9 @@ const findOfferedRides = (startDate, endDate, origin, destination) => {
   return rides;
 }
 
-export { findOfferedRides };
+const addRideOffer = (origin, destination, date, time, maxCapacity, driverNote) => {
+  let rideToAdd = new RideModel(getUser(), origin, destination, date, time, maxCapacity, driverNote);
+  return post();
+};
+
+export { findOfferedRides, addRideOffer };
