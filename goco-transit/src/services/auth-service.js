@@ -33,7 +33,6 @@ const getAuth = (userName, password) => {
     grant_type: 'password',
   });
   const request = new Request(`/token`, { method: 'post', headers, body });
-
   return fetch(request)
     .then(parseResponse)
     .then(data => data.access_token)

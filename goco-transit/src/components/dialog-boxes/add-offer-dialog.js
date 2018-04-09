@@ -17,6 +17,9 @@ import Grid from 'material-ui/Grid';
 // Components
 import { Icons } from '../../icon-library';
 
+// Services
+import { addRideOffer } from "../../services/ride-service";
+
 /* Add an offer dialog box */
 class AddOfferDialog extends React.Component {
   constructor() {
@@ -28,7 +31,13 @@ class AddOfferDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
-      seats: 1,
+      // Dialog box values
+      originValue: null,
+      destinationValue: null,
+      dateValue: null,
+      timeValue: null,
+      maxCapacityValue: 1,
+      driverNoteValue: null
     };
   }
 
@@ -42,18 +51,21 @@ class AddOfferDialog extends React.Component {
   };
 
   // Close the add offer dialog
-  handleClose = () => {
+  handleClose = (confirmSelected) => {
+    if (confirmSelected) {
+      addRideOffer(, origin, destination, );
+    }
     this.setState({ display: false });
   };
 
   // Limits seat maximum to pre-defined constant
   handleSeatPlus = () => {
-    if (this.state.seats < this.constants.SEAT_MAX) { this.setState({ seats: this.state.seats + 1 }) }
+    if (this.state.maxCapacityValue < this.constants.SEAT_MAX) { this.setState({ maxCapacityValue: this.state.maxCapacityValue + 1 }) }
   }
 
   // Limits seat minimum to 1
   handleSeatMinus = () => {
-    if (this.state.seats > 1) { this.setState({ seats: this.state.seats - 1 }) }
+    if (this.state.maxCapacityValue > 1) { this.setState({ maxCapacityValue: this.state.maxCapacityValue - 1 }) }
   }
 
   render() {
@@ -104,7 +116,7 @@ class AddOfferDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >
-                  <TextField required type="date" />
+                  <TextField value={this.state.dateValue} required type="date" />
                 </div>
               </ListItem>
 
@@ -116,7 +128,7 @@ class AddOfferDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >
-                  <TextField required type="time" />
+                  <TextField value={this.state.timeValue} required type="time" />
                 </div>
               </ListItem>
 
@@ -144,7 +156,7 @@ class AddOfferDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >
-                  <TextField label="Note to passengers" multiline={true} />
+                  <TextField value={this.state.driverNoteValue} label="Note to passengers" multiline={true} />
                 </div>
               </ListItem>
             </List>
@@ -156,12 +168,12 @@ class AddOfferDialog extends React.Component {
         {/* Action buttons */}
         <Grid container spacing={40} justify="center">
           <Grid item>
-            <IconButton onClick={this.handleClose}>
+            <IconButton onClick={() => this.handleClose(false)}>
               {Icons.exitIcon}
             </IconButton>
           </Grid>
           <Grid item>
-            <IconButton onClick={this.handleClose}>
+            <IconButton onClick={() => this.handleClose(true)}>
               {Icons.confirmIcon}
             </IconButton>
           </Grid>
