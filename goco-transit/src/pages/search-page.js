@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
+import { Icons } from '../icon-library';
 
 // Services
 import { findOfferedRides } from '../services/ride-service';
@@ -166,6 +167,7 @@ class SearchPage extends React.Component {
               Results
             </h3>
 
+            {/* Display search results as a list of Rides */}
             {this.state.results.map((searchResult) => {
               return (
                 <List dense={this.state.dense}>
@@ -175,7 +177,9 @@ class SearchPage extends React.Component {
                     divider={this.state.divider}
                     onClick={() => { this.addRequestDialogChild.handleClickOpen(searchResult); }}>
                     {/* Driver profile picture */}
-                    <Avatar src={searchResult.driver.profilePhoto} />
+                    {(searchResult.driverUsername.profilePhoto == null) && <Avatar src={Icons.avatarIcon} />}
+                    {(searchResult.driverUsername.profilePhoto != null) && <Avatar src={searchResult.driverUsername.profilePhoto} />}
+                    
                     {/* Ride date */}
                     <ListItemText
                       primary={searchResult.destination}
