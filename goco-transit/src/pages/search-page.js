@@ -176,9 +176,9 @@ class SearchPage extends React.Component {
                     disableGutters={this.state.noGutters}
                     divider={this.state.divider}
                     onClick={() => { this.addRequestDialogChild.handleClickOpen(searchResult); }}>
+                    
                     {/* Driver profile picture */}
-                    {(searchResult.driverUsername.profilePhoto == null) && <Avatar src={Icons.avatarIcon} />}
-                    {(searchResult.driverUsername.profilePhoto != null) && <Avatar src={searchResult.driverUsername.profilePhoto} />}
+                    <Avatar src={searchResult.driverUsername.profilePicture} />
                     
                     {/* Ride date */}
                     <ListItemText
