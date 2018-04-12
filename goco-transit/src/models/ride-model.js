@@ -2,8 +2,8 @@
  * Contains data on rides which may be offers or rides
  */
 class RideModel {
-  constructor(driver, origin, destination, date, time, maxCapacity, driverNote) {
-    this.driver = driver;
+  constructor(driverUsername, origin, destination, date, time, maxCapacity, driverNote) {
+    this.driverUsername = driverUsername;
     this.origin = origin;
     this.destination = destination;
     this.date = date;
@@ -21,15 +21,15 @@ class RideModel {
   time; // Time of ride
   driverNote; // Note to passengers (optional)
 
-  driver; // User - the driver for the ride
-  passengers = []; // Users - any users who are part of the ride
+  driverUsername; // Username - the driver for the ride
+  passengers = []; // Usernames - any Users who are part of the ride
   maxCapacity; // The number of seats available when the ride offer is created 
-  pendingRequests = []; // Requests - request objects from users who wish to join the ride
+  pendingRequests = []; // Requests - request objects from Users who wish to join the ride
 
-  // Determine whether a user is in the list of passengers
-  isUserAPassenger = (user) => {
+  // Determine whether a username is in the list of passengers
+  isUserAPassenger = (usernameIn) => {
     for (let i = 0; i < this.passengers.length; i++) {
-      if (this.passengers[i] === user) {
+      if (this.passengers[i] === usernameIn) {
         return true;
       }
     }

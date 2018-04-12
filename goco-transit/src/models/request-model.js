@@ -2,8 +2,8 @@
  * Contains data on rides which may be offers or rides
  */
 class RequestModel {
-  constructor(user, origin, destination, earliestDeparture, latestDeparture, passengerNote) {
-    this.user = user;
+  constructor(requesterUsername, origin, destination, earliestDeparture, latestDeparture, passengerNote) {
+    this.requesterUsername = requesterUsername;
     this.origin = origin;
     this.destination = destination;
     this.earliestDeparture = earliestDeparture;
@@ -19,7 +19,7 @@ class RequestModel {
   earliestDeparture;
   latestDeparture;
 
-  user; // User - the one who wants a ride
+  requesterUsername; // Username - the one who wants a ride
   pendingRide; // Ride - if the request is linked to a desired ride
 }
 

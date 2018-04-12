@@ -33,12 +33,12 @@ const findOfferedRides = (startDate, endDate, origin, destination) => {
   let Jim = new UserModel("Jim", "Bob", "jim.bob@gordon.edu");
 
   // Dummy rides - will be found in a database somewhere
-  let ride1 = new RideModel(Nathan, "Wenham", "Oxford", "2017-12-07", "13:30", 3, "How much more can they take from me? They got my blood, now it's my car!");
+  let ride1 = new RideModel(Nathan.username, "Wenham", "Oxford", "2017-12-07", "13:30", 3, "How much more can they take from me? They got my blood, now it's my car!");
   ride1.passengers = [Rachel];
   ride1.maxCapacity = 3;
   ride1.id = "000003";
 
-  let ride2 = new RideModel(Zach, "Manchester", "Wenham", "2017-11-03", "08:45", 4, "The way I see it, if you're gonna build a time machine into a car, why not do it with some style?");
+  let ride2 = new RideModel(Zach.username, "Manchester", "Wenham", "2017-11-03", "08:45", 4, "The way I see it, if you're gonna build a time machine into a car, why not do it with some style?");
   ride2.passengers = [Jim];
   ride2.maxCapacity = 4;
   ride2.id = "000004";
@@ -49,7 +49,7 @@ const findOfferedRides = (startDate, endDate, origin, destination) => {
 }
 
 const addRideOffer = (origin, destination, date, time, maxCapacity, driverNote) => {
-  let rideToAdd = new RideModel(getUser(), origin, destination, date, time, maxCapacity, driverNote);
+  let rideToAdd = new RideModel(getUser().username, origin, destination, date, time, maxCapacity, driverNote);
   return post();
 };
 
