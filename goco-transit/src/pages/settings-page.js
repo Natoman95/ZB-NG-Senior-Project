@@ -56,7 +56,7 @@ class SettingsPage extends React.Component {
 
   // Redirect to 360 to edit user info
   handleClickEdit() {
-    window.open("https://360.gordon.edu/#/profile/" + this.state.userName, '_blank');
+    window.open("https://360.gordon.edu/#/profile/" + this.state.username, '_blank');
   }
 
   // Bind dialog data to the state
@@ -186,7 +186,7 @@ class SettingsPage extends React.Component {
         lastName: data.lastName,
         phoneNum: data.phoneNum,
         email: data.email,
-        userName: data.userName,
+        username: data.username,
         loading: false,
       });
     }

@@ -77,24 +77,24 @@ const getUser = async () => {
 
 /**
  * Get user profile info for a given user or the current user if `username` is not provided
- * @param {String} [userName] Username in firstname.lastname format
+ * @param {String} [username] Username in firstname.lastname format
  * @return {Promise} Profile info
  */
-const getUser360Profile = userName => {
-  if (userName) {
-    return get(`profiles/${userName}/`);
+const getUser360Profile = username => {
+  if (username) {
+    return get(`profiles/${username}/`);
   }
   return get('profiles');
 };
 
 /**
  * Get image for a given user or the current user if `username` is not provided
- * @param {String} [userName] Username in firstname.lastname format
+ * @param {String} [username] Username in firstname.lastname format
  * @return {Promise.<String>} Image as a Base64-encoded string
  */
-const getUser360Image = userName => {
-  if (userName) {
-    return get(`profiles/Image/${userName}/`);
+const getUser360Image = username => {
+  if (username) {
+    return get(`profiles/Image/${username}/`);
   }
 
   return get('profiles/Image');
