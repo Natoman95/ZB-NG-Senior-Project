@@ -1,7 +1,5 @@
 // Models
 import UserModel from "../models/user-model";
-import RideModel from "../models/ride-model";
-import RequestModel from "../models/request-model";
 
 // Services
 import { getItem, setItem, isCachedDataExpired } from "../services/storage-service";

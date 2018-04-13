@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 
 // Components
 import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
-import { Icons } from '../icon-library';
 
 // Services
 import { searchOfferedRides } from '../services/ride-service';

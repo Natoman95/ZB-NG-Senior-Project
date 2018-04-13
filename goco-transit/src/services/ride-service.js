@@ -1,5 +1,4 @@
 // Models
-import UserModel from "../models/user-model";
 import RideModel from "../models/ride-model";
 
 // Services
