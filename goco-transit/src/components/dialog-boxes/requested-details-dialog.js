@@ -100,7 +100,7 @@ class RequestedDetailsDialog extends React.Component {
               {/* End of availability range */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingTop: 0}}>
                 <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Latest </div>
-                <ListItemText primary={this.state.request.latestDeparture} />
+                <ListItemText primary={this.state.request.latestDepartureDateTime} />
               </ListItem>
 
               {/* Notes */}
