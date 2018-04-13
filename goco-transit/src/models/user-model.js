@@ -15,10 +15,7 @@ class UserModel {
   username;
   phoneNum;
   profilePhoto;
-
-  requests = []; // Requests
-  confirmedRides = []; // Rides
-  offeredRides = []; // Rides
+  
 }
 
 export default UserModel;
