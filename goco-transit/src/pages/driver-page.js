@@ -64,7 +64,7 @@ class DriverPage extends React.Component {
                   {/* Number of users on the offered ride */}
                   <ListItemAvatar>
                     <IconButton disabled={true}>
-                      <Badge badgeContent={offeredRide.passengers.length + "/" + offeredRide.maxCapacity} color="primary">
+                      <Badge badgeContent={offeredRide.passengerUsernames.length + "/" + offeredRide.maxCapacity} color="primary">
                         {Icons.seatIcon}
                       </Badge>
                     </IconButton>

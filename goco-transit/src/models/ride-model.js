@@ -40,8 +40,8 @@ class RideModel {
 
   // Determine whether a username is in the list of passengers
   isUserAPassenger = (usernameIn) => {
-    for (let i = 0; i < this.passengers.length; i++) {
-      if (this.passengers[i] === usernameIn) {
+    for (let i = 0; i < this.passengerUsernames.length; i++) {
+      if (this.passengerUsernames[i] === usernameIn) {
         return true;
       }
     }
