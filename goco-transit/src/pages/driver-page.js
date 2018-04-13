@@ -18,6 +18,7 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
+import { getOfferedRides } from '../services/ride-service';
 
 // Contains rides offered to other users
 class DriverPage extends React.Component {
@@ -109,11 +110,12 @@ class DriverPage extends React.Component {
     this.setState({ loading: true });
     try {
       let data = await getUser();
+      this.setState({ user: data });
+      // Load the user's offered rides
       this.setState({
-        user: data,
-        offeredRides: data.offeredRides,
+        offeredRides: getOfferedRides(this.state.user.username),
         loading: false
-      });
+      })
     }
     catch (err) {
       throw err;
