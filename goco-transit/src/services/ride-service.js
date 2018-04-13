@@ -22,7 +22,7 @@ import NathanPhoto from '../images/user_profile_nathan.jpg'
  * @param {String} destination desired final location
  * @return {UserModel} Current user
  */
-const findOfferedRides = (startDate, endDate, origin, destination) => {
+const searchOfferedRides = (startDate, endDate, origin, destination) => {
   // Hardcoded for now - will retrieve from 360
   let Zach = new UserModel("Zach", "Brown", "zach.brown@gordon.edu");
   let Nathan = new UserModel("Nathan", "Gray", "nathan.gray@gordon.edu");
@@ -53,4 +53,14 @@ const addRideOffer = (origin, destination, date, time, maxCapacity, driverNote) 
   return post();
 };
 
-export { findOfferedRides, addRideOffer };
+const getOfferedRides = (username) => {
+  let offeredRides = [];
+
+  // call database (pass in username) and get back their offered rides
+  // for each ride in the return, push a new RideModel to the offeredRides array
+  // return the offeredRides array
+
+  // get();
+};
+
+export { searchOfferedRides, addRideOffer, getOfferedRides };
