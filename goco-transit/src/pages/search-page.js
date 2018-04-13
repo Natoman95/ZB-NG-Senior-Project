@@ -183,7 +183,7 @@ class SearchPage extends React.Component {
                     {/* Ride date */}
                     <ListItemText
                       primary={searchResult.destination}
-                      secondary={this.state.secondary ? searchResult.date : null}
+                      secondary={this.state.secondary ? searchResult.getDepartureDate() : null}
                     />
                   </ListItem>
                 </List>

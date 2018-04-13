@@ -72,7 +72,7 @@ class DriverPage extends React.Component {
                   {/* Date of the ride */}
                   <ListItemText
                     primary={offeredRide.destination}
-                    secondary={this.state.secondary ? offeredRide.date : null}
+                    secondary={this.state.secondary ? offeredRide.getDepartureDate() : null}
                   />
                 </ListItem>
               );

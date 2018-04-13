@@ -47,6 +47,17 @@ class RideModel {
     }
     return false;
   }
+
+  // TODO: Returns just the date portion of departureDateTime
+  getDepartureDate = () => {
+    return null;
+  }
+
+  // TODO: Returns just the time portion of departureDateTime
+  getDepartureTime = () => {
+    return null;
+  }
+
 }
 
 export default RideModel;

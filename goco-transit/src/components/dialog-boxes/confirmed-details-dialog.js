@@ -90,7 +90,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={this.state.ride.date} />
+                <ListItemText primary={this.state.ride.getDepartureDate()} />
               </ListItem>
 
               {/* Time */}
@@ -100,7 +100,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={this.state.ride.time} />
+                <ListItemText primary={this.state.ride.getDepartureTime()} />
               </ListItem>
 
               {/* Notes */}

@@ -94,7 +94,7 @@ class AddRequestDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary={this.state.ride.date}
+                  primary={this.state.ride.getDepartureDate()}
                 />
               </ListItem>
 
@@ -106,7 +106,7 @@ class AddRequestDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary={this.state.ride.time}
+                  primary={this.state.ride.getDepartureTime()}
                 />
               </ListItem>
 
