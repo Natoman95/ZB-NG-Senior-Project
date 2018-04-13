@@ -13,7 +13,7 @@ import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
 import { Icons } from '../icon-library';
 
 // Services
-import { findOfferedRides } from '../services/ride-service';
+import { searchOfferedRides } from '../services/ride-service';
 
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
@@ -66,7 +66,7 @@ class SearchPage extends React.Component {
    */
   handleClickSearch = () => {
     this.setState({
-      results: findOfferedRides(this.state.startDate, this.state.endDate,
+      results: searchOfferedRides(this.state.startDate, this.state.endDate,
         this.state.origin, this.state.destination)
     });
   }
