@@ -88,7 +88,7 @@ class PassengerPage extends React.Component {
                   {/* Route destination and date range */}
                   <ListItemText
                     primary={requestedRide.destination}
-                    secondary={this.state.secondary ? (requestedRide.earliestDeparture + ' - ' + requestedRide.latestDeparture) : null}
+                    secondary={this.state.secondary ? (requestedRide.earliestDepartureDateTime + ' - ' + requestedRide.latestDeparture) : null}
                   />
                 </ListItem>
               );

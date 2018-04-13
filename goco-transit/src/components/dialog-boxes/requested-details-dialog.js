@@ -85,7 +85,7 @@ class RequestedDetailsDialog extends React.Component {
               {/* Start of availability range */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingBottom: 0}} >
                 <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Earliest </div>
-                <ListItemText primary={this.state.request.earliestDeparture} />
+                <ListItemText primary={this.state.request.earliestDepartureDateTime} />
               </ListItem>
 
               {/* Availability icon */}
