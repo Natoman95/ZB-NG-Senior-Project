@@ -6,10 +6,6 @@ import RideModel from "../models/ride-model";
 import { post } from './http-service';
 import { getUser } from '../services/user-service';
 
-// Media
-import ZachPhoto from '../images/user_profile_zach.jpg'
-import NathanPhoto from '../images/user_profile_nathan.jpg'
-
 /**
  * This class is responsible for all actions related to rides
  */
