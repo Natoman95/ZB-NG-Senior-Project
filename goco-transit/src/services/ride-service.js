@@ -2,7 +2,7 @@
 import RideModel from "../models/ride-model";
 
 // Services
-import { post } from './http-service';
+import { get, post } from './http-service';
 import { getUser } from '../services/user-service';
 
 /**
