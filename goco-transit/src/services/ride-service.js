@@ -28,13 +28,8 @@ const addRideOffer = (origin, destination, date, time, maxCapacity, driverNote) 
 };
 
 const getOfferedRides = (username) => {
-  let offeredRides = [];
-
-  // call database (pass in username) and get back their offered rides
-  // for each ride in the return, push a new RideModel to the offeredRides array
-  // return the offeredRides array
-
-  // get();
+  let offeredRides = get(`transit/ride/user/${username}/offered`);
+  return offeredRides;
 };
 
 export { searchOfferedRides, addRideOffer, getOfferedRides };
