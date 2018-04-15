@@ -17,6 +17,7 @@ import Loader from '../components/loader';
 // Services
 import { getUser } from '../services/user-service';
 import { getDepartureDate, getConfirmedRides } from '../services/ride-service';
+import { getRequests } from '../services/request-service';
 
 // Contains ride requests made by the user
 class PassengerPage extends React.Component {
@@ -30,7 +31,7 @@ class PassengerPage extends React.Component {
       divider: true,
       user: null,
       confirmedRides: null,
-      requests: null,
+      requestedRides: null,
       loading: true
     };
   }
@@ -54,6 +55,8 @@ class PassengerPage extends React.Component {
             Confirmed
           </h3>
           <List dense={this.state.dense}>
+            {console.log("Confirmed Rides:")}
+            {console.log(this.state.confirmedRides)}
             {this.state.confirmedRides.map((confirmedRide) => {
               return (
                 <ListItem
@@ -78,7 +81,7 @@ class PassengerPage extends React.Component {
           </h3>
 
           <List dense={this.state.dense}>
-            {this.state.requests.map((requestedRide) => {
+            {this.state.requestedRides.map((requestedRide) => {
               return (
                 <ListItem
                   button
@@ -131,12 +134,17 @@ class PassengerPage extends React.Component {
       let data = await getUser();
       this.setState({
         user: data,
-        requests: data.requests
       });
-      this.setState({
-        confirmedRides: getConfirmedRides(this.state.user.username),
-        loading: false,
-      });
+
+      // Set confirmedRides to empty array if promise is rejected
+      this.setState({ confirmedRides: getConfirmedRides(this.state.user.username) });
+      this.state.confirmedRides.catch( this.setState({ confirmedRides: [] }) );
+
+      // Set requestedRides to empty array if promise is rejected
+      this.setState({ requestedRides: getRequests(this.state.user.username) });
+      this.state.requestedRides.catch( this.setState({ requestedRides: [] }) );
+
+      this.setState( {loading: false} );
     }
     catch (err) {
       throw err;
