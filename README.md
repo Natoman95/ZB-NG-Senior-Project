@@ -30,6 +30,7 @@
 * Install react globally (with the -g option) via the npm package manager https://www.npmjs.com/package/react/tutorial
 * Install yarn globally in one of the ways listed https://yarnpkg.com/lang/en/docs/install/
 * Navigate to the `goco-transit` folder of the repository
+* Execute `yarn install` if this is your first time running the project
 * Execute `yarn dev` to run the project
 * Execute `yarn build` to create a production build of the project
 
