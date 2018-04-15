@@ -132,9 +132,8 @@ class PassengerPage extends React.Component {
     this.setState({ loading: true });
     try {
       let data = await getUser();
-      this.setState({
-        user: data,
-      });
+      
+      this.setState({ user: data });
 
       // Set confirmedRides to empty array if promise is rejected
       this.setState({ confirmedRides: getConfirmedRides(this.state.user.username) });
@@ -144,7 +143,7 @@ class PassengerPage extends React.Component {
       this.setState({ requestedRides: getRequests(this.state.user.username) });
       this.state.requestedRides.catch( this.setState({ requestedRides: [] }) );
 
-      this.setState( {loading: false} );
+      this.setState({ loading: false });
     }
     catch (err) {
       throw err;

@@ -110,12 +110,14 @@ class DriverPage extends React.Component {
     this.setState({ loading: true });
     try {
       let data = await getUser();
+      
       this.setState({ user: data });
-      // Load the user's offered rides
-      this.setState({
-        offeredRides: getOfferedRides(this.state.user.username),
-        loading: false
-      })
+
+      // Set confirmedRides to empty array if promise is rejected      
+      this.setState({ offeredRides: getOfferedRides(this.state.user.username) });
+      this.state.offeredRides.catch( this.setState({ offeredRides: [] }) );
+
+      this.setState({ loading: false });
     }
     catch (err) {
       throw err;
