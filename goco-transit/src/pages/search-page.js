@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
 
 // Services
-import { getSearchResults } from '../services/ride-service';
+import { getSearchResults, getDepartureDate } from '../services/ride-service';
 
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
@@ -32,7 +32,7 @@ class SearchPage extends React.Component {
       destination: null,
       startDate: null,
       endDate: null,
-      results: null
+      searchResults: []
     };
   }
 
@@ -61,13 +61,18 @@ class SearchPage extends React.Component {
   }
 
   /**
-   * When the search button is clicked, rides matching the user's parameters must be found
+   * When the search button is clicked, rides matching the user's parameters are displayed
    */
   handleClickSearch = () => {
-    this.setState({
-      results: getSearchResults(this.state.startDate, this.state.endDate,
-        this.state.origin, this.state.destination)
-    });
+    let searchAttempt = getSearchResults(this.state.startDate, this.state.endDate, this.state.origin, this.state.destination);
+    // Catch rejected Promise (if no search results are returned)
+    if (searchAttempt.constructor === Promise) {
+      this.setState({ searchResults: [] });
+    }
+    // Search results were returned
+    else {
+      this.setState({ searchResults: searchAttempt });
+    }
   }
 
   // Change state variables based on changes to input forms
@@ -160,14 +165,14 @@ class SearchPage extends React.Component {
 
         {/* Search Results - visible only if user has hit the search button 
          Generated from an array of results */}
-        {this.state.results !== null &&
+        {this.state.searchResults.length !== 0 &&
           <div style={{ marginTop: '3em' }}>
             <h3>
-              Results
+              Search Results ({this.state.searchResults.length})
             </h3>
 
             {/* Display search results as a list of Rides */}
-            {this.state.results.map((searchResult) => {
+            {this.state.searchResults.map((searchResult) => {
               return (
                 <List dense={this.state.dense}>
                   <ListItem
@@ -182,7 +187,7 @@ class SearchPage extends React.Component {
                     {/* Ride date */}
                     <ListItemText
                       primary={searchResult.destination}
-                      secondary={this.state.secondary ? searchResult.getDepartureDate() : null}
+                      secondary={this.state.secondary ? getDepartureDate(searchResult) : null}
                     />
                   </ListItem>
                 </List>
