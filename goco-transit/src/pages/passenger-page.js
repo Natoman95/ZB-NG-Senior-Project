@@ -16,7 +16,7 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
-import { getDepartureDate, getDepartureTime } from '../services/ride-service';
+import { getDepartureDate, getConfirmedRides } from '../services/ride-service';
 
 // Contains ride requests made by the user
 class PassengerPage extends React.Component {
@@ -131,8 +131,10 @@ class PassengerPage extends React.Component {
       let data = await getUser();
       this.setState({
         user: data,
-        requests: data.requests,
-        confirmedRides: data.confirmedRides,
+        requests: data.requests
+      });
+      this.setState({
+        confirmedRides: getConfirmedRides(this.state.user.username),
         loading: false,
       });
     }

@@ -12,7 +12,7 @@ import PropTypes from 'prop-types';
 import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
 
 // Services
-import { searchOfferedRides } from '../services/ride-service';
+import { getSearchResults } from '../services/ride-service';
 
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
@@ -65,7 +65,7 @@ class SearchPage extends React.Component {
    */
   handleClickSearch = () => {
     this.setState({
-      results: searchOfferedRides(this.state.startDate, this.state.endDate,
+      results: getSearchResults(this.state.startDate, this.state.endDate,
         this.state.origin, this.state.destination)
     });
   }

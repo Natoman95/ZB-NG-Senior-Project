@@ -5,9 +5,7 @@ import UserModel from "../models/user-model";
 import { getItem, setItem, isCachedDataExpired } from "../services/storage-service";
 import { get } from '../services/http-service';
 
-/**
- * This class is responsible for all actions related to users
- */
+/* This class is responsible for all actions related to users */
 
 /**
  * Get the current user
