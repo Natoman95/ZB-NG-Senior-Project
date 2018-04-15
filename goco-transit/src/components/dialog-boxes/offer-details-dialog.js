@@ -21,6 +21,9 @@ import ConfirmationDialog from './confirmation-dialog';
 // Models
 import RideModel from '../../models/ride-model';
 
+// Services
+import { getDepartureDate, getDepartureTime } from '../../services/ride-service';
+
 /* Add an offer dialog box */
 class OfferDetailsDialog extends React.Component {
   constructor() {
@@ -90,7 +93,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={this.state.ride.getDepartureDate()} />
+                <ListItemText primary={getDepartureDate(this.state.ride)} />
               </ListItem>
 
               {/* Time */}
@@ -100,7 +103,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={this.state.ride.getDepartureTime()} />
+                <ListItemText primary={getDepartureTime(this.state.ride)} />
               </ListItem>
 
               {/* Notes */}
@@ -122,7 +125,7 @@ class OfferDetailsDialog extends React.Component {
           <Grid container spacing={40} justify="center">
             <Grid item>
               <IconButton>
-                <Badge badgeContent={this.state.ride.passengerUsernames.length + "/" + this.state.ride.maxCapacity} color="primary">
+                <Badge badgeContent={this.state.ride.passengerUsernames/*.length (TODO)*/ + "/" + this.state.ride.maxCapacity} color="primary">
                   {Icons.seatIcon}
                 </Badge>
               </IconButton>

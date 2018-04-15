@@ -18,7 +18,7 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
-import { getOfferedRides } from '../services/ride-service';
+import { getDepartureDate, getOfferedRides } from '../services/ride-service';
 
 // Contains rides offered to other users
 class DriverPage extends React.Component {
@@ -50,8 +50,11 @@ class DriverPage extends React.Component {
     else {
       content = (
         <div>
-          {/* List of ride offers - items display the number of users who have accepted the ride 
-         Generated from an array */}
+          {/* List of confirmed rides generated from an array */}
+          <h3>
+            Offered Rides ({this.state.offeredRides.length})
+          </h3>
+
           <List dense={this.state.dense}>
             {this.state.offeredRides.map((offeredRide) => {
               return (
@@ -72,7 +75,7 @@ class DriverPage extends React.Component {
                   {/* Date of the ride */}
                   <ListItemText
                     primary={offeredRide.destination}
-                    secondary={this.state.secondary ? offeredRide.getDepartureDate() : null}
+                    secondary={this.state.secondary ? getDepartureDate(offeredRide) : null}
                   />
                 </ListItem>
               );
