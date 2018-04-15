@@ -32,7 +32,8 @@ class SearchPage extends React.Component {
       destination: null,
       startDate: null,
       endDate: null,
-      searchResults: []
+      searchResults: [],
+      searchAttempted: false
     };
   }
 
@@ -65,6 +66,8 @@ class SearchPage extends React.Component {
    */
   handleClickSearch = () => {
     let searchAttempt = getSearchResults(this.state.startDate, this.state.endDate, this.state.origin, this.state.destination);
+    this.setState({ searchAttempted: true });
+
     // Catch rejected Promise (if no search results are returned)
     if (searchAttempt.constructor === Promise) {
       this.setState({ searchResults: [] });
@@ -193,6 +196,15 @@ class SearchPage extends React.Component {
                 </List>
               );
             })}
+          </div>
+        }
+        
+        {/* Display message if search button has been clicked and no results were found */}
+        {(this.state.searchAttempted && this.state.searchResults.length === 0) &&
+          <div style={{ marginTop: '3em' }}>
+            <h3>
+              No rides found.
+            </h3>
           </div>
         }
 
