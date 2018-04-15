@@ -125,7 +125,9 @@ class ConfirmedDetailsDialog extends React.Component {
           <Grid container spacing={40} justify="center">
             <Grid item>
               <IconButton>
-                <Badge badgeContent={this.state.ride.passengerUsernames.length + "/" + this.state.ride.maxCapacity} color="primary">
+                {console.log("TEST")}
+                {console.log(this.state.ride.passengerUsernames + "/" + this.state.ride.maxCapacity)}
+                <Badge badgeContent={this.state.ride.passengerUsernames/*.length (TODO)*/ + "/" + this.state.ride.maxCapacity} color="primary">
                   {Icons.seatIcon}
                 </Badge>
               </IconButton>
