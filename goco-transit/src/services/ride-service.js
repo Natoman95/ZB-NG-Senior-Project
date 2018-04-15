@@ -32,4 +32,14 @@ const getOfferedRides = (username) => {
   return offeredRides;
 };
 
-export { searchOfferedRides, addRideOffer, getOfferedRides };
+// TODO: Returns just the date portion of departureDateTime
+const getDepartureDate = (ride) => {
+  return null;
+}
+
+// TODO: Returns just the time portion of departureDateTime
+const getDepartureTime = (ride) => {
+  return null;
+}
+
+export { searchOfferedRides, addRideOffer, getOfferedRides, getDepartureDate, getDepartureTime };

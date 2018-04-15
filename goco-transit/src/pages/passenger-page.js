@@ -16,6 +16,7 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
+import { getDepartureDate, getDepartureTime } from '../services/ride-service';
 
 // Contains ride requests made by the user
 class PassengerPage extends React.Component {
@@ -64,7 +65,7 @@ class PassengerPage extends React.Component {
                   {/* Route destination and date range */}
                   <ListItemText
                     primary={confirmedRide.destination}
-                    secondary={this.state.secondary ? confirmedRide.getDepartureDate() : null}
+                    secondary={this.state.secondary ? getDepartureDate(confirmedRide) : null}
                   />
                 </ListItem>
               );
