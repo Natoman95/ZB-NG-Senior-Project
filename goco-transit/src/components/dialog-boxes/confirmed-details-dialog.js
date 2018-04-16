@@ -61,6 +61,7 @@ class ConfirmedDetailsDialog extends React.Component {
       >
       
         <DialogTitle id="alert-dialog-title">{"Ride Details"}</DialogTitle>
+        
         {this.state.display && // Don't attempt to get undefined data
           <DialogContent>
             <DialogContentText id="alert-dialog-description">

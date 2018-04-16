@@ -14,8 +14,19 @@ const getDate = (datetime) => {
  * @param {datetime} datetime to convert
  */
 const getTime = (datetime) => {
-  let time = new Date(datetime.split("T")[1]);
-  return time.getHours() + ":" + time.getMinutes();
+  let time = new Date(datetime.split("T")[0] + " " + datetime.split("T")[1]);
+  
+  // AM vs PM
+  let hours = time.getHours();
+  let suffix = "AM";
+  if (hours > 12) {
+    hours = hours - 12;
+    suffix = "PM";
+  }
+  
+  // Pad minutes
+  let minutes = (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
+  return hours + ":" + minutes + " " + suffix;
 }
 
 export {
