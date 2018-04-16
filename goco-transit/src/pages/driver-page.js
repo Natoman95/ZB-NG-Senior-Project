@@ -124,15 +124,6 @@ class DriverPage extends React.Component {
       throw err;
     }
   };
-
-  mapRideData(rideData) {
-    let rideArray = [];
-    for (let i = 0; i < rideData.length; i++) {
-      rideArray.push(rideData[i]);
-    }
-    this.setState({ offeredRides: rideArray });
-  }
-
 }
 
 DriverPage.propTypes = {

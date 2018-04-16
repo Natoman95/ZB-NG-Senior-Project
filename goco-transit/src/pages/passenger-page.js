@@ -130,16 +130,15 @@ class PassengerPage extends React.Component {
     this.setState({ loading: true });
     try {
       let data = await getUser();
-      
       this.setState({ user: data });
 
       // Set confirmedRides to empty array if promise is rejected
-      this.setState({ confirmedRides: getConfirmedRides(this.state.user.username) });
-      this.state.confirmedRides.catch( this.setState({ confirmedRides: [] }) );
+      let confirmedRidesData = await getConfirmedRides(this.state.user.username);
+      this.setState({ confirmedRides: confirmedRidesData });
 
       // Set requestedRides to empty array if promise is rejected
-      this.setState({ requestedRides: getRequests(this.state.user.username) });
-      this.state.requestedRides.catch( this.setState({ requestedRides: [] }) );
+      let requestsData = await getRequests(this.state.user.username);
+      this.setState({ requestedRides: requestsData });
 
       this.setState({ loading: false });
     }

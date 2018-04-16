@@ -65,17 +65,9 @@ class SearchPage extends React.Component {
    * When the search button is clicked, rides matching the user's parameters are displayed
    */
   handleClickSearch = () => {
-    let searchAttempt = getSearchResults(this.state.startDate, this.state.endDate, this.state.origin, this.state.destination);
+    let searchResultsData = getSearchResults(this.state.startDate, this.state.endDate, this.state.origin, this.state.destination);
+    this.setState({ searchResults: searchResultsData });
     this.setState({ searchAttempted: true });
-
-    // Catch rejected Promise (if no search results are returned)
-    if (searchAttempt.constructor === Promise) {
-      this.setState({ searchResults: [] });
-    }
-    // Search results were returned
-    else {
-      this.setState({ searchResults: searchAttempt });
-    }
   }
 
   // Change state variables based on changes to input forms

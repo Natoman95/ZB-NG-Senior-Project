@@ -53,13 +53,14 @@ class AddOfferDialog extends React.Component {
   // Close the add offer dialog
   handleClose = (confirmSelected) => {
     if (confirmSelected) {
-      addRideOffer(
-                   this.state.originValue,
-                   this.state.destinationValue,
-                   this.state.dateValue,
-                   this.state.timeValue,
-                   this.state.maxCapacityValue,
-                   this.state.driverNoteValue);
+      addRideOffer (
+        this.state.originValue,
+        this.state.destinationValue,
+        this.state.dateValue,
+        this.state.timeValue,
+        this.state.maxCapacityValue,
+        this.state.driverNoteValue
+      );
     }
     this.setState({ display: false });
   };
