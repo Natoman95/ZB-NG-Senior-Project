@@ -41,7 +41,7 @@ const getSearchResults = (startDate, endDate, origin, destination) => {
  * Corresponds to PostRide in back end's RideController
  */
 const addRideOffer = (ride) => {
-  return post(ride);
+  return post(`transit/ride/`, ride);
 };
 
 /**
