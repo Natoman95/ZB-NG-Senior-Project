@@ -109,16 +109,6 @@ const deleteRideByID = (rideID) => {
   return del(`transit/ride/delete/${rideID}/`);
 };
 
-// TODO: Returns just the date portion of departureDateTime
-const getDepartureDate = (ride) => {
-  return ride.departureDateTime;
-}
-
-// TODO: Returns just the time portion of departureDateTime
-const getDepartureTime = (ride) => {
-  return ride.departureDateTime;
-}
-
 export {
   getRideByID,
   getOfferedRides,
@@ -132,7 +122,5 @@ export {
   updateDriverNote,
   updateMaxCapacity,
   updateRequestsArray,
-  deleteRideByID,
-  getDepartureDate,
-  getDepartureTime
+  deleteRideByID
 };

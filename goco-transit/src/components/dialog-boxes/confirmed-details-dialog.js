@@ -22,7 +22,7 @@ import ConfirmationDialog from './confirmation-dialog';
 import RideModel from '../../models/ride-model';
 
 // Services
-import { getDepartureDate, getDepartureTime } from '../../services/ride-service';
+import { getDate, getTime } from '../../services/date-service';
 
 /* Add an offer dialog box */
 class ConfirmedDetailsDialog extends React.Component {
@@ -61,103 +61,102 @@ class ConfirmedDetailsDialog extends React.Component {
       >
       
         <DialogTitle id="alert-dialog-title">{"Ride Details"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+        {this.state.display && // Don't attempt to get undefined data
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
 
-            {/* Confirmed ride details */}
-            <List dense={this.state.dense} style={{ padding: '0px' }} >
+              {/* Confirmed ride details */}
+              <List dense={this.state.dense} style={{ padding: '0px' }} >
 
-              {/* Origin */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.originIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={this.state.ride.origin} />
-              </ListItem>
+                {/* Origin */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.originIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={this.state.ride.origin} />
+                </ListItem>
 
-              {/* Destination */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.destinationIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={this.state.ride.destination} />
-              </ListItem>
+                {/* Destination */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.destinationIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={this.state.ride.destination} />
+                </ListItem>
 
-              {/* Date */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.dateIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={getDepartureDate(this.state.ride)} />
-              </ListItem>
+                {/* Date */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.dateIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  {console.log("confirmed-details:97")}
+                  {console.log(this.state.ride.departureDateTime)}
+                  <ListItemText primary={getDate(this.state.ride.departureDateTime)} />
+                </ListItem>
 
-              {/* Time */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.timeIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={getDepartureTime(this.state.ride)} />
-              </ListItem>
+                {/* Time */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.timeIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={getTime(this.state.ride.departureDateTime)} />
+                </ListItem>
 
-              {/* Notes */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.noteIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={this.state.ride.driverNote} />
-              </ListItem>
-            </List>
+                {/* Notes */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.noteIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={this.state.ride.driverNote} />
+                </ListItem>
+              </List>
+            </DialogContentText>
 
-          </DialogContentText>
+            <hr/>
 
-          <hr/>
-
-          {/* Action buttons */}
-          <Grid container spacing={40} justify="center">
-            <Grid item>
-              <IconButton>
-                {this.state.display === true && // Don't attempt to get undefined length
+            {/* Action buttons */}
+            <Grid container spacing={40} justify="center">
+              <Grid item>
+                <IconButton>
                   <Badge badgeContent={this.state.ride.passengerUsernames.length + "/" + this.state.ride.maxCapacity} color="primary">
                     {Icons.seatIcon}
                   </Badge>
-                }
-              </IconButton>
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton onClick={this.handleClose}>
+                  {Icons.exitIcon}
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton onClick={() => {
+                  this.confirmationDialogChild.handleClickOpen(
+                    "Delete this ride?", "Your driver will be notified.");
+                }}
+                >
+                  {Icons.deleteIcon}
+                </IconButton>
+              </Grid>
             </Grid>
-            <Grid item>
-              <IconButton onClick={this.handleClose}>
-                {Icons.exitIcon}
-              </IconButton>
-            </Grid>
-            <Grid item>
-              <IconButton onClick={() => {
-                this.confirmationDialogChild.handleClickOpen(
-                  "Delete this ride?", "Your driver will be notified.");
-              }}
-              >
-                {Icons.deleteIcon}
-              </IconButton>
-            </Grid>
-          </Grid>
 
-        </DialogContent>
-
+          </DialogContent>
+        }
+        
         {/* Dialog boxes */}
         <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance; }} />
 
       </Dialog>
-
     );
-
   }
 }
 

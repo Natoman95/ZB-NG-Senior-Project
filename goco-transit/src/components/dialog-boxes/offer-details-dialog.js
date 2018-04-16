@@ -22,7 +22,7 @@ import ConfirmationDialog from './confirmation-dialog';
 import RideModel from '../../models/ride-model';
 
 // Services
-import { getDepartureDate, getDepartureTime } from '../../services/ride-service';
+import { getDate, getTime } from '../../services/date-service';
 
 /* Add an offer dialog box */
 class OfferDetailsDialog extends React.Component {
@@ -93,7 +93,9 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={getDepartureDate(this.state.ride)} />
+                {console.log("offer-details:97")}
+                {console.log(this.state.ride.departureDateTime)}
+                <ListItemText primary={getDate(this.state.ride.departureDateTime)} />
               </ListItem>
 
               {/* Time */}
@@ -103,7 +105,7 @@ class OfferDetailsDialog extends React.Component {
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <ListItemText primary={getDepartureTime(this.state.ride)} />
+                <ListItemText primary={getTime(this.state.ride.departureDateTime)} />
               </ListItem>
 
               {/* Notes */}

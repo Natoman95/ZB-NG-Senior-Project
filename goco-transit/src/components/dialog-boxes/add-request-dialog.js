@@ -21,7 +21,7 @@ import { Icons } from '../../icon-library';
 import RideModel from '../../models/ride-model';
 
 // Services
-import { getDepartureDate, getDepartureTime } from '../../services/ride-service';
+import { getDate, getTime } from '../../services/date-service';
 
 /* Add a request dialog box */
 class AddRequestDialog extends React.Component {
@@ -96,8 +96,10 @@ class AddRequestDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
+                {console.log("add-request:99")}
+                {console.log(this.state.ride.departureDateTime)}
                 <ListItemText
-                  primary={getDepartureDate(this.state.ride)}
+                  primary={getDate(this.state.ride.departureDateTime)}
                 />
               </ListItem>
 
@@ -109,7 +111,7 @@ class AddRequestDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary={getDepartureTime(this.state.ride)}
+                  primary={getTime(this.state.ride.departureDateTime)}
                 />
               </ListItem>
 

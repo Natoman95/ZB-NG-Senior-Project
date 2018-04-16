@@ -18,7 +18,8 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
-import { getDepartureDate, getOfferedRides } from '../services/ride-service';
+import { getOfferedRides } from '../services/ride-service';
+import { getDate } from '../services/date-service';
 
 // Contains rides offered to other users
 class DriverPage extends React.Component {
@@ -73,9 +74,11 @@ class DriverPage extends React.Component {
                     </IconButton>
                   </ListItemAvatar>
                   {/* Date of the ride */}
+                  {console.log("driver-page:77")}
+                  {console.log(offeredRide.departureDateTime)}
                   <ListItemText
                     primary={offeredRide.destination}
-                    secondary={this.state.secondary ? getDepartureDate(offeredRide) : null}
+                    secondary={this.state.secondary ? getDate(offeredRide.departureDateTime) : null}
                   />
                 </ListItem>
               );

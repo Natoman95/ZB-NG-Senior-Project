@@ -12,7 +12,8 @@ import PropTypes from 'prop-types';
 import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
 
 // Services
-import { getSearchResults, getDepartureDate } from '../services/ride-service';
+import { getSearchResults } from '../services/ride-service';
+import { getDate } from '../services/date-service';
 
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
@@ -180,9 +181,11 @@ class SearchPage extends React.Component {
                     <Avatar src={searchResult.driverUsername.profilePicture} />
                     
                     {/* Ride date */}
+                    {console.log("search-page:184")}
+                    {console.log(searchResult.departureDateTime)}
                     <ListItemText
                       primary={searchResult.destination}
-                      secondary={this.state.secondary ? getDepartureDate(searchResult) : null}
+                      secondary={this.state.secondary ? getDate(searchResult.departureDateTime) : null}
                     />
                   </ListItem>
                 </List>
