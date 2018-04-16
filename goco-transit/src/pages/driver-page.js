@@ -112,13 +112,11 @@ class DriverPage extends React.Component {
   async loadUserData() {
     this.setState({ loading: true });
     try {
-      let data = await getUser();
-      
-      this.setState({ user: data });
+      let userData = await getUser();
+      this.setState({ user: userData });
 
-      // Set confirmedRides to empty array if promise is rejected      
-      this.setState({ offeredRides: getOfferedRides(this.state.user.username) });
-      this.state.offeredRides.catch( this.setState({ offeredRides: [] }) );
+      let rideData = await getOfferedRides(this.state.user.username);
+      this.setState({ offeredRides: rideData });
 
       this.setState({ loading: false });
     }
@@ -126,6 +124,14 @@ class DriverPage extends React.Component {
       throw err;
     }
   };
+
+  mapRideData(rideData) {
+    let rideArray = [];
+    for (let i = 0; i < rideData.length; i++) {
+      rideArray.push(rideData[i]);
+    }
+    this.setState({ offeredRides: rideArray });
+  }
 
 }
 
