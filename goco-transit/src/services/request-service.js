@@ -24,7 +24,7 @@ const getRequests = (username) => {
  * Corresponds to PostRequest in back end's RequestController
  */
 const addRequest = (request) => {
-  return post(request);
+  return post(`transit/request/`, request);
 }
 
 /**

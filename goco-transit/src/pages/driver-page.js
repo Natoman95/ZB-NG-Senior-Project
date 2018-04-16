@@ -87,7 +87,8 @@ class DriverPage extends React.Component {
             <Grid item xs={12}>
               <Grid container direction="row" justify="flex-end" alignItems="center">
                 <Grid item>
-                  <Button variant="fab" color="secondary" aria-label="add" onClick={() => { this.addOfferDialogChild.handleClickOpen(); }}>
+                  <Button variant="fab" color="secondary" aria-label="add"
+                  onClick={() => { this.addOfferDialogChild.handleClickOpen(this.state.user.username); }}>
                     {Icons.addIcon}
                   </Button>
                 </Grid>
