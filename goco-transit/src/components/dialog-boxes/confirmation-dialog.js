@@ -34,16 +34,15 @@ class ConfirmationDialog extends React.Component {
   };
 
   // Close the confirmation dialog
-  handleClose = (confirmed) => {
+  handleClose = () => {
     this.setState({ display: false });
-    return confirmed;
   };
 
   render() {
     return (
       <Dialog
         open={this.state.display}
-        onClose={this.handleClose(false)}
+        onClose={this.handleClose}
         disableBackdropClick={true}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
@@ -61,12 +60,12 @@ class ConfirmationDialog extends React.Component {
           {/* Action buttons */}
           <Grid container spacing={40} justify="center">
             <Grid item>
-              <IconButton onClick={this.handleClose(false)}>
+              <IconButton onClick={this.handleClose}>
                 {Icons.exitIcon}
               </IconButton>
             </Grid>
             <Grid item>
-              <IconButton onClick={this.handleClose(true)} >
+              <IconButton onClick={this.handleClose} >
                 {Icons.confirmIcon}
               </IconButton>
             </Grid>

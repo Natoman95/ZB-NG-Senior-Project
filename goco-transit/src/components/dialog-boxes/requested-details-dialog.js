@@ -129,9 +129,6 @@ class RequestedDetailsDialog extends React.Component {
               <IconButton onClick={() => {
                 this.confirmationDialogChild.handleClickOpen(
                   "Delete this ride request?", "You will be removed from the waiting list.");
-                let dell = this.confirmationDialogChild.handleClose();
-                console.log("test");
-                console.log(dell);
               }}
               >
                 {Icons.deleteIcon}
