@@ -20,6 +20,9 @@ import ConfirmationDialog from './confirmation-dialog';
 // Models
 import RequestModel from '../../models/request-model';
 
+// Services
+import { getDate, getTime } from '../../services/date-service';
+
 /* Add an offer dialog box */
 class RequestedDetailsDialog extends React.Component {
   constructor() {
@@ -56,87 +59,90 @@ class RequestedDetailsDialog extends React.Component {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{"Ride Request Details"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
+        
+        {this.state.display && // Don't attempt to get undefined data
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
 
-            {/* Requested ride details */}
-            <List dense={this.state.dense} style={{ padding: '0px' }} >
+              {/* Requested ride details */}
+              <List dense={this.state.dense} style={{ padding: '0px' }} >
 
-              {/* Origin */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.originIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={this.state.request.origin} />
-              </ListItem>
+                {/* Origin */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.originIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={this.state.request.origin} />
+                </ListItem>
 
-              {/* Destination */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.destinationIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={this.state.request.destination} />
-              </ListItem>
+                {/* Destination */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.destinationIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={this.state.request.destination} />
+                </ListItem>
 
-              {/* Start of availability range */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingBottom: 0}} >
-                <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Earliest </div>
-                <ListItemText primary={this.state.request.earliestDeparture} />
-              </ListItem>
+                {/* Start of availability range */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingBottom: 0}} >
+                  <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Earliest </div>
+                  <ListItemText primary={getDate(this.state.request.earliestDepartureDateTime) + " " + getTime(this.state.request.earliestDepartureDateTime)} />
+                </ListItem>
 
-              {/* Availability icon */}
-              <ListItem disableGutters={this.state.noGutters} divider={false} style={{padding: 0}}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.timelapseIcon}
-                  </Avatar>
-                </ListItemAvatar>
-              </ListItem>
+                {/* Availability icon */}
+                <ListItem disableGutters={this.state.noGutters} divider={false} style={{padding: 0}}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.timelapseIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                </ListItem>
 
-              {/* End of availability range */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingTop: 0}}>
-                <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Latest </div>
-                <ListItemText primary={this.state.request.latestDeparture} />
-              </ListItem>
+                {/* End of availability range */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingTop: 0}}>
+                  <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Latest </div>
+                  <ListItemText primary={getDate(this.state.request.earliestDepartureDateTime) + " " + getTime(this.state.request.latestDepartureDateTime)} />
+                </ListItem>
 
-              {/* Notes */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.noteIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={this.state.request.passengerNote} />
-              </ListItem>
-            </List>
+                {/* Notes */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.noteIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={this.state.request.passengerNote} />
+                </ListItem>
+              </List>
 
-          </DialogContentText>
+            </DialogContentText>
 
-          <hr/>
+            <hr/>
 
-          {/* Action buttons */}
-          <Grid container spacing={40} justify="center">
-            <Grid item>
-              <IconButton onClick={this.handleClose}>
-                {Icons.exitIcon}
-              </IconButton>
+            {/* Action buttons */}
+            <Grid container spacing={40} justify="center">
+              <Grid item>
+                <IconButton onClick={this.handleClose}>
+                  {Icons.exitIcon}
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton onClick={() => {
+                  this.confirmationDialogChild.handleClickOpen(
+                    "Delete this ride request?", "You will be removed from the waiting list.");
+                }}
+                >
+                  {Icons.deleteIcon}
+                </IconButton>
+              </Grid>
             </Grid>
-            <Grid item>
-              <IconButton onClick={() => {
-                this.confirmationDialogChild.handleClickOpen(
-                  "Delete this ride request?", "You will be removed from the waiting list.");
-              }}
-              >
-                {Icons.deleteIcon}
-              </IconButton>
-            </Grid>
-          </Grid>
 
-        </DialogContent>
+          </DialogContent>
+        }
 
         {/* Dialog boxes */}
         <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance; }} />

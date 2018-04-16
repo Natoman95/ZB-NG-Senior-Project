@@ -17,6 +17,7 @@ const makeHeaders = () => {
     const token = getItem('token');
     return new Headers({
       Authorization: `Bearer ${token}`,
+      'Content-type': 'application/json',
     });
   } catch (err) {
     throw new Error('Token is not available');

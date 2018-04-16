@@ -12,7 +12,8 @@ import PropTypes from 'prop-types';
 import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
 
 // Services
-import { findOfferedRides } from '../services/ride-service';
+import { getSearchResults } from '../services/ride-service';
+import { getDate } from '../services/date-service';
 
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
@@ -32,7 +33,8 @@ class SearchPage extends React.Component {
       destination: null,
       startDate: null,
       endDate: null,
-      results: null
+      searchResults: [],
+      searchAttempted: false
     };
   }
 
@@ -61,13 +63,12 @@ class SearchPage extends React.Component {
   }
 
   /**
-   * When the search button is clicked, rides matching the user's parameters must be found
+   * When the search button is clicked, rides matching the user's parameters are displayed
    */
   handleClickSearch = () => {
-    this.setState({
-      results: findOfferedRides(this.state.startDate, this.state.endDate,
-        this.state.origin, this.state.destination)
-    });
+    let searchResultsData = getSearchResults(this.state.startDate, this.state.endDate, this.state.origin, this.state.destination);
+    this.setState({ searchResults: searchResultsData });
+    this.setState({ searchAttempted: true });
   }
 
   // Change state variables based on changes to input forms
@@ -160,13 +161,14 @@ class SearchPage extends React.Component {
 
         {/* Search Results - visible only if user has hit the search button 
          Generated from an array of results */}
-        {this.state.results !== null &&
+        {this.state.searchResults.length !== 0 &&
           <div style={{ marginTop: '3em' }}>
             <h3>
-              Results
+              Search Results ({this.state.searchResults.length})
             </h3>
 
-            {this.state.results.map((searchResult) => {
+            {/* Display search results as a list of Rides */}
+            {this.state.searchResults.map((searchResult) => {
               return (
                 <List dense={this.state.dense}>
                   <ListItem
@@ -174,17 +176,30 @@ class SearchPage extends React.Component {
                     disableGutters={this.state.noGutters}
                     divider={this.state.divider}
                     onClick={() => { this.addRequestDialogChild.handleClickOpen(searchResult); }}>
+                    
                     {/* Driver profile picture */}
-                    <Avatar src={searchResult.driver.profilePhoto} />
+                    <Avatar src={searchResult.driverUsername.profilePicture} />
+                    
                     {/* Ride date */}
+                    {console.log("search-page:184")}
+                    {console.log(searchResult.departureDateTime)}
                     <ListItemText
                       primary={searchResult.destination}
-                      secondary={this.state.secondary ? searchResult.date : null}
+                      secondary={this.state.secondary ? getDate(searchResult.departureDateTime) : null}
                     />
                   </ListItem>
                 </List>
               );
             })}
+          </div>
+        }
+        
+        {/* Display message if search button has been clicked and no results were found */}
+        {(this.state.searchAttempted && this.state.searchResults.length === 0) &&
+          <div style={{ marginTop: '3em' }}>
+            <h3>
+              No rides found.
+            </h3>
           </div>
         }
 

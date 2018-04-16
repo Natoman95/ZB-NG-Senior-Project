@@ -16,6 +16,9 @@ import Grid from 'material-ui/Grid';
 // Components
 import { Icons } from '../../icon-library';
 
+// Models
+import RideModel from '../../models/ride-model';
+
 // Services
 import { addRideOffer } from "../../services/ride-service";
 
@@ -30,6 +33,7 @@ class AddOfferDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
+      username: null,
 
       // Dialog box values
       originValue: null,
@@ -46,20 +50,35 @@ class AddOfferDialog extends React.Component {
   };
 
   // Open the add offer dialog
-  handleClickOpen = () => {
+  handleClickOpen = (username) => {
+    this.setState({
+      username: username,
+      originValue: null,
+      destinationValue: null,
+      dateValue: null,
+      timeValue: null,
+      maxCapacityValue: 1,
+      driverNoteValue: null
+    });
     this.setState({ display: true });
   };
 
   // Close the add offer dialog
   handleClose = (confirmSelected) => {
     if (confirmSelected) {
-      addRideOffer(
-                   this.state.originValue,
-                   this.state.destinationValue,
-                   this.state.dateValue,
-                   this.state.timeValue,
-                   this.state.maxCapacityValue,
-                   this.state.driverNoteValue);
+      addRideOffer (
+        new RideModel(
+          "",
+          this.state.username,
+          [],
+          [],
+          this.state.maxCapacityValue,
+          this.state.originValue,
+          this.state.destinationValue,
+          this.state.dateValue + "T" + this.state.timeValue,
+          this.state.driverNoteValue
+        )
+      );
     }
     this.setState({ display: false });
   };

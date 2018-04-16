@@ -16,6 +16,9 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
+import { getConfirmedRides } from '../services/ride-service';
+import { getDate, getTime } from '../services/date-service';
+import { getRequests } from '../services/request-service';
 
 // Contains ride requests made by the user
 class PassengerPage extends React.Component {
@@ -29,7 +32,7 @@ class PassengerPage extends React.Component {
       divider: true,
       user: null,
       confirmedRides: null,
-      requests: null,
+      requestedRides: null,
       loading: true
     };
   }
@@ -50,7 +53,7 @@ class PassengerPage extends React.Component {
         <div>
           {/* List of confirmed rides generated from an array */}
           <h3>
-            Confirmed
+            Confirmed Rides ({this.state.confirmedRides.length})
           </h3>
           <List dense={this.state.dense}>
             {this.state.confirmedRides.map((confirmedRide) => {
@@ -62,9 +65,11 @@ class PassengerPage extends React.Component {
                   divider={this.state.divider}
                 >
                   {/* Route destination and date range */}
+                  {console.log("passenger-page:68")}
+                  {console.log(confirmedRide.departureDateTime)}
                   <ListItemText
                     primary={confirmedRide.destination}
-                    secondary={this.state.secondary ? confirmedRide.date : null}
+                    secondary={this.state.secondary ? getDate(confirmedRide.departureDateTime) : null}
                   />
                 </ListItem>
               );
@@ -73,11 +78,11 @@ class PassengerPage extends React.Component {
 
           {/* List of requests generated from an array */}
           <h3 style={{ marginTop: '3em' }}>
-            Requested
+            Requested Rides ({this.state.requestedRides.length})
           </h3>
 
           <List dense={this.state.dense}>
-            {this.state.requests.map((requestedRide) => {
+            {this.state.requestedRides.map((requestedRide) => {
               return (
                 <ListItem
                   button
@@ -88,7 +93,13 @@ class PassengerPage extends React.Component {
                   {/* Route destination and date range */}
                   <ListItemText
                     primary={requestedRide.destination}
-                    secondary={this.state.secondary ? (requestedRide.earliestDeparture + ' - ' + requestedRide.latestDeparture) : null}
+                    secondary={this.state.secondary ?
+                      (
+                        getDate(requestedRide.earliestDepartureDateTime) + " " + getTime(requestedRide.earliestDepartureDateTime)
+                        + ' - '
+                        + getDate(requestedRide.latestDepartureDateTime) + " " + getTime(requestedRide.latestDepartureDateTime)
+                      ) : null
+                    }
                   />
                 </ListItem>
               );
@@ -128,12 +139,17 @@ class PassengerPage extends React.Component {
     this.setState({ loading: true });
     try {
       let data = await getUser();
-      this.setState({
-        user: data,
-        requests: data.requests,
-        confirmedRides: data.confirmedRides,
-        loading: false,
-      });
+      this.setState({ user: data });
+
+      // Set confirmedRides to empty array if promise is rejected
+      let confirmedRidesData = await getConfirmedRides(this.state.user.username);
+      this.setState({ confirmedRides: confirmedRidesData });
+
+      // Set requestedRides to empty array if promise is rejected
+      let requestsData = await getRequests(this.state.user.username);
+      this.setState({ requestedRides: requestsData });
+
+      this.setState({ loading: false });
     }
     catch (err) {
       throw err;

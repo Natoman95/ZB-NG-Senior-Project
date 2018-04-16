@@ -20,6 +20,9 @@ import { Icons } from '../../icon-library';
 // Models
 import RideModel from '../../models/ride-model';
 
+// Services
+import { getDate, getTime } from '../../services/date-service';
+
 /* Add a request dialog box */
 class AddRequestDialog extends React.Component {
   constructor() {
@@ -93,8 +96,10 @@ class AddRequestDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
+                {console.log("add-request:99")}
+                {console.log(this.state.ride.departureDateTime)}
                 <ListItemText
-                  primary={this.state.ride.date}
+                  primary={getDate(this.state.ride.departureDateTime)}
                 />
               </ListItem>
 
@@ -106,7 +111,7 @@ class AddRequestDialog extends React.Component {
                   </Avatar>
                 </ListItemAvatar>
                 <ListItemText
-                  primary={this.state.ride.time}
+                  primary={getTime(this.state.ride.departureDateTime)}
                 />
               </ListItem>
 

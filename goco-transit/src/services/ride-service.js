@@ -1,56 +1,126 @@
-// Models
-import UserModel from "../models/user-model";
-import RideModel from "../models/ride-model";
-
 // Services
-import { post } from './http-service';
-import { getUser } from '../services/user-service';
+import { get, put, post, del } from './http-service';
 
-// Media
-import ZachPhoto from '../images/user_profile_zach.jpg'
-import NathanPhoto from '../images/user_profile_nathan.jpg'
+/* This class is responsible for all actions related to Rides */
 
 /**
- * This class is responsible for all actions related to rides
+ * Get a Ride by its unique ID
+ * Corresponds to GetByID in back end's RideController
  */
-
-/**
- * Get rides within a certain date range and along the route between an origin and destination
- * @param {Date} startDate first date in date range
- * @param {Date} endDate last date in date range
- * @param {String} origin starting location
- * @param {String} destination desired final location
- * @return {UserModel} Current user
- */
-const findOfferedRides = (startDate, endDate, origin, destination) => {
-  // Hardcoded for now - will retrieve from 360
-  let Zach = new UserModel("Zach", "Brown", "zach.brown@gordon.edu");
-  let Nathan = new UserModel("Nathan", "Gray", "nathan.gray@gordon.edu");
-  Nathan.profilePhoto = NathanPhoto;
-  Zach.profilePhoto = ZachPhoto;
-
-  let Rachel = new UserModel("Rachel", "Wonko", "rachel.wonko@gordon.edu");
-  let Jim = new UserModel("Jim", "Bob", "jim.bob@gordon.edu");
-
-  // Dummy rides - will be found in a database somewhere
-  let ride1 = new RideModel(Nathan, "Wenham", "Oxford", "2017-12-07", "13:30", 3, "How much more can they take from me? They got my blood, now it's my car!");
-  ride1.passengers = [Rachel];
-  ride1.maxCapacity = 3;
-  ride1.id = "000003";
-
-  let ride2 = new RideModel(Zach, "Manchester", "Wenham", "2017-11-03", "08:45", 4, "The way I see it, if you're gonna build a time machine into a car, why not do it with some style?");
-  ride2.passengers = [Jim];
-  ride2.maxCapacity = 4;
-  ride2.id = "000004";
-
-  let rides = [ride1, ride2];
-
-  return rides;
+const getRideByID = (id) => {
+  return get(`transit/ride/id/${id}/`);
 }
 
-const addRideOffer = (origin, destination, date, time, maxCapacity, driverNote) => {
-  let rideToAdd = new RideModel(getUser(), origin, destination, date, time, maxCapacity, driverNote);
-  return post();
+/**
+ * Get the offered Rides that belong to a User
+ * Corresponds to GetOfferedByUsername in back end's RideController
+ */
+const getOfferedRides = (username) => {
+  return get(`transit/ride/user/${username}/offered/`);
 };
 
-export { findOfferedRides, addRideOffer };
+/**
+ * Get the confirmed Rides that belong to a User
+ * Corresponds to GetConfirmedByUsername in back end's RideController
+ */
+const getConfirmedRides = (username) => {
+  return get(`transit/ride/user/${username}/confirmed/`);
+};
+
+/**
+ * Get Rides within a certain date range and along the route between an origin and destination
+ * Utilizes GetByLocation in back end's RideController
+ */
+const getSearchResults = (startDate, endDate, origin, destination) => {
+  // TODO: filter by start and end dates
+  return get(`transit/ride/location/${origin}/${destination}/`);
+}
+
+/**
+ * Add a new Ride to the database
+ * Corresponds to PostRide in back end's RideController
+ */
+const addRideOffer = (ride) => {
+  return post(`transit/ride/`, ride);
+};
+
+/**
+ * Update a Ride's User array of passengers
+ * Corresponds to UpdatePassengers in back end's RideController
+ */
+const updatePassengersArray = (rideID, passengerUsername) => {
+  return put(`transit/ride/passengers/${rideID}/${passengerUsername}/`);
+};
+
+/**
+ * Update a Ride's starting location
+ * Corresponds to UpdateOrigin in back end's RideController
+ */
+const updateOrigin = (rideID, origin) => {
+  return put(`transit/ride/origin/${rideID}/${origin}/`);
+};
+
+/**
+ * Update a Ride's ending location
+ * Corresponds to UpdateDestination in back end's RideController
+ */
+const updateDestination = (rideID, destination) => {
+  return put(`transit/ride/destination/${rideID}/${destination}/`);
+};
+
+/**
+ * Update a Ride's departure time
+ * Corresponds to UpdateDateTime in back end's RideController
+ */
+const updateDepartureDateTime = (rideID, departureDateTime) => {
+  return put(`transit/ride/date/${rideID}/${departureDateTime}/`);
+};
+
+/**
+ * Update the driver of a Ride's note to passengers
+ * Corresponds to UpdateNote in back end's RideController
+ */
+const updateDriverNote = (rideID, driverNote) => {
+  return put(`transit/ride/note/${rideID}/${driverNote}/`);
+};
+
+/**
+ * Update a Ride's maximum capacity
+ * Corresponds to UpdateCapacity in back end's RideController
+ */
+const updateMaxCapacity = (rideID, maxCapacity) => {
+  return put(`transit/ride/capacity/${rideID}/${maxCapacity}/`);
+};
+
+/**
+ * Update a Ride's User array of Requests
+ * Corresponds to UpdateRequests in back end's RideController
+ */
+// TODO: Account for decreasing the capacity when passenger(s) will be affected 
+const updateRequestsArray = (rideID, requestID) => {
+  return put(`transit/ride/requests/${rideID}/${requestID}/`);
+};
+
+/**
+ * Delete a Ride from the database by its unique ID
+ * Corresponds to DeleteRide in back end's RideController
+ */
+const deleteRideByID = (rideID) => {
+  return del(`transit/ride/delete/${rideID}/`);
+};
+
+export {
+  getRideByID,
+  getOfferedRides,
+  getConfirmedRides,
+  getSearchResults,
+  addRideOffer,
+  updatePassengersArray,
+  updateOrigin,
+  updateDestination,
+  updateDepartureDateTime,
+  updateDriverNote,
+  updateMaxCapacity,
+  updateRequestsArray,
+  deleteRideByID
+};
