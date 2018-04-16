@@ -8,7 +8,7 @@ import { get, put, post, del } from './http-service';
  * Corresponds to GetByID in back end's RequestController
  */
 const getRequestByID = (requestID) => {
-  return get(`transit/request/id/${requestID}`);
+  return get(`transit/request/id/${requestID}/`);
 }
 
 /**
@@ -16,7 +16,7 @@ const getRequestByID = (requestID) => {
  * Corresponds to GetByUsername in back end's RequestController
  */
 const getRequests = (username) => {
-  return get(`transit/request/user/${username}`);
+  return get(`transit/request/user/${username}/`);
 }
 
 /**
@@ -32,7 +32,7 @@ const addRequest = (request) => {
  * Corresponds to UpdateRide in back end's RequestController
  */
 const updateRide = (requestID, rideID) => {
-  return put(`transit/request/ride/${requestID}/${rideID}`);
+  return put(`transit/request/ride/${requestID}/${rideID}/`);
 }
 
 /**
@@ -40,7 +40,7 @@ const updateRide = (requestID, rideID) => {
  * Corresponds to UpdateOrigin in back end's RequestController
  */
 const updateOrigin = (requestID, origin) => {
-  return put(`transit/request/origin/${requestID}/${origin}`);
+  return put(`transit/request/origin/${requestID}/${origin}/`);
 }
 
 /**
@@ -48,7 +48,7 @@ const updateOrigin = (requestID, origin) => {
  * Corresponds to UpdateDestination in back end's RequestController
  */
 const updateDestination = (requestID, destination) => {
-  return put(`transit/request/origin/${requestID}/${destination}`);
+  return put(`transit/request/origin/${requestID}/${destination}/`);
 }
 
 /**
@@ -56,7 +56,7 @@ const updateDestination = (requestID, destination) => {
  * Corresponds to UpdateEarliestDateTime in back end's RequestController
  */
 const updateEarliestDepartureDateTime = (requestID, earliestDepartureDateTime) => {
-  return put(`transit/request/earliest/${requestID}/${earliestDepartureDateTime}`);
+  return put(`transit/request/earliest/${requestID}/${earliestDepartureDateTime}/`);
 };
 
 /**
@@ -64,7 +64,7 @@ const updateEarliestDepartureDateTime = (requestID, earliestDepartureDateTime) =
  * Corresponds to UpdateLatestDateTime in back end's RequestController
  */
 const updateLatestDepartureDateTime = (requestID, latestDepartureDateTime) => {
-  return put(`transit/request/latest/${requestID}/${latestDepartureDateTime}`);
+  return put(`transit/request/latest/${requestID}/${latestDepartureDateTime}/`);
 };
 
 /**
@@ -72,7 +72,7 @@ const updateLatestDepartureDateTime = (requestID, latestDepartureDateTime) => {
  * Corresponds to DeleteRequest in back end's RequestController
  */
 const deleteRequestByID = (requestID) => {
-  return del(`transit/request/delete/${requestID}`);
+  return del(`transit/request/delete/${requestID}/`);
 };
 
 

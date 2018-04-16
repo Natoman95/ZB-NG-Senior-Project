@@ -8,7 +8,7 @@ import { get, put, post, del } from './http-service';
  * Corresponds to GetByID in back end's RideController
  */
 const getRideByID = (id) => {
-  return get(`transit/ride/id/${id}`);
+  return get(`transit/ride/id/${id}/`);
 }
 
 /**
@@ -16,7 +16,7 @@ const getRideByID = (id) => {
  * Corresponds to GetOfferedByUsername in back end's RideController
  */
 const getOfferedRides = (username) => {
-  return get(`transit/ride/user/${username}/offered`);
+  return get(`transit/ride/user/${username}/offered/`);
 };
 
 /**
@@ -24,7 +24,7 @@ const getOfferedRides = (username) => {
  * Corresponds to GetConfirmedByUsername in back end's RideController
  */
 const getConfirmedRides = (username) => {
-  return get(`transit/ride/user/${username}/confirmed`);
+  return get(`transit/ride/user/${username}/confirmed/`);
 };
 
 /**
@@ -33,7 +33,7 @@ const getConfirmedRides = (username) => {
  */
 const getSearchResults = (startDate, endDate, origin, destination) => {
   // TODO: filter by start and end dates
-  return get(`transit/ride/location/${origin}/${destination}`);
+  return get(`transit/ride/location/${origin}/${destination}/`);
 }
 
 /**
@@ -49,7 +49,7 @@ const addRideOffer = (ride) => {
  * Corresponds to UpdatePassengers in back end's RideController
  */
 const updatePassengersArray = (rideID, passengerUsername) => {
-  return put(`transit/ride/passengers/${rideID}/${passengerUsername}`);
+  return put(`transit/ride/passengers/${rideID}/${passengerUsername}/`);
 };
 
 /**
@@ -57,7 +57,7 @@ const updatePassengersArray = (rideID, passengerUsername) => {
  * Corresponds to UpdateOrigin in back end's RideController
  */
 const updateOrigin = (rideID, origin) => {
-  return put(`transit/ride/origin/${rideID}/${origin}`);
+  return put(`transit/ride/origin/${rideID}/${origin}/`);
 };
 
 /**
@@ -65,7 +65,7 @@ const updateOrigin = (rideID, origin) => {
  * Corresponds to UpdateDestination in back end's RideController
  */
 const updateDestination = (rideID, destination) => {
-  return put(`transit/ride/destination/${rideID}/${destination}`);
+  return put(`transit/ride/destination/${rideID}/${destination}/`);
 };
 
 /**
@@ -73,7 +73,7 @@ const updateDestination = (rideID, destination) => {
  * Corresponds to UpdateDateTime in back end's RideController
  */
 const updateDepartureDateTime = (rideID, departureDateTime) => {
-  return put(`transit/ride/date/${rideID}/${departureDateTime}`);
+  return put(`transit/ride/date/${rideID}/${departureDateTime}/`);
 };
 
 /**
@@ -81,7 +81,7 @@ const updateDepartureDateTime = (rideID, departureDateTime) => {
  * Corresponds to UpdateNote in back end's RideController
  */
 const updateDriverNote = (rideID, driverNote) => {
-  return put(`transit/ride/note/${rideID}/${driverNote}`);
+  return put(`transit/ride/note/${rideID}/${driverNote}/`);
 };
 
 /**
@@ -89,7 +89,7 @@ const updateDriverNote = (rideID, driverNote) => {
  * Corresponds to UpdateCapacity in back end's RideController
  */
 const updateMaxCapacity = (rideID, maxCapacity) => {
-  return put(`transit/ride/capacity/${rideID}/${maxCapacity}`);
+  return put(`transit/ride/capacity/${rideID}/${maxCapacity}/`);
 };
 
 /**
@@ -98,7 +98,7 @@ const updateMaxCapacity = (rideID, maxCapacity) => {
  */
 // TODO: Account for decreasing the capacity when passenger(s) will be affected 
 const updateRequestsArray = (rideID, requestID) => {
-  return put(`transit/ride/requests/${rideID}/${requestID}`);
+  return put(`transit/ride/requests/${rideID}/${requestID}/`);
 };
 
 /**
@@ -106,7 +106,7 @@ const updateRequestsArray = (rideID, requestID) => {
  * Corresponds to DeleteRide in back end's RideController
  */
 const deleteRideByID = (rideID) => {
-  return del(`transit/ride/delete/${rideID}`);
+  return del(`transit/ride/delete/${rideID}/`);
 };
 
 // TODO: Returns just the date portion of departureDateTime
