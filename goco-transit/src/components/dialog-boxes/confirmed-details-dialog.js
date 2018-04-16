@@ -59,6 +59,7 @@ class ConfirmedDetailsDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
+      
         <DialogTitle id="alert-dialog-title">{"Ride Details"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -125,9 +126,10 @@ class ConfirmedDetailsDialog extends React.Component {
           <Grid container spacing={40} justify="center">
             <Grid item>
               <IconButton>
-                <Badge badgeContent={this.state.ride.passengerUsernames/*.length (TODO)*/ + "/" + this.state.ride.maxCapacity} color="primary">
+              {this.state.display === true &&
+                <Badge badgeContent={this.state.ride.passengerUsernames.length + "/" + this.state.ride.maxCapacity} color="primary">
                   {Icons.seatIcon}
-                </Badge>
+                </Badge>}
               </IconButton>
             </Grid>
             <Grid item>
