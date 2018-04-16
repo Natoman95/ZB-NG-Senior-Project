@@ -55,8 +55,6 @@ class PassengerPage extends React.Component {
             Confirmed Rides ({this.state.confirmedRides.length})
           </h3>
           <List dense={this.state.dense}>
-            {console.log("Confirmed Rides:")}
-            {console.log(this.state.confirmedRides)}
             {this.state.confirmedRides.map((confirmedRide) => {
               return (
                 <ListItem
