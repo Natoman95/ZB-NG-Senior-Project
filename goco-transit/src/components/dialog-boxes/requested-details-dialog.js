@@ -20,6 +20,9 @@ import ConfirmationDialog from './confirmation-dialog';
 // Models
 import RequestModel from '../../models/request-model';
 
+// Services
+import { getDate, getTime } from '../../services/date-service';
+
 /* Add an offer dialog box */
 class RequestedDetailsDialog extends React.Component {
   constructor() {
@@ -87,7 +90,7 @@ class RequestedDetailsDialog extends React.Component {
                 {/* Start of availability range */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingBottom: 0}} >
                   <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Earliest </div>
-                  <ListItemText primary={this.state.request.earliestDepartureDateTime} />
+                  <ListItemText primary={getDate(this.state.request.earliestDepartureDateTime) + " " + getTime(this.state.request.earliestDepartureDateTime)} />
                 </ListItem>
 
                 {/* Availability icon */}
@@ -102,7 +105,7 @@ class RequestedDetailsDialog extends React.Component {
                 {/* End of availability range */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingTop: 0}}>
                   <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Latest </div>
-                  <ListItemText primary={this.state.request.latestDepartureDateTime} />
+                  <ListItemText primary={getDate(this.state.request.earliestDepartureDateTime) + " " + getTime(this.state.request.latestDepartureDateTime)} />
                 </ListItem>
 
                 {/* Notes */}
