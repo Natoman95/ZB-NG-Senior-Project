@@ -5,8 +5,8 @@
  * @param {datetime} datetime to convert
  */
 const getDate = (datetime) => {
-  let date = (datetime.split("T"))[0];
-  return date;
+  let date = new Date(datetime.split("T")[0]);
+  return date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear().toString().substr(-2);
 }
 
 /**
@@ -14,8 +14,8 @@ const getDate = (datetime) => {
  * @param {datetime} datetime to convert
  */
 const getTime = (datetime) => {
-  let time = (datetime.split("T"))[1];
-  return time;
+  let time = new Date(datetime.split("T")[1]);
+  return time.getHours() + ":" + time.getMinutes();
 }
 
 export {
