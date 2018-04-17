@@ -31,12 +31,16 @@ const makeHeaders = () => {
  * @param {object|array} body data to send with request
  * @return {Request} A request object
  */
-const createRequest = (url, method, body) =>
-  new Request(`/api/${url}`, {
+const createRequest = (url, method, body) => {
+  if (body != null) {
+    body = JSON.stringify(body);
+  }
+  return new Request(`/api/${url}`, {
     method,
     body,
     headers: makeHeaders(),
   });
+}
 
 /**
  * Parse an HTTP response
