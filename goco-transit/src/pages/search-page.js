@@ -65,8 +65,8 @@ class SearchPage extends React.Component {
   /**
    * When the search button is clicked, rides matching the user's parameters are displayed
    */
-  handleClickSearch = () => {
-    let searchResultsData = getSearchResults(this.state.startDate, this.state.endDate, this.state.origin, this.state.destination);
+  handleClickSearch = async () => {
+    let searchResultsData = await getSearchResults(this.state.startDate, this.state.endDate, this.state.origin, this.state.destination);
     this.setState({ searchResults: searchResultsData });
     this.setState({ searchAttempted: true });
   }
@@ -161,12 +161,12 @@ class SearchPage extends React.Component {
 
         {/* Search Results - visible only if user has hit the search button 
          Generated from an array of results */}
-        {this.state.searchResults.length !== 0 &&
+        {(this.state.searchResults.length > 0) &&
           <div style={{ marginTop: '3em' }}>
             <h3>
               Search Results ({this.state.searchResults.length})
             </h3>
-
+            
             {/* Display search results as a list of Rides */}
             {this.state.searchResults.map((searchResult) => {
               return (
@@ -181,8 +181,6 @@ class SearchPage extends React.Component {
                     <Avatar src={searchResult.driverUsername.profilePicture} />
                     
                     {/* Ride date */}
-                    {console.log("search-page:184")}
-                    {console.log(searchResult.departureDateTime)}
                     <ListItemText
                       primary={searchResult.destination}
                       secondary={this.state.secondary ? getDate(searchResult.departureDateTime) : null}

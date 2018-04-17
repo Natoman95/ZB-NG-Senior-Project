@@ -95,8 +95,6 @@ class OfferDetailsDialog extends React.Component {
                       {Icons.dateIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  {console.log("offer-details:97")}
-                  {console.log(this.state.ride.departureDateTime)}
                   <ListItemText primary={getDate(this.state.ride.departureDateTime)} />
                 </ListItem>
 

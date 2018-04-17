@@ -65,8 +65,6 @@ class PassengerPage extends React.Component {
                   divider={this.state.divider}
                 >
                   {/* Route destination and date range */}
-                  {console.log("passenger-page:68")}
-                  {console.log(confirmedRide.departureDateTime)}
                   <ListItemText
                     primary={confirmedRide.destination}
                     secondary={this.state.secondary ? getDate(confirmedRide.departureDateTime) : null}

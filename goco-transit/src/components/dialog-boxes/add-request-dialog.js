@@ -98,8 +98,6 @@ class AddRequestDialog extends React.Component {
                       {Icons.dateIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  {console.log("add-request:99")}
-                  {console.log(this.state.ride.departureDateTime)}
                   <ListItemText
                     primary={getDate(this.state.ride.departureDateTime)}
                   />

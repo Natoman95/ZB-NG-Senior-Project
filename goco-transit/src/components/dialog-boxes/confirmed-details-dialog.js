@@ -96,8 +96,6 @@ class ConfirmedDetailsDialog extends React.Component {
                       {Icons.dateIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  {console.log("confirmed-details:97")}
-                  {console.log(this.state.ride.departureDateTime)}
                   <ListItemText primary={getDate(this.state.ride.departureDateTime)} />
                 </ListItem>
 
