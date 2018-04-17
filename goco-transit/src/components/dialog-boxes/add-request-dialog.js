@@ -59,94 +59,95 @@ class AddRequestDialog extends React.Component {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-
-            {/* Ride info */}
-            <List dense={this.state.dense} style={{ padding: '0px' }} >
-
-              {/* Origin */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.originIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={this.state.ride.origin}
-                />
-              </ListItem>
-
-              {/* Destination */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.destinationIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={this.state.ride.destination}
-                />
-              </ListItem>
-
-              {/* Date */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.dateIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                {console.log("add-request:99")}
-                {console.log(this.state.ride.departureDateTime)}
-                <ListItemText
-                  primary={getDate(this.state.ride.departureDateTime)}
-                />
-              </ListItem>
-
-              {/* Time */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.timeIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={getTime(this.state.ride.departureDateTime)}
-                />
-              </ListItem>
-
-              {/* Notes */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.noteIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <div style={{ paddingLeft: "1em" }} >
-                  <TextField label="Note to driver" multiline={true} />
-                </div>
-              </ListItem>
-            </List>
-
-          </DialogContentText>
         
-        <hr/>
+        {this.state.display && // Don't attempt to get undefined data
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
 
-        {/* Action buttons */}
-        <Grid container spacing={40} justify="center">
-          <Grid item>
-            <IconButton onClick={this.handleClose}>
-              {Icons.exitIcon}
-            </IconButton>
-          </Grid>
-          <Grid item>
-            <IconButton onClick={this.handleClose}>
-              {Icons.confirmIcon}
-            </IconButton>
-          </Grid>
-        </Grid>
+              {/* Ride info */}
+              <List dense={this.state.dense} style={{ padding: '0px' }} >
 
-        </DialogContent>
+                {/* Origin */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.originIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={this.state.ride.origin}
+                  />
+                </ListItem>
+
+                {/* Destination */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.destinationIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={this.state.ride.destination}
+                  />
+                </ListItem>
+
+                {/* Date */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.dateIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={getDate(this.state.ride.departureDateTime)}
+                  />
+                </ListItem>
+
+                {/* Time */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.timeIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={getTime(this.state.ride.departureDateTime)}
+                  />
+                </ListItem>
+
+                {/* Notes */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.noteIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <div style={{ paddingLeft: "1em" }} >
+                    <TextField label="Note to driver" multiline={true} />
+                  </div>
+                </ListItem>
+              </List>
+
+            </DialogContentText>
+          
+          <hr/>
+
+          {/* Action buttons */}
+          <Grid container spacing={40} justify="center">
+            <Grid item>
+              <IconButton onClick={this.handleClose}>
+                {Icons.exitIcon}
+              </IconButton>
+            </Grid>
+            <Grid item>
+              <IconButton onClick={this.handleClose}>
+                {Icons.confirmIcon}
+              </IconButton>
+            </Grid>
+          </Grid>
+
+          </DialogContent>
+        }
 
       </Dialog>
     );

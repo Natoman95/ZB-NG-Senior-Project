@@ -74,8 +74,6 @@ class DriverPage extends React.Component {
                     </IconButton>
                   </ListItemAvatar>
                   {/* Date of the ride */}
-                  {console.log("driver-page:77")}
-                  {console.log(offeredRide.departureDateTime)}
                   <ListItemText
                     primary={offeredRide.destination}
                     secondary={this.state.secondary ? getDate(offeredRide.departureDateTime) : null}
