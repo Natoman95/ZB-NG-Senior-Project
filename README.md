@@ -1,5 +1,8 @@
 # ZB-NG-Senior-Project
 
+#### Further Project Documentation
+* Hand-Off Documentation https://docs.google.com/document/d/1k08G5ONiRkM8Zqfj5ai_mx0tD3p6zAxepkMUG6tu3Os/edit?usp=sharing
+
 #### Useful Documentation
 * React JS Documentation https://reactjs.org/docs/hello-world.html
 * Create React App Documentation https://github.com/facebook/create-react-app
