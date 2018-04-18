@@ -14,6 +14,7 @@ import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
 // Services
 import { getSearchResults } from '../services/ride-service';
 import { getDate } from '../services/date-service';
+import { getUser } from '../services/user-service';
 
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
@@ -34,13 +35,28 @@ class SearchPage extends React.Component {
       startDateTime: null,
       endDateTime: null,
       searchResults: [],
-      searchAttempted: false
+      searchAttempted: false,
+      username: null
     };
   }
+
+  /**
+   * Gets the logged in User's username
+   */
+  async getUsername() {
+    try {
+      let userData = await getUser();
+      this.setState({ username: userData.username });
+    }
+    catch (err) {
+      throw err;
+    }
+  };
 
   componentWillMount() {
     // Once the component mounts, make sure the tab matches the component
     this.props.matchTab();
+    this.getUsername();
   }
 
   // Returns the date and time plus a given number of milliseconds (ms) in datetime-local format ("YYYY-MM-DDTHH:MM")
@@ -117,7 +133,7 @@ class SearchPage extends React.Component {
                 <TextField
                   id="startDateTime"
                   label="Earliest Possible Departure"
-                  type="datetime"
+                  type="datetime-local"
                   defaultValue={this.getDateTime(0)} // Default time for the start date is today
                   value={this.state.startDateTime}
                   onChange={this.handleFormChange('startDateTime')}
@@ -133,7 +149,7 @@ class SearchPage extends React.Component {
                 <TextField
                   id="endDateTime"
                   label="Latest Possible Departure"
-                  type="datetime"
+                  type="datetime-local"
                   defaultValue={this.getDateTime(86400000)} // Default time for the end date is tomorrow
                   min={this.getDateTime(86400000)}
                   onChange={this.handleFormChange('endDateTime')}
@@ -176,6 +192,7 @@ class SearchPage extends React.Component {
                     disableGutters={this.state.noGutters}
                     divider={this.state.divider}
                     onClick={() => { this.addRequestDialogChild.handleClickOpen(
+                      this.state.username,
                       searchResult,
                       this.state.startDateTime,
                       this.state.endDateTime,

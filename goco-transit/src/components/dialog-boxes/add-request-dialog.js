@@ -36,6 +36,7 @@ class AddRequestDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
+      username: null,
 
       // From the search result
       ride: new RideModel(), // Prevents null pointer exception
@@ -50,15 +51,16 @@ class AddRequestDialog extends React.Component {
   }
 
   // Open the add request dialog
-  handleClickOpen = (searchResult, searchStartDateTime, searchEndDateTime, searchOrigin, searchDestination) => {
+  handleClickOpen = (username, searchResult, searchStartDateTime, searchEndDateTime, searchOrigin, searchDestination) => {
     this.setState({
+      username: username,
       ride: searchResult,
       searchStartDateTime: searchStartDateTime,
       searchEndDateTime: searchEndDateTime,
       searchOrigin: searchOrigin,
-      searchDestination: searchDestination
+      searchDestination: searchDestination,
+      display: true
     });
-    this.setState({ display: true });
   };
 
   // Close the add request dialog
@@ -92,7 +94,7 @@ class AddRequestDialog extends React.Component {
     return (
       <Dialog
         open={this.state.display}
-        onClose={this.handleClose(false)}
+        onClose={this.handleClose}
         disableBackdropClick={true}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
