@@ -31,8 +31,8 @@ class SearchPage extends React.Component {
       displayAddRequestDialog: false,
       origin: null,
       destination: null,
-      startDate: null,
-      endDate: null,
+      startDateTime: null,
+      endDateTime: null,
       searchResults: [],
       searchAttempted: false
     };
@@ -66,7 +66,7 @@ class SearchPage extends React.Component {
    * When the search button is clicked, rides matching the user's parameters are displayed
    */
   handleClickSearch = async () => {
-    let searchResultsData = await getSearchResults(this.state.startDate, this.state.endDate, this.state.origin, this.state.destination);
+    let searchResultsData = await getSearchResults(this.state.startDateTime, this.state.endDateTime, this.state.origin, this.state.destination);
     this.setState({ searchResults: searchResultsData });
     this.setState({ searchAttempted: true });
   }
@@ -115,12 +115,12 @@ class SearchPage extends React.Component {
             <Grid item>
               <form noValidate>
                 <TextField
-                  id="startDate"
+                  id="startDateTime"
                   label="Earliest Possible Departure"
-                  type="datetime-local"
+                  type="datetime"
                   defaultValue={this.getDateTime(0)} // Default time for the start date is today
-                  value={this.state.startDate}
-                  onChange={this.handleFormChange('startDate')}
+                  value={this.state.startDateTime}
+                  onChange={this.handleFormChange('startDateTime')}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -131,13 +131,13 @@ class SearchPage extends React.Component {
             <Grid item>
               <form noValidate>
                 <TextField
-                  id="startDate"
+                  id="endDateTime"
                   label="Latest Possible Departure"
-                  type="datetime-local"
+                  type="datetime"
                   defaultValue={this.getDateTime(86400000)} // Default time for the end date is tomorrow
                   min={this.getDateTime(86400000)}
-                  onChange={this.handleFormChange('endDate')}
-                  value={this.state.endDate}
+                  onChange={this.handleFormChange('endDateTime')}
+                  value={this.state.endDateTime}
                   InputLabelProps={{
                     shrink: true,
                   }}
@@ -175,7 +175,13 @@ class SearchPage extends React.Component {
                     button
                     disableGutters={this.state.noGutters}
                     divider={this.state.divider}
-                    onClick={() => { this.addRequestDialogChild.handleClickOpen(searchResult); }}>
+                    onClick={() => { this.addRequestDialogChild.handleClickOpen(
+                      searchResult,
+                      this.state.startDateTime,
+                      this.state.endDateTime,
+                      this.state.origin,
+                      this.state.destination
+                    ); }}>
                     
                     {/* Driver profile picture */}
                     <Avatar src={searchResult.driverUsername.profilePicture} />

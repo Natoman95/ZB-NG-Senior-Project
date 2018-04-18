@@ -66,7 +66,7 @@ class AddOfferDialog extends React.Component {
   // Close the add offer dialog
   handleClose = (confirmSelected) => {
     if (confirmSelected) {
-      addRideOffer (
+      addRideOffer(
         new RideModel(
           "",
           this.state.username,
@@ -78,7 +78,7 @@ class AddOfferDialog extends React.Component {
           this.state.dateValue + "T" + this.state.timeValue,
           this.state.driverNoteValue
         )
-      );
+      )
     }
     this.setState({ display: false });
   };
