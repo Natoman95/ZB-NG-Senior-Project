@@ -46,7 +46,6 @@ class SearchPage extends React.Component {
   async getUsername() {
     try {
       let userData = await getUser();
-      console.log("sp-getUsername");
       this.setState({ username: userData.username });
     }
     catch (err) {
@@ -84,16 +83,13 @@ class SearchPage extends React.Component {
    */
   handleClickSearch = async () => {
     let searchResultsData = await getSearchResults(this.state.startDateTime, this.state.endDateTime, this.state.origin, this.state.destination);
-    console.log("sp-handleClickSearch-sRD");
     this.setState({ searchResults: searchResultsData });
-    console.log("sp-handleClickSearch-sA");
     this.setState({ searchAttempted: true });
   }
 
   // Change state variables based on changes to input forms
   handleFormChange = (input) => {
     return event => {
-      console.log("sp-handleFormChange");
       this.setState({ [input]: event.target.value });
     };
   }

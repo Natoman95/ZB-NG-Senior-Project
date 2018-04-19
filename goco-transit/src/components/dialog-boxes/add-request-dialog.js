@@ -52,7 +52,6 @@ class AddRequestDialog extends React.Component {
 
   // Open the add request dialog
   handleClickOpen = (username, searchResult, searchStartDateTime, searchEndDateTime, searchOrigin, searchDestination) => {
-    console.log("aRD-handleClickOpen");
     this.setState({
       username: username,
       ride: searchResult,
@@ -80,15 +79,13 @@ class AddRequestDialog extends React.Component {
           this.state.requesterNote
         )
       )
-      console.log("aRD-handleClose");
-      this.setState({ display: false });
     }
+    this.setState({ display: false });
   };
 
   // Set state variables
   handleFormChange(input) {
     return event => {
-      console.log("aRD-handleFormChange");
       this.setState({ [input]: event.target.value });
     };
   }
@@ -102,7 +99,6 @@ class AddRequestDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-      {console.log("handleCloseClick-declare")}
         <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
         
         {this.state.display && // Don't attempt to get undefined data
@@ -186,14 +182,12 @@ class AddRequestDialog extends React.Component {
           {/* Action buttons */}
           <Grid container spacing={40} justify="center">
             <Grid item>
-              <IconButton onClick={this.handleClose(false)}>
-                {console.log("handleCloseClick-exit")}
+              <IconButton onClick={() => this.handleClose(false)}>
                 {Icons.exitIcon}
               </IconButton>
             </Grid>
             <Grid item>
-              <IconButton onClick={this.handleClose(true)}>
-                {console.log("handleCloseClick-confirm")}
+              <IconButton onClick={() => this.handleClose(true)}>
                 {Icons.confirmIcon}
               </IconButton>
             </Grid>
