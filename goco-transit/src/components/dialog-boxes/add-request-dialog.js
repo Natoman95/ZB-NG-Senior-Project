@@ -46,7 +46,7 @@ class AddRequestDialog extends React.Component {
       searchDestination: null,
 
       // From the dialog input
-      requesterNote: null
+      requesterNoteValue: null
     };
   }
 
@@ -59,6 +59,7 @@ class AddRequestDialog extends React.Component {
       searchEndDateTime: searchEndDateTime,
       searchOrigin: searchOrigin,
       searchDestination: searchDestination,
+      requesterNoteValue: null,
       display: true
     });
   };
@@ -67,18 +68,17 @@ class AddRequestDialog extends React.Component {
   handleClose = (confirmSelected) => {
     if (confirmSelected) {
       // Request created from search result
-      addRequest(
-        new RequestModel(
-          "",
-          this.state.username,
-          this.state.ride,
-          null,
-          null,
-          null,
-          null,
-          this.state.requesterNote
-        )
+      let requestToPost = new RequestModel(
+        "",
+        this.state.username,
+        this.state.ride,
+        null,
+        null,
+        null,
+        null,
+        this.state.requesterNoteValue
       )
+      addRequest(requestToPost);
     }
     this.setState({ display: false });
   };
@@ -167,8 +167,8 @@ class AddRequestDialog extends React.Component {
                     <TextField
                       id="requesterNoteInput"
                       label="Note to driver"
-                      value={this.state.requesterNote}
-                      onChange={this.handleFormChange("requesterNote")}
+                      value={this.state.requesterNoteValue}
+                      onChange={this.handleFormChange("requesterNoteValue")}
                       multiline={true}
                     />
                   </div>
