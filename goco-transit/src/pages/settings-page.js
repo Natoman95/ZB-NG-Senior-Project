@@ -64,6 +64,11 @@ class SettingsPage extends React.Component {
     this.setState({ [name]: event.target.checked });
   };
 
+  // Format the phone number as (###) ###-####
+  formatPhone = phone => {
+    return "(" + phone.substring(0, 3) + ") " + phone.substring(3, 6) + "-" + phone.substring(6, 10);
+  };
+
   // If the user is logged in, then display the settings
   // But if the logout button is clicked, redirect to the login page
   render() {
@@ -184,7 +189,7 @@ class SettingsPage extends React.Component {
         user: data,
         firstName: data.firstName,
         lastName: data.lastName,
-        phoneNum: data.phoneNum,
+        phoneNum: this.formatPhone(data.phoneNum),
         email: data.email,
         username: data.username,
         loading: false,
