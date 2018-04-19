@@ -68,17 +68,18 @@ class AddRequestDialog extends React.Component {
   handleClose = (confirmSelected) => {
     if (confirmSelected) {
       // Request created from search result
-      let requestToPost = new RequestModel(
-        "",
-        this.state.username,
-        this.state.ride,
-        null,
-        null,
-        null,
-        null,
-        this.state.requesterNoteValue
+      addRequest(
+        new RequestModel(
+          "",
+          this.state.username,
+          this.state.ride.rideID,
+          "",
+          "",
+          "",
+          "",
+          this.state.requesterNoteValue
+        )
       )
-      addRequest(requestToPost);
     }
     this.setState({ display: false });
   };
