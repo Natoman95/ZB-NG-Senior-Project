@@ -20,7 +20,7 @@ import ExitIcon from 'material-ui-icons/Close';
 import AvatarIcon from 'material-ui-icons/Face'
 
 // Icon dictionary
-var icons = {
+let icons = {
   originIcon: React.createElement(OriginIcon),
   destinationIcon: React.createElement(DestinationIcon),
   timeIcon: React.createElement(TimeIcon),
