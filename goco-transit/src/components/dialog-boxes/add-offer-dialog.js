@@ -69,7 +69,7 @@ class AddOfferDialog extends React.Component {
       addRideOffer(
         new RideModel(
           "",
-          this.state.username,
+          this.state.username.toLowerCase(),
           [],
           [],
           this.state.maxCapacityValue,

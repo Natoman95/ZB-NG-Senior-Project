@@ -71,8 +71,8 @@ class AddRequestDialog extends React.Component {
       addRequest(
         new RequestModel(
           "",
-          this.state.username,
-          this.state.ride.rideID,
+          this.state.username.toLowerCase(),
+          this.state.ride.rideId, // "rideId" instead of "rideID" to match back-end
           "",
           "",
           "",

@@ -16,7 +16,7 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
-import { getConfirmedRides } from '../services/ride-service';
+import { getConfirmedRides, getRideByID } from '../services/ride-service';
 import { getDate, getTime } from '../services/date-service';
 import { getRequests } from '../services/request-service';
 
@@ -35,12 +35,24 @@ class PassengerPage extends React.Component {
       requestedRides: null,
       loading: true
     };
+
+    this.rideDictionary = [];
   }
 
   componentWillMount() {
     // Once the component mounts, make sure the tab matches the component
     this.props.matchTab();
     this.loadUserData();
+  }
+
+  // Return the index of the dictionary element containing the Ride
+  searchRideDictionary= (rideID) => {
+    for (let i = 0; i < this.rideDictionary.length; i++) {
+      if (this.rideDictionary[i].value.rideId === rideID) {
+        return i;
+      }
+    }
+    return false;
   }
 
   render() {
@@ -81,6 +93,12 @@ class PassengerPage extends React.Component {
 
           <List dense={this.state.dense}>
             {this.state.requestedRides.map((requestedRide) => {
+
+              // Get the Request's associated Ride, if it exists
+              let index = this.searchRideDictionary(requestedRide.rideId);
+              let linkedRide = this.rideDictionary[index].value;
+              console.log(linkedRide)
+
               return (
                 <ListItem
                   button
@@ -88,14 +106,21 @@ class PassengerPage extends React.Component {
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
+
                   {/* Route destination and date range */}
                   <ListItemText
-                    primary={requestedRide.destination}
+                    primary={linkedRide.destination}
                     secondary={this.state.secondary ?
                       (
-                        getDate(requestedRide.earliestDepartureDateTime) + " " + getTime(requestedRide.earliestDepartureDateTime)
-                        + ' - '
-                        + getDate(requestedRide.latestDepartureDateTime) + " " + getTime(requestedRide.latestDepartureDateTime)
+                        // No linked Ride
+                        (linkedRide === false) ?
+                          (
+                            getDate(requestedRide.earliestDepartureDateTime) + " " + getTime(requestedRide.earliestDepartureDateTime)
+                            + ' - '
+                            + getDate(requestedRide.latestDepartureDateTime) + " " + getTime(requestedRide.latestDepartureDateTime)
+                          // Has linked Ride
+                          ) : 
+                            getDate(linkedRide.departureDateTime) + " " + getTime(linkedRide.departureDateTime)
                       ) : null
                     }
                   />
@@ -147,13 +172,31 @@ class PassengerPage extends React.Component {
       let requestsData = await getRequests(this.state.user.username);
       this.setState({ requestedRides: requestsData });
 
+      // Link Requests to their linked Rides, if they exist
+      let linkedRide;
+      for (let i = 0; i < this.state.requestedRides.length; i++) {
+        linkedRide = await getRideByID(this.state.requestedRides[i].rideId)
+        if (linkedRide !== (null || undefined)) {
+          // Has linked Ride
+          this.rideDictionary.push({
+            key: this.state.requestedRides[i].requestId,
+            value: linkedRide
+          });
+        } else {
+          // No linked Ride
+          this.rideDictionary.push({
+            key: this.state.requestedRides[i].requestId,
+            value: false
+          });
+        }
+      }
+      
       this.setState({ loading: false });
     }
     catch (err) {
       throw err;
     }
   };
-
 }
 
 PassengerPage.propTypes = {
