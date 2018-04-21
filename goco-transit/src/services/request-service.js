@@ -9,7 +9,7 @@ import { get, put, post, del } from './http-service';
  */
 const getRequestByID = (requestID) => {
   return get(`transit/request/id/${requestID}/`);
-}
+};
 
 /**
  * Get the Requests belonging to a User
@@ -17,7 +17,7 @@ const getRequestByID = (requestID) => {
  */
 const getRequests = (username) => {
   return get(`transit/request/user/${username}/`);
-}
+};
 
 /**
  * Add a new Request to the database
@@ -25,7 +25,7 @@ const getRequests = (username) => {
  */
 const addRequest = (request) => {
   return post(`transit/request/`, request);
-}
+};
 
 /**
  * Update the Ride associated with a Request
@@ -33,7 +33,7 @@ const addRequest = (request) => {
  */
 const updateRide = (requestID, rideID) => {
   return put(`transit/request/ride/${requestID}/${rideID}/`);
-}
+};
 
 /**
  * Update a Request's desired starting location
@@ -41,7 +41,7 @@ const updateRide = (requestID, rideID) => {
  */
 const updateOrigin = (requestID, origin) => {
   return put(`transit/request/origin/${requestID}/${origin}/`);
-}
+};
 
 /**
  * Update a Request's desired ending location
@@ -49,7 +49,7 @@ const updateOrigin = (requestID, origin) => {
  */
 const updateDestination = (requestID, destination) => {
   return put(`transit/request/origin/${requestID}/${destination}/`);
-}
+};
 
 /**
  * Update a Request's earliest possible departure time

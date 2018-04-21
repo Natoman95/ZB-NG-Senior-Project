@@ -14,6 +14,7 @@ import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
 // Services
 import { getSearchResults } from '../services/ride-service';
 import { getDate } from '../services/date-service';
+import { getUser } from '../services/user-service';
 
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
@@ -31,16 +32,31 @@ class SearchPage extends React.Component {
       displayAddRequestDialog: false,
       origin: null,
       destination: null,
-      startDate: null,
-      endDate: null,
+      startDateTime: null,
+      endDateTime: null,
       searchResults: [],
-      searchAttempted: false
+      searchAttempted: false,
+      username: null
     };
   }
+
+  /**
+   * Gets the logged in User's username
+   */
+  async getUsername() {
+    try {
+      let userData = await getUser();
+      this.setState({ username: userData.username });
+    }
+    catch (err) {
+      throw err;
+    }
+  };
 
   componentWillMount() {
     // Once the component mounts, make sure the tab matches the component
     this.props.matchTab();
+    this.getUsername();
   }
 
   // Returns the date and time plus a given number of milliseconds (ms) in datetime-local format ("YYYY-MM-DDTHH:MM")
@@ -66,7 +82,7 @@ class SearchPage extends React.Component {
    * When the search button is clicked, rides matching the user's parameters are displayed
    */
   handleClickSearch = async () => {
-    let searchResultsData = await getSearchResults(this.state.startDate, this.state.endDate, this.state.origin, this.state.destination);
+    let searchResultsData = await getSearchResults(this.state.startDateTime, this.state.endDateTime, this.state.origin, this.state.destination);
     this.setState({ searchResults: searchResultsData });
     this.setState({ searchAttempted: true });
   }
@@ -173,7 +189,14 @@ class SearchPage extends React.Component {
                     button
                     disableGutters={this.state.noGutters}
                     divider={this.state.divider}
-                    onClick={() => { this.addRequestDialogChild.handleClickOpen(searchResult); }}>
+                    onClick={() => { this.addRequestDialogChild.handleClickOpen(
+                      this.state.username,
+                      searchResult,
+                      this.state.startDateTime,
+                      this.state.endDateTime,
+                      this.state.origin,
+                      this.state.destination
+                    ); }}>
                     
                     {/* Driver profile picture */}
                     <Avatar src={searchResult.driverUsername.profilePicture} />

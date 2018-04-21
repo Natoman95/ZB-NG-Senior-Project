@@ -9,7 +9,7 @@ import { get, put, post, del } from './http-service';
  */
 const getRideByID = (id) => {
   return get(`transit/ride/id/${id}/`);
-}
+};
 
 /**
  * Get the offered Rides that belong to a User
@@ -34,7 +34,7 @@ const getConfirmedRides = (username) => {
 const getSearchResults = (startDate, endDate, origin, destination) => {
   // TODO: filter by start and end dates
   return get(`transit/ride/location/${origin}/${destination}/`);
-}
+};
 
 /**
  * Add a new Ride to the database
