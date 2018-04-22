@@ -5,7 +5,10 @@ import UserModel from "../models/user-model";
 import { getItem, setItem, isCachedDataExpired } from "../services/storage-service";
 import { get } from '../services/http-service';
 
-/* This class is responsible for all actions related to users */
+/**
+ * This service is responsible for fetching a user's contact information
+ * and placing it into a user model
+ */
 
 /**
  * Get the current user
@@ -17,9 +20,9 @@ const getUser = async () => {
 
   // Fetching data from 360 if it hasn't been cached
   if (isCachedDataExpired(username)) {
-    let user360data = await Promise.all([getUser360Profile(username), getUser360Image(username)])
-    let profile = user360data[0]
-    let image = user360data[1];
+    let userData = await Promise.all([getUserProfile(username), getUserImage(username)])
+    let profile = userData[0]
+    let image = userData[1];
 
     // Populating user with 360 data
     activeUser = new UserModel(profile.FirstName, profile.LastName, profile.Email);
@@ -42,7 +45,7 @@ const getUser = async () => {
  * @param {String} [username] Username in firstname.lastname format
  * @return {Promise} Profile info
  */
-const getUser360Profile = username => {
+const getUserProfile = username => {
   if (username) {
     return get(`profiles/${username}/`);
   }
@@ -54,7 +57,7 @@ const getUser360Profile = username => {
  * @param {String} [username] Username in firstname.lastname format
  * @return {Promise.<String>} Image as a Base64-encoded string
  */
-const getUser360Image = username => {
+const getUserImage = username => {
   if (username) {
     return get(`profiles/Image/${username}/`);
   }

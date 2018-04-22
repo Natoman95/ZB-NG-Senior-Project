@@ -11,7 +11,11 @@ import LoginPage from './pages/login-page';
 // Services
 import { isAuthenticated } from './services/auth-service';
 
-// Main page for the application
+/**
+ * This is the root of the entire app
+ * It displays either the login or the main page to the user
+ * It wraps the whole app in a theme and a router
+ */
 class App extends React.Component {
   constructor() {
     super();

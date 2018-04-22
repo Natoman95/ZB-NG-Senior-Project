@@ -20,7 +20,13 @@ import { getConfirmedRides, getRideByID } from '../services/ride-service';
 import { getDate, getTime } from '../services/date-service';
 import { getRequests } from '../services/request-service';
 
-// Contains ride requests made by the user
+/**
+ * This page allows a user to manage anything having to do with their
+ * role as a passenger. This means displaying a user's requested rides
+ * and the rides where they are confirmed as a passenger.
+ * It also allows a user to navigate to the search page to find
+ * rides they might want to be a passenger on.
+ */
 class PassengerPage extends React.Component {
   constructor(props) {
     super(props);

@@ -24,7 +24,9 @@ import RideModel from '../../models/ride-model';
 // Services
 import { getDate, getTime } from '../../services/date-service';
 
-/* Add an offer dialog box */
+/* This dialog opens on the driver page of the app
+   It displays more information about a ride which a user
+   has offered to other users */
 class OfferDetailsDialog extends React.Component {
   constructor() {
     super();

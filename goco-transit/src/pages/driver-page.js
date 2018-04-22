@@ -21,7 +21,12 @@ import { getUser } from '../services/user-service';
 import { getOfferedRides } from '../services/ride-service';
 import { getDate } from '../services/date-service';
 
-// Contains rides offered to other users
+/**
+ * This page allows a user to manage anything having to do with their
+ * role as a driver. This means displaying information on rides the
+ * user has offered and allowing the user to offer rides to other people
+ * and update information about those rides, including their passengers
+ */
 class DriverPage extends React.Component {
   constructor(props) {
     super(props);

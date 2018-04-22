@@ -25,7 +25,9 @@ import RequestModel from '../../models/request-model';
 import { getDate, getTime } from '../../services/date-service';
 import { addRequest } from "../../services/request-service";
 
-/* Add a request dialog box */
+/* This dialog opens on the search page of the app
+   It allows the user to request a ride that might take
+   them where they want to go */
 class AddRequestDialog extends React.Component {
   constructor() {
     super();

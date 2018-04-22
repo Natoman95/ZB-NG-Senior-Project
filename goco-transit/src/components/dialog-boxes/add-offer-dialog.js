@@ -23,7 +23,8 @@ import RideModel from '../../models/ride-model';
 // Services
 import { addRideOffer } from "../../services/ride-service";
 
-/* Add an offer dialog box */
+/* This dialog opens on the driver page of the app
+   It allows the user to offer a new ride to other users */
 class AddOfferDialog extends React.Component {
   constructor() {
     super();

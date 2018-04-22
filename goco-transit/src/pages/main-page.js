@@ -24,7 +24,10 @@ function TabContainer(props) {
   );
 }
 
-// Main app component
+/**
+ * This page is a container for all other pages loaded after a user
+ * has logged in. It controls the app's tabs which load other pages
+ */
 class MainPage extends React.Component {
   constructor(props) {
     super(props);

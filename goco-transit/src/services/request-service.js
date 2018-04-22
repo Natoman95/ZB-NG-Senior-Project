@@ -2,7 +2,11 @@
 import { get, put, post, del } from './http-service';
 import { getItem, setItem, removeItem, isCachedDataExpired } from "../services/storage-service";
 
-/* This class is responsible for all actions related to Requests */
+/**
+ * This class is responsible for all actions related to user requests
+ * to become passengers on rides. This means getting, posting, updating,
+ * and deleting requests
+ */
 
 /**
  * Get a Request by its unique ID

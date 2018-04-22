@@ -1,7 +1,10 @@
 let CircularJSON = require('circular-json');
 
 /**
- * Handle local storage of data
+ * Performs operations necessary for storing data for caching purposes.
+ * This means caching authentication, user, ride, and request data
+ * so that a user can remain logged in and so that the client
+ * doesn't have to make nearly as many slow server requests.
  */
 
 /**

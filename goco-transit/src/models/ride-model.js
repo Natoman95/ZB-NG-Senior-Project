@@ -1,4 +1,9 @@
 /**
+ * This represents all the data stored about a ride on which a user is a
+ * passenger or the driver
+ * 
+ * This directly corresponds to the TransitRideView model on the server
+ * 
  * Contains data on Rides. Rides have 2 states:
  * EMPTY: (passengerUsernames == null) The Ride has no passengers
  * NONEMPTY: (passengerUsernames != null) The Ride has at least 1 passenger
