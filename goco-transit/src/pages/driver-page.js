@@ -35,6 +35,13 @@ class DriverPage extends React.Component {
       offeredRides: null,
       loading: false,
     };
+
+    this.onOffersUpdated = this.onOffersUpdated.bind(this);
+  }
+
+  onOffersUpdated() {
+    this.loadUserData();
+    this.forceUpdate();
   }
 
   componentWillMount() {
@@ -99,7 +106,7 @@ class DriverPage extends React.Component {
 
           {/* Dialog boxes */}
           <OfferDetailsDialog ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance; }} />
-          <AddOfferDialog ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance; }} />
+          <AddOfferDialog onPost={this.onOffersUpdated} ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance; }} />
 
         </div>
       );

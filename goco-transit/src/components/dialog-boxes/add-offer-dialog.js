@@ -12,6 +12,7 @@ import Avatar from 'material-ui/Avatar';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
+import PropTypes from 'prop-types';
 
 // Components
 import { Icons } from '../../icon-library';
@@ -64,9 +65,10 @@ class AddOfferDialog extends React.Component {
   };
 
   // Close the add offer dialog
-  handleClose = (confirmSelected) => {
+  handleClose = async (confirmSelected) => {
+    this.setState({ display: false });
     if (confirmSelected) {
-      addRideOffer(
+      await addRideOffer(
         new RideModel(
           "",
           this.state.username.toLowerCase(),
@@ -80,7 +82,7 @@ class AddOfferDialog extends React.Component {
         )
       )
     }
-    this.setState({ display: false });
+    this.props.onPost();    
   };
 
   // Set state variables
@@ -250,5 +252,9 @@ class AddOfferDialog extends React.Component {
     );
   }
 }
+
+AddOfferDialog.propTypes = {
+  onPost: PropTypes.func.isRequired,
+};
 
 export default AddOfferDialog;
