@@ -1,6 +1,6 @@
 // Services
 import { get, put, post, del } from './http-service';
-import { getItem, setItem, isCachedDataExpired } from "../services/storage-service";
+import { getItem, setItem, removeItem, isCachedDataExpired } from "../services/storage-service";
 
 /* This class is responsible for all actions related to Rides */
 
@@ -27,7 +27,7 @@ const getRideByID = async (id) => {
  */
 const getOfferedRides = async (username) => {
   let rides;
-  let key = "offered_" + username;
+  let key = "offered";
   if (isCachedDataExpired(key)) {
     rides = await get(`transit/ride/user/${username}/offered/`);
     setItem(key, rides);
@@ -44,7 +44,7 @@ const getOfferedRides = async (username) => {
  */
 const getConfirmedRides = async (username) => {
   let rides;
-  let key = "confirmed_" + username;
+  let key = "confirmed";
   if (isCachedDataExpired(key)) {
     rides = await get(`transit/ride/user/${username}/confirmed/`);    
     setItem(key, rides);
@@ -69,6 +69,7 @@ const getSearchResults = (startDate, endDate, origin, destination) => {
  * Corresponds to PostRide in back end's RideController
  */
 const addRideOffer = (ride) => {
+  removeItem("offered");
   return post(`transit/ride/`, ride);
 };
 
@@ -77,6 +78,8 @@ const addRideOffer = (ride) => {
  * Corresponds to UpdatePassengers in back end's RideController
  */
 const updatePassengersArray = (rideID, passengerUsername) => {
+  removeItem("offered");
+  removeItem("ride_" + rideID);
   return put(`transit/ride/passengers/${rideID}/${passengerUsername}/`);
 };
 
@@ -85,6 +88,8 @@ const updatePassengersArray = (rideID, passengerUsername) => {
  * Corresponds to UpdateOrigin in back end's RideController
  */
 const updateOrigin = (rideID, origin) => {
+  removeItem("offered");
+  removeItem("ride_" + rideID);
   return put(`transit/ride/origin/${rideID}/${origin}/`);
 };
 
@@ -93,6 +98,8 @@ const updateOrigin = (rideID, origin) => {
  * Corresponds to UpdateDestination in back end's RideController
  */
 const updateDestination = (rideID, destination) => {
+  removeItem("offered");
+  removeItem("ride_" + rideID);
   return put(`transit/ride/destination/${rideID}/${destination}/`);
 };
 
@@ -101,6 +108,8 @@ const updateDestination = (rideID, destination) => {
  * Corresponds to UpdateDateTime in back end's RideController
  */
 const updateDepartureDateTime = (rideID, departureDateTime) => {
+  removeItem("offered");
+  removeItem("ride_" + rideID);
   return put(`transit/ride/date/${rideID}/${departureDateTime}/`);
 };
 
@@ -109,6 +118,8 @@ const updateDepartureDateTime = (rideID, departureDateTime) => {
  * Corresponds to UpdateNote in back end's RideController
  */
 const updateDriverNote = (rideID, driverNote) => {
+  removeItem("offered");
+  removeItem("ride_" + rideID);
   return put(`transit/ride/note/${rideID}/${driverNote}/`);
 };
 
@@ -117,6 +128,8 @@ const updateDriverNote = (rideID, driverNote) => {
  * Corresponds to UpdateCapacity in back end's RideController
  */
 const updateMaxCapacity = (rideID, maxCapacity) => {
+  removeItem("offered");
+  removeItem("ride_" + rideID);
   return put(`transit/ride/capacity/${rideID}/${maxCapacity}/`);
 };
 
@@ -126,6 +139,8 @@ const updateMaxCapacity = (rideID, maxCapacity) => {
  */
 // TODO: Account for decreasing the capacity when passenger(s) will be affected 
 const updateRequestsArray = (rideID, requestID) => {
+  removeItem("offered");
+  removeItem("ride_" + rideID);
   return put(`transit/ride/requests/${rideID}/${requestID}/`);
 };
 
@@ -134,6 +149,8 @@ const updateRequestsArray = (rideID, requestID) => {
  * Corresponds to DeleteRide in back end's RideController
  */
 const deleteRideByID = (rideID) => {
+  removeItem("offered");
+  removeItem("ride_" + rideID);
   return del(`transit/ride/delete/${rideID}/`);
 };
 

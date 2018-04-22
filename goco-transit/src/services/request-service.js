@@ -1,6 +1,6 @@
 // Services
 import { get, put, post, del } from './http-service';
-import { getItem, setItem, isCachedDataExpired } from "../services/storage-service";
+import { getItem, setItem, removeItem, isCachedDataExpired } from "../services/storage-service";
 
 /* This class is responsible for all actions related to Requests */
 
@@ -27,7 +27,7 @@ const getRequestByID = async (requestID) => {
  */
 const getRequests = async (username) => {
   let request;
-  let key = "requests_" + username;
+  let key = "requests";
   if (isCachedDataExpired(key)) {
     request = await get(`transit/request/user/${username}/`);
     setItem(key, request);
@@ -43,6 +43,7 @@ const getRequests = async (username) => {
  * Corresponds to PostRequest in back end's RequestController
  */
 const addRequest = (request) => {
+  removeItem("requests");
   return post(`transit/request/`, request);
 };
 
@@ -51,6 +52,8 @@ const addRequest = (request) => {
  * Corresponds to UpdateRide in back end's RequestController
  */
 const updateRide = (requestID, rideID) => {
+  removeItem("requests");
+  removeItem("request_" + requestID);
   return put(`transit/request/ride/${requestID}/${rideID}/`);
 };
 
@@ -59,6 +62,8 @@ const updateRide = (requestID, rideID) => {
  * Corresponds to UpdateOrigin in back end's RequestController
  */
 const updateOrigin = (requestID, origin) => {
+  removeItem("requests");
+  removeItem("request_" + requestID);
   return put(`transit/request/origin/${requestID}/${origin}/`);
 };
 
@@ -67,6 +72,8 @@ const updateOrigin = (requestID, origin) => {
  * Corresponds to UpdateDestination in back end's RequestController
  */
 const updateDestination = (requestID, destination) => {
+  removeItem("requests");
+  removeItem("request_" + requestID);
   return put(`transit/request/origin/${requestID}/${destination}/`);
 };
 
@@ -75,6 +82,8 @@ const updateDestination = (requestID, destination) => {
  * Corresponds to UpdateEarliestDateTime in back end's RequestController
  */
 const updateEarliestDepartureDateTime = (requestID, earliestDepartureDateTime) => {
+  removeItem("requests");
+  removeItem("request_" + requestID);
   return put(`transit/request/earliest/${requestID}/${earliestDepartureDateTime}/`);
 };
 
@@ -83,6 +92,8 @@ const updateEarliestDepartureDateTime = (requestID, earliestDepartureDateTime) =
  * Corresponds to UpdateLatestDateTime in back end's RequestController
  */
 const updateLatestDepartureDateTime = (requestID, latestDepartureDateTime) => {
+  removeItem("requests");
+  removeItem("request_" + requestID);
   return put(`transit/request/latest/${requestID}/${latestDepartureDateTime}/`);
 };
 
@@ -91,6 +102,8 @@ const updateLatestDepartureDateTime = (requestID, latestDepartureDateTime) => {
  * Corresponds to DeleteRequest in back end's RequestController
  */
 const deleteRequestByID = (requestID) => {
+  removeItem("requests");
+  removeItem("request_" + requestID);
   return del(`transit/request/delete/${requestID}/`);
 };
 
