@@ -1,5 +1,6 @@
 // Services
 import { get, put, post, del } from './http-service';
+import { getItem, setItem, isCachedDataExpired } from "../services/storage-service";
 
 /* This class is responsible for all actions related to Requests */
 
@@ -7,16 +8,34 @@ import { get, put, post, del } from './http-service';
  * Get a Request by its unique ID
  * Corresponds to GetByID in back end's RequestController
  */
-const getRequestByID = (requestID) => {
-  return get(`transit/request/id/${requestID}/`);
+const getRequestByID = async (requestID) => {
+  let request;
+  let key = "request_" + requestID;
+  if (isCachedDataExpired(key)) {
+    request = await get(`transit/request/id/${requestID}/`);
+    setItem(key, request);
+  }
+  else {
+    request = getItem(key);
+  }
+  return request;
 };
 
 /**
  * Get the Requests belonging to a User
  * Corresponds to GetByUsername in back end's RequestController
  */
-const getRequests = (username) => {
-  return get(`transit/request/user/${username}/`);
+const getRequests = async (username) => {
+  let request;
+  let key = "requests_" + username;
+  if (isCachedDataExpired(key)) {
+    request = await get(`transit/request/user/${username}/`);
+    setItem(key, request);
+  }
+  else {
+    request = getItem(key);
+  }
+  return request;
 };
 
 /**

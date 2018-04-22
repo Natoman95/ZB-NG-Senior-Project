@@ -1,5 +1,6 @@
 // Services
 import { get, put, post, del } from './http-service';
+import { getItem, setItem, isCachedDataExpired } from "../services/storage-service";
 
 /* This class is responsible for all actions related to Rides */
 
@@ -7,24 +8,51 @@ import { get, put, post, del } from './http-service';
  * Get a Ride by its unique ID
  * Corresponds to GetByID in back end's RideController
  */
-const getRideByID = (id) => {
-  return get(`transit/ride/id/${id}/`);
+const getRideByID = async (id) => {
+  let ride;
+  let key = "ride_" + id;
+  if (isCachedDataExpired(key)) {
+    ride = await get(`transit/ride/id/${id}/`);
+    setItem(key, ride);
+  }
+  else {
+    ride = getItem(key);
+  }
+  return ride;
 };
 
 /**
  * Get the offered Rides that belong to a User
  * Corresponds to GetOfferedByUsername in back end's RideController
  */
-const getOfferedRides = (username) => {
-  return get(`transit/ride/user/${username}/offered/`);
+const getOfferedRides = async (username) => {
+  let rides;
+  let key = "offered_" + username;
+  if (isCachedDataExpired(key)) {
+    rides = await get(`transit/ride/user/${username}/offered/`);
+    setItem(key, rides);
+  }
+  else {
+    rides = getItem(key);
+  }
+  return rides;
 };
 
 /**
  * Get the confirmed Rides that belong to a User
  * Corresponds to GetConfirmedByUsername in back end's RideController
  */
-const getConfirmedRides = (username) => {
-  return get(`transit/ride/user/${username}/confirmed/`);
+const getConfirmedRides = async (username) => {
+  let rides;
+  let key = "confirmed_" + username;
+  if (isCachedDataExpired(key)) {
+    rides = await get(`transit/ride/user/${username}/confirmed/`);    
+    setItem(key, rides);
+  }
+  else {
+    rides = getItem(key);
+  }
+  return rides;
 };
 
 /**
