@@ -23,7 +23,9 @@ import RequestModel from '../../models/request-model';
 // Services
 import { getDate, getTime } from '../../services/date-service';
 
-/* Add an offer dialog box */
+/* This dialog opens on the passenger page of the app
+   It displays more information about a ride which a user
+   has requested but is not a passenger on yet */
 class RequestedDetailsDialog extends React.Component {
   constructor() {
     super();

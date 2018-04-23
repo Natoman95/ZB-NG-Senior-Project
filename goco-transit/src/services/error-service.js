@@ -1,5 +1,6 @@
 /**
- * Constructs errors
+ * Reformats some exceptions (mainly web exceptions) so that they
+ * can be displayed to the user
  */
 
 /**

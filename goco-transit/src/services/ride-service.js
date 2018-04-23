@@ -2,7 +2,11 @@
 import { get, put, post, del } from './http-service';
 import { getItem, setItem, removeItem, isCachedDataExpired } from "../services/storage-service";
 
-/* This class is responsible for all actions related to Rides */
+/**
+ * This class is responsible for all actions related to user rides
+ * which they may be drivers or passengers on. This means getting,
+ * posting, updating, and deleting requests
+ */
 
 /**
  * Get a Ride by its unique ID

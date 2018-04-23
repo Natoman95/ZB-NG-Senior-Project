@@ -1,5 +1,10 @@
 /**
- * Contains data on Requests. Requests have 2 states:
+ * This represents all the data stored about a request to be a passenger on a
+ * ride which another user has offered
+ * 
+ * This directly corresponds to the TransitRequestView model on the server
+ * 
+ * Requests have 2 states:
  * PENDING: (rideID == null) The linked Ride's driver has not approved the Request
  * CONFIRMED: (rideID != null) The linked Ride's driver has approved the Request
  */

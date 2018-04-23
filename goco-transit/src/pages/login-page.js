@@ -14,7 +14,10 @@ import theme from '../theme';
 // Services
 import { authenticate } from '../services/auth-service';
 
-// Login page component
+/**
+ * This page loads when a user is not authenticated into the app
+ * It allows them to login using 360's server
+ */
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);

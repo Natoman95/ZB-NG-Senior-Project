@@ -1,6 +1,8 @@
 import createMuiTheme from 'material-ui/styles/createMuiTheme';
 
-// Theme for the whole app
+/**
+ * Sets the theme colors and font for the whole app
+ */
 const theme = createMuiTheme({
   palette: {
     primary: {

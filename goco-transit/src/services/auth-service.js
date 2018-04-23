@@ -1,7 +1,9 @@
 import { getItem, setItem, clearStorage } from "./storage-service";
 import { parseResponse } from "./http-service";
 
-/* This class is responsible for all actions related to user authentication */
+/**
+ * This class is responsible for performing all actions related to user authentication
+ */
 
 /**
  * Handle an authentication error

@@ -14,7 +14,11 @@ import Loader from '../components/loader';
 import { signOut } from '../services/auth-service';
 import { getUser } from '../services/user-service';
 
-// Component for changing settings
+/**
+ * This page displays a user's contact information and allows them
+ * to modify it by navigating to 360. It allows them to monitor
+ * their progress through legal agreements and logout of the app
+ */
 class SettingsPage extends React.Component {
   constructor(props) {
     super(props);

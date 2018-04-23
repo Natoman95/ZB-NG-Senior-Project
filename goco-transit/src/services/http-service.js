@@ -2,9 +2,8 @@ import { getItem } from './storage-service';
 import { createError } from './error-service';
 
 /**
- * Handle HTTP requests to the API
- *
- * Copied from Gordon 360
+ * Performs all types of HTTP web request
+ * Other services call this one to perform fundamental HTTP operations
  */
 
 /**

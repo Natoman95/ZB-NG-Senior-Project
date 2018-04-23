@@ -10,7 +10,7 @@ import IconButton from 'material-ui/IconButton';
 // Components
 import { Icons } from '../../icon-library';
 
-/* Confirmation dialog box */
+/* This is a generic dialog used to confirm a user's actions */
 class ConfirmationDialog extends React.Component {
   constructor() {
     super();

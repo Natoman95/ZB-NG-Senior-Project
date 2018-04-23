@@ -1,4 +1,7 @@
-/* This class is responsible for all actions related to HTML5 date and time-related input types */
+/**
+ * This class is responsible for all actions related to HTML5 date and
+ * time-related input types. Dates in this format can be stored in the DB
+ */
 
 /**
  * Returns just the date portion of a datetime
