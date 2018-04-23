@@ -103,11 +103,11 @@ class AddRequestDialog extends React.Component {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
-        
-        {this.state.display && // Don't attempt to get undefined data
+
+          {this.state.display && // Don't attempt to get undefined data
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-
+            
               {/* Ride info */}
               <List dense={this.state.dense} style={{ padding: '0px' }} >
 
@@ -143,7 +143,7 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={getDate(this.state.ride.departureDateTime)}
+                    primary={this.state.ride.date}
                   />
                 </ListItem>
 
@@ -155,11 +155,23 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={getTime(this.state.ride.departureDateTime)}
+                    primary={this.state.ride.time}
                   />
                 </ListItem>
 
-                {/* Notes */}
+                {/* Note to passengers */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.noteIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={this.state.ride.driverNote}
+                  />
+                </ListItem>
+
+                {/* Note to driver */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
                     <Avatar>
@@ -167,34 +179,28 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: "1em" }} >
-                    <TextField
-                      id="requesterNoteInput"
-                      label="Note to driver"
-                      value={this.state.requesterNoteValue}
-                      onChange={this.handleFormChange("requesterNoteValue")}
-                      multiline={true}
-                    />
+                    <TextField label="Note to driver" multiline={true} />
                   </div>
                 </ListItem>
               </List>
 
             </DialogContentText>
           
-          <hr/>
+            <hr/>
 
-          {/* Action buttons */}
-          <Grid container spacing={40} justify="center">
-            <Grid item>
-              <IconButton onClick={() => this.handleClose(false)}>
-                {Icons.exitIcon}
-              </IconButton>
+            {/* Action buttons */}
+            <Grid container spacing={40} justify="center">
+              <Grid item>
+                <IconButton onClick={() => this.handleClose(false)}>
+                  {Icons.exitIcon}
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton onClick={() => this.handleClose(true)}>
+                  {Icons.confirmIcon}
+                </IconButton>
+              </Grid>
             </Grid>
-            <Grid item>
-              <IconButton onClick={() => this.handleClose(true)}>
-                {Icons.confirmIcon}
-              </IconButton>
-            </Grid>
-          </Grid>
 
           </DialogContent>
         }
