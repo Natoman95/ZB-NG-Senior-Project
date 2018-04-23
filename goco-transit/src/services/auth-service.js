@@ -2,7 +2,7 @@ import { getItem, setItem, clearStorage } from "./storage-service";
 import { parseResponse } from "./http-service";
 
 /**
- * This class is responsible for all actions related to user authentication
+ * This class is responsible for performing all actions related to user authentication
  */
 
 /**
@@ -21,19 +21,18 @@ const handleError = err => {
 
 /**
  * Get token for user from backend
- * @param {String} userName Username in firstname.lastname format
+ * @param {String} username Username in firstname.lastname format
  * @param {String} password User's password
  * @return {String} Token for use on API requests
  */
-const getAuth = (userName, password) => {
+const getAuth = (username, password) => {
   const headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
   const body = new URLSearchParams({
-    userName,
+    username,
     password,
     grant_type: 'password',
   });
   const request = new Request(`/token`, { method: 'post', headers, body });
-
   return fetch(request)
     .then(parseResponse)
     .then(data => data.access_token)
@@ -43,13 +42,13 @@ const getAuth = (userName, password) => {
 /**
  * Authenticate a user, saving the returned token for later use and caching the user's credentials
  * for refreshing the token when it expires.
- * @param {String} userName Username in firstname.lastname format
+ * @param {String} username Username in firstname.lastname format
  * @param {String} password User's password
  * @return {Promise.<undefined>} Resolved when token is refreshed
  */
-const authenticate = async (userName, password) => {
-  setItem('userName', userName);
-  await getAuth(userName, password).then(token => setItem('token', token));
+const authenticate = async (username, password) => {
+  setItem('username', username);
+  await getAuth(username, password).then(token => setItem('token', token));
 };
 
 /**

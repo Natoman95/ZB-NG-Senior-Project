@@ -2,7 +2,10 @@ import React from 'react';
 import Grid from 'material-ui/Grid';
 import { CircularProgress } from 'material-ui/Progress';
 
-/* Circular loading animation */
+/**
+ * This component is loaded at the top of tabs when they're loading
+ * data from the server. It displays a circular loading symbol
+ */
 class Loader extends React.Component {
 
   render() {

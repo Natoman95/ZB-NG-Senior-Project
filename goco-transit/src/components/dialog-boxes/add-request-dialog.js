@@ -19,8 +19,15 @@ import { Icons } from '../../icon-library';
 
 // Models
 import RideModel from '../../models/ride-model';
+import RequestModel from '../../models/request-model';
 
-/* Add a request dialog box */
+// Services
+import { getDate, getTime } from '../../services/date-service';
+import { addRequest } from "../../services/request-service";
+
+/* This dialog opens on the search page of the app
+   It allows the user to request a ride that might take
+   them where they want to go */
 class AddRequestDialog extends React.Component {
   constructor() {
     super();
@@ -31,20 +38,60 @@ class AddRequestDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
-      ride: new RideModel() // Prevents null pointer exception
+      username: null,
+
+      // From the search result
+      ride: new RideModel(), // Prevents null pointer exception
+      searchStartDateTime: null,
+      searchEndDateTime: null,
+      searchOrigin: null,
+      searchDestination: null,
+
+      // From the dialog input
+      requesterNoteValue: null
     };
   }
 
   // Open the add request dialog
-  handleClickOpen = (searchResult) => {
-    this.setState({ ride: searchResult });
-    this.setState({ display: true });
+  handleClickOpen = (username, searchResult, searchStartDateTime, searchEndDateTime, searchOrigin, searchDestination) => {
+    this.setState({
+      username: username,
+      ride: searchResult,
+      searchStartDateTime: searchStartDateTime,
+      searchEndDateTime: searchEndDateTime,
+      searchOrigin: searchOrigin,
+      searchDestination: searchDestination,
+      requesterNoteValue: null,
+      display: true
+    });
   };
 
   // Close the add request dialog
-  handleClose = () => {
+  handleClose = (confirmSelected) => {
+    if (confirmSelected) {
+      // Request created from search result
+      addRequest(
+        new RequestModel(
+          "",
+          this.state.username.toLowerCase(),
+          this.state.ride.rideId, // "rideId" instead of "rideID" to match back-end
+          "",
+          "",
+          "",
+          "",
+          this.state.requesterNoteValue
+        )
+      )
+    }
     this.setState({ display: false });
   };
+
+  // Set state variables
+  handleFormChange(input) {
+    return event => {
+      this.setState({ [input]: event.target.value });
+    };
+  }
 
   render() {
     return (
@@ -56,104 +103,107 @@ class AddRequestDialog extends React.Component {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
 
-            {/* Ride info */}
-            <List dense={this.state.dense} style={{ padding: '0px' }} >
+          {this.state.display && // Don't attempt to get undefined data
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+            
+              {/* Ride info */}
+              <List dense={this.state.dense} style={{ padding: '0px' }} >
 
-              {/* Origin */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.originIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={this.state.ride.origin}
-                />
-              </ListItem>
+                {/* Origin */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.originIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={this.state.ride.origin}
+                  />
+                </ListItem>
 
-              {/* Destination */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.destinationIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={this.state.ride.destination}
-                />
-              </ListItem>
+                {/* Destination */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.destinationIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={this.state.ride.destination}
+                  />
+                </ListItem>
 
-              {/* Date */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.dateIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={this.state.ride.date}
-                />
-              </ListItem>
+                {/* Date */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.dateIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={this.state.ride.date}
+                  />
+                </ListItem>
 
-              {/* Time */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.timeIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={this.state.ride.time}
-                />
-              </ListItem>
+                {/* Time */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.timeIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={this.state.ride.time}
+                  />
+                </ListItem>
 
-              {/* Note to passengers */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.noteIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText
-                  primary={this.state.ride.driverNote}
-                />
-              </ListItem>
+                {/* Note to passengers */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.noteIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText
+                    primary={this.state.ride.driverNote}
+                  />
+                </ListItem>
 
-              {/* Note to driver */}
-              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                <ListItemAvatar>
-                  <Avatar>
-                    {Icons.noteIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                <div style={{ paddingLeft: "1em" }} >
-                  <TextField label="Note to driver" multiline={true} />
-                </div>
-              </ListItem>
-            </List>
+                {/* Note to driver */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.noteIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <div style={{ paddingLeft: "1em" }} >
+                    <TextField label="Note to driver" multiline={true} />
+                  </div>
+                </ListItem>
+              </List>
 
-          </DialogContentText>
-        
-        <hr/>
+            </DialogContentText>
+          
+            <hr/>
 
-        {/* Action buttons */}
-        <Grid container spacing={40} justify="center">
-          <Grid item>
-            <IconButton onClick={this.handleClose}>
-              {Icons.exitIcon}
-            </IconButton>
-          </Grid>
-          <Grid item>
-            <IconButton onClick={this.handleClose}>
-              {Icons.confirmIcon}
-            </IconButton>
-          </Grid>
-        </Grid>
+            {/* Action buttons */}
+            <Grid container spacing={40} justify="center">
+              <Grid item>
+                <IconButton onClick={() => this.handleClose(false)}>
+                  {Icons.exitIcon}
+                </IconButton>
+              </Grid>
+              <Grid item>
+                <IconButton onClick={() => this.handleClose(true)}>
+                  {Icons.confirmIcon}
+                </IconButton>
+              </Grid>
+            </Grid>
 
-        </DialogContent>
+          </DialogContent>
+        }
 
       </Dialog>
     );

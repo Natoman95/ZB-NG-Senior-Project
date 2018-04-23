@@ -1,5 +1,8 @@
 # ZB-NG-Senior-Project
 
+#### Further Project Documentation
+* Hand-Off Documentation https://docs.google.com/document/d/1k08G5ONiRkM8Zqfj5ai_mx0tD3p6zAxepkMUG6tu3Os/edit?usp=sharing
+
 #### Useful Documentation
 * React JS Documentation https://reactjs.org/docs/hello-world.html
 * Create React App Documentation https://github.com/facebook/create-react-app
@@ -30,6 +33,7 @@
 * Install react globally (with the -g option) via the npm package manager https://www.npmjs.com/package/react/tutorial
 * Install yarn globally in one of the ways listed https://yarnpkg.com/lang/en/docs/install/
 * Navigate to the `goco-transit` folder of the repository
+* Execute `yarn install` if this is your first time running the project
 * Execute `yarn dev` to run the project
 * Execute `yarn build` to create a production build of the project
 

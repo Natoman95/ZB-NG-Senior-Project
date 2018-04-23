@@ -2,9 +2,8 @@ import { getItem } from './storage-service';
 import { createError } from './error-service';
 
 /**
- * Handle HTTP requests to the API
- *
- * Copied from Gordon 360
+ * Performs all types of HTTP web request
+ * Other services call this one to perform fundamental HTTP operations
  */
 
 /**
@@ -17,6 +16,7 @@ const makeHeaders = () => {
     const token = getItem('token');
     return new Headers({
       Authorization: `Bearer ${token}`,
+      'Content-type': 'application/json',
     });
   } catch (err) {
     throw new Error('Token is not available');
@@ -30,12 +30,16 @@ const makeHeaders = () => {
  * @param {object|array} body data to send with request
  * @return {Request} A request object
  */
-const createRequest = (url, method, body) =>
-  new Request(`/api/${url}`, {
+const createRequest = (url, method, body) => {
+  if (body != null) {
+    body = JSON.stringify(body);
+  }
+  return new Request(`/api/${url}`, {
     method,
     body,
     headers: makeHeaders(),
   });
+}
 
 /**
  * Parse an HTTP response

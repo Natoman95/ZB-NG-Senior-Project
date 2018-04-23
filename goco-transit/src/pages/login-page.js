@@ -14,13 +14,16 @@ import theme from '../theme';
 // Services
 import { authenticate } from '../services/auth-service';
 
-// Login page component
+/**
+ * This page loads when a user is not authenticated into the app
+ * It allows them to login using 360's server
+ */
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      userName: null,
+      username: null,
       password: null,
       loginFailed: false,
       errorMessage: null,
@@ -35,7 +38,7 @@ class LoginPage extends React.Component {
     event.preventDefault();
     this.setState({ loading: true });
     try {
-      await authenticate(this.state.userName, this.state.password);
+      await authenticate(this.state.username, this.state.password);
       this.props.onLogin();
     } catch (err) {
       this.setState({ errorMessage: err.message, loading: false, loginFailed: true });
@@ -89,13 +92,13 @@ class LoginPage extends React.Component {
                 </Grid>
 
                 <TextField
-                  id="userName"
+                  id="username"
                   label="Username"
                   placeholder="firstname.lastname"
                   variant="username"
                   margin="none"
-                  value={this.state.userName}
-                  onChange={this.handleFormChange('userName')}
+                  value={this.state.username}
+                  onChange={this.handleFormChange('username')}
                   style={{ width: "100%", paddingTop: '1em' }}
                 />
 

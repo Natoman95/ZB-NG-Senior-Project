@@ -16,8 +16,17 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
+import { getConfirmedRides, getRideByID } from '../services/ride-service';
+import { getDate, getTime } from '../services/date-service';
+import { getRequests } from '../services/request-service';
 
-// Contains ride requests made by the user
+/**
+ * This page allows a user to manage anything having to do with their
+ * role as a passenger. This means displaying a user's requested rides
+ * and the rides where they are confirmed as a passenger.
+ * It also allows a user to navigate to the search page to find
+ * rides they might want to be a passenger on.
+ */
 class PassengerPage extends React.Component {
   constructor(props) {
     super(props);
@@ -29,15 +38,27 @@ class PassengerPage extends React.Component {
       divider: true,
       user: null,
       confirmedRides: null,
-      requests: null,
+      requestedRides: null,
       loading: true
     };
+
+    this.rideDictionary = [];
   }
 
   componentWillMount() {
     // Once the component mounts, make sure the tab matches the component
     this.props.matchTab();
     this.loadUserData();
+  }
+
+  // Return the index of the dictionary element containing the Ride
+  searchRideDictionary= (rideID) => {
+    for (let i = 0; i < this.rideDictionary.length; i++) {
+      if (this.rideDictionary[i].value.rideId === rideID) {
+        return i;
+      }
+    }
+    return false;
   }
 
   render() {
@@ -50,7 +71,7 @@ class PassengerPage extends React.Component {
         <div>
           {/* List of confirmed rides generated from an array */}
           <h3>
-            Confirmed
+            Confirmed Rides ({this.state.confirmedRides.length})
           </h3>
           <List dense={this.state.dense}>
             {this.state.confirmedRides.map((confirmedRide) => {
@@ -64,7 +85,7 @@ class PassengerPage extends React.Component {
                   {/* Route destination and date range */}
                   <ListItemText
                     primary={confirmedRide.destination}
-                    secondary={this.state.secondary ? confirmedRide.date : null}
+                    secondary={this.state.secondary ? getDate(confirmedRide.departureDateTime) : null}
                   />
                 </ListItem>
               );
@@ -73,11 +94,17 @@ class PassengerPage extends React.Component {
 
           {/* List of requests generated from an array */}
           <h3 style={{ marginTop: '3em' }}>
-            Requested
+            Requested Rides ({this.state.requestedRides.length})
           </h3>
 
           <List dense={this.state.dense}>
-            {this.state.requests.map((requestedRide) => {
+            {this.state.requestedRides.map((requestedRide) => {
+
+              // Get the Request's associated Ride, if it exists
+              let index = this.searchRideDictionary(requestedRide.rideId);
+              let linkedRide = this.rideDictionary[index].value;
+              console.log(linkedRide)
+
               return (
                 <ListItem
                   button
@@ -85,10 +112,23 @@ class PassengerPage extends React.Component {
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
+
                   {/* Route destination and date range */}
                   <ListItemText
-                    primary={requestedRide.destination}
-                    secondary={this.state.secondary ? (requestedRide.earliestDeparture + ' - ' + requestedRide.latestDeparture) : null}
+                    primary={linkedRide.destination}
+                    secondary={this.state.secondary ?
+                      (
+                        // No linked Ride
+                        (linkedRide === false) ?
+                          (
+                            getDate(requestedRide.earliestDepartureDateTime) + " " + getTime(requestedRide.earliestDepartureDateTime)
+                            + ' - '
+                            + getDate(requestedRide.latestDepartureDateTime) + " " + getTime(requestedRide.latestDepartureDateTime)
+                          // Has linked Ride
+                          ) : 
+                            getDate(linkedRide.departureDateTime) + " " + getTime(linkedRide.departureDateTime)
+                      ) : null
+                    }
                   />
                 </ListItem>
               );
@@ -128,18 +168,41 @@ class PassengerPage extends React.Component {
     this.setState({ loading: true });
     try {
       let data = await getUser();
-      this.setState({
-        user: data,
-        requests: data.requests,
-        confirmedRides: data.confirmedRides,
-        loading: false,
-      });
+      this.setState({ user: data });
+
+      // Set confirmedRides to empty array if promise is rejected
+      let confirmedRidesData = await getConfirmedRides(this.state.user.username);
+      this.setState({ confirmedRides: confirmedRidesData });
+
+      // Set requestedRides to empty array if promise is rejected
+      let requestsData = await getRequests(this.state.user.username);
+      this.setState({ requestedRides: requestsData });
+
+      // Link Requests to their linked Rides, if they exist
+      let linkedRide;
+      for (let i = 0; i < this.state.requestedRides.length; i++) {
+        linkedRide = await getRideByID(this.state.requestedRides[i].rideId)
+        if (linkedRide !== (null || undefined)) {
+          // Has linked Ride
+          this.rideDictionary.push({
+            key: this.state.requestedRides[i].requestId,
+            value: linkedRide
+          });
+        } else {
+          // No linked Ride
+          this.rideDictionary.push({
+            key: this.state.requestedRides[i].requestId,
+            value: false
+          });
+        }
+      }
+      
+      this.setState({ loading: false });
     }
     catch (err) {
       throw err;
     }
   };
-
 }
 
 PassengerPage.propTypes = {

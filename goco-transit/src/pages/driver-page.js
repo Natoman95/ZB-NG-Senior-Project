@@ -18,8 +18,15 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
+import { getOfferedRides } from '../services/ride-service';
+import { getDate } from '../services/date-service';
 
-// Contains rides offered to other users
+/**
+ * This page allows a user to manage anything having to do with their
+ * role as a driver. This means displaying information on rides the
+ * user has offered and allowing the user to offer rides to other people
+ * and update information about those rides, including their passengers
+ */
 class DriverPage extends React.Component {
   constructor(props) {
     super(props);
@@ -33,6 +40,13 @@ class DriverPage extends React.Component {
       offeredRides: null,
       loading: false,
     };
+
+    this.onOffersUpdated = this.onOffersUpdated.bind(this);
+  }
+
+  onOffersUpdated() {
+    this.loadUserData();
+    this.forceUpdate();
   }
 
   componentWillMount() {
@@ -49,8 +63,11 @@ class DriverPage extends React.Component {
     else {
       content = (
         <div>
-          {/* List of ride offers - items display the number of users who have accepted the ride 
-         Generated from an array */}
+          {/* List of confirmed rides generated from an array */}
+          <h3>
+            Offered Rides ({this.state.offeredRides.length})
+          </h3>
+
           <List dense={this.state.dense}>
             {this.state.offeredRides.map((offeredRide) => {
               return (
@@ -63,7 +80,7 @@ class DriverPage extends React.Component {
                   {/* Number of users on the offered ride */}
                   <ListItemAvatar>
                     <IconButton disabled={true}>
-                      <Badge badgeContent={offeredRide.passengers.length + "/" + offeredRide.maxCapacity} color="primary">
+                      <Badge badgeContent={offeredRide.passengerUsernames.length + "/" + offeredRide.maxCapacity} color="primary">
                         {Icons.seatIcon}
                       </Badge>
                     </IconButton>
@@ -71,7 +88,7 @@ class DriverPage extends React.Component {
                   {/* Date of the ride */}
                   <ListItemText
                     primary={offeredRide.destination}
-                    secondary={this.state.secondary ? offeredRide.date : null}
+                    secondary={this.state.secondary ? getDate(offeredRide.departureDateTime) : null}
                   />
                 </ListItem>
               );
@@ -83,7 +100,8 @@ class DriverPage extends React.Component {
             <Grid item xs={12}>
               <Grid container direction="row" justify="flex-end" alignItems="center">
                 <Grid item>
-                  <Button variant="fab" color="secondary" aria-label="add" onClick={() => { this.addOfferDialogChild.handleClickOpen(); }}>
+                  <Button variant="fab" color="secondary" aria-label="add"
+                  onClick={() => { this.addOfferDialogChild.handleClickOpen(this.state.user.username); }}>
                     {Icons.addIcon}
                   </Button>
                 </Grid>
@@ -93,7 +111,7 @@ class DriverPage extends React.Component {
 
           {/* Dialog boxes */}
           <OfferDetailsDialog ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance; }} />
-          <AddOfferDialog ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance; }} />
+          <AddOfferDialog onPost={this.onOffersUpdated} ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance; }} />
 
         </div>
       );
@@ -108,18 +126,18 @@ class DriverPage extends React.Component {
   async loadUserData() {
     this.setState({ loading: true });
     try {
-      let data = await getUser();
-      this.setState({
-        user: data,
-        offeredRides: data.offeredRides,
-        loading: false
-      });
+      let userData = await getUser();
+      this.setState({ user: userData });
+
+      let rideData = await getOfferedRides(this.state.user.username);
+      this.setState({ offeredRides: rideData });
+
+      this.setState({ loading: false });
     }
     catch (err) {
       throw err;
     }
   };
-
 }
 
 DriverPage.propTypes = {

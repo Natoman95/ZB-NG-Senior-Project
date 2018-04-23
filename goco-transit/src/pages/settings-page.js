@@ -14,7 +14,11 @@ import Loader from '../components/loader';
 import { signOut } from '../services/auth-service';
 import { getUser } from '../services/user-service';
 
-// Component for changing settings
+/**
+ * This page displays a user's contact information and allows them
+ * to modify it by navigating to 360. It allows them to monitor
+ * their progress through legal agreements and logout of the app
+ */
 class SettingsPage extends React.Component {
   constructor(props) {
     super(props);
@@ -56,7 +60,7 @@ class SettingsPage extends React.Component {
 
   // Redirect to 360 to edit user info
   handleClickEdit() {
-    window.open("https://360.gordon.edu/#/profile/" + this.state.userName, '_blank');
+    window.open("https://360.gordon.edu/#/profile/" + this.state.username, '_blank');
   }
 
   // Bind dialog data to the state
@@ -191,7 +195,7 @@ class SettingsPage extends React.Component {
         lastName: data.lastName,
         phoneNum: this.formatPhone(data.phoneNum),
         email: data.email,
-        userName: data.userName,
+        username: data.username,
         loading: false,
       });
     }
