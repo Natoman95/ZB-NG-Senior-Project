@@ -8,8 +8,8 @@
  * @param {datetime} datetime to convert
  */
 const getDate = (datetime) => {
-  let date = new Date(datetime.split("T")[0]);
-  return date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear().toString().substr(-2);
+  let date = new Date(datetime.toString());
+  return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear().toString().substr(-2);
 }
 
 /**
@@ -17,7 +17,7 @@ const getDate = (datetime) => {
  * @param {datetime} datetime to convert
  */
 const getTime = (datetime) => {
-  let time = new Date(datetime.split("T")[0] + " " + datetime.split("T")[1]);
+  let time = new Date(datetime.toString());
   
   // AM vs PM
   let hours = time.getHours();
