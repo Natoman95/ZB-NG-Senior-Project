@@ -5,7 +5,6 @@
  * @param {datetime} datetime to convert
  */
 const getDate = (datetime) => {
-  console.log(datetime)
   let date = new Date(datetime.toString());
   return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear().toString().substr(-2);
 }

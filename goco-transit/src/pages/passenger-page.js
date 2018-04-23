@@ -97,7 +97,6 @@ class PassengerPage extends React.Component {
               // Get the Request's associated Ride, if it exists
               let index = this.searchRideDictionary(requestedRide.rideId);
               let linkedRide = this.rideDictionary[index].value;
-              console.log(linkedRide)
 
               return (
                 <ListItem
