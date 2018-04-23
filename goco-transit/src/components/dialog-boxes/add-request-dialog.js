@@ -110,7 +110,19 @@ class AddRequestDialog extends React.Component {
                 />
               </ListItem>
 
-              {/* Notes */}
+              {/* Note to passengers */}
+              <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                <ListItemAvatar>
+                  <Avatar>
+                    {Icons.noteIcon}
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                  primary={this.state.ride.driverNote}
+                />
+              </ListItem>
+
+              {/* Note to driver */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
                   <Avatar>
