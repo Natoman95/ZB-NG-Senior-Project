@@ -126,7 +126,7 @@ class AddRequestDialog extends React.Component {
                     primary={this.state.ride.destination}
                   />
                 </ListItem>
-
+                
                 {/* Date */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
@@ -135,7 +135,7 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={getDate(this.state.ride.date)}
+                    primary={getDate(this.state.ride.departureDateTime)}
                   />
                 </ListItem>
 
@@ -147,7 +147,7 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={getTime(this.state.ride.time)}
+                    primary={getTime(this.state.ride.departureDateTime)}
                   />
                 </ListItem>
 
