@@ -176,9 +176,6 @@ class PassengerPage extends React.Component {
       let requestedRidesData = await getRequestedRides(this.state.user.username);
       this.setState({ requestedRides: requestedRidesData });
 
-      console.log(this.state.confirmedRides)
-      console.log(this.state.requestedRides)
-
       // Link Requests to their linked Rides, if they exist
       let linkedRide;
       for (let i = 0; i < this.state.requestedRides.length; i++) {

@@ -48,6 +48,7 @@ const getRequests = async (username) => {
  */
 const addRequest = (request) => {
   removeItem("requests");
+  removeItem("pending");
   return post(`transit/request/`, request);
 };
 

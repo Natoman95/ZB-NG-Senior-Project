@@ -65,7 +65,7 @@ const getConfirmedRides = async (username) => {
  */
 const getRequestedRides = async (username) => {
   let rides;
-  let key = "confirmed";
+  let key = "pending";
   if (isCachedDataExpired(key)) {
     rides = await get(`transit/ride/user/${username}/pending/`);    
     setItem(key, rides);
