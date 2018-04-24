@@ -63,7 +63,7 @@ class DriverPage extends React.Component {
     else {
       content = (
         <div>
-          {/* List of confirmed rides generated from an array */}
+          {/* List of offered rides generated from an array */}
           <h3>
             Offered Rides ({this.state.offeredRides.length})
           </h3>

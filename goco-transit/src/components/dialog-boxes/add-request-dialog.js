@@ -42,10 +42,6 @@ class AddRequestDialog extends React.Component {
 
       // From the search result
       ride: new RideModel(), // Prevents null pointer exception
-      searchStartDateTime: null,
-      searchEndDateTime: null,
-      searchOrigin: null,
-      searchDestination: null,
 
       // From the dialog input
       requesterNoteValue: null
@@ -53,17 +49,13 @@ class AddRequestDialog extends React.Component {
   }
 
   // Open the add request dialog
-  handleClickOpen = (username, searchResult, searchStartDateTime, searchEndDateTime, searchOrigin, searchDestination) => {
+  handleClickOpen = (username, searchResult) => {
     this.setState({
       username: username,
       ride: searchResult,
-      searchStartDateTime: searchStartDateTime,
-      searchEndDateTime: searchEndDateTime,
-      searchOrigin: searchOrigin,
-      searchDestination: searchDestination,
-      requesterNoteValue: null,
-      display: true
+      requesterNoteValue: null
     });
+    this.setState({display: true})
   };
 
   // Close the add request dialog
@@ -74,7 +66,7 @@ class AddRequestDialog extends React.Component {
         new RequestModel(
           "",
           this.state.username.toLowerCase(),
-          this.state.ride.rideId, // "rideId" instead of "rideID" to match back-end
+          this.state.ride.rideID,
           "",
           "",
           "",
@@ -143,7 +135,7 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={this.state.ride.date}
+                    primary={getDate(this.state.ride.departureDateTime)}
                   />
                 </ListItem>
 
@@ -155,7 +147,7 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={this.state.ride.time}
+                    primary={getTime(this.state.ride.departureDateTime)}
                   />
                 </ListItem>
 
@@ -179,7 +171,13 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: "1em" }} >
-                    <TextField label="Note to driver" multiline={true} />
+                    <TextField
+                      id="requesterNoteInput"
+                      label="Note to driver"
+                      value={this.state.requesterNoteValue}
+                      onChange={this.handleFormChange("requesterNoteValue")}
+                      multiline
+                    />
                   </div>
                 </ListItem>
               </List>

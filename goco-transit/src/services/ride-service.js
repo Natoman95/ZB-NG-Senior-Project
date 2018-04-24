@@ -60,6 +60,23 @@ const getConfirmedRides = async (username) => {
 };
 
 /**
+ * Get the requested Rides that belong to a User
+ * Corresponds to GetPendingByUsername in back end's RideController
+ */
+const getRequestedRides = async (username) => {
+  let rides;
+  let key = "pending";
+  if (isCachedDataExpired(key)) {
+    rides = await get(`transit/ride/user/${username}/pending/`);    
+    setItem(key, rides);
+  }
+  else {
+    rides = getItem(key);
+  }
+  return rides;
+};
+
+/**
  * Get Rides within a certain date range and along the route between an origin and destination
  * Utilizes GetByLocation in back end's RideController
  */
@@ -162,6 +179,7 @@ export {
   getRideByID,
   getOfferedRides,
   getConfirmedRides,
+  getRequestedRides,
   getSearchResults,
   addRideOffer,
   updatePassengersArray,
