@@ -54,7 +54,7 @@ class PassengerPage extends React.Component {
   // Return the index of the dictionary element containing the Ride
   searchRideDictionary= (rideID) => {
     for (let i = 0; i < this.rideDictionary.length; i++) {
-      if (this.rideDictionary[i].value.rideId === rideID) {
+      if (this.rideDictionary[i].value.rideID === rideID) {
         return i;
       }
     }
@@ -101,7 +101,7 @@ class PassengerPage extends React.Component {
             {this.state.requestedRides.map((requestedRide) => {
 
               // Get the Request's associated Ride, if it exists
-              let index = this.searchRideDictionary(requestedRide.rideId);
+              let index = this.searchRideDictionary(requestedRide.rideID);
               let linkedRide = this.rideDictionary[index].value;
               console.log(linkedRide)
 
@@ -181,7 +181,7 @@ class PassengerPage extends React.Component {
       // Link Requests to their linked Rides, if they exist
       let linkedRide;
       for (let i = 0; i < this.state.requestedRides.length; i++) {
-        linkedRide = await getRideByID(this.state.requestedRides[i].rideId)
+        linkedRide = await getRideByID(this.state.requestedRides[i].rideID)
         if (linkedRide !== (null || undefined)) {
           // Has linked Ride
           this.rideDictionary.push({

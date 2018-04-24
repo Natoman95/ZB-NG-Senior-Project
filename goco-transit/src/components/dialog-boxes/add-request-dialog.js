@@ -74,7 +74,7 @@ class AddRequestDialog extends React.Component {
         new RequestModel(
           "",
           this.state.username.toLowerCase(),
-          this.state.ride.rideId, // "rideId" instead of "rideID" to match back-end
+          this.state.ride.rideID,
           "",
           "",
           "",
@@ -143,7 +143,7 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={this.state.ride.date}
+                    primary={getDate(this.state.ride.date)}
                   />
                 </ListItem>
 
@@ -155,7 +155,7 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={this.state.ride.time}
+                    primary={getTime(this.state.ride.time)}
                   />
                 </ListItem>
 
