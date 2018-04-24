@@ -2,7 +2,8 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // Components
 import DriverPage from './driver-page';
@@ -10,6 +11,9 @@ import PassengerPage from './passenger-page';
 import SettingsPage from './settings-page';
 import SearchPage from './search-page';
 import { Icons } from '../icon-library';
+
+// Services
+import { getUser } from '../services/user-service';
 
 // Contains the children the tabs navigate between
 function TabContainer(props) {
@@ -20,15 +24,20 @@ function TabContainer(props) {
   );
 }
 
-// Main app component
+/**
+ * This page is a container for all other pages loaded after a user
+ * has logged in. It controls the app's tabs which load other pages
+ */
 class MainPage extends React.Component {
-  state = {
-    value: 0,
-  };
+  constructor(props) {
+    super(props);
 
-  handleChange = (event, value) => {
-    this.setState({ value });
-  };
+    this.state = {
+      value: 0,
+    };
+
+    this.loadUserData();
+  }
 
   render() {
     return (
@@ -39,8 +48,8 @@ class MainPage extends React.Component {
             <Tabs
               fullWidth={true}
               value={this.state.value}
-              onChange={this.handleChange}
               indicatorColor="secondary"
+              centered
             >
               <Tab label="Passenger" icon={Icons.seatIcon} component={Link} to="/passenger" />
               <Tab label="Driver" icon={Icons.driverIcon} component={Link} to="/driver" />
@@ -52,16 +61,49 @@ class MainPage extends React.Component {
         {/* Tab Pages */}
         <div style={{ paddingTop: '4.25em' }}>
           <TabContainer>
-            <Route exact path="/" component={PassengerPage} />
-            <Route exact path="/passenger" component={PassengerPage} />
-            <Route exact path="/passenger/search" component={SearchPage} />
-            <Route exact path="/driver" component={DriverPage} />
-            <Route exact path="/settings" component={SettingsPage} />
+            <Route
+              exact path="/"
+              render={() => <PassengerPage
+                matchTab={() => this.setState({ value: 0 })}>
+              </PassengerPage>} />
+            <Route
+              exact path="/passenger"
+              render={() => <PassengerPage
+                matchTab={() => this.setState({ value: 0 })}>
+              </PassengerPage>} />
+            <Route
+              exact path="/passenger/search"
+              render={() => <SearchPage
+                matchTab={() => this.setState({ value: 0 })}>
+              </SearchPage>} />
+            <Route
+              exact path="/driver"
+              render={() => <DriverPage
+                matchTab={() => this.setState({ value: 1 })}>
+              </DriverPage>} />
+            <Route
+              exact path="/settings"
+              render={() => <SettingsPage
+                onLogout={this.props.onLogout}
+                matchTab={() => this.setState({ value: 2 })}>
+              </SettingsPage>} />
           </TabContainer>
         </div>
       </div>
     );
   }
+
+  /**
+   * Load user data on login - grabbing from 360
+   */
+  async loadUserData() {
+    await getUser();
+  };
+
 }
 
-export default MainPage;
+MainPage.propTypes = {
+  onLogout: PropTypes.func.isRequired,
+};
+
+export default withRouter(MainPage);

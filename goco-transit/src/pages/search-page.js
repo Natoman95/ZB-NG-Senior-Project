@@ -6,20 +6,23 @@ import List, {
   ListItemText,
 } from 'material-ui/List'; import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/Button';
+import PropTypes from 'prop-types';
 
 // Components
-import AddRequestDialog from '../components/add-request-dialog';
+import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
 
 // Services
-import { findOfferedRides } from '../services/ride-service';
+import { getSearchResults } from '../services/ride-service';
+import { getDate } from '../services/date-service';
+import { getUser } from '../services/user-service';
 
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
  * It allows the user to search for a ride by location and date range
  */
-class RequestSearchPage extends React.Component {
-  constructor() {
-    super();
+class SearchPage extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
       dense: false,
@@ -29,10 +32,31 @@ class RequestSearchPage extends React.Component {
       displayAddRequestDialog: false,
       origin: null,
       destination: null,
-      startDate: null,
-      endDate: null,
-      results: null
+      startDateTime: null,
+      endDateTime: null,
+      searchResults: [],
+      searchAttempted: false,
+      username: null
     };
+  }
+
+  /**
+   * Gets the logged in User's username
+   */
+  async getUsername() {
+    try {
+      let userData = await getUser();
+      this.setState({ username: userData.username });
+    }
+    catch (err) {
+      throw err;
+    }
+  };
+
+  componentWillMount() {
+    // Once the component mounts, make sure the tab matches the component
+    this.props.matchTab();
+    this.getUsername();
   }
 
   // Returns the date and time plus a given number of milliseconds (ms) in datetime-local format ("YYYY-MM-DDTHH:MM")
@@ -55,13 +79,12 @@ class RequestSearchPage extends React.Component {
   }
 
   /**
-   * When the search button is clicked, rides matching the user's parameters must be found
+   * When the search button is clicked, rides matching the user's parameters are displayed
    */
-  handleClickSearch = () => {
-    this.setState({
-      results: findOfferedRides(this.state.startDate, this.state.endDate,
-        this.state.origin, this.state.destination)
-    });
+  handleClickSearch = async () => {
+    let searchResultsData = await getSearchResults(this.state.startDateTime, this.state.endDateTime, this.state.origin, this.state.destination);
+    this.setState({ searchResults: searchResultsData });
+    this.setState({ searchAttempted: true });
   }
 
   // Change state variables based on changes to input forms
@@ -83,10 +106,10 @@ class RequestSearchPage extends React.Component {
         <div style={{ marginTop: '2em' }}>
           <Grid container spacing={40}>
             {/* Origin */}
-            <Grid item>
+            <Grid item xl={3} md={6} sm={12}>
               <TextField
-                style={{ width: 226.23 }} // Same width as departure fields
-                id="origin"
+                fullWidth
+                id="originField"
                 label="Origin"
                 type="search"
                 value={this.state.origin}
@@ -94,10 +117,10 @@ class RequestSearchPage extends React.Component {
               />
             </Grid>
             {/* Destination */}
-            <Grid item>
+            <Grid item xl={3} md={6} sm={12}>
               <TextField // Destination (end)
-                style={{ width: 226.23 }} // Same width as departure fields
-                id="destination"
+                fullWidth
+                id="destinationField"
                 label="Destination"
                 type="search"
                 value={this.state.destination}
@@ -105,37 +128,35 @@ class RequestSearchPage extends React.Component {
               />
             </Grid>
             {/* Start date */}
-            <Grid item>
-              <form noValidate>
-                <TextField
-                  id="startDate"
-                  label="Earliest Possible Departure"
-                  type="datetime-local"
-                  defaultValue={this.getDateTime(0)} // Default time for the start date is today
-                  value={this.state.startDate}
-                  onChange={this.handleFormChange('startDate')}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </form>
+            <Grid item xl={3} md={6} sm={12}>
+              <TextField
+                fullWidth
+                id="startDateField"
+                label="Earliest Possible Departure"
+                type="datetime-local"
+                defaultValue={this.getDateTime(0)} // Default time for the start date is today
+                value={this.state.startDate}
+                onChange={this.handleFormChange('startDate')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
             </Grid>
             {/* End date */}
-            <Grid item>
-              <form noValidate>
-                <TextField
-                  id="startDate"
-                  label="Latest Possible Departure"
-                  type="datetime-local"
-                  defaultValue={this.getDateTime(86400000)} // Default time for the end date is tomorrow
-                  min={this.getDateTime(86400000)}
-                  onChange={this.handleFormChange('endDate')}
-                  value={this.state.endDate}
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                />
-              </form>
+            <Grid item xl={3} md={6} sm={12}>
+              <TextField
+                fullWidth
+                id="endDateField"
+                label="Latest Possible Departure"
+                type="datetime-local"
+                defaultValue={this.getDateTime(86400000)} // Default time for the end date is tomorrow
+                min={this.getDateTime(86400000)}
+                onChange={this.handleFormChange('endDate')}
+                value={this.state.endDate}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              />
             </Grid>
           </Grid>
         </div>
@@ -154,31 +175,50 @@ class RequestSearchPage extends React.Component {
 
         {/* Search Results - visible only if user has hit the search button 
          Generated from an array of results */}
-        {this.state.results !== null &&
+        {(this.state.searchResults.length > 0) &&
           <div style={{ marginTop: '3em' }}>
             <h3>
-              Results
+              Search Results ({this.state.searchResults.length})
             </h3>
-
-            {this.state.results.map((result) => {
+            
+            {/* Display search results as a list of Rides */}
+            {this.state.searchResults.map((searchResult) => {
               return (
                 <List dense={this.state.dense}>
                   <ListItem
                     button
                     disableGutters={this.state.noGutters}
                     divider={this.state.divider}
-                    onClick={() => { this.addRequestDialogChild.handleClickOpen(); }}>
+                    onClick={() => { this.addRequestDialogChild.handleClickOpen(
+                      this.state.username,
+                      searchResult,
+                      this.state.startDateTime,
+                      this.state.endDateTime,
+                      this.state.origin,
+                      this.state.destination
+                    ); }}>
+                    
                     {/* Driver profile picture */}
-                    <Avatar src={result.driver.profilePhoto} />
+                    <Avatar src={searchResult.driverUsername.profilePicture} />
+                    
                     {/* Ride date */}
                     <ListItemText
-                      primary={result.destination}
-                      secondary={this.state.secondary ? result.date : null}
+                      primary={searchResult.destination}
+                      secondary={this.state.secondary ? getDate(searchResult.departureDateTime) : null}
                     />
                   </ListItem>
                 </List>
               );
             })}
+          </div>
+        }
+        
+        {/* Display message if search button has been clicked and no results were found */}
+        {(this.state.searchAttempted && this.state.searchResults.length === 0) &&
+          <div style={{ marginTop: '3em' }}>
+            <h3>
+              No rides found.
+            </h3>
           </div>
         }
 
@@ -190,4 +230,8 @@ class RequestSearchPage extends React.Component {
   }
 }
 
-export default RequestSearchPage;
+SearchPage.propTypes = {
+  matchTab: PropTypes.func.isRequired,
+};
+
+export default SearchPage;

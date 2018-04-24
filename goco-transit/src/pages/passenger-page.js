@@ -1,28 +1,34 @@
 import React from 'react';
 import List, {
   ListItem,
-  ListItemAvatar,
-  ListItemSecondaryAction,
   ListItemText,
 } from 'material-ui/List';
-import Avatar from 'material-ui/Avatar';
-import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 // Components
-import DeleteRequestDialog from '../components/delete-request-dialog';
-import DeleteRideDialog from '../components/delete-ride-dialog';
+import RequestedDetailsDialog from '../components/dialog-boxes/requested-details-dialog';
+import ConfirmedDetailsDialog from '../components/dialog-boxes/confirmed-details-dialog';
 import { Icons } from '../icon-library';
+import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
+import { getConfirmedRides, getRequestedRides, getRideByID } from '../services/ride-service';
+import { getDate, getTime } from '../services/date-service';
 
-// Contains ride requests made by the user
-class RequestsPage extends React.Component {
-  constructor() {
-    super();
+/**
+ * This page allows a user to manage anything having to do with their
+ * role as a passenger. This means displaying a user's requested rides
+ * and the rides where they are confirmed as a passenger.
+ * It also allows a user to navigate to the search page to find
+ * rides they might want to be a passenger on.
+ */
+class PassengerPage extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
       dense: false,
@@ -31,102 +37,174 @@ class RequestsPage extends React.Component {
       divider: true,
       user: null,
       confirmedRides: null,
-      requests: null
+      requestedRides: null,
+      loading: true
     };
 
-    this.state.user = getUser();
-    this.state.requests = this.state.user.requests;
-    this.state.confirmedRides = this.state.user.confirmedRides;
+    this.rideDictionary = [];
+  }
+
+  componentWillMount() {
+    // Once the component mounts, make sure the tab matches the component
+    this.props.matchTab();
+    this.loadUserData();
+  }
+
+  // Return the index of the dictionary element containing the Ride
+  searchRideDictionary= (rideID) => {
+    for (let i = 0; i < this.rideDictionary.length; i++) {
+      if (this.rideDictionary[i].value.rideID === rideID) {
+        return i;
+      }
+    }
+    return false;
   }
 
   render() {
-    return (
-      <div>
-        {/* List of confirmed rides generated from an array */}
-        <h3>
-          Rides
-        </h3>
-        <List dense={this.state.dense}>
-          {this.state.confirmedRides.map((confirmedRide) => {
-            return (
-              <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
-                <ListItemAvatar>
-                  {/* Depending on whether the user has been accepted as a passenger
-                  A different avatar will be displayed */}
-                  <Avatar>
-                    {Icons.confirmedRideIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                {/* Route destination and date range */}
-                <ListItemText
-                  primary={confirmedRide.destination}
-                  secondary={this.state.secondary ? confirmedRide.date : null}
-                />
-                {/* Delete confirmed ride button */}
-                <ListItemSecondaryAction>
-                  <IconButton onClick={() => { this.deleteRideDialogChild.handleClickOpen(); }} aria-label="Delete">
-                    {Icons.deleteIcon}
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            );
-          })}
-        </List>
+    let content;
+    if (this.state.loading) {
+      content = (<Loader />);
+    }
+    else {
+      content = (
+        <div>
+          {/* List of confirmed rides generated from an array */}
+          <h3>
+            Confirmed Rides ({this.state.confirmedRides.length})
+          </h3>
+          <List dense={this.state.dense}>
+            {this.state.confirmedRides.map((confirmedRide) => {
+              return (
+                <ListItem
+                  button
+                  onClick={() => { this.confirmedDetailsDialogChild.handleClickOpen(confirmedRide); }}
+                  disableGutters={this.state.noGutters}
+                  divider={this.state.divider}
+                >
+                  {/* Route destination and date range */}
+                  <ListItemText
+                    primary={confirmedRide.destination}
+                    secondary={this.state.secondary ? getDate(confirmedRide.departureDateTime) : null}
+                  />
+                </ListItem>
+              );
+            })}
+          </List>
 
-        {/* List of requests generated from an array */}
-        <h3 style={{ marginTop: '3em' }}>
-          Requests
-        </h3>
+          {/* List of requests generated from an array */}
+          <h3 style={{ marginTop: '3em' }}>
+            Requested Rides ({this.state.requestedRides.length})
+          </h3>
 
-        <List dense={this.state.dense}>
-          {this.state.requests.map((request) => {
-            return (
-              <ListItem button disableGutters={this.state.noGutters} divider={this.state.divider}>
-                <ListItemAvatar>
-                  {/* Depending on whether the user has been accepted as a passenger
-                  A different avatar will be displayed */}
-                  <Avatar>
-                    {Icons.pendingRideIcon}
-                  </Avatar>
-                </ListItemAvatar>
-                {/* Route destination and date range */}
-                <ListItemText
-                  primary={request.destination}
-                  secondary={this.state.secondary ? (request.dateMin + '-' + request.dateMax) : null}
-                />
-                {/* Delete request button */}
-                <ListItemSecondaryAction>
-                  <IconButton onClick={() => { this.deleteRequestDialogChild.handleClickOpen(); }} aria-label="Delete">
-                    {Icons.deleteIcon}
-                  </IconButton>
-                </ListItemSecondaryAction>
-              </ListItem>
-            );
-          })}
-        </List>
+          <List dense={this.state.dense}>
+            {this.state.requestedRides.map((requestedRide) => {
 
-        {/* Add a request button */}
-        <Grid container>
-          <Grid item xs={12}>
-            <Grid container direction="row" justify="flex-end" alignItems="center">
-              <Grid item>
-                <Link to="/passenger/search">
-                  <Button variant="fab" color="secondary" aria-label="add">
-                    {Icons.searchIcon}
-                  </Button>
-                </Link>
+              // Get the Request's associated Ride, if it exists
+              let index = this.searchRideDictionary(requestedRide.rideID);
+              let linkedRide = this.rideDictionary[index].value;
+
+              return (
+                <ListItem
+                  button
+                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(requestedRide); }}
+                  disableGutters={this.state.noGutters}
+                  divider={this.state.divider}
+                >
+
+                  {/* Route destination and date range */}
+                  <ListItemText
+                    primary={linkedRide.destination}
+                    secondary={this.state.secondary ?
+                      (
+                        // No linked Ride
+                        (linkedRide === false) ?
+                          (
+                            getDate(requestedRide.earliestDepartureDateTime) + " " + getTime(requestedRide.earliestDepartureDateTime)
+                            + ' - '
+                            + getDate(requestedRide.latestDepartureDateTime) + " " + getTime(requestedRide.latestDepartureDateTime)
+                          // Has linked Ride
+                          ) : 
+                            getDate(linkedRide.departureDateTime) + " " + getTime(linkedRide.departureDateTime)
+                      ) : null
+                    }
+                  />
+                </ListItem>
+              );
+            })}
+          </List>
+
+          {/* Add a request button */}
+          <Grid container>
+            <Grid item xs={12}>
+              <Grid container direction="row" justify="flex-end" alignItems="center">
+                <Grid item>
+                  <Link to="/passenger/search">
+                    <Button variant="fab" color="secondary" aria-label="add">
+                      {Icons.searchIcon}
+                    </Button>
+                  </Link>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
-        </Grid>
 
-        {/* Dialog boxes */}
-        <DeleteRequestDialog ref={(deleteRequestDialogInstance) => { this.deleteRequestDialogChild = deleteRequestDialogInstance; }} />
-        <DeleteRideDialog ref={(deleteRideDialogInstance) => { this.deleteRideDialogChild = deleteRideDialogInstance; }} />
+          {/* Dialog boxes */}
+          <RequestedDetailsDialog ref={(requestedDetailsDialogInstance) => { this.requestedDetailsDialogChild = requestedDetailsDialogInstance; }} />
+          <ConfirmedDetailsDialog ref={(confirmedDetailsDialogInstance) => { this.confirmedDetailsDialogChild = confirmedDetailsDialogInstance; }} />
 
-      </div>
-    );
+        </div>
+      );
+    }
+
+    return (<div>{content}</div>)
   }
+
+  /**
+   * Load user data - grabbing from 360
+   */
+  async loadUserData() {
+    this.setState({ loading: true });
+    try {
+      let data = await getUser();
+      this.setState({ user: data });
+
+      // Set confirmedRides to empty array if promise is rejected
+      let confirmedRidesData = await getConfirmedRides(this.state.user.username);
+      this.setState({ confirmedRides: confirmedRidesData });
+
+      // Set requestedRides to empty array if promise is rejected
+      let requestedRidesData = await getRequestedRides(this.state.user.username);
+      this.setState({ requestedRides: requestedRidesData });
+
+      // Link Requests to their linked Rides, if they exist
+      let linkedRide;
+      for (let i = 0; i < this.state.requestedRides.length; i++) {
+        linkedRide = await getRideByID(this.state.requestedRides[i].rideID)
+        if (linkedRide !== (null || undefined)) {
+          // Has linked Ride
+          this.rideDictionary.push({
+            key: this.state.requestedRides[i].requestId,
+            value: linkedRide
+          });
+        } else {
+          // No linked Ride
+          this.rideDictionary.push({
+            key: this.state.requestedRides[i].requestId,
+            value: false
+          });
+        }
+      }
+      
+      this.setState({ loading: false });
+    }
+    catch (err) {
+      throw err;
+    }
+  };
 }
 
-export default RequestsPage;
+PassengerPage.propTypes = {
+  matchTab: PropTypes.func.isRequired,
+};
+
+export default PassengerPage;

@@ -1,11 +1,9 @@
-import { getItem, setItem, removeItem } from "./storage-service";
+import { getItem, setItem, clearStorage } from "./storage-service";
 import { parseResponse } from "./http-service";
 
 /**
- * This class is responsible for all actions related to user authentication
+ * This class is responsible for performing all actions related to user authentication
  */
-
-const base = "https://360Api.gordon.edu/"
 
 /**
  * Handle an authentication error
@@ -34,8 +32,7 @@ const getAuth = (username, password) => {
     password,
     grant_type: 'password',
   });
-  const request = new Request(`${base}token`, { method: 'post', headers, body });
-
+  const request = new Request(`/token`, { method: 'post', headers, body });
   return fetch(request)
     .then(parseResponse)
     .then(data => data.access_token)
@@ -49,8 +46,10 @@ const getAuth = (username, password) => {
  * @param {String} password User's password
  * @return {Promise.<undefined>} Resolved when token is refreshed
  */
-const authenticate = (username, password) =>
-  getAuth(username, password).then(token => setItem('token', token));
+const authenticate = async (username, password) => {
+  setItem('username', username);
+  await getAuth(username, password).then(token => setItem('token', token));
+};
 
 /**
  * Check if current session is authenticated
@@ -71,10 +70,10 @@ const isAuthenticated = () => {
 
 /**
  * Sign a user out
- * @description Removes token from storage.
+ * @description Removes local data, including auth token from storage.
  */
 const signOut = () => {
-  removeItem('token');
+  clearStorage();
 };
 
 export { authenticate, signOut, isAuthenticated };

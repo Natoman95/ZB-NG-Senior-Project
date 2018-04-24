@@ -1,12 +1,10 @@
 import { getItem } from './storage-service';
+import { createError } from './error-service';
 
 /**
- * Handle HTTP requests to the API
- *
- * Copied from Gordon 360
+ * Performs all types of HTTP web request
+ * Other services call this one to perform fundamental HTTP operations
  */
-
-const base = "https://360Api.gordon.edu/"
 
 /**
  * Make a headers object for use with the API
@@ -18,6 +16,7 @@ const makeHeaders = () => {
     const token = getItem('token');
     return new Headers({
       Authorization: `Bearer ${token}`,
+      'Content-type': 'application/json',
     });
   } catch (err) {
     throw new Error('Token is not available');
@@ -31,12 +30,16 @@ const makeHeaders = () => {
  * @param {object|array} body data to send with request
  * @return {Request} A request object
  */
-const createRequest = (url, method, body) =>
-  new Request(`${base}api/${url}`, {
+const createRequest = (url, method, body) => {
+  if (body != null) {
+    body = JSON.stringify(body);
+  }
+  return new Request(`/api/${url}`, {
     method,
     body,
     headers: makeHeaders(),
   });
+}
 
 /**
  * Parse an HTTP response
@@ -49,11 +52,11 @@ const parseResponse = res => {
   const json = res
     .json()
     // Handle error if response body is not valid JSON
-    .catch(error => Promise.reject(error));
+    .catch(err => Promise.reject(createError(err, res)));
 
   // Handle error when response body is valid but status code is not
   if (!res.ok) {
-    return json.then(data => Promise.reject());
+    return json.then(data => Promise.reject(createError(data, res)));
   }
   return json;
 };
