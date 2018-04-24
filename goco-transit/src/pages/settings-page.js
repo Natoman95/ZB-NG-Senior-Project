@@ -70,7 +70,12 @@ class SettingsPage extends React.Component {
 
   // Format the phone number as (###) ###-####
   formatPhone = phone => {
-    return "(" + phone.substring(0, 3) + ") " + phone.substring(3, 6) + "-" + phone.substring(6, 10);
+    // Don't format phone if it is private
+    if (isNaN(phone)) {
+      return phone;
+    } else {
+      return "(" + phone.substring(0, 3) + ") " + phone.substring(3, 6) + "-" + phone.substring(6, 10);
+    }
   };
 
   // If the user is logged in, then display the settings
