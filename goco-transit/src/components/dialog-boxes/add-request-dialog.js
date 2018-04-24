@@ -126,7 +126,7 @@ class AddRequestDialog extends React.Component {
                     primary={this.state.ride.destination}
                   />
                 </ListItem>
-                
+
                 {/* Date */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
@@ -176,6 +176,7 @@ class AddRequestDialog extends React.Component {
                       label="Note to driver"
                       value={this.state.requesterNoteValue}
                       onChange={this.handleFormChange("requesterNoteValue")}
+                      multiline
                     />
                   </div>
                 </ListItem>
