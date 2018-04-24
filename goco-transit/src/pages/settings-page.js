@@ -1,14 +1,13 @@
 import React from 'react';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
-import { FormGroup, FormControlLabel } from 'material-ui/Form';
-import Checkbox from 'material-ui/Checkbox';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 // Components
 import { Icons } from '../icon-library';
 import Loader from '../components/loader';
+import InformationDialog from '../components/dialog-boxes/information-dialog';
 
 // Services
 import { signOut } from '../services/auth-service';
@@ -30,16 +29,15 @@ class SettingsPage extends React.Component {
       divider: true,
       displayPhone: false,
       displayEmail: true,
-      privacyComplete: true,
-      waiverComplete: true,
-      termsComplete: true,
       user: null,
       firstName: null,
       lastName: null,
       phoneNum: null,
       email: null,
+      buttonWidth: 0,
       loading: false,
     }
+
     // The click handlers needs "this"
     this.handleClickLogout = this.handleClickLogout.bind(this);
     this.handleClickEdit = this.handleClickEdit.bind(this);
@@ -94,7 +92,7 @@ class SettingsPage extends React.Component {
                 <Grid item>
                   <h3>
                     Contact Information
-                    </h3>
+                  </h3>
                 </Grid>
               </Grid>
             </Grid>
@@ -111,61 +109,58 @@ class SettingsPage extends React.Component {
             </Grid>
           </Grid>
 
-          <div style={{ padding: '.75em', }}>
+          <div style={{ paddingBottom: '1em' }}>
             Name: {this.state.firstName} {this.state.lastName}
           </div>
-          <div style={{ padding: '.75em', }}>
+          <div style={{ paddingBottom: '1em' }}>
             Phone: {this.state.phoneNum}
           </div>
-          <div style={{ padding: '.75em', }}>
+          <div style={{ paddingBottom: '1em' }}>
             Email: {this.state.email}
           </div>
 
-          {/* Shows which legal agreements have been completed */}
+          {/* Information dialogs for legal agreements */}
           <h3>
             Legal Agreements
           </h3>
 
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  checked={this.state.waiverComplete}
-                  value="waiverComplete"
-                />
-              }
-              label="Liability Waiver"
-            />
-          </FormGroup>
-
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  checked={this.state.privacyComplete}
-                  value="privacyComplete"
-                />
-              }
-              label="Privacy Policy"
-            />
-          </FormGroup>
-
-          <FormGroup row>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  color="primary"
-                  checked={this.state.termsComplete}
-                  value="termsComplete"
-                />
-              }
-              label="Terms of Use"
-            />
-          </FormGroup>
-
-          <div style={{ padding: '.75em', }}>
+          <div style={{ paddingBottom: '1em', width: 155 }}>
+            <Button
+              variant="raised"
+              fullWidth
+              onClick={() => {
+                this.informationDialogChild.handleClickOpen(
+                  "Liability Waiver", "(Liability waiver text.)");
+              }}
+            >
+              Liability Waiver
+            </Button>
+          </div>
+          
+          <div style={{ paddingBottom: '1em', width: 155 }}>
+            <Button
+              variant="raised"
+              fullWidth
+              onClick={() => {
+                this.informationDialogChild.handleClickOpen(
+                  "Privacy Policy", "(Privacy policy text.)");
+              }}
+            >
+              Privacy Policy
+            </Button>
+          </div>
+          
+          <div style={{ paddingBottom: '1em', width: 155 }}>
+            <Button
+              variant="raised"
+              fullWidth
+              onClick={() => {
+                this.informationDialogChild.handleClickOpen(
+                  "Terms of Use", "(Terms of use text.)");
+              }}
+            >
+              Terms of Use
+            </Button>
           </div>
 
           {/* Button to logout
@@ -180,6 +175,10 @@ class SettingsPage extends React.Component {
               Logout
             </Button>
           </Link>
+
+          {/* Dialog boxes */}
+          <InformationDialog ref={(informationDialogInstance) => { this.informationDialogChild = informationDialogInstance; }} />
+
         </div>
       );
     }
@@ -201,8 +200,8 @@ class SettingsPage extends React.Component {
         phoneNum: this.formatPhone(data.phoneNum),
         email: data.email,
         username: data.username,
-        loading: false,
       });
+      this.setState({ loading: false });
     }
     catch (err) {
       throw err;
