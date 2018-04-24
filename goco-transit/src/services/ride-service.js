@@ -179,6 +179,7 @@ export {
   getRideByID,
   getOfferedRides,
   getConfirmedRides,
+  getRequestedRides,
   getSearchResults,
   addRideOffer,
   updatePassengersArray,

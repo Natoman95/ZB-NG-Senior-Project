@@ -16,9 +16,8 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
-import { getConfirmedRides, getRideByID } from '../services/ride-service';
+import { getConfirmedRides, getRequestedRides, getRideByID } from '../services/ride-service';
 import { getDate, getTime } from '../services/date-service';
-import { getRequests } from '../services/request-service';
 
 /**
  * This page allows a user to manage anything having to do with their
@@ -174,8 +173,11 @@ class PassengerPage extends React.Component {
       this.setState({ confirmedRides: confirmedRidesData });
 
       // Set requestedRides to empty array if promise is rejected
-      let requestsData = await getRequests(this.state.user.username);
-      this.setState({ requestedRides: requestsData });
+      let requestedRidesData = await getRequestedRides(this.state.user.username);
+      this.setState({ requestedRides: requestedRidesData });
+
+      console.log(this.state.confirmedRides)
+      console.log(this.state.requestedRides)
 
       // Link Requests to their linked Rides, if they exist
       let linkedRide;
