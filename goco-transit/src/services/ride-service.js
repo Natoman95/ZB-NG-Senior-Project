@@ -81,8 +81,12 @@ const getRequestedRides = async (username) => {
  * Utilizes GetByLocation in back end's RideController
  */
 const getSearchResults = (startDate, endDate, origin, destination) => {
-  // TODO: filter by start and end dates
-  return get(`transit/ride/location/${origin}/${destination}/`);
+  let body = {};
+  body.startDate = startDate;
+  body.endDate = endDate;
+  body.origin = origin;
+  body.destination = destination;
+  return post(`transit/ride/location/`, body);
 };
 
 /**

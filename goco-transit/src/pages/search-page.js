@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
+import Loader from '../components/loader';
 
 // Services
 import { getSearchResults } from '../services/ride-service';
@@ -30,13 +31,15 @@ class SearchPage extends React.Component {
       noGutters: true,
       divider: true,
       displayAddRequestDialog: false,
-      origin: null,
+      origin: "Gordon",
       destination: null,
-      startDateTime: null,
-      endDateTime: null,
+      startDateTime: this.getDateTime(0),
+      endDateTime: this.getDateTime(86400000),
+      minEnd: this.getDateTime(86400000),
       searchResults: [],
       searchAttempted: false,
-      username: null
+      username: null,
+      loading: false
     };
   }
 
@@ -82,9 +85,11 @@ class SearchPage extends React.Component {
    * When the search button is clicked, rides matching the user's parameters are displayed
    */
   handleClickSearch = async () => {
+    this.setState({loading: true});
     let searchResultsData = await getSearchResults(this.state.startDateTime, this.state.endDateTime, this.state.origin, this.state.destination);
-    this.setState({ searchResults: searchResultsData });
-    this.setState({ searchAttempted: true });
+    this.setState({ searchResults: searchResultsData,
+                    searchAttempted: true,
+                    loading: false });
   }
 
   // Change state variables based on changes to input forms
@@ -112,6 +117,7 @@ class SearchPage extends React.Component {
                 id="originField"
                 label="Origin"
                 type="search"
+                defaultValue={this.state.origin}
                 value={this.state.origin}
                 onChange={this.handleFormChange('origin')}
               />
@@ -134,9 +140,9 @@ class SearchPage extends React.Component {
                 id="startDateField"
                 label="Earliest Possible Departure"
                 type="datetime-local"
-                defaultValue={this.getDateTime(0)} // Default time for the start date is today
-                value={this.state.startDate}
-                onChange={this.handleFormChange('startDate')}
+                defaultValue={this.state.startDateTime} // Default time for the start date is today
+                value={this.state.startDateTime}
+                onChange={this.handleFormChange('startDateTime')}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -149,10 +155,10 @@ class SearchPage extends React.Component {
                 id="endDateField"
                 label="Latest Possible Departure"
                 type="datetime-local"
-                defaultValue={this.getDateTime(86400000)} // Default time for the end date is tomorrow
-                min={this.getDateTime(86400000)}
-                onChange={this.handleFormChange('endDate')}
-                value={this.state.endDate}
+                defaultValue={this.state.endDateTime} // Default time for the end date is tomorrow
+                min={this.state.minEnd}
+                onChange={this.handleFormChange('endDateTime')}
+                value={this.state.endDateTime}
                 InputLabelProps={{
                   shrink: true,
                 }}
@@ -173,9 +179,16 @@ class SearchPage extends React.Component {
           </Button>
         </div>
 
-        {/* Search Results - visible only if user has hit the search button 
+        {/* Loading symbol while fetching from database */}
+        {(this.state.loading) &&
+          <div style={{ marginTop: '3em' }}>
+            <Loader />
+          </div>
+        }
+
+        {/* Search Results - visible only if user has hit the search button and loading has finished
          Generated from an array of results */}
-        {(this.state.searchResults.length > 0) &&
+        {(this.state.searchResults.length > 0 && !this.state.loading) &&
           <div style={{ marginTop: '3em' }}>
             <h3>
               Search Results ({this.state.searchResults.length})
