@@ -4,6 +4,7 @@ import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 import { Link, Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Badge from 'material-ui/Badge';
 
 // Components
 import DriverPage from './driver-page';
@@ -34,9 +35,15 @@ class MainPage extends React.Component {
 
     this.state = {
       value: 0,
+      pendingRequests: 0,
     };
 
+    this.onPendingRequestsChange = this.onPendingRequestsChange.bind(this);
     this.loadUserData();
+  }
+
+  onPendingRequestsChange(pendingCount) {
+    this.setState({ pendingRequests: pendingCount });
   }
 
   render() {
@@ -52,7 +59,24 @@ class MainPage extends React.Component {
               centered
             >
               <Tab label="Passenger" icon={Icons.seatIcon} component={Link} to="/passenger" />
-              <Tab label="Driver" icon={Icons.driverIcon} component={Link} to="/driver" />
+              
+              {/* Display a badge on the driver page icon when there are pending requests */}
+              {this.state.pendingRequests > 0 && 
+                <Tab
+                  label="Driver"
+                  icon={<Badge badgeContent={this.state.pendingRequests} color="error">
+                    {Icons.driverIcon}
+                  </Badge>}
+                  component={Link}
+                  to="/driver"
+                  style={{ paddingTop: '.5em' }} />
+              }
+
+              {/* Otherwise display an icon with no badge */}
+              {this.state.pendingRequests <= 0 &&
+                <Tab label="Driver" icon={Icons.driverIcon} component={Link} to="/driver" />
+              }
+
               <Tab label="Settings" icon={Icons.settingsIcon} component={Link} to="/settings" />
             </Tabs>
           </AppBar>
@@ -79,6 +103,7 @@ class MainPage extends React.Component {
             <Route
               exact path="/driver"
               render={() => <DriverPage
+                pendingRequests={this.onPendingRequestsChange}
                 matchTab={() => this.setState({ value: 1 })}>
               </DriverPage>} />
             <Route
