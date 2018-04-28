@@ -58,7 +58,12 @@ class MainPage extends React.Component {
               indicatorColor="secondary"
               centered
             >
-              <Tab label="Passenger" icon={Icons.seatIcon} component={Link} to="/passenger" />
+              <Tab
+                label="Passenger"
+                icon={Icons.seatIcon}
+                component={Link}
+                to="/passenger"
+                style={{ paddingTop: '.5em' }} />
               
               {/* Display a badge on the driver page icon when there are pending requests */}
               {this.state.pendingRequests > 0 && 
@@ -74,10 +79,20 @@ class MainPage extends React.Component {
 
               {/* Otherwise display an icon with no badge */}
               {this.state.pendingRequests <= 0 &&
-                <Tab label="Driver" icon={Icons.driverIcon} component={Link} to="/driver" />
+                <Tab
+                  label="Driver"
+                  icon={Icons.driverIcon}
+                  component={Link}
+                  to="/driver"
+                  style={{ paddingTop: '.5em' }} />
               }
 
-              <Tab label="Settings" icon={Icons.settingsIcon} component={Link} to="/settings" />
+              <Tab
+                label="Settings"
+                icon={Icons.settingsIcon}
+                component={Link}
+                to="/settings"
+                style={{ paddingTop: '.5em' }} />
             </Tabs>
           </AppBar>
         </div>
