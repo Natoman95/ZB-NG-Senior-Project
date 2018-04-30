@@ -132,6 +132,13 @@ class DriverPage extends React.Component {
       let rideData = await getOfferedRides(this.state.user.username);
       this.setState({ offeredRides: rideData });
 
+      // Pass the message up to the main page if the user has any pending requests
+      let pendingCount = 0;
+      for (let i = 0; i < this.state.offeredRides.length; i ++) {
+        pendingCount = pendingCount + this.state.offeredRides[i].requestIDs.length
+        this.props.pendingRequests(pendingCount);
+      }
+
       this.setState({ loading: false });
     }
     catch (err) {
@@ -142,6 +149,7 @@ class DriverPage extends React.Component {
 
 DriverPage.propTypes = {
   matchTab: PropTypes.func.isRequired,
+  pendingRequests: PropTypes.func.isRequired,
 };
 
 export default DriverPage;
