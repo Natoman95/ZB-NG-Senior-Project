@@ -150,7 +150,7 @@ class SettingsPage extends React.Component {
             </Button>
           </div>
           
-          <div style={{ paddingBottom: '1em', width: 155 }}>
+          <div style={{ paddingBottom: '3em', width: 155 }}>
             <Button
               variant="raised"
               fullWidth

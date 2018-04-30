@@ -15,7 +15,7 @@ import Loader from '../components/loader';
 // Services
 import { getSearchResults } from '../services/ride-service';
 import { getDate } from '../services/date-service';
-import { getUser } from '../services/user-service';
+import { getUser, getUserImage } from '../services/user-service';
 
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
@@ -37,6 +37,7 @@ class SearchPage extends React.Component {
       endDateTime: this.getDateTime(86400000),
       minEnd: this.getDateTime(86400000),
       searchResults: [],
+      driverPhotos: [],
       searchAttempted: false,
       username: null,
       loading: false
@@ -86,8 +87,19 @@ class SearchPage extends React.Component {
    */
   handleClickSearch = async () => {
     this.setState({loading: true});
+    // Find related rides
     let searchResultsData = await getSearchResults(this.state.startDateTime, this.state.endDateTime, this.state.origin, this.state.destination);
+    // Get the photos of the drivers for the rides and map them by username
+    let driverPhotosData = [];
+    for (let i = 0; i < searchResultsData.length; i ++) {
+      let ride = searchResultsData[i];
+      let key = ride.driverUsername;
+      let value = await getUserImage(ride.driverUsername);
+      // convert binary to something the image tag can use
+      driverPhotosData[key] = 'data:image/png;base64,' + value.def;
+    }
     this.setState({ searchResults: searchResultsData,
+                    driverPhotos: driverPhotosData,
                     searchAttempted: true,
                     loading: false });
   }
@@ -212,7 +224,7 @@ class SearchPage extends React.Component {
                     ); }}>
                     
                     {/* Driver profile picture */}
-                    <Avatar src={searchResult.driverUsername.profilePicture} />
+                    <Avatar src={this.state.driverPhotos[searchResult.driverUsername]} />
                     
                     {/* Ride date */}
                     <ListItemText
