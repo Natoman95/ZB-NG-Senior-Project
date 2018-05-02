@@ -59,10 +59,10 @@ const getUserProfile = username => {
  */
 const getUserImage = username => {
   if (username) {
-    return get(`profiles/Image/${username}/`);
+    return get(`profiles/image/${username}/`);
   }
 
-  return get('profiles/Image');
+  return get('profiles/image');
 };
 
-export { getUser };
+export { getUser, getUserImage };

@@ -89,25 +89,14 @@ class RequestedDetailsDialog extends React.Component {
                   <ListItemText primary={this.state.request.destination} />
                 </ListItem>
 
-                {/* Start of availability range */}
-                <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingBottom: 0}} >
-                  <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Earliest </div>
-                  <ListItemText primary={getDate(this.state.request.earliestDepartureDateTime) + " " + getTime(this.state.request.earliestDepartureDateTime)} />
-                </ListItem>
-
-                {/* Availability icon */}
-                <ListItem disableGutters={this.state.noGutters} divider={false} style={{padding: 0}}>
+                {/* Time */}
+                <ListItem disableGutters={this.state.noGutters} divider={false}>
                   <ListItemAvatar>
                     <Avatar>
-                      {Icons.timelapseIcon}
+                      {Icons.timeIcon}
                     </Avatar>
                   </ListItemAvatar>
-                </ListItem>
-
-                {/* End of availability range */}
-                <ListItem disableGutters={this.state.noGutters} divider={this.divider} style={{paddingTop: 0}}>
-                  <div style={{ fontSize: 11, width: "40px", textAlign: "center" }}> Latest </div>
-                  <ListItemText primary={getDate(this.state.request.earliestDepartureDateTime) + " " + getTime(this.state.request.latestDepartureDateTime)} />
+                  <ListItemText primary={getDate(this.state.request.departureDateTime) + " " + getTime(this.state.request.departureDateTime)} />
                 </ListItem>
 
                 {/* Notes */}
