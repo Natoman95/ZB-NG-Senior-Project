@@ -53,6 +53,16 @@ class PassengerListDialog extends React.Component {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
 
+              <h4 style={{ marginTop: '0em' }}>
+                Confirmed ({this.state.passengers.length})
+              </h4>
+
+              <hr/>
+              
+              <h4>
+                Requested ({this.state.passengers.length})
+              </h4>
+
             </DialogContentText>
 
             <hr/>

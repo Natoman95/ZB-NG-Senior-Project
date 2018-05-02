@@ -69,7 +69,7 @@ class PassengerPage extends React.Component {
       content = (
         <div>
           {/* List of confirmed rides generated from an array */}
-          <h3>
+          <h3 style={{ marginBottom: '0em' }}>
             Confirmed Rides ({this.state.confirmedRides.length})
           </h3>
           <List dense={this.state.dense}>
@@ -92,7 +92,7 @@ class PassengerPage extends React.Component {
           </List>
 
           {/* List of requests generated from an array */}
-          <h3 style={{ marginTop: '3em' }}>
+          <h3 style={{ marginTop: '2em', marginBottom: '0em' }}>
             Requested Rides ({this.state.requestedRides.length})
           </h3>
 
