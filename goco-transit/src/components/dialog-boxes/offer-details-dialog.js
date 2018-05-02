@@ -17,6 +17,7 @@ import Badge from 'material-ui/Badge';
 // Components
 import { Icons } from '../../icon-library';
 import ConfirmationDialog from './confirmation-dialog';
+import PassengerListDialog from './passenger-list-dialog';
 
 // Models
 import RideModel from '../../models/ride-model';
@@ -128,7 +129,7 @@ class OfferDetailsDialog extends React.Component {
             {/* Action buttons */}
             <Grid container spacing={40} justify="center">
               <Grid item>
-                <IconButton>
+                <IconButton onClick={ () => {this.passengerDialogChild.handleClickOpen(this.state.ride.passengerUsernames)} }>
                   {this.state.display === true && // Don't attempt to get undefined length
                     <Badge badgeContent={this.state.ride.passengerUsernames.length + "/" + this.state.ride.maxCapacity} color="primary">
                       {Icons.seatIcon}
@@ -142,10 +143,8 @@ class OfferDetailsDialog extends React.Component {
                 </IconButton>
               </Grid>
               <Grid item>
-                <IconButton onClick={() => {
-                  this.confirmationDialogChild.handleClickOpen(
-                    "Delete this ride offer?", "Your passengers will be notified.");
-                }}
+                <IconButton onClick={ () => {this.confirmationDialogChild.handleClickOpen(
+                    "Delete this ride offer?", "Your passengers will be notified.")} }
                 >
                   {Icons.deleteIcon}
                 </IconButton>
@@ -156,14 +155,12 @@ class OfferDetailsDialog extends React.Component {
         }
 
         {/* Dialog boxes */}
-        <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance; }} />
+        <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance }} />
+        <PassengerListDialog ref={(passengerDialogInstance) => { this.passengerDialogChild = passengerDialogInstance }} />
 
       </Dialog>
-
     );
-
   }
-
 }
 
 export default OfferDetailsDialog;
