@@ -3,7 +3,6 @@ import React from 'react';
 import OriginIcon from 'material-ui-icons/MyLocation';
 import DestinationIcon from 'material-ui-icons/Place';
 import TimeIcon from 'material-ui-icons/WatchLater';
-import TimelapseIcon from 'material-ui-icons/Timelapse';
 import DateIcon from 'material-ui-icons/DateRange';
 import NoteIcon from 'material-ui-icons/Assignment';
 import DriverIcon from 'material-ui-icons/DriveEta';
@@ -28,7 +27,6 @@ let icons = {
   originIcon: React.createElement(OriginIcon),
   destinationIcon: React.createElement(DestinationIcon),
   timeIcon: React.createElement(TimeIcon),
-  timelapseIcon: React.createElement(TimelapseIcon),
   dateIcon: React.createElement(DateIcon),
   noteIcon: React.createElement(NoteIcon),
   driverIcon: React.createElement(DriverIcon),
