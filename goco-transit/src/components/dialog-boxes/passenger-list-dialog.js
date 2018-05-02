@@ -53,6 +53,10 @@ class PassengerListDialog extends React.Component {
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
 
+              {/* generate lists then map them into list items (use avatars and secondary actions)*/}
+              {/* secondary list item text: passenger note? */}
+              {/* or expand list item with confirm/decline option? */}
+              
               <h4 style={{ marginTop: '0em' }}>
                 Confirmed ({this.state.passengers.length})
               </h4>

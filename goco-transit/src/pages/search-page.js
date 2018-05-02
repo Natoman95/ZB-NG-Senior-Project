@@ -193,7 +193,7 @@ class SearchPage extends React.Component {
 
         {/* Loading symbol while fetching from database */}
         {(this.state.loading) &&
-          <div style={{ marginTop: '3em' }}>
+          <div style={{ marginTop: '2em' }}>
             <Loader />
           </div>
         }
@@ -201,7 +201,7 @@ class SearchPage extends React.Component {
         {/* Search Results - visible only if user has hit the search button and loading has finished
          Generated from an array of results */}
         {(this.state.searchResults.length > 0 && !this.state.loading) &&
-          <div style={{ marginTop: '3em' }}>
+          <div style={{ marginTop: '2em' }}>
             <h3>
               Search Results ({this.state.searchResults.length})
             </h3>
@@ -240,7 +240,7 @@ class SearchPage extends React.Component {
         
         {/* Display message if search button has been clicked and no results were found */}
         {(this.state.searchAttempted && this.state.searchResults.length === 0) &&
-          <div style={{ marginTop: '3em' }}>
+          <div style={{ marginTop: '2em' }}>
             <h3>
               No rides found.
             </h3>
