@@ -130,7 +130,7 @@ class OfferDetailsDialog extends React.Component {
             <Grid container spacing={40} justify="center">
               <Grid item>
                 <IconButton onClick={ () => { this.passengerDialogChild.handleClickOpen(this.state.ride.requestIDs) }}>
-                  {this.state.display === true && // Don't attempt to get undefined length
+                  {this.state.display && // Don't attempt to get undefined length
                     <Badge badgeContent={"?" + "/" + this.state.ride.maxCapacity} color="primary">
                       {Icons.seatIcon}
                     </Badge>
