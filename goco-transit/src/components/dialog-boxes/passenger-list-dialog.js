@@ -97,20 +97,36 @@ class PassengerListDialog extends React.Component {
               <List dense={this.state.dense}>
                 {this.state.confirmedRequests.map((confirmedRequest) => {
                   return (
-                    <ListItem
-                      button
-                      onClick={ () => { this.handleListItemClick(1, confirmedRequest.index) }}
-                      disableGutters={this.state.noGutters}
-                      divider={this.state.divider}
-                    >
-                      <ListItemAvatar>
-                        <Avatar src={confirmedRequest.profilePic}/>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={getUserFullName(confirmedRequest.request.requesterUsername)}
-                        secondary={confirmedRequest.request.requesterNote}
-                      />
-                    </ListItem>
+                    <ExpansionPanel elevation={0}>
+                      <ExpansionPanelSummary expandIcon={Icons.expandIcon} style={{ padding: 0 }}>
+                        <ListItem
+                          disableGutters={this.state.noGutters}
+                          divider={this.state.divider}
+                        >
+                          <ListItemAvatar>
+                            <Avatar src={confirmedRequest.profilePic}/>
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={getUserFullName(confirmedRequest.request.requesterUsername)}
+                          />
+                        </ListItem>
+                      </ExpansionPanelSummary>
+                      <ExpansionPanelDetails style={{ padding: 0 }}>
+                        <ListItem
+                          disableGutters={this.state.noGutters}
+                          divider={this.state.divider}
+                        >
+                          <ListItemAvatar>
+                            <Avatar>
+                              {Icons.noteIcon}
+                            </Avatar>
+                          </ListItemAvatar>
+                          <ListItemText
+                            secondary={confirmedRequest.request.requesterNote}
+                          />
+                        </ListItem>
+                      </ExpansionPanelDetails>
+                    </ExpansionPanel>
                   )
                 })}
               </List>
