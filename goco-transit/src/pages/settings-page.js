@@ -177,7 +177,7 @@ class SettingsPage extends React.Component {
           </Link>
 
           {/* Dialog boxes */}
-          <InformationDialog ref={(informationDialogInstance) => { this.informationDialogChild = informationDialogInstance; }} />
+          <InformationDialog ref={(informationDialogInstance) => { this.informationDialogChild = informationDialogInstance }} />
 
         </div>
       );

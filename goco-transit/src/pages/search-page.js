@@ -221,7 +221,7 @@ class SearchPage extends React.Component {
                       this.state.endDateTime,
                       this.state.origin,
                       this.state.destination
-                    ); }}>
+                    )}}>
                     
                     {/* Driver profile picture */}
                     <Avatar src={this.state.driverPhotos[searchResult.driverUsername]} />
@@ -248,7 +248,7 @@ class SearchPage extends React.Component {
         }
 
         {/* Dialog box */}
-        <AddRequestDialog ref={(addRequestDialogInstance) => { this.addRequestDialogChild = addRequestDialogInstance; }} />
+        <AddRequestDialog ref={(addRequestDialogInstance) => { this.addRequestDialogChild = addRequestDialogInstance }} />
 
       </div>
     );

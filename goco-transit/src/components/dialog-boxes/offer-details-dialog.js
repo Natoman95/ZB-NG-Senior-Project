@@ -129,8 +129,7 @@ class OfferDetailsDialog extends React.Component {
             {/* Action buttons */}
             <Grid container spacing={40} justify="center">
               <Grid item>
-                <IconButton onClick={ () => {this.passengerDialogChild.handleClickOpen(
-                  this.state.ride.passengerUsernames, this.state.ride.requestIDs)} }>
+                <IconButton onClick={ () => { this.passengerDialogChild.handleClickOpen(this.state.ride.requestIDs) }}>
                   {this.state.display === true && // Don't attempt to get undefined length
                     <Badge badgeContent={this.state.ride.passengerUsernames.length + "/" + this.state.ride.maxCapacity} color="primary">
                       {Icons.seatIcon}
@@ -144,8 +143,8 @@ class OfferDetailsDialog extends React.Component {
                 </IconButton>
               </Grid>
               <Grid item>
-                <IconButton onClick={ () => {this.confirmationDialogChild.handleClickOpen(
-                    "Delete this ride offer?", "Your passengers will be notified.")} }
+                <IconButton onClick={ () => { this.confirmationDialogChild.handleClickOpen(
+                    "Delete this ride offer?", "Your passengers will be notified.") }}
                 >
                   {Icons.deleteIcon}
                 </IconButton>

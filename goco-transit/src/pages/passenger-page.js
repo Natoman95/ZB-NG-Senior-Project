@@ -77,7 +77,7 @@ class PassengerPage extends React.Component {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.confirmedDetailsDialogChild.handleClickOpen(confirmedRide); }}
+                  onClick={() => { this.confirmedDetailsDialogChild.handleClickOpen(confirmedRide) }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
@@ -106,7 +106,7 @@ class PassengerPage extends React.Component {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(requestedRide); }}
+                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(requestedRide) }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
@@ -149,8 +149,8 @@ class PassengerPage extends React.Component {
           </Grid>
 
           {/* Dialog boxes */}
-          <RequestedDetailsDialog ref={(requestedDetailsDialogInstance) => { this.requestedDetailsDialogChild = requestedDetailsDialogInstance; }} />
-          <ConfirmedDetailsDialog ref={(confirmedDetailsDialogInstance) => { this.confirmedDetailsDialogChild = confirmedDetailsDialogInstance; }} />
+          <RequestedDetailsDialog ref={(requestedDetailsDialogInstance) => { this.requestedDetailsDialogChild = requestedDetailsDialogInstance }} />
+          <ConfirmedDetailsDialog ref={(confirmedDetailsDialogInstance) => { this.confirmedDetailsDialogChild = confirmedDetailsDialogInstance }} />
 
         </div>
       );
