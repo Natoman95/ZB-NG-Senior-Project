@@ -108,9 +108,7 @@ class PassengerListDialog extends React.Component {
                   return (
                     <ListItem
                       button
-                      onClick={() => { this.handleListItemClick(1, this.state.confirmedRequests.findIndex(
-                        i => i.request.requestID === confirmedRequest.requestID
-                      ))}}
+                      onClick={ () => { this.handleListItemClick(1, confirmedRequest.index) }}
                       disableGutters={this.state.noGutters}
                       divider={this.state.divider}
                     >
@@ -137,7 +135,7 @@ class PassengerListDialog extends React.Component {
                   return (
                     <ListItem
                       button
-                      onClick={ (index) => { this.handleListItemClick(2, pendingRequest.index) }}
+                      onClick={ () => { this.handleListItemClick(2, pendingRequest.index) }}
                       disableGutters={this.state.noGutters}
                       divider={this.state.divider}
                     >
