@@ -9,6 +9,10 @@ import List, {
   ListItemText,
   ListItemAvatar
 } from 'material-ui/List';
+import ExpansionPanel, {
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
+} from 'material-ui/ExpansionPanel';
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
@@ -133,20 +137,40 @@ class PassengerListDialog extends React.Component {
               <List dense={this.state.dense}>
                 {this.state.pendingRequests.map((pendingRequest) => {
                   return (
-                    <ListItem
-                      button
-                      onClick={ () => { this.handleListItemClick(2, pendingRequest.index) }}
-                      disableGutters={this.state.noGutters}
-                      divider={this.state.divider}
-                    >
-                      <ListItemAvatar>
-                        <Avatar src={pendingRequest.profilePic}/>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={getUserFullName(pendingRequest.request.requesterUsername)}
-                        secondary={pendingRequest.request.requesterNote}
-                      />
-                    </ListItem>
+                    <ExpansionPanel>
+                      <ExpansionPanelSummary expandIcon={Icons.expandIcon}>
+                        <ListItem
+                          button
+                          onClick={ () => { this.handleListItemClick(2, pendingRequest.index) }}
+                          disableGutters={this.state.noGutters}
+                          divider={this.state.divider}
+                        >
+                          <ListItemAvatar>
+                            <Avatar src={pendingRequest.profilePic}/>
+                          </ListItemAvatar>
+                          <ListItemText
+                            primary={getUserFullName(pendingRequest.request.requesterUsername)}
+                          />
+                        </ListItem>
+                      </ExpansionPanelSummary>
+                      <ExpansionPanelDetails>
+                        <ListItem
+                          button
+                          onClick={ () => { this.handleListItemClick(2, pendingRequest.index) }}
+                          disableGutters={this.state.noGutters}
+                          divider={this.state.divider}
+                        >
+                          <ListItemAvatar>
+                            <Avatar>
+                              {Icons.noteIcon}
+                            </Avatar>
+                          </ListItemAvatar>
+                          <ListItemText
+                            secondary={pendingRequest.request.requesterNote}
+                          />
+                        </ListItem>
+                      </ExpansionPanelDetails>
+                    </ExpansionPanel>
                   )
                 })}
               </List>
