@@ -159,7 +159,7 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={this.state.ride.driverNote}
+                    primary={(this.state.ride.driverNote === (null || undefined) ? "Not provided" : this.state.driverNote)}
                   />
                 </ListItem>
 

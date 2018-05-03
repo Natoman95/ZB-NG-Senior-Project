@@ -106,7 +106,7 @@ class RequestedDetailsDialog extends React.Component {
                       {Icons.noteIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={this.state.request.passengerNote} />
+                  <ListItemText primary={(this.state.request.passengerNote === (null || undefined) ? "Not provided" : this.state.request.passengerNote)} />
                 </ListItem>
               </List>
 
