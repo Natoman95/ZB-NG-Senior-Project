@@ -99,16 +99,6 @@ const addRideOffer = (ride) => {
 };
 
 /**
- * Update a Ride's User array of passengers
- * Corresponds to UpdatePassengers in back end's RideController
- */
-const updatePassengersArray = (rideID, passengerUsername) => {
-  removeItem("offered");
-  removeItem("ride_" + rideID);
-  return put(`transit/ride/passengers/${rideID}/${passengerUsername}/`);
-};
-
-/**
  * Update a Ride's starting location
  * Corresponds to UpdateOrigin in back end's RideController
  */
@@ -159,17 +149,6 @@ const updateMaxCapacity = (rideID, maxCapacity) => {
 };
 
 /**
- * Update a Ride's User array of Requests
- * Corresponds to UpdateRequests in back end's RideController
- */
-// TODO: Account for decreasing the capacity when passenger(s) will be affected 
-const updateRequestsArray = (rideID, requestID) => {
-  removeItem("offered");
-  removeItem("ride_" + rideID);
-  return put(`transit/ride/requests/${rideID}/${requestID}/`);
-};
-
-/**
  * Delete a Ride from the database by its unique ID
  * Corresponds to DeleteRide in back end's RideController
  */
@@ -186,12 +165,10 @@ export {
   getRequestedRides,
   getSearchResults,
   addRideOffer,
-  updatePassengersArray,
   updateOrigin,
   updateDestination,
   updateDepartureDateTime,
   updateDriverNote,
   updateMaxCapacity,
-  updateRequestsArray,
   deleteRideByID
 };

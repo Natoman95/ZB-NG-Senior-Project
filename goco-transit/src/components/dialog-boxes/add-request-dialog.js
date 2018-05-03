@@ -67,11 +67,8 @@ class AddRequestDialog extends React.Component {
           "",
           this.state.username.toLowerCase(),
           this.state.ride.rideID,
-          "",
-          "",
-          "",
-          "",
-          this.state.requesterNoteValue
+          this.state.requesterNoteValue,
+          0
         )
       )
     }

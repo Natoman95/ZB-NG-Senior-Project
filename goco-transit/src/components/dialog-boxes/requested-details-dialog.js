@@ -136,12 +136,10 @@ class RequestedDetailsDialog extends React.Component {
         }
 
         {/* Dialog boxes */}
-        <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance; }} />
+        <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance }} />
 
       </Dialog>
-
     );
-
   }
 }
 

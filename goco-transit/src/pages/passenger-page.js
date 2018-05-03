@@ -69,7 +69,7 @@ class PassengerPage extends React.Component {
       content = (
         <div>
           {/* List of confirmed rides generated from an array */}
-          <h3>
+          <h3 style={{ marginBottom: '0em' }}>
             Confirmed Rides ({this.state.confirmedRides.length})
           </h3>
           <List dense={this.state.dense}>
@@ -77,7 +77,7 @@ class PassengerPage extends React.Component {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.confirmedDetailsDialogChild.handleClickOpen(confirmedRide); }}
+                  onClick={() => { this.confirmedDetailsDialogChild.handleClickOpen(confirmedRide) }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
@@ -92,7 +92,7 @@ class PassengerPage extends React.Component {
           </List>
 
           {/* List of requests generated from an array */}
-          <h3 style={{ marginTop: '3em' }}>
+          <h3 style={{ marginTop: '2em', marginBottom: '0em' }}>
             Requested Rides ({this.state.requestedRides.length})
           </h3>
 
@@ -106,7 +106,7 @@ class PassengerPage extends React.Component {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(requestedRide); }}
+                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(requestedRide) }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
@@ -149,8 +149,8 @@ class PassengerPage extends React.Component {
           </Grid>
 
           {/* Dialog boxes */}
-          <RequestedDetailsDialog ref={(requestedDetailsDialogInstance) => { this.requestedDetailsDialogChild = requestedDetailsDialogInstance; }} />
-          <ConfirmedDetailsDialog ref={(confirmedDetailsDialogInstance) => { this.confirmedDetailsDialogChild = confirmedDetailsDialogInstance; }} />
+          <RequestedDetailsDialog ref={(requestedDetailsDialogInstance) => { this.requestedDetailsDialogChild = requestedDetailsDialogInstance }} />
+          <ConfirmedDetailsDialog ref={(confirmedDetailsDialogInstance) => { this.confirmedDetailsDialogChild = confirmedDetailsDialogInstance }} />
 
         </div>
       );

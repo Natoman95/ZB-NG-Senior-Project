@@ -12,7 +12,6 @@ import List, {
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
-import Badge from 'material-ui/Badge';
 
 // Components
 import { Icons } from '../../icon-library';
@@ -128,13 +127,6 @@ class ConfirmedDetailsDialog extends React.Component {
             {/* Action buttons */}
             <Grid container spacing={40} justify="center">
               <Grid item>
-                <IconButton>
-                  <Badge badgeContent={this.state.ride.passengerUsernames.length + "/" + this.state.ride.maxCapacity} color="primary">
-                    {Icons.seatIcon}
-                  </Badge>
-                </IconButton>
-              </Grid>
-              <Grid item>
                 <IconButton onClick={this.handleClose}>
                   {Icons.exitIcon}
                 </IconButton>
@@ -154,7 +146,7 @@ class ConfirmedDetailsDialog extends React.Component {
         }
         
         {/* Dialog boxes */}
-        <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance; }} />
+        <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance }} />
 
       </Dialog>
     );
