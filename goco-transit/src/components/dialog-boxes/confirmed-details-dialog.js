@@ -12,6 +12,7 @@ import List, {
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
+import { Typography } from 'material-ui';
 
 // Components
 import { Icons } from '../../icon-library';
@@ -117,7 +118,11 @@ class ConfirmedDetailsDialog extends React.Component {
                       {Icons.noteIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={(this.state.ride.driverNote === (null || undefined) ? "Not provided" : this.state.ride.driverNote)} />
+                  <ListItemText
+                    primary={(this.state.ride.driverNote === null || undefined ?
+                      <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
+                      : this.state.ride.driverNote)}
+                  />
                 </ListItem>
               </List>
             </DialogContentText>
