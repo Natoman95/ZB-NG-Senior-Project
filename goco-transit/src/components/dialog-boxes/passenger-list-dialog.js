@@ -100,7 +100,7 @@ class PassengerListDialog extends React.Component {
 {console.log(this.state.confirmedRequests)}
 {console.log(this.state.pendingRequests)}
               <h4 style={{ marginTop: '0em' }}>
-                Confirmed ({this.state.passengerUsernames.length})
+                Confirmed ({"?"})
               </h4>
 
               <hr/>

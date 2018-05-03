@@ -3,16 +3,11 @@
  * passenger or the driver
  * 
  * This directly corresponds to the TransitRideView model on the server
- * 
- * Contains data on Rides. Rides have 2 states:
- * EMPTY: (passengerUsernames == null) The Ride has no passengers
- * NONEMPTY: (passengerUsernames != null) The Ride has at least 1 passenger
  */
 class RideModel {
   constructor(
     rideID,
     driverUsername,
-    passengerUsernames,
     requestIDs,
     maxCapacity,
     origin,
@@ -22,7 +17,6 @@ class RideModel {
 
     this.rideID = rideID;
     this.driverUsername = driverUsername;
-    this.passengerUsernames = passengerUsernames;
     this.requestIDs = requestIDs;
     this.maxCapacity = maxCapacity;
     this.origin = origin;
@@ -41,17 +35,6 @@ class RideModel {
   destination; // The ending location that the Ride is travelling to
   departureDateTime; // The point in when the Ride will depart
   driverNote; // The driver's note to potential requesters (optional)
-
-  // Determine whether a username is in the list of passengers
-  isUserAPassenger = (usernameIn) => {
-    for (let i = 0; i < this.passengerUsernames.length; i++) {
-      if (this.passengerUsernames[i] === usernameIn) {
-        return true;
-      }
-    }
-    return false;
-  }
-
 }
 
 export default RideModel;
