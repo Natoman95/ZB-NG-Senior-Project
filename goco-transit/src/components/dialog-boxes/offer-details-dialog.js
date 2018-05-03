@@ -115,9 +115,11 @@ class OfferDetailsDialog extends React.Component {
                 {/* Notes */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
-                    <Avatar>
-                      {Icons.noteIcon}
-                    </Avatar>
+                    <Badge badgeContent={Icons.driverIcon} color="error">
+                      <Avatar>
+                        {Icons.noteIcon}
+                      </Avatar>
+                    </Badge>
                   </ListItemAvatar>
                   <ListItemText
                     primary={(this.state.ride.driverNote === null || undefined ?

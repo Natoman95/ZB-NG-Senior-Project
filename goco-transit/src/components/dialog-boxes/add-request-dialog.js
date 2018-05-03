@@ -13,6 +13,7 @@ import Avatar from 'material-ui/Avatar';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
+import Badge from 'material-ui/Badge';
 import { Typography } from 'material-ui';
 
 // Components
@@ -152,9 +153,11 @@ class AddRequestDialog extends React.Component {
                 {/* Note to passengers */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
-                    <Avatar>
-                      {Icons.noteIcon}
-                    </Avatar>
+                    <Badge badgeContent={Icons.driverIcon} color="error">
+                      <Avatar>
+                        {Icons.noteIcon}
+                      </Avatar>
+                    </Badge>
                   </ListItemAvatar>
                   <ListItemText
                     primary={(this.state.ride.driverNote === null || undefined ?
@@ -166,9 +169,11 @@ class AddRequestDialog extends React.Component {
                 {/* Note to driver */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
-                    <Avatar>
-                      {Icons.noteIcon}
-                    </Avatar>
+                    <Badge badgeContent={Icons.seatIcon} color="error">
+                      <Avatar>
+                        {Icons.noteIcon}
+                      </Avatar>
+                    </Badge>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: "1em" }} >
                     <TextField

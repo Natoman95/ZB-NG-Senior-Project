@@ -69,7 +69,7 @@ class MainPage extends React.Component {
               {this.state.pendingRequests > 0 && 
                 <Tab
                   label="Driver"
-                  icon={<Badge badgeContent={this.state.pendingRequests} color="error">
+                  icon={<Badge badgeContent={this.state.pendingRequests} color="secondary">
                     {Icons.driverIcon}
                   </Badge>}
                   component={Link}

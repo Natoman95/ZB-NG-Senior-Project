@@ -12,6 +12,7 @@ import List, {
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
+import Badge from 'material-ui/Badge';
 import { Typography } from 'material-ui';
 
 // Components
@@ -103,11 +104,12 @@ class RequestedDetailsDialog extends React.Component {
                 {/* Notes */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
-                    <Avatar>
-                      {Icons.noteIcon}
-                    </Avatar>
+                    <Badge badgeContent={Icons.driverIcon} color="error">
+                      <Avatar>
+                        {Icons.noteIcon}
+                      </Avatar>
+                    </Badge>
                   </ListItemAvatar>
-                  {console.log(this.state.requestedRide)}
                   <ListItemText
                     primary={(this.state.requestedRide.driverNote === null || undefined ?
                       <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>

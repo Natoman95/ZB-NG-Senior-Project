@@ -16,6 +16,7 @@ import ExpansionPanel, {
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
+import Badge from 'material-ui/Badge';
 
 // Components
 import { Icons } from '../../icon-library';
@@ -102,6 +103,7 @@ class PassengerListDialog extends React.Component {
                 Confirmed ({this.state.confirmedRequests.length})
               </h4>
 
+              {/* List of confirmed passengers */}
               <List dense={this.state.dense}>
                 {this.state.confirmedRequests.map((confirmedRequest) => {
                   return (
@@ -123,14 +125,17 @@ class PassengerListDialog extends React.Component {
                         <ListItem
                           disableGutters={this.state.noGutters}
                           divider={this.state.divider}
+                          style={{ paddingTop: '1em' }}
                         >
                           <ListItemAvatar>
-                            <Avatar>
-                              {Icons.noteIcon}
-                            </Avatar>
+                            <Badge badgeContent={Icons.seatIcon} color="error">
+                              <Avatar>
+                                {Icons.noteIcon}
+                              </Avatar>
+                            </Badge>
                           </ListItemAvatar>
                           <ListItemText
-                            secondary={confirmedRequest.request.requesterNote}
+                            primary={confirmedRequest.request.requesterNote}
                           />
                         </ListItem>
                       </ExpansionPanelDetails>
@@ -144,7 +149,8 @@ class PassengerListDialog extends React.Component {
               <h4 style={{ marginTop: '1em', marginBottom: '0em' }}>
                 Requested ({this.state.pendingRequests.length})
               </h4>
-
+              
+              {/* List of potential passengers */}
               <List dense={this.state.dense}>
                 {this.state.pendingRequests.map((pendingRequest) => {
                   return (
@@ -166,14 +172,17 @@ class PassengerListDialog extends React.Component {
                         <ListItem
                           disableGutters={this.state.noGutters}
                           divider={this.state.divider}
+                          style={{ paddingTop: '1em' }}
                         >
                           <ListItemAvatar>
-                            <Avatar>
-                              {Icons.noteIcon}
-                            </Avatar>
+                            <Badge badgeContent={Icons.seatIcon} color="error">
+                              <Avatar>
+                                {Icons.noteIcon}
+                              </Avatar>
+                            </Badge>
                           </ListItemAvatar>
                           <ListItemText
-                            secondary={pendingRequest.request.requesterNote}
+                            primary={pendingRequest.request.requesterNote}
                           />
                         </ListItem>
                       </ExpansionPanelDetails>
