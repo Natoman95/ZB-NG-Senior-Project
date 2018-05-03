@@ -58,7 +58,6 @@ class ConfirmedDetailsDialog extends React.Component {
       <Dialog
         open={this.state.display}
         onClose={this.handleClose}
-        disableBackdropClick={true}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
