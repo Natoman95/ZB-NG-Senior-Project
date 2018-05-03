@@ -23,13 +23,17 @@ class PassengerListDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
-      passengers: null
+      passengerUsernames: [],
+      requestIDs: []
     };
   }
 
   // Open the add offer dialog
-  handleClickOpen = (passengerList) => {
-    this.setState({ passengers: passengerList });
+  handleClickOpen = (confirmed, requested) => {
+    this.setState({
+      passengerUsernames: confirmed,
+      requestIDs: requested
+     });
     this.setState({ display: true });
   };
 
@@ -52,19 +56,19 @@ class PassengerListDialog extends React.Component {
         {this.state.display && // Don't attempt to get undefined data
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-
+              
               {/* generate lists then map them into list items (use avatars and secondary actions)*/}
               {/* secondary list item text: passenger note? */}
               {/* or expand list item with confirm/decline option? */}
-              
+
               <h4 style={{ marginTop: '0em' }}>
-                Confirmed ({this.state.passengers.length})
+                Confirmed ({this.state.passengerUsernames.length})
               </h4>
 
               <hr/>
               
               <h4>
-                Requested ({this.state.passengers.length})
+                Requested ({this.state.requestIDs.length})
               </h4>
 
             </DialogContentText>

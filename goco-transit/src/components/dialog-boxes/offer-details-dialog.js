@@ -125,11 +125,12 @@ class OfferDetailsDialog extends React.Component {
             </DialogContentText>
 
             <hr/>
-
+{console.log(this.state.ride)}
             {/* Action buttons */}
             <Grid container spacing={40} justify="center">
               <Grid item>
-                <IconButton onClick={ () => {this.passengerDialogChild.handleClickOpen(this.state.ride.passengerUsernames)} }>
+                <IconButton onClick={ () => {this.passengerDialogChild.handleClickOpen(
+                  this.state.ride.passengerUsernames, this.state.ride.requestIDs)} }>
                   {this.state.display === true && // Don't attempt to get undefined length
                     <Badge badgeContent={this.state.ride.passengerUsernames.length + "/" + this.state.ride.maxCapacity} color="primary">
                       {Icons.seatIcon}

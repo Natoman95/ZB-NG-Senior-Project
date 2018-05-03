@@ -1,5 +1,5 @@
 // Services
-import { get, put, post, del } from './http-service';
+import { get, post, del } from './http-service';
 import { getItem, setItem, removeItem, isCachedDataExpired } from "../services/storage-service";
 
 /**
@@ -53,56 +53,6 @@ const addRequest = (request) => {
 };
 
 /**
- * Update the Ride associated with a Request
- * Corresponds to UpdateRide in back end's RequestController
- */
-const updateRide = (requestID, rideID) => {
-  removeItem("requests");
-  removeItem("request_" + requestID);
-  return put(`transit/request/ride/${requestID}/${rideID}/`);
-};
-
-/**
- * Update a Request's desired starting location
- * Corresponds to UpdateOrigin in back end's RequestController
- */
-const updateOrigin = (requestID, origin) => {
-  removeItem("requests");
-  removeItem("request_" + requestID);
-  return put(`transit/request/origin/${requestID}/${origin}/`);
-};
-
-/**
- * Update a Request's desired ending location
- * Corresponds to UpdateDestination in back end's RequestController
- */
-const updateDestination = (requestID, destination) => {
-  removeItem("requests");
-  removeItem("request_" + requestID);
-  return put(`transit/request/origin/${requestID}/${destination}/`);
-};
-
-/**
- * Update a Request's earliest possible departure time
- * Corresponds to UpdateEarliestDateTime in back end's RequestController
- */
-const updateEarliestDepartureDateTime = (requestID, earliestDepartureDateTime) => {
-  removeItem("requests");
-  removeItem("request_" + requestID);
-  return put(`transit/request/earliest/${requestID}/${earliestDepartureDateTime}/`);
-};
-
-/**
- * Update a Request's latest possible departure time
- * Corresponds to UpdateLatestDateTime in back end's RequestController
- */
-const updateLatestDepartureDateTime = (requestID, latestDepartureDateTime) => {
-  removeItem("requests");
-  removeItem("request_" + requestID);
-  return put(`transit/request/latest/${requestID}/${latestDepartureDateTime}/`);
-};
-
-/**
  * Delete a Request from the database by its unique ID
  * Corresponds to DeleteRequest in back end's RequestController
  */
@@ -117,10 +67,5 @@ export {
   getRequestByID,
   getRequests,
   addRequest,
-  updateRide,
-  updateOrigin,
-  updateDestination,
-  updateEarliestDepartureDateTime,
-  updateLatestDepartureDateTime,
   deleteRequestByID
 };
