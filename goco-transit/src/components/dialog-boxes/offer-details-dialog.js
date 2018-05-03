@@ -125,7 +125,7 @@ class OfferDetailsDialog extends React.Component {
             </DialogContentText>
 
             <hr/>
-{console.log(this.state.ride)}
+
             {/* Action buttons */}
             <Grid container spacing={40} justify="center">
               <Grid item>
