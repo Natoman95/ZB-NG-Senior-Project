@@ -42,11 +42,10 @@ class PassengerListDialog extends React.Component {
 
   // Open the add offer dialog
   handleClickOpen = async (requestIDs) => {
-    
-    // Sort request IDs by confirmation status
+    // Sort Requests by confirmation status
     let request;
     for (let requestID in requestIDs) {
-      request = await getRequestByID(requestID);
+      request = await getRequestByID(requestIDs[requestID]);
       if (request.isConfirmed === 1) {
         this.state.confirmedRequests.push({
           request: request,
@@ -97,8 +96,7 @@ class PassengerListDialog extends React.Component {
         {this.state.display && // Don't attempt to get undefined data
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-{console.log(this.state.confirmedRequests)}
-{console.log(this.state.pendingRequests)}
+            
               <h4 style={{ marginTop: '0em' }}>
                 Confirmed ({"?"})
               </h4>
@@ -106,7 +104,7 @@ class PassengerListDialog extends React.Component {
               <hr/>
               
               <h4>
-                Requested ({this.state.requestIDs.length})
+                Requested ({this.state.pendingRequests.length})
               </h4>
 
               <List dense={this.state.dense}>
@@ -121,13 +119,12 @@ class PassengerListDialog extends React.Component {
                       divider={this.state.divider}
                     >
                       <ListItemAvatar>
-                        <Avatar>
-                          {pendingRequest.profilePic}
-                        </Avatar>
+                        <Avatar src={pendingRequest.profilePic}/>
                       </ListItemAvatar>
+                      {console.log(pendingRequest)}
                       <ListItemText
-                        primary={getUserFullName(pendingRequest.requesterUsername)}
-                        secondary={pendingRequest.requesterNote}
+                        primary={getUserFullName(pendingRequest.request.requesterUsername)}
+                        secondary={pendingRequest.request.requesterNote}
                       />
                     </ListItem>
                   )
