@@ -19,9 +19,9 @@ import ExitIcon from 'material-ui-icons/Close';
 import AvatarIcon from 'material-ui-icons/Face'
 
 /**
- * Takes all material ui icons and renames them all by their function.
+ * Takes all Material UI icons and renames them all by their function.
  * These icons are used throughout the app many times. If you want to
- * change one across the app everywhere it's used you can do so here
+ * change one across the app everywhere it's used you should do so here.
  */
 let icons = {
   originIcon: React.createElement(OriginIcon),
