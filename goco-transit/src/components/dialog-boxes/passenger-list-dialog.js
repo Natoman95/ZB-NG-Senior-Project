@@ -46,6 +46,14 @@ class PassengerListDialog extends React.Component {
 
   // Open the add offer dialog
   handleClickOpen = async (requestIDs) => {
+    // Reset arrays to being empty
+    this.setState({
+      confirmedRequests: [],
+      pendingRequests: [],
+      confirmedListItemExpansion: [],
+      pendingListItemExpansion: []
+    });
+    
     // Sort Requests by confirmation status
     let request;
     for (let requestID in requestIDs) {
