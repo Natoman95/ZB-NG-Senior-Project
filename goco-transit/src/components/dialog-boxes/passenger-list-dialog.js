@@ -49,13 +49,13 @@ class PassengerListDialog extends React.Component {
       if (request.isConfirmed === 1) {
         this.state.confirmedRequests.push({
           request: request,
-          profilePic: await getUserImage(request.requesterUsername),
+          profilePic: 'data:image/png;base64,' + (await getUserImage(request.requesterUsername)).def,
         });
         this.state.confirmedListItemExpansion.push(false);
       } else {
         this.state.pendingRequests.push({
           request: request,
-          profilePic: await getUserImage(request.requesterUsername),
+          profilePic: 'data:image/png;base64,' + (await getUserImage(request.requesterUsername)).def,
         });
         this.state.pendingListItemExpansion.push(false);
       }
