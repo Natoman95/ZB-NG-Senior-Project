@@ -98,12 +98,35 @@ class PassengerListDialog extends React.Component {
             <DialogContentText id="alert-dialog-description">
             
               <h4 style={{ marginTop: '0em', marginBottom: '0em' }}>
-                Confirmed ({"?"})
+                Confirmed ({this.state.confirmedRequests.length})
               </h4>
+
+              <List dense={this.state.dense}>
+                {this.state.confirmedRequests.map((confirmedRequest) => {
+                  return (
+                    <ListItem
+                      button
+                      onClick={() => { this.handleListItemClick(1, this.state.confirmedRequests.findIndex(
+                        i => i.request.requestID === confirmedRequest.requestID
+                      ))}}
+                      disableGutters={this.state.noGutters}
+                      divider={this.state.divider}
+                    >
+                      <ListItemAvatar>
+                        <Avatar src={confirmedRequest.profilePic}/>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={getUserFullName(confirmedRequest.request.requesterUsername)}
+                        secondary={confirmedRequest.request.requesterNote}
+                      />
+                    </ListItem>
+                  )
+                })}
+              </List>
 
               <hr/>
               
-              <h4 style={{ marginTop: '0em', marginBottom: '0em' }}>
+              <h4 style={{ marginTop: '1em', marginBottom: '0em' }}>
                 Requested ({this.state.pendingRequests.length})
               </h4>
 
@@ -121,7 +144,6 @@ class PassengerListDialog extends React.Component {
                       <ListItemAvatar>
                         <Avatar src={pendingRequest.profilePic}/>
                       </ListItemAvatar>
-                      {console.log(pendingRequest)}
                       <ListItemText
                         primary={getUserFullName(pendingRequest.request.requesterUsername)}
                         secondary={pendingRequest.request.requesterNote}
