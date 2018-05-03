@@ -46,16 +46,18 @@ class PassengerListDialog extends React.Component {
     let request;
     for (let requestID in requestIDs) {
       request = await getRequestByID(requestIDs[requestID]);
-      if (request.isConfirmed === 1) {
+      if (request.isConfirmed) {
         this.state.confirmedRequests.push({
           request: request,
           profilePic: 'data:image/png;base64,' + (await getUserImage(request.requesterUsername)).def,
+          index: this.state.confirmedRequests.length
         });
         this.state.confirmedListItemExpansion.push(false);
       } else {
         this.state.pendingRequests.push({
           request: request,
           profilePic: 'data:image/png;base64,' + (await getUserImage(request.requesterUsername)).def,
+          index: this.state.pendingRequests.length
         });
         this.state.pendingListItemExpansion.push(false);
       }
@@ -135,9 +137,7 @@ class PassengerListDialog extends React.Component {
                   return (
                     <ListItem
                       button
-                      onClick={() => { this.handleListItemClick(2, this.state.pendingRequests.findIndex(
-                        i => i.request.requestID === pendingRequest.requestID
-                      ))}}
+                      onClick={ (index) => { this.handleListItemClick(2, pendingRequest.index) }}
                       disableGutters={this.state.noGutters}
                       divider={this.state.divider}
                     >
