@@ -35,7 +35,7 @@ class PassengerListDialog extends React.Component {
       dense: false,
       secondary: true,
       noGutters: true,
-      divider: true,
+      divider: false,
       display: false,
       confirmedRequests: [],
       pendingRequests: [],
@@ -74,19 +74,6 @@ class PassengerListDialog extends React.Component {
   handleClose = () => {
     this.setState({ display: false });
   };
-
-  // Toggle an expandable list item's state
-  handleListItemClick = (list, index) => {
-    if (list === 1) {
-      let confirmedListState = this.state.confirmedListItemExpansion;
-      confirmedListState[index] = !confirmedListState[index];
-      this.setState({ confirmedListItemExpansion: confirmedListState });
-    } else if (list === 2) {
-      let pendingListState = this.state.pendingListItemExpansion;
-      pendingListState[index] = !pendingListState[index];
-      this.setState({ pendingListItemExpansion: pendingListState });
-    }
-  }
 
   render() {
     return (
@@ -137,11 +124,9 @@ class PassengerListDialog extends React.Component {
               <List dense={this.state.dense}>
                 {this.state.pendingRequests.map((pendingRequest) => {
                   return (
-                    <ExpansionPanel>
-                      <ExpansionPanelSummary expandIcon={Icons.expandIcon}>
+                    <ExpansionPanel elevation={0}>
+                      <ExpansionPanelSummary expandIcon={Icons.expandIcon} style={{ padding: 0 }}>
                         <ListItem
-                          button
-                          onClick={ () => { this.handleListItemClick(2, pendingRequest.index) }}
                           disableGutters={this.state.noGutters}
                           divider={this.state.divider}
                         >
@@ -153,10 +138,8 @@ class PassengerListDialog extends React.Component {
                           />
                         </ListItem>
                       </ExpansionPanelSummary>
-                      <ExpansionPanelDetails>
+                      <ExpansionPanelDetails style={{ padding: 0 }}>
                         <ListItem
-                          button
-                          onClick={ () => { this.handleListItemClick(2, pendingRequest.index) }}
                           disableGutters={this.state.noGutters}
                           divider={this.state.divider}
                         >
