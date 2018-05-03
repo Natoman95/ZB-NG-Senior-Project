@@ -16,12 +16,13 @@ import EditIcon from 'material-ui-icons/Edit';
 import DeleteIcon from 'material-ui-icons/Delete';
 import SearchIcon from 'material-ui-icons/Search';
 import ExitIcon from 'material-ui-icons/Close';
-import AvatarIcon from 'material-ui-icons/Face'
+import AvatarIcon from 'material-ui-icons/Face';
+import ExpandIcon from 'material-ui-icons/ExpandMore';
 
 /**
- * Takes all material ui icons and renames them all by their function.
+ * Takes all Material UI icons and renames them all by their function.
  * These icons are used throughout the app many times. If you want to
- * change one across the app everywhere it's used you can do so here
+ * change one across the app everywhere it's used you should do so here.
  */
 let icons = {
   originIcon: React.createElement(OriginIcon),
@@ -40,7 +41,8 @@ let icons = {
   deleteIcon: React.createElement(DeleteIcon),
   searchIcon: React.createElement(SearchIcon),
   exitIcon: React.createElement(ExitIcon),
-  avatarIcon: React.createElement(AvatarIcon)
+  avatarIcon: React.createElement(AvatarIcon),
+  expandIcon: React.createElement(ExpandIcon)
 };
 
 export { icons as Icons };

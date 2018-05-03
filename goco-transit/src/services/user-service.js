@@ -45,7 +45,7 @@ const getUser = async () => {
  * @param {String} [username] Username in firstname.lastname format
  * @return {Promise} Profile info
  */
-const getUserProfile = username => {
+const getUserProfile = (username) => {
   if (username) {
     return get(`profiles/${username}/`);
   }
@@ -57,7 +57,7 @@ const getUserProfile = username => {
  * @param {String} [username] Username in firstname.lastname format
  * @return {Promise.<String>} Image as a Base64-encoded string
  */
-const getUserImage = username => {
+const getUserImage = (username) => {
   if (username) {
     return get(`profiles/image/${username}/`);
   }
@@ -65,4 +65,11 @@ const getUserImage = username => {
   return get('profiles/image');
 };
 
-export { getUser, getUserImage };
+const getUserFullName = (username) => {
+  let firstName = username.split(".")[0];
+  let lastName = username.split(".")[1];
+  let fullName = firstName.charAt(0).toUpperCase() + firstName.slice(1) + " " + lastName.charAt(0).toUpperCase() + lastName.slice(1);
+  return fullName;
+}
+
+export { getUser, getUserImage, getUserFullName };

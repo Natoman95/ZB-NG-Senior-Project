@@ -73,14 +73,14 @@ class DriverPage extends React.Component {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(offeredRide); }}
+                  onClick={() => { this.offerDetailsDialogChild.handleClickOpen(offeredRide) }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
                   {/* Number of users on the offered ride */}
                   <ListItemAvatar>
                     <IconButton disabled={true}>
-                      <Badge badgeContent={offeredRide.passengerUsernames.length + "/" + offeredRide.maxCapacity} color="primary">
+                      <Badge badgeContent={"?" + "/" + offeredRide.maxCapacity} color="primary">
                         {Icons.seatIcon}
                       </Badge>
                     </IconButton>
@@ -101,7 +101,7 @@ class DriverPage extends React.Component {
               <Grid container direction="row" justify="flex-end" alignItems="center">
                 <Grid item>
                   <Button variant="fab" color="secondary" aria-label="add"
-                  onClick={() => { this.addOfferDialogChild.handleClickOpen(this.state.user.username); }}>
+                  onClick={() => { this.addOfferDialogChild.handleClickOpen(this.state.user.username) }}>
                     {Icons.addIcon}
                   </Button>
                 </Grid>
@@ -110,8 +110,8 @@ class DriverPage extends React.Component {
           </Grid>
 
           {/* Dialog boxes */}
-          <OfferDetailsDialog ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance; }} />
-          <AddOfferDialog onPost={this.onOffersUpdated} ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance; }} />
+          <OfferDetailsDialog ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance }} />
+          <AddOfferDialog onPost={this.onOffersUpdated} ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance }} />
 
         </div>
       );
