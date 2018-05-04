@@ -152,7 +152,7 @@ class AddRequestDialog extends React.Component {
                 {/* Note to passengers */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
-                    <Badge badgeContent={Icons.driverIcon} style={{backgroundColor: '#BDBDBD'}}>
+                    <Badge badgeContent={Icons.driverIcon} color="error">
                       <Avatar>
                         {Icons.noteIcon}
                       </Avatar>
@@ -168,7 +168,7 @@ class AddRequestDialog extends React.Component {
                 {/* Note to driver */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
-                    <Badge badgeContent={Icons.seatIcon} style={{backgroundColor: '#BDBDBD'}}>
+                    <Badge badgeContent={Icons.seatIcon} color="error">
                       <Avatar>
                         {Icons.noteIcon}
                       </Avatar>

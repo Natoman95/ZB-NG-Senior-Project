@@ -212,7 +212,7 @@ class AddOfferDialog extends React.Component {
               {/* Notes */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
-                  <Badge badgeContent={Icons.driverIcon} style={{backgroundColor: '#BDBDBD'}}>
+                  <Badge badgeContent={Icons.driverIcon} color="error">
                     <Avatar>
                       {Icons.noteIcon}
                     </Avatar>
