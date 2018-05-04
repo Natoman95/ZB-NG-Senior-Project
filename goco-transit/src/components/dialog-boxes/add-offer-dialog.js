@@ -13,6 +13,7 @@ import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
 import PropTypes from 'prop-types';
+import Badge from 'material-ui/Badge';
 
 // Components
 import { Icons } from '../../icon-library';
@@ -108,7 +109,6 @@ class AddOfferDialog extends React.Component {
       <Dialog
         open={this.state.display}
         onClose={this.handleClose}
-        disableBackdropClick={true}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -212,9 +212,21 @@ class AddOfferDialog extends React.Component {
               {/* Notes */}
               <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                 <ListItemAvatar>
-                  <Avatar>
-                    {Icons.noteIcon}
-                  </Avatar>
+                  <Badge badgeContent={
+                    <IconButton
+                      disabled
+                      style={{
+                        backgroundColor: '#BDBDBD',
+                        color: '#FFFFFF',
+                        width: '1.25em',
+                        height: '1.25em'
+                    }}>
+                      {Icons.driverIcon}
+                    </IconButton>}>
+                    <Avatar>
+                      {Icons.noteIcon}
+                    </Avatar>
+                  </Badge>
                 </ListItemAvatar>
                 <div style={{ paddingLeft: "1em" }} >
                   <TextField

@@ -13,6 +13,8 @@ import Avatar from 'material-ui/Avatar';
 import TextField from 'material-ui/TextField';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
+import Badge from 'material-ui/Badge';
+import { Typography } from 'material-ui';
 
 // Components
 import { Icons } from '../../icon-library';
@@ -87,7 +89,6 @@ class AddRequestDialog extends React.Component {
       <Dialog
         open={this.state.display}
         onClose={this.handleClose}
-        disableBackdropClick={true}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -151,21 +152,47 @@ class AddRequestDialog extends React.Component {
                 {/* Note to passengers */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
-                    <Avatar>
-                      {Icons.noteIcon}
-                    </Avatar>
+                    <Badge badgeContent={
+                      <IconButton
+                        disabled
+                        style={{
+                          backgroundColor: '#BDBDBD',
+                          color: '#FFFFFF',
+                          width: '1.25em',
+                          height: '1.25em'
+                      }}>
+                        {Icons.driverIcon}
+                      </IconButton>}>
+                      <Avatar>
+                        {Icons.noteIcon}
+                      </Avatar>
+                    </Badge>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={this.state.ride.driverNote}
+                    primary={(this.state.ride.driverNote === null || undefined ?
+                      <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
+                      : this.state.ride.driverNote)}
                   />
                 </ListItem>
 
                 {/* Note to driver */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
-                    <Avatar>
-                      {Icons.noteIcon}
-                    </Avatar>
+                    <Badge badgeContent={
+                      <IconButton
+                        disabled
+                        style={{
+                          backgroundColor: '#BDBDBD',
+                          color: '#FFFFFF',
+                          width: '1.25em',
+                          height: '1.25em'
+                      }}>
+                        {Icons.seatIcon}
+                      </IconButton>}>
+                      <Avatar>
+                        {Icons.noteIcon}
+                      </Avatar>
+                    </Badge>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: "1em" }} >
                     <TextField

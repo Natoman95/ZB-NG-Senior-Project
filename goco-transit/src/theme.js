@@ -13,6 +13,10 @@ const theme = createMuiTheme({
       main: '#00AEEF',
       contrastText: '#fff',
     },
+    error: { // We use this for notifications
+      main: '#F44336',
+      contrastText: '#fff',
+    },
   },
   typography: {
     fontFamily: 'Arial',

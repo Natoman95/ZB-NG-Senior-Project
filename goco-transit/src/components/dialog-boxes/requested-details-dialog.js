@@ -12,13 +12,15 @@ import List, {
 import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
+import Badge from 'material-ui/Badge';
+import { Typography } from 'material-ui';
 
 // Components
 import { Icons } from '../../icon-library';
 import ConfirmationDialog from './confirmation-dialog';
 
 // Models
-import RequestModel from '../../models/request-model';
+import RideModel from '../../models/ride-model';
 
 // Services
 import { getDate, getTime } from '../../services/date-service';
@@ -36,13 +38,13 @@ class RequestedDetailsDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
-      request: new RequestModel() // Prevents null pointer exception
+      requestedRide: new RideModel() // Prevents null pointer exception
     };
   }
 
   // Open the add offer dialog
   handleClickOpen = (requestedRide) => {
-    this.setState({ request: requestedRide });
+    this.setState({ requestedRide: requestedRide });
     this.setState({ display: true });
   };
 
@@ -56,7 +58,6 @@ class RequestedDetailsDialog extends React.Component {
       <Dialog
         open={this.state.display}
         onClose={this.handleClose}
-        disableBackdropClick={true}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
@@ -76,7 +77,7 @@ class RequestedDetailsDialog extends React.Component {
                       {Icons.originIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={this.state.request.origin} />
+                  <ListItemText primary={this.state.requestedRide.origin} />
                 </ListItem>
 
                 {/* Destination */}
@@ -86,7 +87,7 @@ class RequestedDetailsDialog extends React.Component {
                       {Icons.destinationIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={this.state.request.destination} />
+                  <ListItemText primary={this.state.requestedRide.destination} />
                 </ListItem>
 
                 {/* Time */}
@@ -96,17 +97,33 @@ class RequestedDetailsDialog extends React.Component {
                       {Icons.timeIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={getDate(this.state.request.departureDateTime) + " " + getTime(this.state.request.departureDateTime)} />
+                  <ListItemText primary={getDate(this.state.requestedRide.departureDateTime) + " " + getTime(this.state.requestedRide.departureDateTime)} />
                 </ListItem>
 
                 {/* Notes */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
-                    <Avatar>
-                      {Icons.noteIcon}
-                    </Avatar>
+                    <Badge badgeContent={
+                      <IconButton
+                        disabled
+                        style={{
+                          backgroundColor: '#BDBDBD',
+                          color: '#FFFFFF',
+                          width: '1.25em',
+                          height: '1.25em'
+                      }}>
+                        {Icons.driverIcon}
+                      </IconButton>}>
+                      <Avatar>
+                        {Icons.noteIcon}
+                      </Avatar>
+                    </Badge>
                   </ListItemAvatar>
-                  <ListItemText primary={this.state.request.passengerNote} />
+                  <ListItemText
+                    primary={(this.state.requestedRide.driverNote === null || undefined ?
+                      <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
+                      : this.state.requestedRide.driverNote)}
+                  />
                 </ListItem>
               </List>
 
