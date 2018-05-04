@@ -7,6 +7,7 @@ import List, {
 } from 'material-ui/List'; import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/Button';
 import PropTypes from 'prop-types';
+import DateTimePicker from 'material-ui-pickers/DateTimePicker';
 
 // Components
 import AddRequestDialog from '../components/dialog-boxes/add-request-dialog';
@@ -147,14 +148,26 @@ class SearchPage extends React.Component {
             </Grid>
             {/* Start date */}
             <Grid item xl={3} md={6} sm={12}>
-              <TextField
+              {/* <DateTimePicker
+                // fullWidth
+                // id="startDateField"
+                // label="Earliest Possible Departure"
+                // type="datetime-local"
+                // defaultValue={this.state.startDateTime} // Default time for the start date is today
+                value={this.state.startDateTime}
+                onChange={this.handleFormChange('startDateTime')}
+                InputLabelProps={{
+                  shrink: true,
+                }}
+              /> */}
+              <DateTimePicker
                 fullWidth
                 id="startDateField"
                 label="Earliest Possible Departure"
-                type="datetime-local"
-                defaultValue={this.state.startDateTime} // Default time for the start date is today
+                minDate={this.getDateTime(0)}
                 value={this.state.startDateTime}
                 onChange={this.handleFormChange('startDateTime')}
+                format="MM/DD/YYYY hh:mm A"
                 InputLabelProps={{
                   shrink: true,
                 }}
