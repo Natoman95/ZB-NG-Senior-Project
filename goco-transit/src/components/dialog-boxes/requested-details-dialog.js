@@ -103,7 +103,7 @@ class RequestedDetailsDialog extends React.Component {
                 {/* Notes */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
-                    <Badge badgeContent={Icons.driverIcon} color="error">
+                    <Badge badgeContent={Icons.driverIcon} style={{backgroundColor: '#BDBDBD'}}>
                       <Avatar>
                         {Icons.noteIcon}
                       </Avatar>
