@@ -13,16 +13,7 @@ import { getItem, setItem, removeItem, isCachedDataExpired } from "../services/s
  * Corresponds to GetByID in back end's RideController
  */
 const getRideByID = async (id) => {
-  let ride;
-  let key = "ride_" + id;
-  if (isCachedDataExpired(key)) {
-    ride = await get(`transit/ride/id/${id}/`);
-    setItem(key, ride);
-  }
-  else {
-    ride = getItem(key);
-  }
-  return ride;
+  return get(`transit/ride/id/${id}/`);
 };
 
 /**
@@ -30,16 +21,7 @@ const getRideByID = async (id) => {
  * Corresponds to GetOfferedByUsername in back end's RideController
  */
 const getOfferedRides = async (username) => {
-  let rides;
-  let key = "offered";
-  if (isCachedDataExpired(key)) {
-    rides = await get(`transit/ride/user/${username}/offered/`);
-    setItem(key, rides);
-  }
-  else {
-    rides = getItem(key);
-  }
-  return rides;
+  return get(`transit/ride/user/${username}/offered/`);
 };
 
 /**
@@ -47,16 +29,7 @@ const getOfferedRides = async (username) => {
  * Corresponds to GetConfirmedByUsername in back end's RideController
  */
 const getConfirmedRides = async (username) => {
-  let rides;
-  let key = "confirmed";
-  if (isCachedDataExpired(key)) {
-    rides = await get(`transit/ride/user/${username}/confirmed/`);    
-    setItem(key, rides);
-  }
-  else {
-    rides = getItem(key);
-  }
-  return rides;
+  return await get(`transit/ride/user/${username}/confirmed/`);    
 };
 
 /**
@@ -64,16 +37,7 @@ const getConfirmedRides = async (username) => {
  * Corresponds to GetPendingByUsername in back end's RideController
  */
 const getRequestedRides = async (username) => {
-  let rides;
-  let key = "pending";
-  if (isCachedDataExpired(key)) {
-    rides = await get(`transit/ride/user/${username}/pending/`);    
-    setItem(key, rides);
-  }
-  else {
-    rides = getItem(key);
-  }
-  return rides;
+  return get(`transit/ride/user/${username}/pending/`);    
 };
 
 /**
@@ -94,7 +58,6 @@ const getSearchResults = (startDate, endDate, origin, destination) => {
  * Corresponds to PostRide in back end's RideController
  */
 const addRideOffer = (ride) => {
-  removeItem("offered");
   return post(`transit/ride/`, ride);
 };
 
@@ -103,8 +66,6 @@ const addRideOffer = (ride) => {
  * Corresponds to UpdateOrigin in back end's RideController
  */
 const updateOrigin = (rideID, origin) => {
-  removeItem("offered");
-  removeItem("ride_" + rideID);
   return put(`transit/ride/origin/${rideID}/${origin}/`);
 };
 
@@ -113,8 +74,6 @@ const updateOrigin = (rideID, origin) => {
  * Corresponds to UpdateDestination in back end's RideController
  */
 const updateDestination = (rideID, destination) => {
-  removeItem("offered");
-  removeItem("ride_" + rideID);
   return put(`transit/ride/destination/${rideID}/${destination}/`);
 };
 
@@ -123,8 +82,6 @@ const updateDestination = (rideID, destination) => {
  * Corresponds to UpdateDateTime in back end's RideController
  */
 const updateDepartureDateTime = (rideID, departureDateTime) => {
-  removeItem("offered");
-  removeItem("ride_" + rideID);
   return put(`transit/ride/date/${rideID}/${departureDateTime}/`);
 };
 
@@ -133,8 +90,6 @@ const updateDepartureDateTime = (rideID, departureDateTime) => {
  * Corresponds to UpdateNote in back end's RideController
  */
 const updateDriverNote = (rideID, driverNote) => {
-  removeItem("offered");
-  removeItem("ride_" + rideID);
   return put(`transit/ride/note/${rideID}/${driverNote}/`);
 };
 
@@ -143,8 +98,6 @@ const updateDriverNote = (rideID, driverNote) => {
  * Corresponds to UpdateCapacity in back end's RideController
  */
 const updateMaxCapacity = (rideID, maxCapacity) => {
-  removeItem("offered");
-  removeItem("ride_" + rideID);
   return put(`transit/ride/capacity/${rideID}/${maxCapacity}/`);
 };
 
@@ -153,8 +106,6 @@ const updateMaxCapacity = (rideID, maxCapacity) => {
  * Corresponds to DeleteRide in back end's RideController
  */
 const deleteRideByID = (rideID) => {
-  removeItem("offered");
-  removeItem("ride_" + rideID);
   return del(`transit/ride/delete/${rideID}/`);
 };
 
