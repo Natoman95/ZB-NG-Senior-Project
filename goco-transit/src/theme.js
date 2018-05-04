@@ -13,8 +13,8 @@ const theme = createMuiTheme({
       main: '#00AEEF',
       contrastText: '#fff',
     },
-    error: { // Not set to a traditional error color; hardcoded due to Material UI using a brittle enum
-      main: '#BDBDBD',
+    error: { // We use this for notifications
+      main: '#F44336',
       contrastText: '#fff',
     },
   },

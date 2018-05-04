@@ -114,7 +114,17 @@ class OfferDetailsDialog extends React.Component {
                 {/* Notes */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
-                    <Badge badgeContent={Icons.driverIcon} color="error">
+                    <Badge badgeContent={
+                      <IconButton
+                        disabled
+                        style={{
+                          backgroundColor: '#BDBDBD',
+                          color: '#FFFFFF',
+                          width: '1.25em',
+                          height: '1.25em'
+                      }}>
+                        {Icons.seatIcon}
+                      </IconButton>}>
                       <Avatar>
                         {Icons.noteIcon}
                       </Avatar>

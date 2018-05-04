@@ -127,7 +127,17 @@ class PassengerListDialog extends React.Component {
                           style={{ paddingTop: '1em' }}
                         >
                           <ListItemAvatar>
-                            <Badge badgeContent={Icons.seatIcon} color="error">
+                            <Badge badgeContent={
+                              <IconButton
+                                disabled
+                                style={{
+                                  backgroundColor: '#BDBDBD',
+                                  color: '#FFFFFF',
+                                  width: '1.25em',
+                                  height: '1.25em'
+                              }}>
+                                {Icons.seatIcon}
+                              </IconButton>}>
                               <Avatar>
                                 {Icons.noteIcon}
                               </Avatar>
@@ -174,7 +184,17 @@ class PassengerListDialog extends React.Component {
                           style={{ paddingTop: '1em' }}
                         >
                           <ListItemAvatar>
-                            <Badge badgeContent={Icons.seatIcon} color="error">
+                            <Badge badgeContent={
+                              <IconButton
+                                disabled
+                                style={{
+                                  backgroundColor: '#BDBDBD',
+                                  color: '#FFFFFF',
+                                  width: '1.25em',
+                                  height: '1.25em'
+                              }}>
+                                {Icons.seatIcon}
+                              </IconButton>}>
                               <Avatar>
                                 {Icons.noteIcon}
                               </Avatar>
