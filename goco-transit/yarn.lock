@@ -4206,6 +4206,13 @@ material-ui-icons@^1.0.0-beta.35:
   dependencies:
     recompose "^0.26.0"
 
+material-ui-pickers@^1.0.0-rc.7:
+  version "1.0.0-rc.7"
+  resolved "https://registry.yarnpkg.com/material-ui-pickers/-/material-ui-pickers-1.0.0-rc.7.tgz#81d283a2651048ce2de9ddbe56f7b8a04b090c67"
+  dependencies:
+    babel-runtime "^6.26.0"
+    react-text-mask "^5.3.1"
+
 material-ui@^1.0.0-beta.35:
   version "1.0.0-beta.35"
   resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.35.tgz#eeac6be307c0469943c7686e5c6bd4eaa6b1b563"
@@ -5223,7 +5230,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -5490,6 +5497,12 @@ react-scrollbar-size@^2.0.2:
     prop-types "^15.6.0"
     react-event-listener "^0.5.1"
     stifle "^1.0.2"
+
+react-text-mask@^5.3.1:
+  version "5.4.0"
+  resolved "https://registry.yarnpkg.com/react-text-mask/-/react-text-mask-5.4.0.tgz#4472eb2f0b9d8916017a2532c864707d51b98cf1"
+  dependencies:
+    prop-types "^15.5.6"
 
 react-transition-group@^2.2.1:
   version "2.2.1"
