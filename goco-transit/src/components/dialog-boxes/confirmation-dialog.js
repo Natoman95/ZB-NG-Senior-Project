@@ -6,14 +6,15 @@ import Dialog, {
 } from 'material-ui/Dialog';
 import Grid from 'material-ui/Grid';
 import IconButton from 'material-ui/IconButton';
+import PropTypes from 'prop-types';
 
 // Components
 import { Icons } from '../../icon-library';
 
 /* This is a generic dialog used to confirm a user's actions */
 class ConfirmationDialog extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       dense: false,
@@ -37,6 +38,11 @@ class ConfirmationDialog extends React.Component {
   handleClose = () => {
     this.setState({ display: false });
   };
+
+  handleConfirm = () => {
+    this.props.onConfirm();
+    this.setState({ display: false });
+  }
 
   render() {
     return (
@@ -64,7 +70,7 @@ class ConfirmationDialog extends React.Component {
               </IconButton>
             </Grid>
             <Grid item>
-              <IconButton onClick={this.handleClose} >
+              <IconButton onClick={this.handleConfirm} >
                 {Icons.confirmIcon}
               </IconButton>
             </Grid>
@@ -75,5 +81,9 @@ class ConfirmationDialog extends React.Component {
     );
   }
 }
+
+ConfirmationDialog.propTypes = {
+  onConfirm: PropTypes.func.isRequired,
+};
 
 export default ConfirmationDialog;
