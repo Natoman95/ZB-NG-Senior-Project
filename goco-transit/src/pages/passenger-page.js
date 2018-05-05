@@ -61,9 +61,9 @@ class PassengerPage extends React.Component {
     return false;
   }
 
-  // If delete was clicked on the confirmed ride dialog, delete the associated request
+  // If delete was clicked on a dialog, delete the associated request
   // and reload user data
-  deleteConfirmedRequest = async (requestID) => {
+  deleteRequest = async (requestID) => {
     await deleteRequestByID(requestID);
     this.loadUserData();
   }
@@ -114,7 +114,7 @@ class PassengerPage extends React.Component {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(requestedRide) }}
+                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(requestedRide, this.state.user.username) }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
@@ -157,9 +157,11 @@ class PassengerPage extends React.Component {
           </Grid>
 
           {/* Dialog boxes */}
-          <RequestedDetailsDialog ref={(requestedDetailsDialogInstance) => { this.requestedDetailsDialogChild = requestedDetailsDialogInstance }} />
+          <RequestedDetailsDialog
+            onDelete={this.deleteRequest}
+            ref={(requestedDetailsDialogInstance) => { this.requestedDetailsDialogChild = requestedDetailsDialogInstance }} />
           <ConfirmedDetailsDialog
-            onDelete={this.deleteConfirmedRequest}
+            onDelete={this.deleteRequest}
             ref={(confirmedDetailsDialogInstance) => { this.confirmedDetailsDialogChild = confirmedDetailsDialogInstance }} />
 
         </div>
