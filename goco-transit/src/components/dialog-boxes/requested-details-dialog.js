@@ -14,6 +14,7 @@ import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 import { Typography } from 'material-ui';
+import PropTypes from 'prop-types';
 
 // Components
 import { Icons } from '../../icon-library';
@@ -29,8 +30,8 @@ import { getDate, getTime } from '../../services/date-service';
    It displays more information about a ride which a user
    has requested but is not a passenger on yet */
 class RequestedDetailsDialog extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       dense: false,
@@ -38,20 +39,32 @@ class RequestedDetailsDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
-      requestedRide: new RideModel() // Prevents null pointer exception
+      requestedRide: new RideModel(), // Prevents null pointer exception
+      requestID: null
     };
   }
 
   // Open the add offer dialog
-  handleClickOpen = (requestedRide) => {
-    this.setState({ requestedRide: requestedRide });
-    this.setState({ display: true });
+  handleClickOpen = (requestedRide, username) => {
+    // Find the request in the ride that belongs to the current user
+    for (let i = 0; i < requestedRide.requests.length; i++) {
+      let request = requestedRide.requests[i];
+      if (request.requesterUsername.toUpperCase() == username.toUpperCase()) {
+        this.state.requestID = request.requestID;
+      }
+    }
+    this.setState({ requestedRide: requestedRide, display: true });
   };
 
   // Close the add offer dialog
   handleClose = () => {
     this.setState({ display: false });
   };
+
+  handleDelete = () => {
+    this.props.onDelete(this.state.requestID);
+    this.setState({ display: false });
+  }
 
   render() {
     return (
@@ -161,11 +174,17 @@ class RequestedDetailsDialog extends React.Component {
         }
 
         {/* Dialog boxes */}
-        <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance }} />
+        <ConfirmationDialog
+          onConfirm={this.handleDelete}          
+          ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance }} />
 
       </Dialog>
     );
   }
 }
+
+RequestedDetailsDialog.propTypes = {
+  onDelete: PropTypes.func.isRequired,
+};
 
 export default RequestedDetailsDialog;
