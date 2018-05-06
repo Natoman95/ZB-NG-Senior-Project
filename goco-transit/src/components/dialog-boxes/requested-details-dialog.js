@@ -90,7 +90,9 @@ class RequestedDetailsDialog extends React.Component {
                       {Icons.originIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={this.state.requestedRide.origin} />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={this.state.requestedRide.origin} />
+                  </div>
                 </ListItem>
 
                 {/* Destination */}
@@ -100,7 +102,9 @@ class RequestedDetailsDialog extends React.Component {
                       {Icons.destinationIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={this.state.requestedRide.destination} />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={this.state.requestedRide.destination} />
+                  </div>
                 </ListItem>
 
                 {/* Time */}
@@ -110,7 +114,9 @@ class RequestedDetailsDialog extends React.Component {
                       {Icons.timeIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={getDate(this.state.requestedRide.departureDateTime) + " " + getTime(this.state.requestedRide.departureDateTime)} />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={getDate(this.state.requestedRide.departureDateTime) + " " + getTime(this.state.requestedRide.departureDateTime)} />
+                  </div>
                 </ListItem>
 
                 {/* Notes */}
@@ -132,11 +138,13 @@ class RequestedDetailsDialog extends React.Component {
                       </Avatar>
                     </Badge>
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={(this.state.requestedRide.driverNote === null || undefined ?
-                      <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
-                      : this.state.requestedRide.driverNote)}
-                  />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText
+                      primary={(this.state.requestedRide.driverNote === null || undefined ?
+                        <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
+                        : this.state.requestedRide.driverNote)}
+                    />
+                  </div>
                 </ListItem>
               </List>
 

@@ -18,7 +18,7 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
-import { getOfferedRides } from '../services/ride-service';
+import { getOfferedRides, getTotalConfirmedRequests, getTotalPendingRequests } from '../services/ride-service';
 import { getDate } from '../services/date-service';
 
 /**
@@ -80,9 +80,21 @@ class DriverPage extends React.Component {
                   {/* Number of users on the offered ride */}
                   <ListItemAvatar>
                     <IconButton disabled={true}>
-                      <Badge badgeContent={"?" + "/" + offeredRide.maxCapacity} color="primary">
-                        {Icons.seatIcon}
-                      </Badge>
+                      {getTotalPendingRequests(offeredRide.requests) > 0 ?
+                        <Badge 
+                          badgeContent={getTotalConfirmedRequests(offeredRide.requests) + "/" + offeredRide.maxCapacity}
+                          color="error"
+                        >
+                          {Icons.seatIcon}
+                        </Badge>
+                        :
+                        <Badge 
+                          badgeContent={getTotalConfirmedRequests(offeredRide.requests) + "/" + offeredRide.maxCapacity}
+                          color="primary"
+                        >
+                          {Icons.seatIcon}
+                        </Badge>
+                      }
                     </IconButton>
                   </ListItemAvatar>
                   {/* Date of the ride */}
@@ -132,12 +144,12 @@ class DriverPage extends React.Component {
       let rideData = await getOfferedRides(this.state.user.username);
       this.setState({ offeredRides: rideData });
 
-      // Pass the message up to the main page if the user has any pending requests
+      // Pass the number of pending requests up to the main page if the user has any
       let pendingCount = 0;
-      for (let i = 0; i < this.state.offeredRides.length; i ++) {
-        pendingCount = pendingCount + this.state.offeredRides[i].requestIDs.length
-        this.props.pendingRequests(pendingCount);
+      for (let offeredRide in this.state.offeredRides) {
+        pendingCount += getTotalPendingRequests(this.state.offeredRides[offeredRide].requests);
       }
+      this.props.pendingRequests(pendingCount);
 
       this.setState({ loading: false });
     }

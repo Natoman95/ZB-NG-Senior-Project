@@ -25,6 +25,7 @@ import RideModel from '../../models/ride-model';
 
 // Services
 import { getDate, getTime } from '../../services/date-service';
+import { getTotalConfirmedRequests, getTotalPendingRequests } from '../../services/ride-service';
 
 /* This dialog opens on the driver page of the app
    It displays more information about a ride which a user
@@ -78,7 +79,9 @@ class OfferDetailsDialog extends React.Component {
                       {Icons.originIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={this.state.ride.origin} />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={this.state.ride.origin} />
+                  </div>
                 </ListItem>
 
                 {/* Destination */}
@@ -88,7 +91,9 @@ class OfferDetailsDialog extends React.Component {
                       {Icons.destinationIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={this.state.ride.destination} />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={this.state.ride.destination} />
+                  </div>
                 </ListItem>
 
                 {/* Date */}
@@ -98,7 +103,9 @@ class OfferDetailsDialog extends React.Component {
                       {Icons.dateIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={getDate(this.state.ride.departureDateTime)} />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={getDate(this.state.ride.departureDateTime)} />
+                  </div>
                 </ListItem>
 
                 {/* Time */}
@@ -108,7 +115,9 @@ class OfferDetailsDialog extends React.Component {
                       {Icons.timeIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={getTime(this.state.ride.departureDateTime)} />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={getTime(this.state.ride.departureDateTime)} />
+                  </div>
                 </ListItem>
 
                 {/* Notes */}
@@ -130,11 +139,13 @@ class OfferDetailsDialog extends React.Component {
                       </Avatar>
                     </Badge>
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={(this.state.ride.driverNote === null || undefined ?
-                      <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
-                      : this.state.ride.driverNote)}
-                  />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText
+                      primary={(this.state.ride.driverNote === null || undefined ?
+                        <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
+                        : this.state.ride.driverNote)}
+                    />
+                  </div>
                 </ListItem>
               </List>
 
@@ -145,11 +156,22 @@ class OfferDetailsDialog extends React.Component {
             {/* Action buttons */}
             <Grid container spacing={40} justify="center">
               <Grid item>
-                <IconButton onClick={ () => { this.passengerDialogChild.handleClickOpen(this.state.ride.requestIDs) }}>
+                <IconButton onClick={ () => { this.passengerDialogChild.handleClickOpen(this.state.ride.requests) }}>
                   {this.state.display && // Don't attempt to get undefined length
-                    <Badge badgeContent={"?" + "/" + this.state.ride.maxCapacity} color="primary">
-                      {Icons.seatIcon}
-                    </Badge>
+                    getTotalPendingRequests(this.state.ride.requests) > 0 ?
+                      <Badge 
+                        badgeContent={getTotalConfirmedRequests(this.state.ride.requests) + "/" + this.state.ride.maxCapacity}
+                        color="error"
+                      >
+                        {Icons.seatIcon}
+                      </Badge>
+                      :
+                      <Badge 
+                        badgeContent={getTotalConfirmedRequests(this.state.ride.requests) + "/" + this.state.ride.maxCapacity}
+                        color="primary"
+                      >
+                        {Icons.seatIcon}
+                      </Badge>
                   }
                 </IconButton>
               </Grid>

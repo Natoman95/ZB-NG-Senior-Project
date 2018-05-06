@@ -126,15 +126,15 @@ class AddOfferDialog extends React.Component {
                     {Icons.originIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <div style={{ paddingLeft: "1em" }} >
+                <div style={{ paddingLeft: "1.5em" }} >
                   <TextField
-                      required
-                      id="originInput"
-                      label="Starting location"
-                      value={this.state.originValue}
-                      onChange={this.handleFormChange("originValue")}
-                    />
-                  </div>
+                    required
+                    id="originInput"
+                    label="Starting location"
+                    value={this.state.originValue}
+                    onChange={this.handleFormChange("originValue")}
+                  />
+                </div>
               </ListItem>
 
               {/* Destination */}
@@ -144,15 +144,15 @@ class AddOfferDialog extends React.Component {
                     {Icons.destinationIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <div style={{ paddingLeft: "1em" }} >
+                <div style={{ paddingLeft: "1.5em" }} >
                   <TextField
-                      required
-                      id="destinationInput"
-                      label="Ending location"
-                      value={this.state.destinationValue}
-                      onChange={this.handleFormChange("destinationValue")}
-                    />
-                  </div>
+                    required
+                    id="destinationInput"
+                    label="Ending location"
+                    value={this.state.destinationValue}
+                    onChange={this.handleFormChange("destinationValue")}
+                  />
+                </div>
               </ListItem>
 
               {/* Date */}
@@ -162,12 +162,11 @@ class AddOfferDialog extends React.Component {
                     {Icons.dateIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <div style={{ paddingLeft: "1em" }} >
+                <div style={{ paddingLeft: "1.5em" }} >
                   <TextField
                     required
                     id="dateInput"
                     type="date"
-                    //* TODO: Abstract getDateTime from search-page.js *// defaultValue={this.getDateTime(0)} // Default to now
                     value={this.state.dateValue}
                     onChange={this.handleFormChange("dateValue")}
                   />
@@ -181,12 +180,11 @@ class AddOfferDialog extends React.Component {
                     {Icons.timeIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <div style={{ paddingLeft: "1em" }} >
+                <div style={{ paddingLeft: "1.5em" }} >
                   <TextField
                     required
                     id="timeInput"
                     type="time"
-                    //* TODO: Abstract getDateTime from search-page.js *// defaultValue={this.getDateTime(0)} // Default to now
                     value={this.state.timeValue}
                     onChange={this.handleFormChange("timeValue")}
                   />
@@ -200,13 +198,15 @@ class AddOfferDialog extends React.Component {
                     {Icons.seatIcon}
                   </Avatar>
                 </ListItemAvatar>
-                <IconButton onClick={this.handleSeatMinus} >
-                  {Icons.leftArrowIcon}
-                </IconButton>
-                {this.state.maxCapacityValue}
-                <IconButton onClick={this.handleSeatPlus} >
-                  {Icons.rightArrowIcon}
-                </IconButton>
+                <div style={{ paddingLeft: "0.5em" }} >
+                  <IconButton onClick={this.handleSeatMinus} >
+                    {Icons.leftArrowIcon}
+                  </IconButton>
+                  {this.state.maxCapacityValue}
+                  <IconButton onClick={this.handleSeatPlus} >
+                    {Icons.rightArrowIcon}
+                  </IconButton>
+                </div>
               </ListItem>
 
               {/* Notes */}
@@ -228,7 +228,7 @@ class AddOfferDialog extends React.Component {
                     </Avatar>
                   </Badge>
                 </ListItemAvatar>
-                <div style={{ paddingLeft: "1em" }} >
+                <div style={{ paddingLeft: "1.5em" }} >
                   <TextField
                     required
                     id="driverNoteInput"
