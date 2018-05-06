@@ -91,8 +91,8 @@ class SearchPage extends React.Component {
     let searchResultsData = await getSearchResults(this.state.startDateTime, this.state.endDateTime, this.state.origin, this.state.destination);
     // Get the photos of the drivers for the rides and map them by username
     let driverPhotosData = [];
-    for (let i = 0; i < searchResultsData.length; i ++) {
-      let ride = searchResultsData[i];
+    for (let searchResult in searchResultsData) {
+      let ride = searchResultsData[searchResult];
       let key = ride.rideID;
       let value = await getUserImage(ride.driverUsername);
       driverPhotosData[key] = value;
