@@ -1,6 +1,5 @@
 // Services
 import { get, put, post, del } from './http-service';
-import { getItem, setItem, removeItem, isCachedDataExpired } from "../services/storage-service";
 
 /**
  * This class is responsible for all actions related to user rides
