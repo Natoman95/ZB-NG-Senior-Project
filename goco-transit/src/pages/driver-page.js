@@ -147,9 +147,6 @@ class DriverPage extends React.Component {
       // Pass the number of pending requests up to the main page if the user has any
       let pendingCount = 0;
       for (let offeredRide in this.state.offeredRides) {
-        console.log(this.state.offeredRides[offeredRide])
-        console.log(getTotalPendingRequests(this.state.offeredRides[offeredRide].requests))
-        console.log("---")
         pendingCount += getTotalPendingRequests(this.state.offeredRides[offeredRide].requests);
       }
       this.props.pendingRequests(pendingCount);
