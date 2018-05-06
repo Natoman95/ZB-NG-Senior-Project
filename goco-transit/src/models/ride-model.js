@@ -35,6 +35,7 @@ class RideModel {
   destination; // The ending location that the Ride is travelling to
   departureDateTime; // The point in when the Ride will depart
   driverNote; // The driver's note to potential requesters (optional)
+  driverPhoto; // The driver's profile picture from 360
 }
 
 export default RideModel;

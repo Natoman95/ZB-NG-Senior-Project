@@ -18,6 +18,7 @@ import Loader from '../components/loader';
 import { getUser } from '../services/user-service';
 import { getConfirmedRides, getRequestedRides, getRideByID } from '../services/ride-service';
 import { getDate, getTime } from '../services/date-service';
+import { deleteRequestByID } from '../services/request-service';
 
 /**
  * This page allows a user to manage anything having to do with their
@@ -51,13 +52,20 @@ class PassengerPage extends React.Component {
   }
 
   // Return the index of the dictionary element containing the Ride
-  searchRideDictionary= (rideID) => {
+  searchRideDictionary = (rideID) => {
     for (let i = 0; i < this.rideDictionary.length; i++) {
       if (this.rideDictionary[i].value.rideID === rideID) {
         return i;
       }
     }
     return false;
+  }
+
+  // If delete was clicked on a dialog, delete the associated request
+  // and reload user data
+  deleteRequest = async (requestID) => {
+    await deleteRequestByID(requestID);
+    this.loadUserData();
   }
 
   render() {
@@ -77,7 +85,7 @@ class PassengerPage extends React.Component {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.confirmedDetailsDialogChild.handleClickOpen(confirmedRide) }}
+                  onClick={() => { this.confirmedDetailsDialogChild.handleClickOpen(confirmedRide, this.state.user.username) }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
@@ -106,7 +114,7 @@ class PassengerPage extends React.Component {
               return (
                 <ListItem
                   button
-                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(requestedRide) }}
+                  onClick={() => { this.requestedDetailsDialogChild.handleClickOpen(requestedRide, this.state.user.username) }}
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
@@ -149,8 +157,12 @@ class PassengerPage extends React.Component {
           </Grid>
 
           {/* Dialog boxes */}
-          <RequestedDetailsDialog ref={(requestedDetailsDialogInstance) => { this.requestedDetailsDialogChild = requestedDetailsDialogInstance }} />
-          <ConfirmedDetailsDialog ref={(confirmedDetailsDialogInstance) => { this.confirmedDetailsDialogChild = confirmedDetailsDialogInstance }} />
+          <RequestedDetailsDialog
+            onDelete={this.deleteRequest}
+            ref={(requestedDetailsDialogInstance) => { this.requestedDetailsDialogChild = requestedDetailsDialogInstance }} />
+          <ConfirmedDetailsDialog
+            onDelete={this.deleteRequest}
+            ref={(confirmedDetailsDialogInstance) => { this.confirmedDetailsDialogChild = confirmedDetailsDialogInstance }} />
 
         </div>
       );

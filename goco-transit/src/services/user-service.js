@@ -57,9 +57,10 @@ const getUserProfile = (username) => {
  * @param {String} [username] Username in firstname.lastname format
  * @return {Promise.<String>} Image as a Base64-encoded string
  */
-const getUserImage = (username) => {
+const getUserImage = async (username) => {
   if (username) {
-    return get(`profiles/image/${username}/`);
+    let rawImage = await get(`profiles/image/${username}/`);
+    return 'data:image/png;base64,' + (rawImage).def;
   }
 
   return get('profiles/image');

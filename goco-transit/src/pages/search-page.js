@@ -91,12 +91,11 @@ class SearchPage extends React.Component {
     let searchResultsData = await getSearchResults(this.state.startDateTime, this.state.endDateTime, this.state.origin, this.state.destination);
     // Get the photos of the drivers for the rides and map them by username
     let driverPhotosData = [];
-    for (let i = 0; i < searchResultsData.length; i ++) {
-      let ride = searchResultsData[i];
-      let key = ride.driverUsername;
+    for (let searchResult in searchResultsData) {
+      let ride = searchResultsData[searchResult];
+      let key = ride.rideID;
       let value = await getUserImage(ride.driverUsername);
-      // convert binary to something the image tag can use
-      driverPhotosData[key] = 'data:image/png;base64,' + value.def;
+      driverPhotosData[key] = value;
     }
     this.setState({ searchResults: searchResultsData,
                     driverPhotos: driverPhotosData,
@@ -209,7 +208,7 @@ class SearchPage extends React.Component {
             {/* Display search results as a list of Rides */}
             {this.state.searchResults.map((searchResult) => {
               return (
-                <List dense={this.state.dense}>
+                <List dense={this.state.dense}> {console.log(searchResult)}
                   <ListItem
                     button
                     disableGutters={this.state.noGutters}
@@ -224,7 +223,7 @@ class SearchPage extends React.Component {
                     )}}>
                     
                     {/* Driver profile picture */}
-                    <Avatar src={this.state.driverPhotos[searchResult.driverUsername]} />
+                    <Avatar src={this.state.driverPhotos[searchResult.rideID]} />
                     
                     {/* Ride date */}
                     <ListItemText

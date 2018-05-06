@@ -17,7 +17,7 @@ import { Icons } from '../icon-library';
 import Loader from '../components/loader';
 
 // Services
-import { getUser } from '../services/user-service';
+import { getUser, getUserImage } from '../services/user-service';
 import { getOfferedRides, getTotalConfirmedRequests, getTotalPendingRequests } from '../services/ride-service';
 import { getDate } from '../services/date-service';
 
@@ -144,10 +144,18 @@ class DriverPage extends React.Component {
       let rideData = await getOfferedRides(this.state.user.username);
       this.setState({ offeredRides: rideData });
 
-      // Pass the number of pending requests up to the main page if the user has any
+      // Iterate through each offered ride and:
+      // - Add up the total pending requests and pass this up to the main page
+      // - Link the appropriate profile picture to each offered ride 
       let pendingCount = 0;
       for (let offeredRide in this.state.offeredRides) {
         pendingCount += getTotalPendingRequests(this.state.offeredRides[offeredRide].requests);
+        this.state.offeredRides[offeredRide].driverPhoto = this.state.user.profilePhoto;
+        // Iterate through each request of the offered ride and link the appropriate profile picture to each request
+        for (let request in this.state.offeredRides[offeredRide].requests) {
+          this.state.offeredRides[offeredRide].requests[request].requesterPhoto =
+            await getUserImage(this.state.offeredRides[offeredRide].requests[request].requesterUsername);
+        }
       }
       this.props.pendingRequests(pendingCount);
 
