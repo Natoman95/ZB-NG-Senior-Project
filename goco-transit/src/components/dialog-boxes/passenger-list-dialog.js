@@ -22,7 +22,7 @@ import Badge from 'material-ui/Badge';
 import { Icons } from '../../icon-library';
 
 // Services
-import { getUserImage, getUserFullName } from '../../services/user-service';
+import { getUserFullName } from '../../services/user-service';
 
 /* This dialog opens on the driver page of the app
    It displays more information about a ride which a user
@@ -59,14 +59,12 @@ class PassengerListDialog extends React.Component {
       if (requests[request].isConfirmed) {
         this.state.confirmedRequests.push({
           request: requests[request],
-          profilePic: 'data:image/png;base64,' + (await getUserImage(requests[request].requesterUsername)).def,
           index: this.state.confirmedRequests.length
         });
         this.state.confirmedListItemExpansion.push(false);
       } else {
         this.state.pendingRequests.push({
           request: requests[request],
-          profilePic: 'data:image/png;base64,' + (await getUserImage(requests[request].requesterUsername)).def,
           index: this.state.pendingRequests.length
         });
         this.state.pendingListItemExpansion.push(false);
@@ -110,7 +108,7 @@ class PassengerListDialog extends React.Component {
                           divider={this.state.divider}
                         >
                           <ListItemAvatar>
-                            <Avatar src={confirmedRequest.profilePic}/>
+                            <Avatar src={confirmedRequest.request.requesterPhoto}/>
                           </ListItemAvatar>
                           <div style={{ paddingLeft: '1.5em' }}>
                             <ListItemText primary={getUserFullName(confirmedRequest.request.requesterUsername)}/>
@@ -173,7 +171,7 @@ class PassengerListDialog extends React.Component {
                           divider={this.state.divider}
                         >
                           <ListItemAvatar>
-                            <Avatar src={pendingRequest.profilePic}/>
+                            <Avatar src={pendingRequest.request.requesterPhoto}/>
                           </ListItemAvatar>
                           <div style={{ paddingLeft: '1.5em' }}>
                             <ListItemText primary={getUserFullName(pendingRequest.request.requesterUsername)}/>

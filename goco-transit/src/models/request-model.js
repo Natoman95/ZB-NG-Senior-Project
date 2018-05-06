@@ -30,6 +30,7 @@ class RequestModel {
   rideID; // The ID of the Ride that the requester wants to join
   requesterNote; // The requester's note to the Ride's driver (optional)
   isConfirmed; // Whether or not the Request has been approved (0 = Requested; 1 = Confirmed)
+  requesterPhoto; // The requester's profile picture from 360
 
 }
 
