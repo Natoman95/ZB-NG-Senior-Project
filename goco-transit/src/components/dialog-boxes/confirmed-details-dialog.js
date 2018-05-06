@@ -49,8 +49,8 @@ class ConfirmedDetailsDialog extends React.Component {
     // Find the request in the ride that belongs to the current user
     for (let i = 0; i < confirmedRide.requests.length; i++) {
       let request = confirmedRide.requests[i];
-      if (request.requesterUsername.toUpperCase() == username.toUpperCase()) {
-        this.state.requestID = request.requestID;
+      if (request.requesterUsername.toUpperCase() === username.toUpperCase()) {
+        this.setState({ requestID: request.requestID });
       }
     }
     this.setState({ ride: confirmedRide, display: true });
