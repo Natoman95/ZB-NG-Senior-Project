@@ -196,7 +196,7 @@ class AddRequestDialog extends React.Component {
                       </Avatar>
                     </Badge>
                   </ListItemAvatar>
-                  <div style={{ paddingLeft: "1em" }} >
+                  <div style={{ paddingLeft: "1.5em" }} >
                     <TextField
                       id="requesterNoteInput"
                       label="Note to driver"
