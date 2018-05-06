@@ -5,6 +5,7 @@ import Typography from 'material-ui/Typography';
 import { Link, Route, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Badge from 'material-ui/Badge';
+import IconButton from 'material-ui/IconButton';
 
 // Components
 import DriverPage from './driver-page';
@@ -35,7 +36,7 @@ class MainPage extends React.Component {
 
     this.state = {
       value: 0,
-      pendingRequests: 0,
+      pendingRequests: 0
     };
 
     this.onPendingRequestsChange = this.onPendingRequestsChange.bind(this);
@@ -69,9 +70,23 @@ class MainPage extends React.Component {
               {this.state.pendingRequests > 0 && 
                 <Tab
                   label="Driver"
-                  icon={<Badge badgeContent={this.state.pendingRequests} color="error">
-                    {Icons.driverIcon}
-                  </Badge>}
+                  icon={
+                    <Badge
+                      badgeContent={
+                        <IconButton
+                          disabled
+                          style={{
+                            backgroundColor: '#F44336',
+                            color: '#FFFFFF',
+                            width: '0.5em',
+                            height: '0.5em'
+                        }}>
+                        </IconButton>
+                      }
+                    >
+                      {Icons.driverIcon}
+                    </Badge>
+                  }
                   component={Link}
                   to="/driver"
                   style={{ paddingTop: '.5em' }} />
