@@ -18,7 +18,7 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
-import { getOfferedRides } from '../services/ride-service';
+import { getOfferedRides, getTotalConfirmedRequests } from '../services/ride-service';
 import { getDate } from '../services/date-service';
 
 /**
@@ -80,7 +80,10 @@ class DriverPage extends React.Component {
                   {/* Number of users on the offered ride */}
                   <ListItemAvatar>
                     <IconButton disabled={true}>
-                      <Badge badgeContent={"?" + "/" + offeredRide.maxCapacity} color="primary">
+                      <Badge 
+                        badgeContent={getTotalConfirmedRequests(offeredRide.requests) + "/" + offeredRide.maxCapacity}
+                        color="primary"
+                      >
                         {Icons.seatIcon}
                       </Badge>
                     </IconButton>

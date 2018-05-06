@@ -158,6 +158,32 @@ const deleteRideByID = (rideID) => {
   return del(`transit/ride/delete/${rideID}/`);
 };
 
+/**
+ * Get the total number of confirmed Requests associated with a Ride's list of Requests ([Ride].requests)
+ */
+const getTotalConfirmedRequests = (requests) => {
+  let totalConfirmedRequests = 0;
+  for (let request in requests) {
+    if (requests[request].isConfirmed) {
+      totalConfirmedRequests++;
+    }
+  }
+  return totalConfirmedRequests;
+};
+
+/**
+ * Get the total number of pending Requests associated with a Ride's list of Requests ([Ride].requests)
+ */
+const getTotalPendingRequests = (requests) => {
+  let totalPendingRequests = 0;
+  for (let request in requests) {
+    if (!requests[request].isConfirmed) {
+      totalPendingRequests++;
+    }
+  }
+  return totalPendingRequests;
+};
+
 export {
   getRideByID,
   getOfferedRides,
@@ -170,5 +196,7 @@ export {
   updateDepartureDateTime,
   updateDriverNote,
   updateMaxCapacity,
-  deleteRideByID
+  deleteRideByID,
+  getTotalConfirmedRequests,
+  getTotalPendingRequests
 };

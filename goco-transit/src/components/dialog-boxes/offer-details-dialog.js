@@ -25,6 +25,7 @@ import RideModel from '../../models/ride-model';
 
 // Services
 import { getDate, getTime } from '../../services/date-service';
+import { getTotalConfirmedRequests } from '../../services/ride-service';
 
 /* This dialog opens on the driver page of the app
    It displays more information about a ride which a user
@@ -157,7 +158,10 @@ class OfferDetailsDialog extends React.Component {
               <Grid item>
                 <IconButton onClick={ () => { this.passengerDialogChild.handleClickOpen(this.state.ride.requests) }}>
                   {this.state.display && // Don't attempt to get undefined length
-                    <Badge badgeContent={"?" + "/" + this.state.ride.maxCapacity} color="primary">
+                    <Badge
+                      badgeContent={getTotalConfirmedRequests(this.state.ride.requests) + "/" + this.state.ride.maxCapacity}
+                      color="primary"
+                    >
                       {Icons.seatIcon}
                     </Badge>
                   }
