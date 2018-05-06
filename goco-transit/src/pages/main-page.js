@@ -35,7 +35,7 @@ class MainPage extends React.Component {
 
     this.state = {
       value: 0,
-      pendingRequests: 0,
+      pendingRequests: 0
     };
 
     this.onPendingRequestsChange = this.onPendingRequestsChange.bind(this);

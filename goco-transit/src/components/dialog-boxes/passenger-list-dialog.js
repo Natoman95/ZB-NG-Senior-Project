@@ -47,7 +47,7 @@ class PassengerListDialog extends React.Component {
   // Open the add offer dialog
   handleClickOpen = async (requests) => {
     // Reset arrays to being empty
-    this.setState({
+    await this.setState({
       confirmedRequests: [],
       pendingRequests: [],
       confirmedListItemExpansion: [],
@@ -151,7 +151,7 @@ class PassengerListDialog extends React.Component {
               </List>
 
               <hr/>
-              
+
               {this.state.pendingRequests.length > 0 ?
                 <h4 style={{ marginTop: '1em', marginBottom: '0em', color: '#F44336' }}>
                   Requested ({this.state.pendingRequests.length})
