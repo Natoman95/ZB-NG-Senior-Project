@@ -112,9 +112,9 @@ class PassengerListDialog extends React.Component {
                           <ListItemAvatar>
                             <Avatar src={confirmedRequest.profilePic}/>
                           </ListItemAvatar>
-                          <ListItemText
-                            primary={getUserFullName(confirmedRequest.request.requesterUsername)}
-                          />
+                          <div style={{ paddingLeft: '1.5em' }}>
+                            <ListItemText primary={getUserFullName(confirmedRequest.request.requesterUsername)}/>
+                          </div>
                         </ListItem>
                       </ExpansionPanelSummary>
                       <ExpansionPanelDetails style={{ padding: 0 }}>
@@ -140,9 +140,9 @@ class PassengerListDialog extends React.Component {
                               </Avatar>
                             </Badge>
                           </ListItemAvatar>
-                          <ListItemText
-                            primary={confirmedRequest.request.requesterNote}
-                          />
+                          <div style={{ paddingLeft: '1.5em' }}>
+                            <ListItemText primary={confirmedRequest.request.requesterNote}/>
+                          </div>
                         </ListItem>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
@@ -169,11 +169,9 @@ class PassengerListDialog extends React.Component {
                           <ListItemAvatar>
                             <Avatar src={pendingRequest.profilePic}/>
                           </ListItemAvatar>
-                          {console.log("REE")}
-                          {console.log(pendingRequest)}
-                          <ListItemText
-                            primary={getUserFullName(pendingRequest.request.requesterUsername)}
-                          />
+                          <div style={{ paddingLeft: '1.5em' }}>
+                            <ListItemText primary={getUserFullName(pendingRequest.request.requesterUsername)}/>
+                          </div>
                         </ListItem>
                       </ExpansionPanelSummary>
                       <ExpansionPanelDetails style={{ padding: 0 }}>
@@ -199,9 +197,9 @@ class PassengerListDialog extends React.Component {
                               </Avatar>
                             </Badge>
                           </ListItemAvatar>
-                          <ListItemText
-                            primary={pendingRequest.request.requesterNote}
-                          />
+                          <div style={{ paddingLeft: '1.5em' }}>
+                            <ListItemText primary={pendingRequest.request.requesterNote}/>
+                          </div>
                         </ListItem>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>

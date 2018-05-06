@@ -78,7 +78,9 @@ class OfferDetailsDialog extends React.Component {
                       {Icons.originIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={this.state.ride.origin} />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={this.state.ride.origin} />
+                  </div>
                 </ListItem>
 
                 {/* Destination */}
@@ -88,7 +90,9 @@ class OfferDetailsDialog extends React.Component {
                       {Icons.destinationIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={this.state.ride.destination} />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={this.state.ride.destination} />
+                  </div>
                 </ListItem>
 
                 {/* Date */}
@@ -98,7 +102,9 @@ class OfferDetailsDialog extends React.Component {
                       {Icons.dateIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={getDate(this.state.ride.departureDateTime)} />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={getDate(this.state.ride.departureDateTime)} />
+                  </div>
                 </ListItem>
 
                 {/* Time */}
@@ -108,7 +114,9 @@ class OfferDetailsDialog extends React.Component {
                       {Icons.timeIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={getTime(this.state.ride.departureDateTime)} />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={getTime(this.state.ride.departureDateTime)} />
+                  </div>
                 </ListItem>
 
                 {/* Notes */}
@@ -130,11 +138,13 @@ class OfferDetailsDialog extends React.Component {
                       </Avatar>
                     </Badge>
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={(this.state.ride.driverNote === null || undefined ?
-                      <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
-                      : this.state.ride.driverNote)}
-                  />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText
+                      primary={(this.state.ride.driverNote === null || undefined ?
+                        <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
+                        : this.state.ride.driverNote)}
+                    />
+                  </div>
                 </ListItem>
               </List>
 
