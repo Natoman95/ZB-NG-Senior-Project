@@ -152,9 +152,15 @@ class PassengerListDialog extends React.Component {
 
               <hr/>
               
-              <h4 style={{ marginTop: '1em', marginBottom: '0em' }}>
-                Requested ({this.state.pendingRequests.length})
-              </h4>
+              {this.state.pendingRequests.length > 0 ?
+                <h4 style={{ marginTop: '1em', marginBottom: '0em', color: '#F44336' }}>
+                  Requested ({this.state.pendingRequests.length})
+                </h4>
+                :
+                <h4 style={{ marginTop: '1em', marginBottom: '0em' }}>
+                  Requested ({this.state.pendingRequests.length})
+                </h4>
+              }
               
               {/* List of potential passengers */}
               <List dense={this.state.dense}>
