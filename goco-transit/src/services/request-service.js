@@ -40,7 +40,6 @@ const deleteRequestByID = (requestID) => {
   return del(`transit/request/delete/${requestID}/`);
 };
 
-
 export {
   getRequestByID,
   getRequests,

@@ -18,7 +18,7 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser } from '../services/user-service';
-import { getOfferedRides } from '../services/ride-service';
+import { getOfferedRides, getTotalConfirmedRequests, getTotalPendingRequests } from '../services/ride-service';
 import { getDate } from '../services/date-service';
 
 /**
@@ -80,9 +80,21 @@ class DriverPage extends React.Component {
                   {/* Number of users on the offered ride */}
                   <ListItemAvatar>
                     <IconButton disabled={true}>
-                      <Badge badgeContent={"?" + "/" + offeredRide.maxCapacity} color="primary">
-                        {Icons.seatIcon}
-                      </Badge>
+                      {getTotalPendingRequests(offeredRide.requests) > 0 ?
+                        <Badge 
+                          badgeContent={getTotalConfirmedRequests(offeredRide.requests) + "/" + offeredRide.maxCapacity}
+                          color="error"
+                        >
+                          {Icons.seatIcon}
+                        </Badge>
+                        :
+                        <Badge 
+                          badgeContent={getTotalConfirmedRequests(offeredRide.requests) + "/" + offeredRide.maxCapacity}
+                          color="primary"
+                        >
+                          {Icons.seatIcon}
+                        </Badge>
+                      }
                     </IconButton>
                   </ListItemAvatar>
                   {/* Date of the ride */}
@@ -135,7 +147,7 @@ class DriverPage extends React.Component {
       // Pass the message up to the main page if the user has any pending requests
       let pendingCount = 0;
       for (let i = 0; i < this.state.offeredRides.length; i ++) {
-        pendingCount = pendingCount + this.state.offeredRides[i].requestIDs.length
+        pendingCount = pendingCount + this.state.offeredRides[i].requests.length;
         this.props.pendingRequests(pendingCount);
       }
 

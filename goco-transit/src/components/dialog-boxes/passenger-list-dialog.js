@@ -22,7 +22,6 @@ import Badge from 'material-ui/Badge';
 import { Icons } from '../../icon-library';
 
 // Services
-import { getRequestByID } from '../../services/request-service';
 import { getUserImage, getUserFullName } from '../../services/user-service';
 
 /* This dialog opens on the driver page of the app
@@ -46,7 +45,7 @@ class PassengerListDialog extends React.Component {
   }
 
   // Open the add offer dialog
-  handleClickOpen = async (requestIDs) => {
+  handleClickOpen = async (requests) => {
     // Reset arrays to being empty
     this.setState({
       confirmedRequests: [],
@@ -56,20 +55,18 @@ class PassengerListDialog extends React.Component {
     });
     
     // Sort Requests by confirmation status
-    let request;
-    for (let requestID in requestIDs) {
-      request = await getRequestByID(requestIDs[requestID]);
-      if (request.isConfirmed) {
+    for (let request in requests) {
+      if (requests[request].isConfirmed) {
         this.state.confirmedRequests.push({
-          request: request,
-          profilePic: 'data:image/png;base64,' + (await getUserImage(request.requesterUsername)).def,
+          request: requests[request],
+          profilePic: 'data:image/png;base64,' + (await getUserImage(requests[request].requesterUsername)).def,
           index: this.state.confirmedRequests.length
         });
         this.state.confirmedListItemExpansion.push(false);
       } else {
         this.state.pendingRequests.push({
-          request: request,
-          profilePic: 'data:image/png;base64,' + (await getUserImage(request.requesterUsername)).def,
+          request: requests[request],
+          profilePic: 'data:image/png;base64,' + (await getUserImage(requests[request].requesterUsername)).def,
           index: this.state.pendingRequests.length
         });
         this.state.pendingListItemExpansion.push(false);
@@ -115,9 +112,9 @@ class PassengerListDialog extends React.Component {
                           <ListItemAvatar>
                             <Avatar src={confirmedRequest.profilePic}/>
                           </ListItemAvatar>
-                          <ListItemText
-                            primary={getUserFullName(confirmedRequest.request.requesterUsername)}
-                          />
+                          <div style={{ paddingLeft: '1.5em' }}>
+                            <ListItemText primary={getUserFullName(confirmedRequest.request.requesterUsername)}/>
+                          </div>
                         </ListItem>
                       </ExpansionPanelSummary>
                       <ExpansionPanelDetails style={{ padding: 0 }}>
@@ -143,9 +140,9 @@ class PassengerListDialog extends React.Component {
                               </Avatar>
                             </Badge>
                           </ListItemAvatar>
-                          <ListItemText
-                            primary={confirmedRequest.request.requesterNote}
-                          />
+                          <div style={{ paddingLeft: '1.5em' }}>
+                            <ListItemText primary={confirmedRequest.request.requesterNote}/>
+                          </div>
                         </ListItem>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
@@ -155,9 +152,15 @@ class PassengerListDialog extends React.Component {
 
               <hr/>
               
-              <h4 style={{ marginTop: '1em', marginBottom: '0em' }}>
-                Requested ({this.state.pendingRequests.length})
-              </h4>
+              {this.state.pendingRequests.length > 0 ?
+                <h4 style={{ marginTop: '1em', marginBottom: '0em', color: '#F44336' }}>
+                  Requested ({this.state.pendingRequests.length})
+                </h4>
+                :
+                <h4 style={{ marginTop: '1em', marginBottom: '0em' }}>
+                  Requested ({this.state.pendingRequests.length})
+                </h4>
+              }
               
               {/* List of potential passengers */}
               <List dense={this.state.dense}>
@@ -172,9 +175,9 @@ class PassengerListDialog extends React.Component {
                           <ListItemAvatar>
                             <Avatar src={pendingRequest.profilePic}/>
                           </ListItemAvatar>
-                          <ListItemText
-                            primary={getUserFullName(pendingRequest.request.requesterUsername)}
-                          />
+                          <div style={{ paddingLeft: '1.5em' }}>
+                            <ListItemText primary={getUserFullName(pendingRequest.request.requesterUsername)}/>
+                          </div>
                         </ListItem>
                       </ExpansionPanelSummary>
                       <ExpansionPanelDetails style={{ padding: 0 }}>
@@ -200,9 +203,9 @@ class PassengerListDialog extends React.Component {
                               </Avatar>
                             </Badge>
                           </ListItemAvatar>
-                          <ListItemText
-                            primary={pendingRequest.request.requesterNote}
-                          />
+                          <div style={{ paddingLeft: '1.5em' }}>
+                            <ListItemText primary={pendingRequest.request.requesterNote}/>
+                          </div>
                         </ListItem>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>

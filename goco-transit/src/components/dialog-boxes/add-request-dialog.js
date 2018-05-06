@@ -108,9 +108,9 @@ class AddRequestDialog extends React.Component {
                       {Icons.originIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={this.state.ride.origin}
-                  />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={this.state.ride.origin}/>
+                  </div>
                 </ListItem>
 
                 {/* Destination */}
@@ -120,9 +120,9 @@ class AddRequestDialog extends React.Component {
                       {Icons.destinationIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={this.state.ride.destination}
-                  />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={this.state.ride.destination}/>
+                  </div>
                 </ListItem>
 
                 {/* Date */}
@@ -132,9 +132,9 @@ class AddRequestDialog extends React.Component {
                       {Icons.dateIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={getDate(this.state.ride.departureDateTime)}
-                  />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={getDate(this.state.ride.departureDateTime)}/>
+                  </div>
                 </ListItem>
 
                 {/* Time */}
@@ -144,9 +144,9 @@ class AddRequestDialog extends React.Component {
                       {Icons.timeIcon}
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={getTime(this.state.ride.departureDateTime)}
-                  />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={getTime(this.state.ride.departureDateTime)}/>
+                  </div>
                 </ListItem>
 
                 {/* Note to passengers */}
@@ -168,11 +168,13 @@ class AddRequestDialog extends React.Component {
                       </Avatar>
                     </Badge>
                   </ListItemAvatar>
-                  <ListItemText
-                    primary={(this.state.ride.driverNote === null || undefined ?
-                      <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
-                      : this.state.ride.driverNote)}
-                  />
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText
+                      primary={(this.state.ride.driverNote === null || undefined ?
+                        <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
+                        : this.state.ride.driverNote)}
+                    />
+                  </div>
                 </ListItem>
 
                 {/* Note to driver */}
@@ -194,7 +196,7 @@ class AddRequestDialog extends React.Component {
                       </Avatar>
                     </Badge>
                   </ListItemAvatar>
-                  <div style={{ paddingLeft: "1em" }} >
+                  <div style={{ paddingLeft: "1.5em" }} >
                     <TextField
                       id="requesterNoteInput"
                       label="Note to driver"
