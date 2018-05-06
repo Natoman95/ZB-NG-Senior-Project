@@ -135,7 +135,7 @@ class DriverPage extends React.Component {
       // Pass the message up to the main page if the user has any pending requests
       let pendingCount = 0;
       for (let i = 0; i < this.state.offeredRides.length; i ++) {
-        pendingCount = pendingCount + this.state.offeredRides[i].requestIDs.length
+        pendingCount = pendingCount + this.state.offeredRides[i].requests.length;
         this.props.pendingRequests(pendingCount);
       }
 

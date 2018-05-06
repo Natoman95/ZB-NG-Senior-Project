@@ -22,7 +22,6 @@ import Badge from 'material-ui/Badge';
 import { Icons } from '../../icon-library';
 
 // Services
-import { getRequestByID } from '../../services/request-service';
 import { getUserImage, getUserFullName } from '../../services/user-service';
 
 /* This dialog opens on the driver page of the app
@@ -46,7 +45,7 @@ class PassengerListDialog extends React.Component {
   }
 
   // Open the add offer dialog
-  handleClickOpen = async (requestIDs) => {
+  handleClickOpen = async (requests) => {
     // Reset arrays to being empty
     this.setState({
       confirmedRequests: [],
@@ -56,20 +55,18 @@ class PassengerListDialog extends React.Component {
     });
     
     // Sort Requests by confirmation status
-    let request;
-    for (let requestID in requestIDs) {
-      request = await getRequestByID(requestIDs[requestID]);
-      if (request.isConfirmed) {
+    for (let request in requests) {
+      if (requests[request].isConfirmed) {
         this.state.confirmedRequests.push({
-          request: request,
-          profilePic: 'data:image/png;base64,' + (await getUserImage(request.requesterUsername)).def,
+          request: requests[request],
+          profilePic: 'data:image/png;base64,' + (await getUserImage(requests[request].requesterUsername)).def,
           index: this.state.confirmedRequests.length
         });
         this.state.confirmedListItemExpansion.push(false);
       } else {
         this.state.pendingRequests.push({
-          request: request,
-          profilePic: 'data:image/png;base64,' + (await getUserImage(request.requesterUsername)).def,
+          request: requests[request],
+          profilePic: 'data:image/png;base64,' + (await getUserImage(requests[request].requesterUsername)).def,
           index: this.state.pendingRequests.length
         });
         this.state.pendingListItemExpansion.push(false);
@@ -172,6 +169,8 @@ class PassengerListDialog extends React.Component {
                           <ListItemAvatar>
                             <Avatar src={pendingRequest.profilePic}/>
                           </ListItemAvatar>
+                          {console.log("REE")}
+                          {console.log(pendingRequest)}
                           <ListItemText
                             primary={getUserFullName(pendingRequest.request.requesterUsername)}
                           />
