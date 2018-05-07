@@ -14,6 +14,7 @@ import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 import { Typography } from 'material-ui';
+import PropTypes from 'prop-types';
 
 // Components
 import { Icons } from '../../icon-library';
@@ -31,8 +32,8 @@ import { getTotalConfirmedRequests, getTotalPendingRequests } from '../../servic
    It displays more information about a ride which a user
    has offered to other users */
 class OfferDetailsDialog extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       dense: false,
@@ -40,7 +41,7 @@ class OfferDetailsDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
-      ride: new RideModel() // Prevents null pointer exception
+      ride: new RideModel(), // Prevents null pointer exception
     };
   }
 
@@ -52,8 +53,35 @@ class OfferDetailsDialog extends React.Component {
 
   // Close the add offer dialog
   handleClose = () => {
+    this.props.onClose();
     this.setState({ display: false });
   };
+
+  handleConfirmRequest = (requestID) => {
+    // Update the ui so that the request has been moved
+    // This needs to be done locally to update the UI immediately
+    for (let index in this.state.ride.requests) {
+      let request = this.state.ride.requests[index];
+      if (request.requestID === requestID) {
+        request.isConfirmed = true;
+      }
+    }
+    this.forceUpdate();
+    this.props.onConfirm(requestID);
+  }
+
+  handleDeleteRequest = (requestID) => {
+    // Update the ui so that the request has been deleted
+    // This needs to be done locally to update the UI immediately
+    for (let index in this.state.ride.requests) {
+      let request = this.state.ride.requests[index];
+      if (request.requestID === requestID) {
+        this.state.ride.requests.splice(index, 1);
+      }
+    }
+    this.forceUpdate();
+    this.props.onDelete(requestID);
+  }
 
   render() {
     return (
@@ -194,11 +222,17 @@ class OfferDetailsDialog extends React.Component {
 
         {/* Dialog boxes */}
         <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance }} />
-        <PassengerListDialog ref={(passengerDialogInstance) => { this.passengerDialogChild = passengerDialogInstance }} />
+        <PassengerListDialog onConfirm={this.handleConfirmRequest} onDelete={this.handleDeleteRequest} ref={(passengerDialogInstance) => { this.passengerDialogChild = passengerDialogInstance }} />
 
       </Dialog>
     );
   }
 }
+
+OfferDetailsDialog.propTypes = {
+  onConfirm: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired
+};
 
 export default OfferDetailsDialog;

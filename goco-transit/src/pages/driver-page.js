@@ -18,6 +18,7 @@ import Loader from '../components/loader';
 
 // Services
 import { getUser, getUserImage } from '../services/user-service';
+import { deleteRequestByID, updateConfirmed } from '../services/request-service';
 import { getOfferedRides, getTotalConfirmedRequests, getTotalPendingRequests } from '../services/ride-service';
 import { getDate, getTime } from '../services/date-service';
 
@@ -39,19 +40,45 @@ class DriverPage extends React.Component {
       user: null,
       offeredRides: null,
       loading: false,
+      requestsToUpdate: [],
+      requestsToDelete: [],
     };
 
     this.onOffersUpdated = this.onOffersUpdated.bind(this);
   }
 
-  onOffersUpdated() {
+  onOffersUpdated = () => {
     this.loadUserData();
     this.forceUpdate();
   }
 
-  componentWillMount() {
+  componentWillMount = () => {
     // Once the component mounts, make sure the tab matches the component
     this.props.matchTab();
+    this.loadUserData();
+  }
+
+  // Add an item to the list of requests to update
+  handleConfirmRequest = async (requestID) => {
+    this.state.requestsToUpdate.push(requestID)
+  }
+
+  // Add an item to the list of requests to delete
+  handleDeleteRequest = async (requestID) => {
+    this.state.requestsToDelete.push(requestID);
+  }
+
+  // Once the details dialog is closed, update all modified requests
+  handleUpdateRequests = async () => {
+    for (let index in this.state.requestsToUpdate) {
+      let request = this.state.requestsToUpdate[index];
+      await updateConfirmed(request, true);
+    }
+    for (let index in this.state.requestsToDelete) {
+      let request = this.state.requestsToDelete[index];
+      await deleteRequestByID(request);
+    }
+
     this.loadUserData();
   }
 
@@ -122,8 +149,15 @@ class DriverPage extends React.Component {
           </Grid>
 
           {/* Dialog boxes */}
-          <OfferDetailsDialog ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance }} />
-          <AddOfferDialog onPost={this.onOffersUpdated} ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance }} />
+          <OfferDetailsDialog
+            onConfirm={this.handleConfirmRequest}
+            onDelete={this.handleDeleteRequest}
+            onClose={this.handleUpdateRequests}
+            ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance }} />
+          
+          <AddOfferDialog
+            onPost={this.onOffersUpdated}
+            ref={(addOfferDialogInstance) => { this.addOfferDialogChild = addOfferDialogInstance }} />
 
         </div>
       );

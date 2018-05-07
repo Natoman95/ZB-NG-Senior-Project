@@ -26,6 +26,7 @@ import RequestModel from '../../models/request-model';
 // Services
 import { getDate, getTime } from '../../services/date-service';
 import { addRequest } from "../../services/request-service";
+import { getUserFullName } from '../../services/user-service';
 
 /* This dialog opens on the search page of the app
    It allows the user to request a ride that might take
@@ -84,17 +85,6 @@ class AddRequestDialog extends React.Component {
     };
   }
 
-  // Converts username to first and last name
-  getFullName = (username) => {
-    let names = username.split(".");
-    let firstName = names[0];
-    let lastName = names[1];
-    let capFirst = firstName[0].toUpperCase() + firstName.substr(1);
-    let capLast = lastName[0].toUpperCase() + lastName.substr(1);
-
-    return capFirst + " " + capLast;
-  }
-
   render() {
     return (
       <Dialog
@@ -120,7 +110,7 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={this.getFullName(this.state.ride.driverUsername)} />
+                    <ListItemText primary={getUserFullName(this.state.ride.driverUsername)} />
                   </div>
                 </ListItem>
 

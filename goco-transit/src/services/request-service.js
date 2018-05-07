@@ -1,5 +1,5 @@
 // Services
-import { get, post, del } from './http-service';
+import { get, post, del, put } from './http-service';
 
 /**
  * This class is responsible for all actions related to user requests
@@ -32,6 +32,15 @@ const addRequest = (request) => {
 };
 
 /**
+ * Update the confirmation status of a request
+ * Corresponds to UpdateConfirmed in back end's RequestController
+ */
+
+ const updateConfirmed = (requestID, isConfirmed) => {
+   return put(`transit/request/confirmed/${requestID}/${isConfirmed}`);
+ }
+
+/**
  * Delete a Request from the database by its unique ID
  * Corresponds to DeleteRequest in back end's RequestController
  */
@@ -43,5 +52,6 @@ export {
   getRequestByID,
   getRequests,
   addRequest,
+  updateConfirmed,
   deleteRequestByID
 };

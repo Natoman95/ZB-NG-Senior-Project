@@ -18,6 +18,7 @@ import Avatar from 'material-ui/Avatar';
 import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
+import PropTypes from 'prop-types';
 
 // Components
 import { Icons } from '../../icon-library';
@@ -29,8 +30,8 @@ import { getUserFullName } from '../../services/user-service';
    It displays more information about a ride which a user
    has offered to other users */
 class PassengerListDialog extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       dense: false,
@@ -101,6 +102,37 @@ class PassengerListDialog extends React.Component {
     }
   };
 
+  handleConfirm = (request) => {
+    // Remove the request from pending and add it to confirmed
+    // This needs to be done locally to update the UI immediately
+    let index = this.state.pendingRequests.indexOf(request);
+    this.state.pendingRequests.splice(index, 1);
+    this.state.confirmedRequests.push(request);
+
+    this.forceUpdate();
+    this.props.onConfirm(request.request.requestID);
+  };
+
+  handleDeletePending = (request) => {
+    // Remove the request from pending
+    // This needs to be done locally to update the UI immediately
+    let index = this.state.pendingRequests.indexOf(request);
+    this.state.pendingRequests.splice(index, 1);
+
+    this.forceUpdate();
+    this.props.onDelete(request.request.requestID);
+  };
+
+  handleDeleteConfirmed = (request) => {
+    // Remove the request from confirmed
+    // This needs to be done locally to update the UI immediately
+    let index = this.state.confirmedRequests.indexOf(request);
+    this.state.confirmedRequests.splice(index, 1);
+
+    this.forceUpdate();
+    this.props.onDelete(request.request.requestID);
+  }
+
   render() {
     return (
       <Dialog
@@ -146,7 +178,7 @@ class PassengerListDialog extends React.Component {
                           <div style={{ alignContent: 'flex-end' }}>
                             <ListItemSecondaryAction>
                               <div style={{ paddingRight: '3em' }}>
-                                <IconButton>
+                                <IconButton onClick={() => {this.handleDeleteConfirmed(confirmedRequest)}}>
                                   {Icons.deleteIcon}
                                 </IconButton>
                               </div>
@@ -224,10 +256,10 @@ class PassengerListDialog extends React.Component {
                           <div style={{ alignContent: 'flex-end' }}>
                             <ListItemSecondaryAction>
                               <div style={{ paddingRight: '3em' }}>
-                                <IconButton>
+                                <IconButton onClick={() => {this.handleConfirm(pendingRequest)}}>
                                   {Icons.confirmIcon}
                                 </IconButton>
-                                <IconButton>
+                                <IconButton onClick={() => {this.handleDeletePending(pendingRequest)}}>
                                   {Icons.deleteIcon}
                                 </IconButton>
                               </div>
@@ -285,5 +317,10 @@ class PassengerListDialog extends React.Component {
     );
   }
 }
+
+PassengerListDialog.propTypes = {
+  onConfirm: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired
+};
 
 export default PassengerListDialog;
