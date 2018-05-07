@@ -208,7 +208,7 @@ class SearchPage extends React.Component {
             {/* Display search results as a list of Rides */}
             {this.state.searchResults.map((searchResult) => {
               return (
-                <List dense={this.state.dense}> {console.log(searchResult)}
+                <List dense={this.state.dense}>
                   <ListItem
                     button
                     disableGutters={this.state.noGutters}
