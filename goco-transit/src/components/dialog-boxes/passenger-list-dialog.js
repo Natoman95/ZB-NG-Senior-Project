@@ -136,10 +136,13 @@ class PassengerListDialog extends React.Component {
                           disableGutters={this.state.noGutters}
                           divider={this.state.divider}
                         >
-                          <ListItemAvatar>
+                          <ListItemAvatar onClick={this.toggleExpansionState.bind(this, true, confirmedRequest.index)}>
                             <Avatar src={confirmedRequest.request.requesterPhoto}/>
                           </ListItemAvatar>
-                          <ListItemText primary={getUserFullName(confirmedRequest.request.requesterUsername)} style={{ paddingLeft: '1.5em' }}/>
+                          <ListItemText
+                            primary={getUserFullName(confirmedRequest.request.requesterUsername)} style={{ paddingLeft: '1.5em' }}
+                            onClick={this.toggleExpansionState.bind(this, true, confirmedRequest.index)}
+                          />
                           <div style={{ alignContent: 'flex-end' }}>
                             <ListItemSecondaryAction>
                               <div style={{ paddingRight: '3em' }}>
@@ -211,10 +214,13 @@ class PassengerListDialog extends React.Component {
                           disableGutters={this.state.noGutters}
                           divider={this.state.divider}
                         >
-                          <ListItemAvatar>
+                          <ListItemAvatar onClick={this.toggleExpansionState.bind(this, false, pendingRequest.index)}>
                             <Avatar src={pendingRequest.request.requesterPhoto}/>
                           </ListItemAvatar>
-                          <ListItemText primary={getUserFullName(pendingRequest.request.requesterUsername)} style={{ paddingLeft: '1.5em' }}/>
+                          <ListItemText
+                            primary={getUserFullName(pendingRequest.request.requesterUsername)} style={{ paddingLeft: '1.5em' }}
+                            onClick={this.toggleExpansionState.bind(this, false, pendingRequest.index)}
+                          />
                           <div style={{ alignContent: 'flex-end' }}>
                             <ListItemSecondaryAction>
                               <div style={{ paddingRight: '3em' }}>
