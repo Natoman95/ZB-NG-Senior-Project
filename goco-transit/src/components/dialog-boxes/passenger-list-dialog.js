@@ -80,6 +80,28 @@ class PassengerListDialog extends React.Component {
     this.setState({ display: false });
   };
 
+  // Invert the expanded boolean of the specified confirmed request list item
+  toggleConfirmedExpansionState = (index) => {
+    let oldArray = this.state.confirmedListItemExpansion;
+    let newArray = [];
+    // Open the list item and close other list items
+    if (oldArray[index] === false) {
+      for (let entry in oldArray) {
+        if (parseInt(entry, 10) === index) {
+          newArray[entry] = true;
+        } else {
+          newArray[entry] = false;
+        }
+      }
+    }
+    // Close the list item
+    else {
+      oldArray[index] = false;
+      newArray = oldArray;
+    }
+    this.setState({ confirmedListItemExpansion: newArray });
+  };
+
   render() {
     return (
       <Dialog
@@ -102,8 +124,15 @@ class PassengerListDialog extends React.Component {
               <List dense={this.state.dense}>
                 {this.state.confirmedRequests.map((confirmedRequest) => {
                   return (
-                    <ExpansionPanel elevation={0}>
-                      <ExpansionPanelSummary expandIcon={Icons.expandIcon} style={{ padding: 0 }}>
+                    <ExpansionPanel expanded={this.state.confirmedListItemExpansion[confirmedRequest.index]} elevation={0}>
+                      <ExpansionPanelSummary
+                        style={{ padding: 0 }}
+                        expandIcon={
+                          <IconButton onClick={this.toggleConfirmedExpansionState.bind(this, confirmedRequest.index)}>
+                            {Icons.expandIcon}
+                          </IconButton>
+                        }
+                      >
                         <ListItem
                           disableGutters={this.state.noGutters}
                           divider={this.state.divider}
@@ -170,7 +199,7 @@ class PassengerListDialog extends React.Component {
               <List dense={this.state.dense}>
                 {this.state.pendingRequests.map((pendingRequest) => {
                   return (
-                    <ExpansionPanel elevation={0}>
+                    <ExpansionPanel expanded={this.state.pendingListItemExpansion[pendingRequest.index]} elevation={0}>
                       <ExpansionPanelSummary expandIcon={Icons.expandIcon} style={{ padding: 0 }}>
                         <ListItem
                           disableGutters={this.state.noGutters}
