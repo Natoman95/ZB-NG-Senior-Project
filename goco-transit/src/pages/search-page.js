@@ -4,7 +4,8 @@ import Grid from 'material-ui/Grid';
 import List, {
   ListItem,
   ListItemText,
-} from 'material-ui/List'; import Avatar from 'material-ui/Avatar';
+} from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
 import Button from 'material-ui/Button';
 import PropTypes from 'prop-types';
 
@@ -14,7 +15,7 @@ import Loader from '../components/loader';
 
 // Services
 import { getSearchResults } from '../services/ride-service';
-import { getDate } from '../services/date-service';
+import { getDate, getTime } from '../services/date-service';
 import { getUser, getUserImage } from '../services/user-service';
 
 /** 
@@ -227,8 +228,8 @@ class SearchPage extends React.Component {
                     
                     {/* Ride date */}
                     <ListItemText
-                      primary={searchResult.destination}
-                      secondary={this.state.secondary ? getDate(searchResult.departureDateTime) : null}
+                      primary={searchResult.origin + " ➜ " + searchResult.destination}
+                      secondary={this.state.secondary ? getDate(searchResult.departureDateTime) + " " + getTime(searchResult.departureDateTime) : null}
                     />
                   </ListItem>
                 </List>

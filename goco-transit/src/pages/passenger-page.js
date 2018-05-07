@@ -7,6 +7,7 @@ import Button from 'material-ui/Button';
 import Grid from 'material-ui/Grid';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Avatar from 'material-ui/Avatar';
 
 // Components
 import RequestedDetailsDialog from '../components/dialog-boxes/requested-details-dialog';
@@ -15,7 +16,7 @@ import { Icons } from '../icon-library';
 import Loader from '../components/loader';
 
 // Services
-import { getUser } from '../services/user-service';
+import { getUser, getUserImage } from '../services/user-service';
 import { getConfirmedRides, getRequestedRides, getRideByID } from '../services/ride-service';
 import { getDate, getTime } from '../services/date-service';
 import { deleteRequestByID } from '../services/request-service';
@@ -89,10 +90,14 @@ class PassengerPage extends React.Component {
                   disableGutters={this.state.noGutters}
                   divider={this.state.divider}
                 >
+
+                  {/* Driver profile picture */}
+                  <Avatar src={confirmedRide.driverPhoto} />
+
                   {/* Route destination and date range */}
                   <ListItemText
-                    primary={confirmedRide.destination}
-                    secondary={this.state.secondary ? getDate(confirmedRide.departureDateTime) : null}
+                    primary={confirmedRide.origin  + " ➜ " + confirmedRide.destination}
+                    secondary={this.state.secondary ? getDate(confirmedRide.departureDateTime) + " " + getTime(confirmedRide.departureDateTime) : null}
                   />
                 </ListItem>
               );
@@ -119,22 +124,13 @@ class PassengerPage extends React.Component {
                   divider={this.state.divider}
                 >
 
+                  {/* Driver profile picture */}
+                  <Avatar src={requestedRide.driverPhoto} />
+
                   {/* Route destination and date range */}
                   <ListItemText
-                    primary={linkedRide.destination}
-                    secondary={this.state.secondary ?
-                      (
-                        // No linked Ride
-                        (linkedRide === false) ?
-                          (
-                            getDate(requestedRide.earliestDepartureDateTime) + " " + getTime(requestedRide.earliestDepartureDateTime)
-                            + ' - '
-                            + getDate(requestedRide.latestDepartureDateTime) + " " + getTime(requestedRide.latestDepartureDateTime)
-                          // Has linked Ride
-                          ) : 
-                            getDate(linkedRide.departureDateTime) + " " + getTime(linkedRide.departureDateTime)
-                      ) : null
-                    }
+                    primary={linkedRide.origin + " ➜ " + linkedRide.destination}
+                    secondary={this.state.secondary ? getDate(linkedRide.departureDateTime) + " " + getTime(linkedRide.departureDateTime): null}
                   />
                 </ListItem>
               );
@@ -204,6 +200,23 @@ class PassengerPage extends React.Component {
             key: this.state.requestedRides[i].requestId,
             value: false
           });
+        }
+      }
+
+      // Get driver profile pictures for confirmed and requested rides
+      if (this.state.confirmedRides.length > 0) {
+        for (let rideIndex in this.state.confirmedRides) {
+          let ride = this.state.confirmedRides[rideIndex];
+          let photo = await getUserImage(ride.driverUsername);
+          ride.driverPhoto = photo;
+        }
+      }
+
+      if (this.state.requestedRides.length > 0) {
+        for (let rideIndex in this.state.requestedRides) {
+          let ride = this.state.requestedRides[rideIndex];
+          let photo = await getUserImage(ride.driverUsername);
+          ride.driverPhoto = photo;
         }
       }
       

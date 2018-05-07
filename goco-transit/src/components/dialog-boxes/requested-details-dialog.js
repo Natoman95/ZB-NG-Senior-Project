@@ -66,6 +66,17 @@ class RequestedDetailsDialog extends React.Component {
     this.setState({ display: false });
   }
 
+  // Converts username to first and last name
+  getFullName = (username) => {
+    let names = username.split(".");
+    let firstName = names[0];
+    let lastName = names[1];
+    let capFirst = firstName[0].toUpperCase() + firstName.substr(1);
+    let capLast = lastName[0].toUpperCase() + lastName.substr(1);
+
+    return capFirst + " " + capLast;
+  }
+
   render() {
     return (
       <Dialog
@@ -82,6 +93,18 @@ class RequestedDetailsDialog extends React.Component {
 
               {/* Requested ride details */}
               <List dense={this.state.dense} style={{ padding: '0px' }} >
+
+                {/* Driver name */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.avatarIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={this.getFullName(this.state.requestedRide.driverUsername)} />
+                  </div>
+                </ListItem>
 
                 {/* Origin */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>

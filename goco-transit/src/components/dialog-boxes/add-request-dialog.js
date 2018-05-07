@@ -84,6 +84,17 @@ class AddRequestDialog extends React.Component {
     };
   }
 
+  // Converts username to first and last name
+  getFullName = (username) => {
+    let names = username.split(".");
+    let firstName = names[0];
+    let lastName = names[1];
+    let capFirst = firstName[0].toUpperCase() + firstName.substr(1);
+    let capLast = lastName[0].toUpperCase() + lastName.substr(1);
+
+    return capFirst + " " + capLast;
+  }
+
   render() {
     return (
       <Dialog
@@ -92,7 +103,7 @@ class AddRequestDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Add this ride request?"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Request this ride?"}</DialogTitle>
 
           {this.state.display && // Don't attempt to get undefined data
           <DialogContent>
@@ -100,6 +111,18 @@ class AddRequestDialog extends React.Component {
             
               {/* Ride info */}
               <List dense={this.state.dense} style={{ padding: '0px' }} >
+
+                {/* Driver name */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.avatarIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={this.getFullName(this.state.ride.driverUsername)} />
+                  </div>
+                </ListItem>
 
                 {/* Origin */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
