@@ -84,20 +84,13 @@ class PassengerListDialog extends React.Component {
   toggleExpansionState = (arrayChoice, index) => {
     let oldArray = [];
     let newArray = [];
+
     // Set oldArray based on arrayChoice (0 = Pending, 1 = Confirmed)
-    if (arrayChoice) {
-      oldArray = this.state.confirmedListItemExpansion;
-    } else {
-      oldArray = this.state.pendingListItemExpansion;
-    }
-    // Open the list item and close other list items
-    if (oldArray[index] === false || oldArray[index] === undefined) {
-      newArray[index] = true;
-    }
-    // Close the list item
-    else {
-      newArray[index] = false;
-    }
+    (arrayChoice ? oldArray = this.state.confirmedListItemExpansion : oldArray = this.state.pendingListItemExpansion);
+
+    // Toggle the list item so that it is the only one open
+    (oldArray[index] === false || oldArray[index] === undefined ? newArray[index] = true : newArray[index] = false);
+
     // Set new state based on arrayChoice (0 = Pending, 1 = Confirmed)
     if (arrayChoice) {
       this.setState({ confirmedListItemExpansion: newArray });
