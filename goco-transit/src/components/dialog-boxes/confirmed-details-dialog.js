@@ -129,7 +129,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={getDate(this.state.confirmedRide.departureDateTime) + " at " + getTime(this.state.confirmedRide.departureDateTime)} />
+                    <ListItemText primary={getDate(this.state.confirmedRide.departureDateTime) + " @ " + getTime(this.state.confirmedRide.departureDateTime)} />
                   </div>
                 </ListItem>
 
