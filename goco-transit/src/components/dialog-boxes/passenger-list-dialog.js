@@ -114,9 +114,11 @@ class PassengerListDialog extends React.Component {
                           <ListItemText primary={getUserFullName(confirmedRequest.request.requesterUsername)} style={{ paddingLeft: '1.5em' }}/>
                           <div style={{ alignContent: 'flex-end' }}>
                             <ListItemSecondaryAction>
-                              <IconButton style={{ paddingRight: '3em' }}>
-                                {Icons.deleteIcon}
-                              </IconButton>
+                              <div style={{ paddingRight: '3em' }}>
+                                <IconButton>
+                                  {Icons.deleteIcon}
+                                </IconButton>
+                              </div>
                             </ListItemSecondaryAction>
                           </div>
                         </ListItem>
@@ -178,6 +180,18 @@ class PassengerListDialog extends React.Component {
                             <Avatar src={pendingRequest.request.requesterPhoto}/>
                           </ListItemAvatar>
                           <ListItemText primary={getUserFullName(pendingRequest.request.requesterUsername)} style={{ paddingLeft: '1.5em' }}/>
+                          <div style={{ alignContent: 'flex-end' }}>
+                            <ListItemSecondaryAction>
+                              <div style={{ paddingRight: '3em' }}>
+                                <IconButton>
+                                  {Icons.confirmIcon}
+                                </IconButton>
+                                <IconButton>
+                                  {Icons.deleteIcon}
+                                </IconButton>
+                              </div>
+                            </ListItemSecondaryAction>
+                          </div>
                         </ListItem>
                       </ExpansionPanelSummary>
                       <ExpansionPanelDetails style={{ padding: 0 }}>
