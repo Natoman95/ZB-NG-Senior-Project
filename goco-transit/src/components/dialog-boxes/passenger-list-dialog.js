@@ -19,6 +19,7 @@ import IconButton from 'material-ui/IconButton';
 import Grid from 'material-ui/Grid';
 import Badge from 'material-ui/Badge';
 import PropTypes from 'prop-types';
+import Typography from 'material-ui/Typography';
 
 // Components
 import { Icons } from '../../icon-library';
@@ -210,7 +211,12 @@ class PassengerListDialog extends React.Component {
                               </Avatar>
                             </Badge>
                           </ListItemAvatar>
-                          <ListItemText primary={confirmedRequest.request.requesterNote} style={{ paddingLeft: '1.5em' }}/>
+                          <ListItemText
+                            primary={(confirmedRequest.request.requesterNote === null || undefined ?
+                              <Typography style={{ paddingLeft: '0.5em', fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
+                              :
+                              <Typography style={{ paddingLeft: '0.5em', fontSize: '1em', color: '#212121'}}> {confirmedRequest.request.requesterNote} </Typography>)}
+                          />
                         </ListItem>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
@@ -291,7 +297,12 @@ class PassengerListDialog extends React.Component {
                               </Avatar>
                             </Badge>
                           </ListItemAvatar>
-                          <ListItemText primary={pendingRequest.request.requesterNote} style={{ paddingLeft: '1.5em' }}/>
+                          <ListItemText
+                            primary={(pendingRequest.request.requesterNote === null || undefined ?
+                              <Typography style={{ paddingLeft: '0.5em', fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
+                              :
+                              <Typography style={{ paddingLeft: '0.5em', fontSize: '1em', color: '#212121'}}> {pendingRequest.request.requesterNote} </Typography>)}
+                          />
                         </ListItem>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
