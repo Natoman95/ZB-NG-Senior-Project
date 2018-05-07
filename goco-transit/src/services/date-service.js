@@ -9,7 +9,34 @@
  */
 const getDate = (datetime) => {
   let date = new Date(datetime.toString());
-  return (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear().toString().substr(-2);
+  let day = date.getDay();
+  // Needs to be done via a package (Moment)
+  switch (day) {
+    case 0:
+      day = "Su";
+      break;
+    case 1:
+      day = "M";
+      break;
+    case 2:
+      day = "Tu";
+      break;
+    case 3:
+      day = "W";
+      break;
+    case 4:
+      day = "Th";
+      break;
+    case 5:
+      day = "F";
+      break;
+    case 6:
+      day = "Sa";
+      break;
+    default:
+      console.log("Date returned invalid integer.");
+  }
+  return day + " " + (date.getMonth() + 1) + "/" + date.getDate() + "/" + date.getFullYear().toString().substr(-2);
 }
 
 /**
