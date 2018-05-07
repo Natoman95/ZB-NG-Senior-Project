@@ -121,18 +121,6 @@ class ConfirmedDetailsDialog extends React.Component {
                   </div>
                 </ListItem>
 
-                {/* Date */}
-                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      {Icons.dateIcon}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={getDate(this.state.confirmedRide.departureDateTime)} />
-                  </div>
-                </ListItem>
-
                 {/* Time */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
@@ -141,7 +129,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={getTime(this.state.confirmedRide.departureDateTime)} />
+                    <ListItemText primary={getDate(this.state.confirmedRide.departureDateTime) + " at " + getTime(this.state.confirmedRide.departureDateTime)} />
                   </div>
                 </ListItem>
 

@@ -96,18 +96,6 @@ class OfferDetailsDialog extends React.Component {
                   </div>
                 </ListItem>
 
-                {/* Date */}
-                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                  <ListItemAvatar>
-                    <Avatar>
-                      {Icons.dateIcon}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={getDate(this.state.ride.departureDateTime)} />
-                  </div>
-                </ListItem>
-
                 {/* Time */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
@@ -116,7 +104,7 @@ class OfferDetailsDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={getTime(this.state.ride.departureDateTime)} />
+                    <ListItemText primary={getDate(this.state.ride.departureDateTime) + " at " + getTime(this.state.ride.departureDateTime)} />
                   </div>
                 </ListItem>
 
