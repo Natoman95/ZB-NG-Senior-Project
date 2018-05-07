@@ -32,7 +32,7 @@ INSERT INTO [dbo].[Transit_Requests]
     ,[requester_note]
     ,[is_confirmed])
 VALUES
-    (GETDATE(), 'zach.brown', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'nathan.gray'), 'Looking for a ride back as well.', 0),
+  (GETDATE(), 'zach.brown', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'nathan.gray'), 'Looking for a ride back as well.', 0),
 	(GETDATE(), 'zach.brown', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'ezeanyinabia.anyanwu'), 'Eze I miss you', 1),
 	(GETDATE(), 'nathan.gray', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'samuel.solberg'), 'Are you going through New York City?', 1),
 	(GETDATE(), 'nathan.gray', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'bradley.boutcher'), NULL, 0),
