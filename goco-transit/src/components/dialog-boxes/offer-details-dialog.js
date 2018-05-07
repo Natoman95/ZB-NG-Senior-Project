@@ -67,7 +67,7 @@ class OfferDetailsDialog extends React.Component {
       }
     }
     this.forceUpdate();
-    this.props.onConfirm(requestID);
+    this.props.onConfirmRequest(requestID);
   }
 
   handleDeleteRequest = (requestID) => {
@@ -80,7 +80,12 @@ class OfferDetailsDialog extends React.Component {
       }
     }
     this.forceUpdate();
-    this.props.onDelete(requestID);
+    this.props.onDeleteRequest(requestID);
+  }
+
+  handleDeleteRide = () => {
+    this.props.onDeleteRide(this.state.ride.rideID);
+    this.setState({ display: false });
   }
 
   render() {
@@ -221,8 +226,13 @@ class OfferDetailsDialog extends React.Component {
         }
 
         {/* Dialog boxes */}
-        <ConfirmationDialog ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance }} />
-        <PassengerListDialog onConfirm={this.handleConfirmRequest} onDelete={this.handleDeleteRequest} ref={(passengerDialogInstance) => { this.passengerDialogChild = passengerDialogInstance }} />
+        <ConfirmationDialog
+          onConfirm={this.handleDeleteRide}
+          ref={(confirmationDialogInstance) => { this.confirmationDialogChild = confirmationDialogInstance }} />
+        <PassengerListDialog
+          onConfirm={this.handleConfirmRequest}
+          onDelete={this.handleDeleteRequest}
+          ref={(passengerDialogInstance) => { this.passengerDialogChild = passengerDialogInstance }} />
 
       </Dialog>
     );
@@ -230,8 +240,9 @@ class OfferDetailsDialog extends React.Component {
 }
 
 OfferDetailsDialog.propTypes = {
-  onConfirm: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  onConfirmRequest: PropTypes.func.isRequired,
+  onDeleteRequest: PropTypes.func.isRequired,
+  onDeleteRide: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired
 };
 

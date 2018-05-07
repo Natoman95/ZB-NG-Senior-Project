@@ -19,7 +19,10 @@ import Loader from '../components/loader';
 // Services
 import { getUser, getUserImage } from '../services/user-service';
 import { deleteRequestByID, updateConfirmed } from '../services/request-service';
-import { getOfferedRides, getTotalConfirmedRequests, getTotalPendingRequests } from '../services/ride-service';
+import { getOfferedRides,
+         getTotalConfirmedRequests,
+         getTotalPendingRequests,
+         deleteRideByID } from '../services/ride-service';
 import { getDate, getTime } from '../services/date-service';
 
 /**
@@ -79,6 +82,20 @@ class DriverPage extends React.Component {
       await deleteRequestByID(request);
     }
 
+    let dataWasUpdated = false;
+    if (this.state.requestsToDelete.length > 0 || this.state.requestsToUpdate > 0) {
+      dataWasUpdated = true;
+      this.state.requestsToDelete = [];
+      this.state.requestsToUpdate = [];
+    }
+
+    if (dataWasUpdated) {
+      this.loadUserData();
+    }
+  }
+
+  handleDeleteRide = async (rideID) => {
+    await deleteRideByID(rideID);
     this.loadUserData();
   }
 
@@ -150,8 +167,9 @@ class DriverPage extends React.Component {
 
           {/* Dialog boxes */}
           <OfferDetailsDialog
-            onConfirm={this.handleConfirmRequest}
-            onDelete={this.handleDeleteRequest}
+            onConfirmRequest={this.handleConfirmRequest}
+            onDeleteRequest={this.handleDeleteRequest}
+            onDeleteRide={this.handleDeleteRide}
             onClose={this.handleUpdateRequests}
             ref={(offerDetailsDialogInstance) => { this.offerDetailsDialogChild = offerDetailsDialogInstance }} />
           
