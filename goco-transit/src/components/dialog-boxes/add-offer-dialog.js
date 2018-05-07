@@ -75,7 +75,6 @@ class AddOfferDialog extends React.Component {
           "",
           this.state.username.toLowerCase(),
           [],
-          [],
           this.state.maxCapacityValue,
           this.state.originValue,
           this.state.destinationValue,
