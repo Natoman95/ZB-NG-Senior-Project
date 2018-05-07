@@ -7,7 +7,8 @@ import Dialog, {
 import List, {
   ListItem,
   ListItemText,
-  ListItemAvatar
+  ListItemAvatar,
+  ListItemSecondaryAction
 } from 'material-ui/List';
 import ExpansionPanel, {
   ExpansionPanelSummary,
@@ -79,6 +80,27 @@ class PassengerListDialog extends React.Component {
     this.setState({ display: false });
   };
 
+  // Invert the expanded boolean of the specified request list item
+  toggleExpansionState = (arrayChoice, index) => {
+    let oldArray = [];
+    let newArray = [];
+
+    // Set oldArray based on arrayChoice (0 = Pending, 1 = Confirmed)
+    (arrayChoice ? oldArray = this.state.confirmedListItemExpansion : oldArray = this.state.pendingListItemExpansion);
+
+    // Toggle the list item so that it is the only one open
+    (oldArray[index] === false || oldArray[index] === undefined ? newArray[index] = true : newArray[index] = false);
+
+    // Set new state based on arrayChoice (0 = Pending, 1 = Confirmed)
+    if (arrayChoice) {
+      this.setState({ confirmedListItemExpansion: newArray });
+      this.setState({ pendingListItemExpansion: [] });
+    } else {
+      this.setState({ pendingListItemExpansion: newArray });
+      this.setState({ confirmedListItemExpansion: [] });
+    }
+  };
+
   render() {
     return (
       <Dialog
@@ -101,17 +123,34 @@ class PassengerListDialog extends React.Component {
               <List dense={this.state.dense}>
                 {this.state.confirmedRequests.map((confirmedRequest) => {
                   return (
-                    <ExpansionPanel elevation={0}>
-                      <ExpansionPanelSummary expandIcon={Icons.expandIcon} style={{ padding: 0 }}>
+                    <ExpansionPanel expanded={this.state.confirmedListItemExpansion[confirmedRequest.index]} elevation={0}>
+                      <ExpansionPanelSummary
+                        style={{ padding: 0 }}
+                        expandIcon={
+                          <IconButton onClick={this.toggleExpansionState.bind(this, true, confirmedRequest.index)}>
+                            {Icons.expandIcon}
+                          </IconButton>
+                        }
+                      >
                         <ListItem
                           disableGutters={this.state.noGutters}
                           divider={this.state.divider}
                         >
-                          <ListItemAvatar>
+                          <ListItemAvatar onClick={this.toggleExpansionState.bind(this, true, confirmedRequest.index)}>
                             <Avatar src={confirmedRequest.request.requesterPhoto}/>
                           </ListItemAvatar>
-                          <div style={{ paddingLeft: '1.5em' }}>
-                            <ListItemText primary={getUserFullName(confirmedRequest.request.requesterUsername)}/>
+                          <ListItemText
+                            primary={getUserFullName(confirmedRequest.request.requesterUsername)} style={{ paddingLeft: '1.5em' }}
+                            onClick={this.toggleExpansionState.bind(this, true, confirmedRequest.index)}
+                          />
+                          <div style={{ alignContent: 'flex-end' }}>
+                            <ListItemSecondaryAction>
+                              <div style={{ paddingRight: '3em' }}>
+                                <IconButton>
+                                  {Icons.deleteIcon}
+                                </IconButton>
+                              </div>
+                            </ListItemSecondaryAction>
                           </div>
                         </ListItem>
                       </ExpansionPanelSummary>
@@ -138,9 +177,7 @@ class PassengerListDialog extends React.Component {
                               </Avatar>
                             </Badge>
                           </ListItemAvatar>
-                          <div style={{ paddingLeft: '1.5em' }}>
-                            <ListItemText primary={confirmedRequest.request.requesterNote}/>
-                          </div>
+                          <ListItemText primary={confirmedRequest.request.requesterNote} style={{ paddingLeft: '1.5em' }}/>
                         </ListItem>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
@@ -164,17 +201,37 @@ class PassengerListDialog extends React.Component {
               <List dense={this.state.dense}>
                 {this.state.pendingRequests.map((pendingRequest) => {
                   return (
-                    <ExpansionPanel elevation={0}>
-                      <ExpansionPanelSummary expandIcon={Icons.expandIcon} style={{ padding: 0 }}>
+                    <ExpansionPanel expanded={this.state.pendingListItemExpansion[pendingRequest.index]} elevation={0}>
+                      <ExpansionPanelSummary
+                        style={{ padding: 0 }}
+                        expandIcon={
+                          <IconButton onClick={this.toggleExpansionState.bind(this, false, pendingRequest.index)}>
+                            {Icons.expandIcon}
+                          </IconButton>
+                        }
+                      >
                         <ListItem
                           disableGutters={this.state.noGutters}
                           divider={this.state.divider}
                         >
-                          <ListItemAvatar>
+                          <ListItemAvatar onClick={this.toggleExpansionState.bind(this, false, pendingRequest.index)}>
                             <Avatar src={pendingRequest.request.requesterPhoto}/>
                           </ListItemAvatar>
-                          <div style={{ paddingLeft: '1.5em' }}>
-                            <ListItemText primary={getUserFullName(pendingRequest.request.requesterUsername)}/>
+                          <ListItemText
+                            primary={getUserFullName(pendingRequest.request.requesterUsername)} style={{ paddingLeft: '1.5em' }}
+                            onClick={this.toggleExpansionState.bind(this, false, pendingRequest.index)}
+                          />
+                          <div style={{ alignContent: 'flex-end' }}>
+                            <ListItemSecondaryAction>
+                              <div style={{ paddingRight: '3em' }}>
+                                <IconButton>
+                                  {Icons.confirmIcon}
+                                </IconButton>
+                                <IconButton>
+                                  {Icons.deleteIcon}
+                                </IconButton>
+                              </div>
+                            </ListItemSecondaryAction>
                           </div>
                         </ListItem>
                       </ExpansionPanelSummary>
@@ -201,9 +258,7 @@ class PassengerListDialog extends React.Component {
                               </Avatar>
                             </Badge>
                           </ListItemAvatar>
-                          <div style={{ paddingLeft: '1.5em' }}>
-                            <ListItemText primary={pendingRequest.request.requesterNote}/>
-                          </div>
+                          <ListItemText primary={pendingRequest.request.requesterNote} style={{ paddingLeft: '1.5em' }}/>
                         </ListItem>
                       </ExpansionPanelDetails>
                     </ExpansionPanel>
