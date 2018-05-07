@@ -80,10 +80,16 @@ class PassengerListDialog extends React.Component {
     this.setState({ display: false });
   };
 
-  // Invert the expanded boolean of the specified confirmed request list item
-  toggleConfirmedExpansionState = (index) => {
-    let oldArray = this.state.confirmedListItemExpansion;
+  // Invert the expanded boolean of the specified request list item
+  toggleExpansionState = (arrayChoice, index) => {
+    let oldArray = [];
     let newArray = [];
+    // Set oldArray based on arrayChoice (0 = Pending, 1 = Confirmed)
+    if (arrayChoice) {
+      oldArray = this.state.confirmedListItemExpansion;
+    } else {
+      oldArray = this.state.pendingListItemExpansion;
+    }
     // Open the list item and close other list items
     if (oldArray[index] === false) {
       for (let entry in oldArray) {
@@ -99,7 +105,12 @@ class PassengerListDialog extends React.Component {
       oldArray[index] = false;
       newArray = oldArray;
     }
-    this.setState({ confirmedListItemExpansion: newArray });
+    // Set new state based on arrayChoice (0 = Pending, 1 = Confirmed)
+    if (arrayChoice) {
+      this.setState({ confirmedListItemExpansion: newArray });
+    } else {
+      this.setState({ pendingListItemExpansion: newArray });
+    }
   };
 
   render() {
@@ -128,7 +139,7 @@ class PassengerListDialog extends React.Component {
                       <ExpansionPanelSummary
                         style={{ padding: 0 }}
                         expandIcon={
-                          <IconButton onClick={this.toggleConfirmedExpansionState.bind(this, confirmedRequest.index)}>
+                          <IconButton onClick={this.toggleExpansionState.bind(this, true, confirmedRequest.index)}>
                             {Icons.expandIcon}
                           </IconButton>
                         }
@@ -200,7 +211,14 @@ class PassengerListDialog extends React.Component {
                 {this.state.pendingRequests.map((pendingRequest) => {
                   return (
                     <ExpansionPanel expanded={this.state.pendingListItemExpansion[pendingRequest.index]} elevation={0}>
-                      <ExpansionPanelSummary expandIcon={Icons.expandIcon} style={{ padding: 0 }}>
+                      <ExpansionPanelSummary
+                        style={{ padding: 0 }}
+                        expandIcon={
+                          <IconButton onClick={this.toggleExpansionState.bind(this, false, pendingRequest.index)}>
+                            {Icons.expandIcon}
+                          </IconButton>
+                        }
+                      >
                         <ListItem
                           disableGutters={this.state.noGutters}
                           divider={this.state.divider}
