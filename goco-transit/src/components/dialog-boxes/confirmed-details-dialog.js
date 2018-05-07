@@ -25,6 +25,7 @@ import RideModel from '../../models/ride-model';
 
 // Services
 import { getDate, getTime } from '../../services/date-service';
+import { getUserFullName } from '../../services/user-service';
 
 /* This dialog opens on the passenger page of the app
    It displays more information about a ride on which a user
@@ -92,7 +93,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={this.getFullName(this.state.confirmedRide.driverUsername)} />
+                    <ListItemText primary={getUserFullName(this.state.confirmedRide.driverUsername)} />
                   </div>
                 </ListItem>
                 
@@ -186,7 +187,7 @@ class ConfirmedDetailsDialog extends React.Component {
               <Grid item>
                 <IconButton onClick={() => {
                   this.confirmationDialogChild.handleClickOpen(
-                    "Delete this ride?", "Your driver will be notified.");
+                    "Cancel this reservation?", "Your driver will be notified.");
                 }}
                 >
                   {Icons.deleteIcon}

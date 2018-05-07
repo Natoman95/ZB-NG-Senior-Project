@@ -182,7 +182,7 @@ class OfferDetailsDialog extends React.Component {
               </Grid>
               <Grid item>
                 <IconButton onClick={ () => { this.confirmationDialogChild.handleClickOpen(
-                    "Delete this ride offer?", "Your passengers will be notified.") }}
+                    "Cancel this ride?", "Your passengers will be notified.") }}
                 >
                   {Icons.deleteIcon}
                 </IconButton>

@@ -25,6 +25,7 @@ import RideModel from '../../models/ride-model';
 
 // Services
 import { getDate, getTime } from '../../services/date-service';
+import { getUserFullName } from '../../services/user-service';
 
 /* This dialog opens on the passenger page of the app
    It displays more information about a ride which a user
@@ -66,17 +67,6 @@ class RequestedDetailsDialog extends React.Component {
     this.setState({ display: false });
   }
 
-  // Converts username to first and last name
-  getFullName = (username) => {
-    let names = username.split(".");
-    let firstName = names[0];
-    let lastName = names[1];
-    let capFirst = firstName[0].toUpperCase() + firstName.substr(1);
-    let capLast = lastName[0].toUpperCase() + lastName.substr(1);
-
-    return capFirst + " " + capLast;
-  }
-
   render() {
     return (
       <Dialog
@@ -102,7 +92,7 @@ class RequestedDetailsDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={this.getFullName(this.state.requestedRide.driverUsername)} />
+                    <ListItemText primary={getUserFullName(this.state.requestedRide.driverUsername)} />
                   </div>
                 </ListItem>
 
@@ -185,7 +175,7 @@ class RequestedDetailsDialog extends React.Component {
               <Grid item>
                 <IconButton onClick={() => {
                   this.confirmationDialogChild.handleClickOpen(
-                    "Delete this ride request?", "You will be removed from the waiting list.");
+                    "Cancel this ride request?", "You will be removed from the waiting list.");
                 }}
                 >
                   {Icons.deleteIcon}
