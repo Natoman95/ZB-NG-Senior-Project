@@ -20,7 +20,7 @@ VALUES /* WARNING: Do not create more than 1 dummy ride with the same driver_use
 	(GETDATE(), 'nathan.gray', 3, 'Gordon', 'Boston', '2018-05-11 14:30:00.000', 'Visiting the city for the day'),
 	(GETDATE(), 'zach.brown', 4, 'Nottingham', 'Gordon', '2018-05-13 20:15:00.000', 'Willing to take I-93 or I-95'),
 	(GETDATE(), 'bradley.boutcher', 2, 'Gordon', 'Danvers', '2018-05-09 18:30:00.000', 'Going to senior formal and have extra space'),
-	(GETDATE(), 'davis.modarelli', 5, 'Gordon', 'Boston', '2018-05-11 10:45:00.000', 'You have to buy a yearbook to ride with me'),
+	(GETDATE(), 'ezeanyinabia.anyanwu', 5, 'Gordon', 'Boston', '2018-05-11 10:45:00.000', 'Making my way downtown'),
 	(GETDATE(), 'samuel.solberg', 2, 'Hamilton', 'Pittsburgh', '2018-05-12 09:05:00.000', NULL);
 GO
 
@@ -32,7 +32,10 @@ INSERT INTO [dbo].[Transit_Requests]
     ,[requester_note]
     ,[is_confirmed])
 VALUES
-    (GETDATE(), 'zach.brown', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'nathan.gray'), 'Looking for a ride back as well.', 0),
+  (GETDATE(), 'zach.brown', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'nathan.gray'), 'Looking for a ride back as well.', 0),
+	(GETDATE(), 'zach.brown', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'ezeanyinabia.anyanwu'), 'Eze I miss you', 1),
+	(GETDATE(), 'nathan.gray', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'samuel.solberg'), 'Are you going through New York City?', 1),
+	(GETDATE(), 'nathan.gray', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'bradley.boutcher'), NULL, 0),
 	(GETDATE(), 'samuel.colacchia', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'nathan.gray'), NULL, 1),
 	(GETDATE(), 'matthew.felgate', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'nathan.gray'), 'Can we stop at Starbucks?', 1),
 	(GETDATE(), 'spencer.lindsay', (SELECT [ride_id] FROM [dbo].[Transit_Rides] WHERE driver_username = 'zach.brown'), '95 is easier for me', 0),

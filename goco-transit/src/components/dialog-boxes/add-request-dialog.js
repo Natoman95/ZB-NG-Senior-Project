@@ -152,23 +152,11 @@ class AddRequestDialog extends React.Component {
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
                     <Avatar>
-                      {Icons.dateIcon}
-                    </Avatar>
-                  </ListItemAvatar>
-                  <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={getDate(this.state.ride.departureDateTime)}/>
-                  </div>
-                </ListItem>
-
-                {/* Time */}
-                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
-                  <ListItemAvatar>
-                    <Avatar>
                       {Icons.timeIcon}
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={getTime(this.state.ride.departureDateTime)}/>
+                    <ListItemText primary={getDate(this.state.ride.departureDateTime) + " @ " + getTime(this.state.ride.departureDateTime)}/>
                   </div>
                 </ListItem>
 
