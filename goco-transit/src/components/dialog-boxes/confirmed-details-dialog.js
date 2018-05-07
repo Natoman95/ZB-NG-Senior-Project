@@ -75,7 +75,7 @@ class ConfirmedDetailsDialog extends React.Component {
         aria-describedby="alert-dialog-description"
       >
       
-        <DialogTitle id="alert-dialog-title">{"Ride Details"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Confirmed Ride Details"}</DialogTitle>
         
         {this.state.display && // Don't attempt to get undefined data
           <DialogContent>

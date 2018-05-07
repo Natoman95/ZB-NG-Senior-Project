@@ -63,7 +63,7 @@ class OfferDetailsDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Ride Offer Details"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Offered Ride Details"}</DialogTitle>
         
         {this.state.display && // Don't attempt to get undefined data
           <DialogContent>
