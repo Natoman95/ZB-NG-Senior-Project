@@ -156,7 +156,7 @@ class AddRequestDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={getDate(this.state.ride.departureDateTime) + " at " + getTime(this.state.ride.departureDateTime)}/>
+                    <ListItemText primary={getDate(this.state.ride.departureDateTime) + " @ " + getTime(this.state.ride.departureDateTime)}/>
                   </div>
                 </ListItem>
 

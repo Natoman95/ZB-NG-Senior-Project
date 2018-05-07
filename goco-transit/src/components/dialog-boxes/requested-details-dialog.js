@@ -128,7 +128,7 @@ class RequestedDetailsDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={getDate(this.state.requestedRide.departureDateTime) + " at " + getTime(this.state.requestedRide.departureDateTime)} />
+                    <ListItemText primary={getDate(this.state.requestedRide.departureDateTime) + " @ " + getTime(this.state.requestedRide.departureDateTime)} />
                   </div>
                 </ListItem>
 
