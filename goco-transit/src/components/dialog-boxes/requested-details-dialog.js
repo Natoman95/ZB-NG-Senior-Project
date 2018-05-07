@@ -25,6 +25,7 @@ import RideModel from '../../models/ride-model';
 
 // Services
 import { getDate, getTime } from '../../services/date-service';
+import { getUserFullName } from '../../services/user-service';
 
 /* This dialog opens on the passenger page of the app
    It displays more information about a ride which a user
@@ -74,7 +75,7 @@ class RequestedDetailsDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Ride Request Details"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Requested Ride Details"}</DialogTitle>
         
         {this.state.display && // Don't attempt to get undefined data
           <DialogContent>
@@ -82,6 +83,18 @@ class RequestedDetailsDialog extends React.Component {
 
               {/* Requested ride details */}
               <List dense={this.state.dense} style={{ padding: '0px' }} >
+
+                {/* Driver name */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.avatarIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={getUserFullName(this.state.requestedRide.driverUsername)} />
+                  </div>
+                </ListItem>
 
                 {/* Origin */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
@@ -162,7 +175,7 @@ class RequestedDetailsDialog extends React.Component {
               <Grid item>
                 <IconButton onClick={() => {
                   this.confirmationDialogChild.handleClickOpen(
-                    "Delete this ride request?", "You will be removed from the waiting list.");
+                    "Cancel this ride request?", "You will be removed from the waiting list.");
                 }}
                 >
                   {Icons.deleteIcon}

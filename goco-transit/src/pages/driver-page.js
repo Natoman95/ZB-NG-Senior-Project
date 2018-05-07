@@ -19,7 +19,7 @@ import Loader from '../components/loader';
 // Services
 import { getUser, getUserImage } from '../services/user-service';
 import { getOfferedRides, getTotalConfirmedRequests, getTotalPendingRequests } from '../services/ride-service';
-import { getDate } from '../services/date-service';
+import { getDate, getTime } from '../services/date-service';
 
 /**
  * This page allows a user to manage anything having to do with their
@@ -99,8 +99,8 @@ class DriverPage extends React.Component {
                   </ListItemAvatar>
                   {/* Date of the ride */}
                   <ListItemText
-                    primary={offeredRide.destination}
-                    secondary={this.state.secondary ? getDate(offeredRide.departureDateTime) : null}
+                    primary={offeredRide.origin + " ➜ " + offeredRide.destination}
+                    secondary={this.state.secondary ? getDate(offeredRide.departureDateTime) + " " + getTime(offeredRide.departureDateTime) : null}
                   />
                 </ListItem>
               );

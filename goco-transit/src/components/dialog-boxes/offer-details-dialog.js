@@ -63,7 +63,7 @@ class OfferDetailsDialog extends React.Component {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{"Ride Offer Details"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Offered Ride Details"}</DialogTitle>
         
         {this.state.display && // Don't attempt to get undefined data
           <DialogContent>
@@ -182,7 +182,7 @@ class OfferDetailsDialog extends React.Component {
               </Grid>
               <Grid item>
                 <IconButton onClick={ () => { this.confirmationDialogChild.handleClickOpen(
-                    "Delete this ride offer?", "Your passengers will be notified.") }}
+                    "Cancel this ride?", "Your passengers will be notified.") }}
                 >
                   {Icons.deleteIcon}
                 </IconButton>

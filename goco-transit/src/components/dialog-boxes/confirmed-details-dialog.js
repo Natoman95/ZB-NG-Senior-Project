@@ -25,6 +25,7 @@ import RideModel from '../../models/ride-model';
 
 // Services
 import { getDate, getTime } from '../../services/date-service';
+import { getUserFullName } from '../../services/user-service';
 
 /* This dialog opens on the passenger page of the app
    It displays more information about a ride on which a user
@@ -39,7 +40,7 @@ class ConfirmedDetailsDialog extends React.Component {
       noGutters: true,
       divider: true,
       display: false,
-      ride: new RideModel(), // Prevents null pointer exception
+      confirmedRide: new RideModel(), // Prevents null pointer exception
       requestID: null,
     };
   }
@@ -53,7 +54,7 @@ class ConfirmedDetailsDialog extends React.Component {
         this.setState({ requestID: request.requestID });
       }
     }
-    this.setState({ ride: confirmedRide, display: true });
+    this.setState({ confirmedRide: confirmedRide, display: true });
   };
 
   // Close the add offer dialog
@@ -75,7 +76,7 @@ class ConfirmedDetailsDialog extends React.Component {
         aria-describedby="alert-dialog-description"
       >
       
-        <DialogTitle id="alert-dialog-title">{"Ride Details"}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Confirmed Ride Details"}</DialogTitle>
         
         {this.state.display && // Don't attempt to get undefined data
           <DialogContent>
@@ -84,6 +85,18 @@ class ConfirmedDetailsDialog extends React.Component {
               {/* Confirmed ride details */}
               <List dense={this.state.dense} style={{ padding: '0px' }} >
 
+                {/* Driver name */}
+                <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
+                  <ListItemAvatar>
+                    <Avatar>
+                      {Icons.avatarIcon}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <div style={{ paddingLeft: '1.5em' }}>
+                    <ListItemText primary={getUserFullName(this.state.confirmedRide.driverUsername)} />
+                  </div>
+                </ListItem>
+                
                 {/* Origin */}
                 <ListItem disableGutters={this.state.noGutters} divider={this.divider}>
                   <ListItemAvatar>
@@ -92,7 +105,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={this.state.ride.origin} />
+                    <ListItemText primary={this.state.confirmedRide.origin} />
                   </div>
                 </ListItem>
 
@@ -104,7 +117,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={this.state.ride.destination} />
+                    <ListItemText primary={this.state.confirmedRide.destination} />
                   </div>
                 </ListItem>
 
@@ -116,7 +129,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={getDate(this.state.ride.departureDateTime)} />
+                    <ListItemText primary={getDate(this.state.confirmedRide.departureDateTime)} />
                   </div>
                 </ListItem>
 
@@ -128,7 +141,7 @@ class ConfirmedDetailsDialog extends React.Component {
                     </Avatar>
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
-                    <ListItemText primary={getTime(this.state.ride.departureDateTime)} />
+                    <ListItemText primary={getTime(this.state.confirmedRide.departureDateTime)} />
                   </div>
                 </ListItem>
 
@@ -153,9 +166,9 @@ class ConfirmedDetailsDialog extends React.Component {
                   </ListItemAvatar>
                   <div style={{ paddingLeft: '1.5em' }}>
                     <ListItemText
-                      primary={(this.state.ride.driverNote === null || undefined ?
+                      primary={(this.state.confirmedRide.driverNote === null || undefined ?
                         <Typography style={{ fontStyle: 'italic', fontSize: '1em', color: '#757575'}}> Not provided </Typography>
-                        : this.state.ride.driverNote)}
+                        : this.state.confirmedRide.driverNote)}
                     />
                   </div>
                 </ListItem>
@@ -174,7 +187,7 @@ class ConfirmedDetailsDialog extends React.Component {
               <Grid item>
                 <IconButton onClick={() => {
                   this.confirmationDialogChild.handleClickOpen(
-                    "Delete this ride?", "Your driver will be notified.");
+                    "Cancel this reservation?", "Your driver will be notified.");
                 }}
                 >
                   {Icons.deleteIcon}
