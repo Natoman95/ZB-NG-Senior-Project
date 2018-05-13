@@ -17,6 +17,7 @@ import Loader from '../components/loader';
 import { getSearchResults } from '../services/ride-service';
 import { getDate, getTime } from '../services/date-service';
 import { getUser, getUserImage } from '../services/user-service';
+let moment = require('moment');
 
 /** 
  * This page is displayed when a user wants to find a ride somewhere.
@@ -34,9 +35,9 @@ class SearchPage extends React.Component {
       displayAddRequestDialog: false,
       origin: "Gordon",
       destination: null,
-      startDateTime: this.getDateTime(0),
-      endDateTime: this.getDateTime(86400000),
-      minEnd: this.getDateTime(86400000),
+      startDateTime: moment(),
+      endDateTime: moment.add(1, "day"),
+      minEnd: moment.add(1, "day"),
       searchResults: [],
       driverPhotos: [],
       searchAttempted: false,
@@ -63,16 +64,6 @@ class SearchPage extends React.Component {
     this.props.matchTab();
     this.getUsername();
   }
-
-  // Returns the date and time plus a given number of milliseconds (ms) in datetime-local format ("YYYY-MM-DDTHH:MM")
-  getDateTime = (ms) => {
-    var dateTime = new Date((new Date()).getTime() + ms);
-    return this.pad(dateTime.getFullYear(), 4)
-      + "-" + this.pad((dateTime.getMonth() + 1), 2)
-      + "-" + this.pad(dateTime.getDate(), 2)
-      + "T" + this.pad(dateTime.getHours(), 2)
-      + ":" + this.pad(dateTime.getMinutes(), 2)
-  };
 
   // Pads a number with leading zeroes and returns it as a String
   pad = (number, length) => {
