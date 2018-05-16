@@ -201,6 +201,7 @@ Url prefix: `/api/transit/request`
 <img src=https://github.com/Natoman95/ZB-NG-Senior-Project/blob/master/ride_table.png width="500">
 
 #### Requests
+`ride_id` is no longer nullable
 <img src=https://github.com/Natoman95/ZB-NG-Senior-Project/blob/master/request_table.png width="500">
 
 ## Code and Class Guide
