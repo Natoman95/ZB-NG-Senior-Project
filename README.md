@@ -1,5 +1,39 @@
 # ZB-NG-Senior-Project
 
+## Table of Contents
+* [Dependencies](#dependencies)
+  * [Descriptions](#descriptions)
+  * [Links](#links)
+* [Conventions](#conventions)
+  * [Naming](#naming)
+  * [Issue Tracking](#issue-tracking)
+* [Installation](#installation)
+  * [Development](#development)
+* [Testing](#testing)
+  * [Client](#client)
+  * [Server](#server)
+* [Server API](#server-api)
+  * [Endpoint Arguments](#endpoint-arguments)
+  * [Authentication](#authentication)
+  * [User](#user)
+  * [Rides](#rides)
+  * [Requests](#requests)
+* [Database Schema](#database-schema)
+  * [Rides](#rides)
+  * [Requests](#requests)
+* [Code and Class Guide](#code-and-class-guide)
+  * [Client](#client)
+  * [Server](#server)
+* [Features to Implement](#features-to-implement)
+  * [Highland Express](#highland-express)
+  * [Ride Search](#ride-search)
+  * [Communication](#communication)
+  * [Displaying Information](#displaying-information)
+  * [UI Design](#ui-design)
+  * [Security](#security)
+  * [Liability](#liability)
+  * [Deployment](#deployment)
+
 ## Dependencies
 
 #### Descriptions
@@ -34,6 +68,7 @@
 * Pull Requests (Should have names identical to the Issue they're linked to, but with the issue number at the front): `{linked issue number}-{linked issue description}`
 
 #### Issue Tracking
+
 ###### Creating an issue
 * Give the issue a name that briefly describes the bug or feature
 * Assign the issue to the appropriate person
@@ -129,7 +164,6 @@ The basic functionality of the app and its connection to the server can be teste
 * The ‘Token’ may need to be executed first and the auth token copied into the various tests
 
 ## Server API
-
 Our app uses a modified version of the 360 server. It does its user and authentication related tasks with pre-existing 360 endpoints. Ride and request operations use our custom endpoints.
 
 Base url (varies depending on which server is used): https://360Api.gordon.edu/
