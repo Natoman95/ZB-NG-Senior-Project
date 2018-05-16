@@ -142,16 +142,13 @@ The basic functionality of the app and its connection to the server can be teste
   * The request should now appear on the ‘Passenger’ page
   * Now tap the request and delete it
   * It should disappear from the ‘Driver’ page
-4. Update a ride
+4. Update passengers
   * Tap a ride on the ‘Driver’ page
-  * Change one of the dialog fields
-  * Tap confirm
-  * Tap the ride again and confirm the change persisted
-5. Update a request
-  * Tap a pending request on the ‘Passenger’ page
-  * Change one of the dialog fields
-  * Tap confirm
-  * Tap the request again and confirm the change persisted
+  * Click on the seat icon on the bottom left of the dialog
+  * Change the status of a passenger on the ride
+  * Confirm this change
+  * Close the dialogs and the page should reload
+  * Confirm that the change has persisted
   
 #### Server
 * In order to test server endpoints, follow these steps:
