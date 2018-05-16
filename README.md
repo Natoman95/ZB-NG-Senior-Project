@@ -202,6 +202,7 @@ Url prefix: `/api/transit/request`
 
 #### Requests
 `ride_id` is no longer nullable
+
 <img src=https://github.com/Natoman95/ZB-NG-Senior-Project/blob/master/request_table.png width="500">
 
 ## Code and Class Guide
