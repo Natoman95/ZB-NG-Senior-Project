@@ -76,6 +76,7 @@ In order to run the server locally, perform the following operations
 * Open the Remote Desktops File
 * Login with your Gordon credentials
 * Clone the Transit version of the Gordon 360 back end server: https://github.com/Natoman95/Project-Raymond.git
+* Switch from the `master` to `Goco-Transit` branch
 * Open the project solution in Visual Studio
 * Generate database models by “Updating” CCT_DB_Models.edmx
 * Retrieve the “secrets.config” file from the cs-devA virtual machine in “C:\Users\Public\Documents\360 Shared files” and place it in the * Gordon 360 directory of the project
@@ -135,53 +136,63 @@ Base url (varies depending on which server is used): https://360Api.gordon.edu/
 #### Endpoint Arguments
 Data passed through these endpoints as arguments are enclosed in { } brackets.
 
-`{username}` -- “nathan.gray” or “zach.brown”
-`{id}` / `{requestid}` / `{rideid}`  -- the unique id of a ride or request: “34” or “72”
-`{origin}` / `{destination}` -- right now just a string representing a city: “Boston”
-`{note}` -- any string a user wants to pass as a note: “Pay me back for gas!”
-`{capacity}` -- the max number of seats available in a car: “3” or “4”
-`{datetime}` -- a string representing a date and a time: “2017-12-07T20:30” means December 7th, 2017 at 8:30 PM
-`{isconfirmed}` -- a boolean representing whether a request has been accepted or not: “true” or “false”
+* `{username}` -- “nathan.gray” or “zach.brown”
+* `{id}` / `{requestid}` / `{rideid}`  -- the unique id of a ride or request: “34” or “72”
+* `{origin}` / `{destination}` -- right now just a string representing a city: “Boston”
+* `{note}` -- any string a user wants to pass as a note: “Pay me back for gas!”
+* `{capacity}` -- the max number of seats available in a car: “3” or “4”
+* `{datetime}` -- a string representing a date and a time: “2017-12-07T20:30” means December 7th, 2017 at 8:30 PM
+* `{isconfirmed}` -- a boolean representing whether a request has been accepted or not: “true” or “false”
 
 Example objects to pass through POST’s can be found in our Postman tests.
 
 #### Authentication
-GET: `/token` -- Gets an authentication token to be used for all other requests by sending username and password
+GET
+* `/token` -- Gets an authentication token to be used for all other requests by sending username and password
 
 #### User
-GET: `/api/profiles/{username}` -- Gets a bunch of user data. We only use contact information and username
-GET: `/api/Image/{username}` -- Gets a user’s headshot
+GET
+* `/api/profiles/{username}` -- Gets a bunch of user data. We only use contact information and username
+* `/api/Image/{username}` -- Gets a user’s headshot
 
 #### Rides
 Url prefix: `/api/transit/ride`
 
-GET: `/id/{id}` -- Gets a ride by its unique id
-GET: `/user/{username}/offered` -- Gets a list of rides where a user is the driver
-GET: `/user/{username}/confirmed` -- Gets a list of rides where a user is the passenger
-GET: `/user/{username}/pending` -- Gets a list of rides that a user wants to be a passenger on
+GET
+* `/id/{id}` -- Gets a ride by its unique id
+* `/user/{username}/offered` -- Gets a list of rides where a user is the driver
+* `/user/{username}/confirmed` -- Gets a list of rides where a user is the passenger
+* `/user/{username}/pending` -- Gets a list of rides that a user wants to be a passenger on
 
-POST: `/location/` -- Gets a list of rides related to desired origin, destination, and date
-POST: `/` -- Adds the ride attached to the request body to the database
+POST
+* `/location/` -- Gets a list of rides related to desired origin, destination, and date
+* `/` -- Adds the ride attached to the request body to the database
 
-PUT: `/origin/{id}/{origin}` -- Updates the origin of a ride
-PUT: `/destination/{id}/{destination}` -- Updates the destination of a ride
-PUT: `/date/{id}/{datetime}` -- Updates the date/time of a ride
-PUT: `/note/{id}/{note}` -- Updates the driver note on a ride
-PUT: `/capacity/{id}/{capacity}` -- Updates the max number of seats on a ride
+PUT
+* `/origin/{id}/{origin}` -- Updates the origin of a ride
+* `/destination/{id}/{destination}` -- Updates the destination of a ride
+* `/date/{id}/{datetime}` -- Updates the date/time of a ride
+* `/note/{id}/{note}` -- Updates the driver note on a ride
+* `/capacity/{id}/{capacity}` -- Updates the max number of seats on a ride
 
-DELETE: `/delete/{id}` -- Deletes a ride by its unique id
+DELETE
+* `/delete/{id}` -- Deletes a ride by its unique id
 
 #### Requests
 Url prefix: `/api/transit/request`
 
-GET: `/id/{id}` -- Get a request by its unique id
-GET: `/user/{username}` -- Get all the requests belonging to a user
+GET
+* `/id/{id}` -- Get a request by its unique id
+* `/user/{username}` -- Get all the requests belonging to a user
 
-POST: `/` -- Adds the request attached to the request body to the database
+POST
+* `/` -- Adds the request attached to the request body to the database
 
-PUT: `/confirmed/{id}/{isconfirmed}` -- Updates the status of a request to confirmed or not confirmed
+PUT
+* `/confirmed/{id}/{isconfirmed}` -- Updates the status of a request to confirmed or not confirmed
 
-DELETE: `/delete/{id}` -- Deletes a ride by its unique id
+DELETE
+* `/delete/{id}` -- Deletes a ride by its unique id
 
 ## Database Schema
 
@@ -234,3 +245,58 @@ DELETE: `/delete/{id}` -- Deletes a ride by its unique id
 
 #### Server
 Only the custom classes we added to the 360 server
+
+| ApiControllers |                      |                           | Contain Endpoints                                           |
+|:-------------- |:-------------------- |:------------------------- |:----------------------------------------------------------- |
+|                | RequestController.cs |                           | Endpoints for requests                                      |
+|                | RideController.cs    |                           | Endpoints for rides                                         |
+| **Models**     |                      |                           | **Model database tables to allow for reading/writing to database**|
+|                | **ViewModels**       |                           | **Put models of database tables into a more usable form for the client to read and write to. Are transformed back into regular models for database interactions.**|
+|                |                      | TransitRequestViewModel.cs| Friendly request model                                      |
+|                |                      | TransitRideViewModel.cs   | Friendly ride model                                         |
+|                | Transit_Requests.cs  |                           | Exact correspondence to database table - used to interact with the database|
+|                | Transit_Rides.cs     |                           | Exact correspondence to database table - used to interact with the database|
+| **Services**   |                      |                           | **Called by controllers. Read and write to the database**   |
+|                | RequestService.cs    |                           | Uses request models to interact with the database           |
+|                | RideService.cs       |                           | Uses ride models to interact with the database              |
+
+## Features to Implement
+See this repository's issues for a list of immediate tasks left unfinished
+
+#### Highland Express
+* Allow the HE to poll users for optimal airport Shuttle times
+* Ride scheduling for highland express staff
+  
+#### Ride Search
+* Allow users to browse available rides
+* Allow users to adjust the radius around a location to search for rides
+* Incorporate a maps API to allow for better location matching and searching
+* Allow users to add a request that isn't linked to a ride yet
+* Filter out rides that have already been requested
+
+#### Communication
+* In-app messaging between drivers and passengers
+* Add banner notifications
+  * When a passenger's request is rejected
+  * When a driver's ride is requested
+* Adding a note to a rejected passenger
+
+#### Displaying Information
+* Add return time to rides
+* Add identification information for driver's vehicles
+* Show relevant requests to drivers adding new rides
+* Show driver phone number on a ride if available
+* Figure out what to do with rides and requests whose dates have passed
+
+#### UI Design
+* Optimize the app for desktop use
+
+#### Security
+* Prevent users from modifying rides and requests that don't belong to them (say, through Postman with any old auth token)
+* Client and Server data validation
+
+#### Liability
+* Flesh out the legal agreements
+
+#### Deployment
+* Set up a production version of the project on a virtual machine with an external IP
