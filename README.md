@@ -34,15 +34,16 @@
 * Pull Requests (Should have names identical to the Issue they're linked to, but with the issue number at the front): `{linked issue number}-{linked issue description}`
 
 #### Issue Tracking
-Creating an issue
+###### Creating an issue
 * Give the issue a name that briefly describes the bug or feature
 * Assign the issue to the appropriate person
 * Label the issue appropriately
 * Add the issue to the goco-transit project
 * Add the issue to a sprint if applicable
-* If the issue needs to be completed in the current sprint, add it to that column on the project board
+* If the issue is high-priority, add it to the "priority" column on the project board
 * Move the issue to "In Progress" once you have begun work on it
-Completing an issue
+
+###### Completing an issue
 * When you have finished work on the issue, create a pull request to merge the issue into master
 * Assign that pull request to the appropriate reviewer
 * Add the pull request to the goco-transit project
@@ -147,51 +148,51 @@ Data passed through these endpoints as arguments are enclosed in { } brackets.
 Example objects to pass through POST’s can be found in our Postman tests.
 
 #### Authentication
-GET
+###### GET
 * `/token` -- Gets an authentication token to be used for all other requests by sending username and password
 
 #### User
-GET
+###### GET
 * `/api/profiles/{username}` -- Gets a bunch of user data. We only use contact information and username
 * `/api/Image/{username}` -- Gets a user’s headshot
 
 #### Rides
 Url prefix: `/api/transit/ride`
 
-GET
+###### GET
 * `/id/{id}` -- Gets a ride by its unique id
 * `/user/{username}/offered` -- Gets a list of rides where a user is the driver
 * `/user/{username}/confirmed` -- Gets a list of rides where a user is the passenger
 * `/user/{username}/pending` -- Gets a list of rides that a user wants to be a passenger on
 
-POST
+###### POST
 * `/location/` -- Gets a list of rides related to desired origin, destination, and date
 * `/` -- Adds the ride attached to the request body to the database
 
-PUT
+###### PUT
 * `/origin/{id}/{origin}` -- Updates the origin of a ride
 * `/destination/{id}/{destination}` -- Updates the destination of a ride
 * `/date/{id}/{datetime}` -- Updates the date/time of a ride
 * `/note/{id}/{note}` -- Updates the driver note on a ride
 * `/capacity/{id}/{capacity}` -- Updates the max number of seats on a ride
 
-DELETE
+###### DELETE
 * `/delete/{id}` -- Deletes a ride by its unique id
 
 #### Requests
 Url prefix: `/api/transit/request`
 
-GET
+###### GET
 * `/id/{id}` -- Get a request by its unique id
 * `/user/{username}` -- Get all the requests belonging to a user
 
-POST
+###### POST
 * `/` -- Adds the request attached to the request body to the database
 
-PUT
+###### PUT
 * `/confirmed/{id}/{isconfirmed}` -- Updates the status of a request to confirmed or not confirmed
 
-DELETE
+###### DELETE
 * `/delete/{id}` -- Deletes a ride by its unique id
 
 ## Database Schema
@@ -213,7 +214,9 @@ DELETE
 |     |                |                  | add-request-dialog.js       | Opened when you request a ride on the search page     |
 |     |                |                  | confirmation-dialog.js      | Opened when you hit the check button on any data-entry dialog|
 |     |                |                  | confirmed-details-dialog.js | Opens with info on a confirmed ride on the passenger page|
+|     |                |                  | information-dialog.js       | Generic dialog that contains text information         |
 |     |                |                  | offer-details-dialog.js     | Opens with info on an offer on the driver page        |
+|     |                |                  | passenger-list-dialog.js    | Opens from the offer details dialog with info and options about the passsengers on that offered ride|
 |     |                |                  | requested-details-dialog.js | Opens with info on a request on the passenger page    |
 |     |                | loader.js        |                             | The circular loading animation used when a tab is fetching data|
 |     | **images**     |                  |                             | Images used in the project                            |
@@ -223,25 +226,25 @@ DELETE
 |     |                | ride-model.js    |                             | Used to store data about a ride                       |
 |     |                | user-model.js    |                             | Used to store user data                               |
 |     | **pages**      |                  |                             | **The main views displayed in the app**               |
-|     |                | driver-page.js   |                             | **The main views displayed in the app**               |
-|     |                | login-page.js    |                             | **The main views displayed in the app**               |
-|     |                | main-page.js     |                             | **The main views displayed in the app**               |
-|     |                | passenger-page.js|                             | **The main views displayed in the app**               |
-|     |                | search-page.js   |                             | **The main views displayed in the app**               |
-|     |                | settings-page.js |                             | **The main views displayed in the app**               |
-|     | **services**   |                  |                             | **The main views displayed in the app**               |
-|     |                | auth-service.js  |                             | **The main views displayed in the app**               |
-|     |                | date-service.js  |                             | **The main views displayed in the app**               |
-|     |                | error-service.js |                             | **The main views displayed in the app**               |
-|     |                | http-service.js  |                             | **The main views displayed in the app**               |
-|     |                | request-service.js|                            | **The main views displayed in the app**               |
-|     |                | ride-service.js  |                             | **The main views displayed in the app**               |
-|     |                | storage-service.js|                            | **The main views displayed in the app**               |
-|     |                | user-service.js  |                             | **The main views displayed in the app**               |
-|     | App.js         |                  |                             | **The main views displayed in the app**               |
-|     | index.js       |                  |                             | **The main views displayed in the app**               |
-|     | theme.js       |                  |                             | **The main views displayed in the app**               |
-| package.json|        |                  |                             | **The main views displayed in the app**               |
+|     |                | driver-page.js   |                             | The middle tab where you offer rides to others        |
+|     |                | login-page.js    |                             | The login page                                        |
+|     |                | main-page.js     |                             | The page that has the tabs and contains most other pages|
+|     |                | passenger-page.js|                             | The first tab where you track rides you’ve requested  |
+|     |                | search-page.js   |                             | Linked from the passenger page. This is where you find rides to join|
+|     |                | settings-page.js |                             | Where you can see your user information and logout    |
+|     | **services**   |                  |                             | **Data storage and retrieval - often in the form of database view models**|
+|     |                | auth-service.js  |                             | Deals with user authentication                        |
+|     |                | date-service.js  |                             | Creates and formats dates in a style the UI and DB can understand|
+|     |                | error-service.js |                             | Formats errors that will be displayed to the user     |
+|     |                | http-service.js  |                             | Makes http requests to the server. Is used by several other services|
+|     |                | request-service.js|                            | Gets data about requests from the server              |
+|     |                | ride-service.js  |                             | Gets ride data from the server                        |
+|     |                | storage-service.js|                            | Caches data like user and authentication data         |
+|     |                | user-service.js  |                             | Gets data about the user from the server              |
+|     | App.js         |                  |                             | The root of the project. Decides to load “login” or “main” page depending on authentication status|
+|     | index.js       |                  |                             | Contains the router and renders into either the main page or the login page|
+|     | theme.js       |                  |                             | Contains Gordon colors used throughout the project    |
+| package.json|        |                  |                             | Lists dependencies, proxies, project commands         |
 
 #### Server
 Only the custom classes we added to the 360 server
